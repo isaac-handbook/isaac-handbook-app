@@ -40,7 +40,7 @@ export const useThemeInfo = () => {
         themeColor = lightThemeColor;
         break;
       default:
-        themeColor = darkThemeColor;
+        themeColor = lightThemeColor;
         break;
     }
     setThemeInfo({

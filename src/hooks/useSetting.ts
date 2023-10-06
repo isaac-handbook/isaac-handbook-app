@@ -39,7 +39,7 @@ export const defaultSettingInfo: SettingInfo = {
   gridIconSize: 'grid-normal',
   performance: true,
   sortMethod: 'ID',
-  theme: 'dark',
+  theme: 'light',
   showGridBorder: true,
   developerMode: false,
   isLoading: false,
