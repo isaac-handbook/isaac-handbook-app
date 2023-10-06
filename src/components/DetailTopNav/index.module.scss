@@ -1,0 +1,46 @@
+.container {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  // background-color: #fff;
+  background-color: #c4b39d;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 52px;
+  box-sizing: border-box;
+  color: #000000e0;
+  font-weight: bold;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+  position: relative;
+  padding: 0 12px;
+}
+
+.topDrawerIcon {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  font-size: 12px;
+}
+
+.popover {
+  width: 200px;
+}
+
+.link {
+  // color: #739ede;
+  // color: #597ef7;
+}

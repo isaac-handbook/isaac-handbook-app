@@ -1,0 +1,28 @@
+.drawer {
+  padding: 16px;
+  padding-bottom: 32px;
+  height: 60vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.info {
+  padding: 0 16px;
+}
+
+.children {
+  display: inline;
+}
+
+.row {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  box-sizing: border-box;
+  justify-content: flex-start;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+}

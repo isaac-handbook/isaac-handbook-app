@@ -1,0 +1,97 @@
+.nut-popup-title {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.nut-fixednav__btn {
+  background: #c4b39d !important;
+  padding-left: 8px !important;
+  width: auto !important;
+  padding-right: 8px;
+
+  .nut-icon {
+    font-size: 16px;
+    color: #000000e0 !important;
+  }
+
+  .text {
+    width: 12px !important;
+    font-size: 11px !important;
+    color: #000000e0 !important;
+    font-weight: bold !important;
+  }
+}
+
+.nut-fixednav__list {
+  padding-right: 56px !important;
+}
+
+.nut-fixednav__list-item {
+  justify-content: space-between !important;
+  padding: 4px 0;
+  box-sizing: border-box;
+  img {
+    width: 26px !important;
+    height: 26px !important;
+    // image-rendering: pixelated !important;
+    margin-bottom: 0px !important;
+  }
+  .nut-fixednav__list-text {
+    font-size: 11px !important;
+    position: relative;
+    top: -2px;
+  }
+}
+.nut-fixednav__list-item:first-of-type {
+  img {
+    height: 13px !important;
+    margin-top: 6px !important;
+    // image-rendering: pixelated !important;
+    margin-bottom: 0px !important;
+  }
+}
+
+.my-search-bar {
+  --nutui-searchbar-background: #c4b39d;
+  .nut-searchbar__content {
+    padding: 0 2px !important;
+  }
+  .nut-icon {
+    font-size: 13px !important;
+  }
+  .nut-searchbar__input {
+    font-size: 13px !important;
+  }
+  .nut-icon-circle-close {
+    font-size: 14px !important;
+  }
+}
+
+.popoverWrapper {
+  height: 80%;
+  .nut-popover-wrapper {
+    height: 100%;
+    display: flex;
+  }
+  .nut-popover {
+    top: 60px !important;
+  }
+}
+
+.nut-table__main {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.nut-popover-content {
+  overflow: hidden !important;
+}
+
+button {
+  border-radius: 16px;
+  border: none;
+}
+
+button::after {
+  border: none;
+}

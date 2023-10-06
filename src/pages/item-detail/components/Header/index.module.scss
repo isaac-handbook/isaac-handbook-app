@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  height: 96px;
+  margin-bottom: 12px;
+  color: #000000e0;
+}
+
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 96px;
+  width: 100%;
+  image-rendering: pixelated;
+}
+
+.line1 {
+  z-index: 2;
+  font-size: 20px;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.line2 {
+  z-index: 2;
+}

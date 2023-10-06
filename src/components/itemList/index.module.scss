@@ -1,0 +1,33 @@
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid transparent;
+  box-sizing: border-box;
+  // prettier-ignore
+  height: 48PX;
+}
+
+.listContainer {
+  height: 100%;
+}
+
+.row {
+  display: flex;
+}
+
+.icon {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.value {
+  flex: 7;
+}

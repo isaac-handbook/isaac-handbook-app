@@ -1,0 +1,71 @@
+.container {
+  line-height: 30px;
+  position: relative;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-line;
+}
+
+.icon {
+  width: 17px;
+  height: 17px;
+  image-rendering: pixelated;
+  position: relative;
+  top: 2px;
+  margin-right: 2px;
+}
+
+.chara {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  transform: scale(2);
+  position: relative;
+  top: 2px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.stage {
+  width: 13px;
+  height: 9px;
+  image-rendering: pixelated;
+  transform: scale(2);
+  position: relative;
+  top: -1px;
+  margin-left: 9px;
+  margin-right: 8px;
+}
+
+.file {
+  width: 12px;
+  height: 12px;
+  image-rendering: pixelated;
+  transform: scale(2.1);
+  position: relative;
+  top: 1px;
+  margin-left: 12px;
+  margin-right: 8px;
+}
+
+.mode {
+  width: 8px;
+  height: 8px;
+  image-rendering: pixelated;
+  transform: scale(2);
+  position: relative;
+  top: -1px;
+  margin-left: 9px;
+  margin-right: 8px;
+}
+
+.math {
+  display: inline;
+  margin: 0 4px;
+}
+
+.inlineA {
+  color: #739ede;
+  display: inline;
+}

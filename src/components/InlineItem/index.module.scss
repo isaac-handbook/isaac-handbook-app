@@ -1,0 +1,16 @@
+.container {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.icon {
+  display: inline;
+}
+
+.name {
+  margin-left: 32px;
+  margin-right: 6px;
+  // 跳转颜色
+  color: #739ede;
+}

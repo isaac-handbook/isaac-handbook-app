@@ -1,0 +1,54 @@
+.container {
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.module {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.value {
+  display: flex;
+  position: relative;
+}
+
+.value-0 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dotWrapper {
+  display: flex;
+  position: relative;
+  top: 12px;
+
+  .dot-1 {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin: 0 8px;
+  }
+
+  .dot-2 {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: transparent;
+    margin: 0 8px;
+    // 中间是空心的
+    border: 1px solid #000000;
+    box-sizing: border-box;
+  }
+
+  .dot-3 {
+    width: 5px;
+    height: 5px;
+    margin: 0 8px;
+  }
+}

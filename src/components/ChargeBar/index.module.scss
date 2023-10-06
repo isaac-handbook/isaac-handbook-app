@@ -1,0 +1,30 @@
+.container {
+  // prettier-ignore
+  width: 16PX;
+  // prettier-ignore
+  height: 32px;
+  image-rendering: pixelated;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.bar {
+  // prettier-ignore
+  width: 16PX;
+  // prettier-ignore
+  height: 31px;
+  position: absolute;
+  image-rendering: pixelated;
+  background-blend-mode: screen;
+}
+
+.text {
+  position: absolute;
+  // 上下居中
+  top: 45%;
+  transform: translateY(-50%);
+  right: -42px;
+  font-size: 8px;
+  width: 40px;
+}

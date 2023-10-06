@@ -1,0 +1,33 @@
+.drawer {
+  padding: 16px;
+  background-color: #f5f5f5;
+  padding-bottom: 32px;
+}
+
+.icon {
+  padding: 16px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+
+  .text {
+    margin-top: 4px;
+    font-size: 12px;
+  }
+}
+
+.item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  padding: 0 16px;
+  height: 52px;
+  background-color: white;
+  border-radius: 16px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
