@@ -1,7 +1,6 @@
 {
-  "name": "isaac-handbook",
+  "name": "isaac-handbook-app",
   "version": "1.0.0",
-  "private": true,
   "description": "",
   "templateInfo": {
     "name": "react-NutUI",
