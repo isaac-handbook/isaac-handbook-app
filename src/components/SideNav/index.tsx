@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Drag, FixedNav } from '@nutui/nutui-react-taro';
 import charaImg from '@assets/chara.png';
 import cardsImg from '@assets/cards.png';
-import othersImg from '@assets/others.png';
 import pillImg from '@assets/pill.png';
 import coinImg from '@assets/coin.gif';
 import Taro from '@tarojs/taro';
@@ -28,13 +27,8 @@ export const SideNav: React.FC<Props> = () => {
     },
     {
       id: 4,
-      text: '角色',
-      icon: charaImg,
-    },
-    {
-      id: 5,
       text: '其他',
-      icon: othersImg,
+      icon: charaImg,
     },
   ];
 
@@ -64,15 +58,6 @@ export const SideNav: React.FC<Props> = () => {
         });
         break;
       case 4:
-        // TODO 角色页面
-        Taro.showToast({
-          title: '角色功能即将上线',
-          icon: 'none',
-          duration: 1500,
-        });
-        break;
-      case 5:
-        // TODO 其他页面
         Taro.showToast({
           title: '其他功能即将上线',
           icon: 'none',

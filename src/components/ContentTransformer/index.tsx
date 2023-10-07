@@ -13,6 +13,7 @@ import { ReviveDrawer } from '@components/ReviveDrawer';
 import { handbookDataState } from '@hooks/useHandbookData';
 import { ItemTable } from '@pages/item-detail/components/ItemTable';
 import { ItemType } from 'src/types/handbook';
+import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
 
 interface Props {
   id?: string;
@@ -261,6 +262,22 @@ export const ContentTransformer: React.FC<Props> = (props) => {
             }}
           >
             {`${pool}道具池`}
+          </View>
+        </ItemGridDrawer>
+      );
+    }
+    // suit| 开头，表示是一个套装
+    if (data.startsWith('suit|')) {
+      const suit = data.replace('suit|', '');
+      return (
+        <ItemGridDrawer title={convertTagToSuit[suit]} tagFilter={suit}>
+          <View
+            style={{
+              color: '#739ede',
+              display: 'inline',
+            }}
+          >
+            {convertTagToSuit[suit]}
           </View>
         </ItemGridDrawer>
       );

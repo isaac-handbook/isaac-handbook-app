@@ -4,15 +4,16 @@ import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import classNames from 'classnames';
 import Taro from '@tarojs/taro';
+import changeLog from './assets/changeLog.json';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
-  const copyWikiUrl = () => {
+  const copyUrl = (url: string) => {
     Taro.setClipboardData({
-      data: 'https://isaac.huijiwiki.com/',
+      data: url,
       success: () => {
         Taro.showToast({
           title: '链接已复制',
@@ -23,18 +24,15 @@ function Index() {
     });
   };
 
-  const copyCodeUrl = () => {
-    Taro.setClipboardData({
-      data: 'https://github.com/isaac-handbook/isaac-handbook-app',
-      success: () => {
-        Taro.showToast({
-          title: '链接已复制',
-          icon: 'success',
-          duration: 1000,
-        });
-      },
-    });
-  };
+  const copyWikiUrl = () => copyUrl('https://isaac.huijiwiki.com/');
+
+  const copyCodeUrl = () =>
+    copyUrl('https://github.com/isaac-handbook/isaac-handbook-app');
+
+  const copyRuleUrl = () =>
+    copyUrl(
+      'https://github.com/isaac-handbook/isaac-handbook-app/blob/main/LICENSE',
+    );
 
   return (
     <ErrorBoundary>
@@ -55,13 +53,32 @@ function Index() {
           本项目以个人学习、方便玩家为目的而创建，不作任何商业用途。
         </View>
         <View className={styles.p}>
-          本项目遵从 MIT协议 进行开源，欢迎大家提出建议和意见，或一起参与建设。
+          本项目遵从
+          <View className={styles.inline} onClick={copyRuleUrl}>
+            MIT协议
+          </View>
+          进行开源，欢迎大家提出建议和意见，或一起参与建设。
         </View>
         <View
           className={classNames(styles.p, styles.inline)}
           onClick={copyCodeUrl}
         >
           开源仓库地址
+        </View>
+        <View className={styles.changeLog}>
+          <View className={styles.changeTitle}>更新记录</View>
+          {changeLog.changeLog.map((item, index) => (
+            <View key={index} className={styles.changeLine}>
+              <View className={styles.changeDate}>{item.date}</View>
+              <View className={styles.changeContent}>
+                {item.changes.map((change, index) => (
+                  <View key={index} className={styles.changeItem}>
+                    {change}
+                  </View>
+                ))}
+              </View>
+            </View>
+          ))}
         </View>
       </View>
     </ErrorBoundary>

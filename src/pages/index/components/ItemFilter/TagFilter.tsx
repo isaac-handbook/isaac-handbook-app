@@ -22,7 +22,7 @@ const order = [
 ];
 
 // 将某些名称转换为更友好的名称
-const convertMap = {
+export const convertTagToSuit = {
   嗝屁猫: '猫套装',
   宝宝: '宝宝套装',
   注射器: '针套装',
@@ -38,12 +38,14 @@ const convertMap = {
   乞丐: '乞丐套装',
 };
 const convertName = (name: string) => {
-  return convertMap[name] || name;
+  return convertTagToSuit[name] || name;
 };
 
 const reConvertName = (name: string) => {
   return (
-    Object.keys(convertMap).find((key) => convertMap[key] === name) || name
+    Object.keys(convertTagToSuit).find(
+      (key) => convertTagToSuit[key] === name,
+    ) || name
   );
 };
 

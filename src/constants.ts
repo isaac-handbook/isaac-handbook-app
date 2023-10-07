@@ -1,8 +1,9 @@
+// 线上链接
+// export const HANDBOOK_DATA_OSS_URL =
+//   'cloud://isaac-handbook-6gfcp1zy588edf1a.6973-isaac-handbook-6gfcp1zy588edf1a-1317852125/isaac-handbook-data.json';
+// 开发链接
 export const HANDBOOK_DATA_OSS_URL =
-  'cloud://isaac-handbook-6gfcp1zy588edf1a.6973-isaac-handbook-6gfcp1zy588edf1a-1317852125/isaac-handbook-data.json';
-
-// export const ITEM_ICON_IMG_URL =
-//   "https://isaac-handbook.oss-cn-hangzhou.aliyuncs.com/isaac-items.png";
+  'cloud://isaac-handbook-6gfcp1zy588edf1a.6973-isaac-handbook-6gfcp1zy588edf1a-1317852125/dev/isaac-handbook-data.json';
 // 道具
 export const ITEM_ICON_IMG_URL =
   'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/isaac-items.png';

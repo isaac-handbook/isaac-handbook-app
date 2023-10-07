@@ -6,8 +6,38 @@
   position: relative;
 }
 
-.info {
+.header {
   padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+}
+
+.suit {
+  display: flex;
+  flex: 1;
+  padding-top: 12px;
+  padding-bottom: 4px;
+
+  .info {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .imgBox {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: -16px;
+
+    .img {
+      height: 66px;
+      width: initial;
+      image-rendering: pixelated;
+    }
+  }
 }
 
 .children {
@@ -25,4 +55,8 @@
   justify-content: flex-start;
   border-top: 1px solid transparent;
   border-left: 1px solid transparent;
+}
+
+.line {
+  display: flex;
 }

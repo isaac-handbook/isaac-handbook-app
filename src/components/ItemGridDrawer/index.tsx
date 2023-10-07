@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View } from '@tarojs/components';
+import { Image, ScrollView, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Popup } from '@nutui/nutui-react-taro';
 import { useRecoilState } from 'recoil';
@@ -10,6 +10,8 @@ import { themeInfoState } from '@hooks/useThemeInfo';
 import { handbookDataState } from '@hooks/useHandbookData';
 import { ContentTransformer } from '@components/ContentTransformer';
 import classNames from 'classnames';
+import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
+import { Dot } from '@components/Dot';
 
 interface Props {
   children: React.ReactNode;
@@ -29,6 +31,8 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
     title,
     itemInfoList = [],
   } = props;
+
+  const curSuit = convertTagToSuit[tagFilter ?? ''];
 
   const [showDrawer, setShowDrawer] = React.useState(false);
 
@@ -91,6 +95,47 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
 
   const showingItems = filteredItems.filter((item) => item.show);
 
+  const renderHeader = () => {
+    if (!tagFilter || !handbookData.extra.tagInfo[tagFilter]) {
+      return null;
+    }
+    // 套装
+    if (curSuit) {
+      return (
+        <View className={styles.header}>
+          <View className={styles.suit}>
+            <View className={styles.info}>
+              {handbookData.extra.tagInfo[tagFilter].map((info) => (
+                <View className={styles.line}>
+                  <Dot level={1} themeColor={themeColor} />
+                  <ContentTransformer value={info} lineHeight="52rpx" />
+                </View>
+              ))}
+            </View>
+            <View className={styles.imgBox}>
+              <Image
+                className={styles.img}
+                mode="heightFix"
+                src={require(`@assets/suit/${curSuit}.png`)}
+              />
+            </View>
+          </View>
+        </View>
+      );
+    }
+    // 普通标签
+    return (
+      <View className={styles.header}>
+        {handbookData.extra.tagInfo[tagFilter].map((info) => (
+          <View className={styles.line}>
+            <Dot level={1} themeColor={themeColor} />
+            <ContentTransformer value={info} lineHeight="52rpx" />
+          </View>
+        ))}
+      </View>
+    );
+  };
+
   // 补全到能整除columnCount
   showingItems.push(
     ...new Array(columnCount - (showingItems.length % columnCount)).fill({
@@ -124,16 +169,13 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
         lockScroll
         destroyOnClose
       >
-        {tagFilter && handbookData.extra.tagInfo[tagFilter] && (
-          <View className={styles.info}>
-            {handbookData.extra.tagInfo[tagFilter].map((info) => (
-              <ContentTransformer value={info} />
-            ))}
-          </View>
-        )}
+        {renderHeader()}
         <ScrollView
           className={styles.drawer}
-          style={{ backgroundColor: themeColor.bgColor }}
+          style={{
+            backgroundColor: themeColor.bgColor,
+            height: curSuit ? '50vh' : '60vh',
+          }}
           scrollY
           enablePassive
         >
