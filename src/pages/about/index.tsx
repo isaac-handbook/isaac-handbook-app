@@ -57,7 +57,7 @@ function Index() {
           <View className={styles.inline} onClick={copyRuleUrl}>
             MIT协议
           </View>
-          进行开源，欢迎大家提出建议和意见，或一起参与建设。
+          进行开源，欢迎大家提出问题或建议，一起参与建设。
         </View>
         <View
           className={classNames(styles.p, styles.inline)}

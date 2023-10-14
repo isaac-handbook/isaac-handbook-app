@@ -19,7 +19,7 @@ export const ItemFilter: React.FC = () => {
     <>
       <View className={styles.icon} onClick={() => setShowDrawer(true)}>
         <Horizontal size={'32rpx'} />
-        <View className={styles.text}>筛选</View>
+        <View className={styles.text}>过滤</View>
       </View>
       <Popup
         closeable

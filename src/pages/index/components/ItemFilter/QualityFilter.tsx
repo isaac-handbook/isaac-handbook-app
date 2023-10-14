@@ -50,7 +50,7 @@ const Cell: React.FC = () => {
         value={selectList.indexOf(showLabel)}
       >
         <View className={styles.item}>
-          <View className={styles.label}>品质</View>
+          <View className={styles.label}>道具品质</View>
           <View className={styles.value}>{showLabel}</View>
         </View>
       </Picker>
