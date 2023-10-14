@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
-import { Picker, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
+import { SideNavBar, SideNavBarItem } from '@nutui/nutui-react-taro';
 
 // 一些特定的顺序
 const order = [
@@ -59,12 +60,15 @@ const Cell: React.FC = () => {
     handbookData: { items },
   } = useHandBookData();
 
+  const [visible, setVisible] = React.useState(false);
+
   const onChange = (e: any) => {
-    const cur = selectList[e.detail.value];
+    const cur = e.value;
     setItemSearchInfo((prev) => ({
       ...prev,
       tagFilter: cur === '全部' ? '' : reConvertName(cur),
     }));
+    setVisible(false);
   };
 
   // 找到items里所有的pools并去重 注意pools是数组
@@ -105,17 +109,21 @@ const Cell: React.FC = () => {
 
   return (
     <>
-      <Picker
-        mode="selector"
-        range={selectList}
-        onChange={onChange}
-        value={selectList.indexOf(showLabel)}
+      <View className={styles.item} onClick={() => setVisible(true)}>
+        <View className={styles.label}>套装、标签</View>
+        <View className={styles.value}>{showLabel}</View>
+      </View>
+      <SideNavBar
+        visible={visible}
+        onClose={() => setVisible(false)}
+        position="right"
+        width="45%"
+        title="选择道具池"
       >
-        <View className={styles.item}>
-          <View className={styles.label}>套装、标签</View>
-          <View className={styles.value}>{showLabel}</View>
-        </View>
-      </Picker>
+        {selectList.map((item) => (
+          <SideNavBarItem title={item} value={item} onClick={onChange} />
+        ))}
+      </SideNavBar>
     </>
   );
 };

@@ -37,7 +37,7 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
 
       {supportFilter && hasFilterInfo && (
         <View
-          onClick={resetFilter}
+          onClick={() => resetFilter({ refreshKeyword: true })}
           className={classNames(styles.icon, styles.refresh)}
         >
           <Refresh2 size={'32rpx'} />
@@ -49,14 +49,12 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
 
       {supportBackHome && (
         <View
-          onClick={resetFilter}
+          onClick={handleBackHome}
           className={styles.icon}
           style={{ paddingLeft: '6rpx' }}
         >
           <Home size={'32rpx'} />
-          <View className={styles.text} onClick={handleBackHome}>
-            首页
-          </View>
+          <View className={styles.text}>首页</View>
         </View>
       )}
     </View>

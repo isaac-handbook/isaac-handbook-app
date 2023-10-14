@@ -1,8 +1,11 @@
 import React, { memo } from 'react';
-import { Picker, View } from '@tarojs/components';
+import { Image, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
+import { SideNavBar, SideNavBarItem } from '@nutui/nutui-react-taro';
+import { StuffIcon } from '@components/StuffIcon';
+import { stuffIconPositionMap } from '@constants';
 
 // 一些特定的顺序
 const order = [
@@ -24,16 +27,20 @@ const Cell: React.FC = () => {
     setItemSearchInfo,
   } = useItemSearchInfo();
 
+  const [visible, setVisible] = React.useState(false);
+
   const {
     handbookData: { items },
   } = useHandBookData();
 
   const onChange = (e: any) => {
-    const cur = selectList[e.detail.value];
+    const cur = e.value;
+    // console.log(e);
     setItemSearchInfo((prev) => ({
       ...prev,
       poolFilter: cur === '全部' ? '' : cur,
     }));
+    setVisible(false);
   };
 
   // 找到items里所有的pools并去重 注意pools是数组
@@ -78,19 +85,52 @@ const Cell: React.FC = () => {
 
   selectList.unshift('全部');
 
+  const renderIcon = (item: string, top = 6) => {
+    if (item.includes('贪婪')) {
+      return (
+        <Image className={styles.mode} src={require(`@assets/mode/贪婪.png`)} />
+      );
+    }
+    return (
+      <StuffIcon
+        location={stuffIconPositionMap[item]}
+        top={6}
+        scale={1.8}
+        marginRight={12}
+      />
+    );
+  };
+
   return (
     <>
-      <Picker
-        mode="selector"
-        range={selectList}
-        onChange={onChange}
-        value={selectList.indexOf(poolFilter || '全部')}
-      >
-        <View className={styles.item}>
-          <View className={styles.label}>道具池</View>
-          <View className={styles.value}>{poolFilter || '全部'}</View>
+      <View className={styles.item} onClick={() => setVisible(true)}>
+        <View className={styles.label}>道具池</View>
+        <View className={styles.value}>
+          {renderIcon(poolFilter, 0)}
+          {poolFilter || '全部'}
         </View>
-      </Picker>
+      </View>
+      <SideNavBar
+        visible={visible}
+        onClose={() => setVisible(false)}
+        position="right"
+        width="45%"
+        title="选择道具池"
+      >
+        {selectList.map((item) => (
+          <SideNavBarItem
+            // @ts-ignore
+            title={
+              <View>
+                {renderIcon(item)}
+                {item}
+              </View>
+            }
+            value={item}
+            onClick={onChange}
+          />
+        ))}
+      </SideNavBar>
     </>
   );
 };

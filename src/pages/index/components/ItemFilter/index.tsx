@@ -44,7 +44,7 @@ export const ItemFilter: React.FC = () => {
         }
         onCloseIconClick={(e) => {
           e.preventDefault();
-          resetFilter();
+          resetFilter({});
         }}
       >
         <View className={styles.drawer}>

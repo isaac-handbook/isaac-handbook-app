@@ -38,9 +38,9 @@ export const useItemSearchInfo = () => {
   const [itemSearchInfo, setItemSearchInfo] =
     useRecoilState(itemSearchInfoState);
 
-  const resetFilter = () => {
+  const resetFilter = ({ refreshKeyword = false }) => {
     setItemSearchInfo({
-      keyword: itemSearchInfo.keyword,
+      keyword: refreshKeyword ? '' : itemSearchInfo.keyword,
       poolFilter: '',
       tagFilter: '',
       qualityFilter: '',
