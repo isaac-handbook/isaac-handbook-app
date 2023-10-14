@@ -39,6 +39,9 @@ const Cell: React.FC<Props> = (props) => {
           scaleRate={1}
         />
       </View>
+      {props.type === 'pill' && (
+        <View className={styles.quality}>{item.quality}</View>
+      )}
       <View className={styles.value}>{item.nameZh}</View>
     </View>
   );

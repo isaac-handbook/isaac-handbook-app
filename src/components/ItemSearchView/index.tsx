@@ -13,11 +13,7 @@ export const ItemSearchView: React.FC<Props> = (props) => {
   const { showType } = props;
   return (
     <View className={styles.container}>
-      <IndexTopNav
-        supportSetting={props.supportSetting}
-        supportFilter={props.supportFilter}
-        type={props.type}
-      />
+      <IndexTopNav {...props} type={props.type} />
       <View className={styles.itemsView}>
         {showType === 'grid' && <ItemGrid type={props.type} />}
         {showType === 'list' && <ItemList type={props.type} />}

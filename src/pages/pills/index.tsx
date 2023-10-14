@@ -19,6 +19,7 @@ function Index() {
         <ItemSearchView
           supportFilter={false}
           supportSetting={false}
+          supportBackHome
           showType="list"
           type="pill"
         />

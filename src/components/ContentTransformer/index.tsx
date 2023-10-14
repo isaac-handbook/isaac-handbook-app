@@ -335,6 +335,32 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         </>
       );
     }
+    // mark| 开头，表示需要读取本地图片
+    if (data.startsWith('mark|')) {
+      let mark = data.replace('mark|', '');
+      if (mark.includes('|')) {
+        mark = mark.split('|')[0];
+      }
+      let img = '';
+      try {
+        img = require(`@assets/mark/${mark}`);
+      } catch (err) {}
+      return (
+        <>
+          <Image
+            className={styles.mark}
+            src={img}
+            style={{
+              filter:
+                themeColor.type === 'dark'
+                  ? 'invert(100%) hue-rotate(180deg)'
+                  : undefined,
+            }}
+          />
+          {` `}
+        </>
+      );
+    }
     // color 开头，表示内容需要有颜色
     if (data.startsWith('color|')) {
       const color = data.split('|')[1];

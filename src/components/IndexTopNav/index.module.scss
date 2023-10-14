@@ -18,3 +18,21 @@
   flex: 1;
   background-color: #c4b39d;
 }
+
+.icon {
+  padding: 16px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+
+  .text {
+    margin-top: 4px;
+    font-size: 12px;
+  }
+}
+
+.refresh {
+  padding-right: 6px;
+}

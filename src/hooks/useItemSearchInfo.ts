@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { atom, useRecoilState } from 'recoil';
 
 export const chargeTypeList = ['电池充能', '时间充能', '无充能', ''] as const;
@@ -48,8 +49,14 @@ export const useItemSearchInfo = () => {
     });
   };
 
+  // 当前是否有过滤条件
+  const hasFilterInfo = useMemo(() => {
+    return Object.values(itemSearchInfo).some((value) => value !== '');
+  }, [itemSearchInfo]);
+
   return {
     itemSearchInfo,
+    hasFilterInfo,
     setItemSearchInfo,
     resetFilter,
   };

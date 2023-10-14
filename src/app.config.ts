@@ -6,6 +6,11 @@ export default defineAppConfig({
     'pages/cards/index',
     'pages/pills/index',
     'pages/about/index',
+    'pages/boss-mark/index',
+    'pages/dice-room/index',
+    'pages/sacrifice-room/index',
+    'pages/others/index',
+    'pages/suit/index',
   ],
   window: {
     backgroundTextStyle: 'light',

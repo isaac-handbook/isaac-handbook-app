@@ -67,6 +67,7 @@ export interface HandBookData {
   cards: Item[];
   pills: Item[];
   extra: {
+    suitList: { name: string }[];
     tagInfo: {
       [key: string]: string[];
     };
@@ -77,5 +78,17 @@ export interface HandBookData {
       };
     };
     revive: string[];
+    bossMark: {
+      columns: TableColumnProps[];
+      data: any[];
+    };
+    diceRoom: {
+      columns: TableColumnProps[];
+      data: any[];
+    };
+    sacrificeRoom: {
+      columns: TableColumnProps[];
+      data: any[];
+    };
   };
 }

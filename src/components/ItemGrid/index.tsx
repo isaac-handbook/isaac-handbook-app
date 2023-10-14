@@ -74,6 +74,16 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
         show = false;
       }
     }
+    // 如果当前是饰品，直接返回
+    if (props.type === 'trinket') {
+      return {
+        ...item,
+        show,
+      };
+    }
+
+    // 道具相关过滤
+
     // 道具池过滤
     if (poolFilter) {
       if (!item.pools.includes(poolFilter)) {

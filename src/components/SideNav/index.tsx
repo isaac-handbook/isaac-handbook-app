@@ -45,24 +45,27 @@ export const SideNav: React.FC<Props> = () => {
         Taro.navigateTo({
           url: `/pages/trinkets/index`,
         });
+        setVisible(false);
         break;
       case 2:
         // 跳转到卡牌页面
         Taro.navigateTo({
           url: `/pages/cards/index`,
         });
+        setVisible(false);
       case 3:
         // 跳转到胶囊页面
         Taro.navigateTo({
           url: `/pages/pills/index`,
         });
+        setVisible(false);
         break;
       case 4:
-        Taro.showToast({
-          title: '其他功能即将上线',
-          icon: 'none',
-          duration: 1500,
+        // 跳转到其他页面
+        Taro.navigateTo({
+          url: `/pages/others/index`,
         });
+        setVisible(false);
         break;
       default:
         break;

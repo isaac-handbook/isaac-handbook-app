@@ -28,6 +28,12 @@
   align-items: center;
 }
 
+.quality {
+  flex: 3;
+  padding-left: 12px;
+  box-sizing: border-box;
+}
+
 .value {
-  flex: 7;
+  flex: 8;
 }
