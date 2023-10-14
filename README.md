@@ -4,6 +4,8 @@
 
 微信小程序《以撒图鉴无敌版》
 
+<img src="./assets/qrcode.JPG">
+
 <table>
   <tr>
     <td><img src="./assets/index.JPG"></td>
@@ -25,4 +27,4 @@ npm run dev
 ## 声明
 本项目以个人学习、方便玩家为目的而创建，不作任何商业用途。
 
-本项目遵从 [MIT协议](./LICENSE) 进行开源，欢迎大家提出建议和意见，或一起参与建设。
+本项目遵从 [MIT协议](./LICENSE) 进行开源，欢迎大家提出问题或建议，一起参与建设。
