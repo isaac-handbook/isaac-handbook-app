@@ -12,6 +12,7 @@ import { ContentTransformer } from '@components/ContentTransformer';
 import classNames from 'classnames';
 import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
 import { Dot } from '@components/Dot';
+import { drawerMaskColor } from '@src/styles';
 
 interface Props {
   children: React.ReactNode;
@@ -161,7 +162,7 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
         }}
         closeable
         overlay={true}
-        overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+        overlayStyle={{ backgroundColor: drawerMaskColor }}
         style={{
           backgroundColor: themeColor.bgColor,
           color: themeColor.textColor,

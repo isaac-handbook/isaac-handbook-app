@@ -14,3 +14,15 @@
   // 跳转颜色
   color: #739ede;
 }
+
+.charaIcon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  transform: scale(2);
+  position: relative;
+  margin-left: 8px;
+  margin-right: 8px;
+  position: absolute;
+  top: 8px;
+}

@@ -10,7 +10,8 @@ const defaultHandbookData: HandBookData = {
   trinkets: [],
   cards: [],
   pills: [],
-  extra: { tagInfo: {}, table: {}, revive: [] },
+  chara: {},
+  extra: { tagInfo: {}, table: {}, revive: [] } as any,
 };
 
 export const handbookDataState = atom<HandBookData>({
@@ -84,6 +85,13 @@ export const handbookDataSelector = selector<HandBookData>({
           ...pill,
           type: 'pill',
         }));
+        // 所有 chara 都加入 type=chara
+        Object.keys(res.chara).forEach((key) => {
+          res.chara[key] = {
+            ...res.chara[key],
+            type: 'chara',
+          };
+        });
         return res;
       };
 

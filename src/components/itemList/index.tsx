@@ -47,14 +47,10 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
     initDataList = handbookData.items;
   }
 
-  console.log('props.type', props.type);
-
-  console.log('initDataList', initDataList);
-
   const scrollRef = React.useRef<any>();
 
   useEffect(() => {
-    scrollRef.current?.setScrollTop(Math.random());
+    scrollRef.current?.backTop();
   });
 
   let filteredItems = initDataList.map((item) => {

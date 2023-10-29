@@ -4,6 +4,7 @@ import charaImg from '@assets/chara.png';
 import cardsImg from '@assets/cards.png';
 import pillImg from '@assets/pill.png';
 import coinImg from '@assets/coin.gif';
+import othersImg from '@assets/others.png';
 import Taro from '@tarojs/taro';
 
 interface Props {}
@@ -27,8 +28,13 @@ export const SideNav: React.FC<Props> = () => {
     },
     {
       id: 4,
-      text: '其他',
+      text: '角色',
       icon: charaImg,
+    },
+    {
+      id: 5,
+      text: '其他',
+      icon: othersImg,
     },
   ];
 
@@ -61,6 +67,13 @@ export const SideNav: React.FC<Props> = () => {
         setVisible(false);
         break;
       case 4:
+        // 跳转到其他页面
+        Taro.navigateTo({
+          url: `/pages/charas/index`,
+        });
+        setVisible(false);
+        break;
+      case 5:
         // 跳转到其他页面
         Taro.navigateTo({
           url: `/pages/others/index`,

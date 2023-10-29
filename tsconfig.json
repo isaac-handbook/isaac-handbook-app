@@ -29,7 +29,8 @@
       "@utils/*": ["src/utils/*"],
       "@hooks": ["src/hooks/"],
       "@hooks/*": ["src/hooks/*"],
-      "@types/*": ["src/types/*"]
+      "@types/*": ["src/types/*"],
+      "@src/*": ["src/*"]
     }
   },
   "include": ["./src", "./types"],

@@ -1,6 +1,6 @@
 import { TableColumnProps } from '@nutui/nutui-react-taro/dist/types/packages/table/types';
 
-export type ItemType = 'item' | 'trinket' | 'card' | 'pill';
+export type ItemType = 'item' | 'trinket' | 'card' | 'pill' | 'chara';
 
 export interface ItemGridVirtualListItem {
   type: 'items' | 'component';
@@ -37,6 +37,7 @@ export type BriefItem = {
 
 export type ItemDetailNode = {
   level: number;
+  extra: string[];
   value: string;
   children: ItemDetailNode[];
 };
@@ -57,7 +58,7 @@ export interface Item extends BriefItem {
   // 是否显示
   show?: boolean;
   // 类型
-  type: 'item' | 'trinket' | 'card' | 'pill';
+  type: ItemType;
 }
 
 export interface HandBookData {
@@ -91,4 +92,36 @@ export interface HandBookData {
       data: any[];
     };
   };
+  chara: Record<string, Chara>;
+}
+
+// 单个角色信息
+export interface CharaInfo {
+  // 中文名称
+  nameZh: string;
+  // 英文名称
+  nameEn: string;
+  // 血量
+  health: string;
+  // 移速
+  speed: string;
+  // 射速
+  tears: string;
+  // 伤害
+  damage: string;
+  // 射程
+  range: string;
+  // 弹速
+  shotSpeed: string;
+  // 幸运
+  luck: string;
+  // 解锁条件
+  unlock: string;
+}
+
+export interface Chara extends Item {
+  // 名称
+  nameZh: string;
+  // 角色信息列表
+  infoList: CharaInfo[];
 }

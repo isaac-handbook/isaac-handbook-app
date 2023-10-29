@@ -11,6 +11,8 @@ export default defineAppConfig({
     'pages/sacrifice-room/index',
     'pages/others/index',
     'pages/suit/index',
+    'pages/charas/index',
+    'pages/chara-detail/index',
   ],
   window: {
     backgroundTextStyle: 'light',

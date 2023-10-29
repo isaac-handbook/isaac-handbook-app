@@ -7,6 +7,7 @@ import { stuffIconPositionMap } from '@constants';
 import { ItemGridDrawer } from '@components/ItemGridDrawer';
 import { Popover } from '@components/Popover';
 import { RectDown } from '@nutui/icons-react-taro';
+import { drawerMaskColor } from '@src/styles';
 
 interface Props {
   pools: string[];
@@ -47,7 +48,7 @@ export const PoolsPopover: React.FC<Props> = ({ pools }) => {
           closeOnOutsideClick={false}
           overlay={true}
           className={styles.popover}
-          overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+          overlayStyle={{ backgroundColor: drawerMaskColor }}
           showArrow={false}
           visible={showDrawer}
           onClose={() => {

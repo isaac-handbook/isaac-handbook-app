@@ -18,6 +18,7 @@ interface Props {
 const Cell: React.FC<Props> = (props) => {
   const { item, size, themeColor, showGridBorder } = props;
   const handleClick = () => {
+    if (!item.id) return;
     Taro.navigateTo({
       url: `/pages/item-detail/index?itemId=${item.id}&type=${props.type}`,
     });

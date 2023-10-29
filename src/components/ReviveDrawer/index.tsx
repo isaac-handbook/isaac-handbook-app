@@ -6,6 +6,7 @@ import { useRecoilState } from 'recoil';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { handbookDataState } from '@hooks/useHandbookData';
 import { ContentTransformer } from '@components/ContentTransformer';
+import { drawerMaskColor } from '@src/styles';
 
 interface Props {}
 
@@ -30,7 +31,7 @@ export const ReviveDrawer: React.FC<Props> = () => {
         }}
         closeable
         overlay={true}
-        overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+        overlayStyle={{ backgroundColor: drawerMaskColor }}
         style={{
           backgroundColor: themeColor.bgColor,
           color: themeColor.textColor,

@@ -55,7 +55,7 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
   const scrollRef = React.useRef<any>();
 
   useEffect(() => {
-    scrollRef.current?.setScrollTop(Math.random());
+    scrollRef.current?.backTop();
   });
 
   let filteredItems = initDataList.map((item) => {

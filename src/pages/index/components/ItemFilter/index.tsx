@@ -9,6 +9,7 @@ import { QualityFilter } from './QualityFilter';
 import { ChargeFilter } from './ChargeFilter';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
 import { NeedUnlock } from './NeedUnlock';
+import { drawerMaskColor } from '@src/styles';
 
 export const ItemFilter: React.FC = () => {
   const [showDrawer, setShowDrawer] = React.useState(false);
@@ -31,7 +32,7 @@ export const ItemFilter: React.FC = () => {
           setShowDrawer(false);
         }}
         overlay={true}
-        overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+        overlayStyle={{ backgroundColor: drawerMaskColor }}
         style={{ backgroundColor: '#f5f5f5' }}
         closeIcon={
           <View

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
-import { HandBookData, Item, ItemType } from 'src/types/handbook';
+import { Chara, HandBookData, Item, ItemType } from 'src/types/handbook';
 import classNames from 'classnames';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { useRecoilState } from 'recoil';
@@ -10,7 +10,7 @@ import { Dot } from '@components/Dot';
 import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
 
 interface Props {
-  item: Item;
+  item: Item | Chara;
   handbookData: HandBookData;
   type: ItemType;
 }
@@ -18,16 +18,24 @@ interface Props {
 export const DetailContent: React.FC<Props> = (props) => {
   const { item: curItem } = props;
   const [{ themeColor }] = useRecoilState(themeInfoState);
-  // 渲染最左边的点
+
+  if (!curItem) {
+    return null;
+  }
 
   // 递归渲染所有 value 和 children
   const renderSections = (item: Item['content'][0]) => {
+    if (item.level === 0 && !item.children.length) {
+      return null;
+    }
     return (
       <View
         className={classNames(styles.section, styles[`section-${item.level}`])}
       >
         <View
-          className={classNames(styles.value, styles[`value-${item.level}`])}
+          className={classNames(styles.value, styles[`value-${item.level}`], {
+            [styles.subTitle]: item.extra?.includes('subTitle'),
+          })}
         >
           <Dot level={item.level} themeColor={themeColor} value={item.value} />
           <ContentTransformer
@@ -77,7 +85,7 @@ export const DetailContent: React.FC<Props> = (props) => {
 
   let curSuit = '';
   // 看一下tag里面有没有套装
-  curItem.tags.forEach((tag) => {
+  curItem.tags?.forEach((tag) => {
     if (convertTagToSuit[tag]) {
       curSuit = tag;
     }
@@ -85,6 +93,8 @@ export const DetailContent: React.FC<Props> = (props) => {
 
   return (
     <View className={styles.container}>
+      {props.type === 'chara' &&
+        renderSingleModule('可解锁物品', [`{{charaUnlock|${curItem.nameZh}}}`])}
       {curItem.description &&
         renderSingleModule('简介', [
           curItem.description,

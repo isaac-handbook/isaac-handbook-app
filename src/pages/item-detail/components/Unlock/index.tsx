@@ -3,9 +3,11 @@ import { Image, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import unlockImg from '@assets/unlock.png';
 import { ContentTransformer } from '@components/ContentTransformer';
+import { ThemeColor } from '@hooks/useThemeInfo/style';
 
 interface Props {
   unlock: string;
+  lockTheme?: ThemeColor;
 }
 
 export const Unlock: React.FC<Props> = (props) => {
@@ -20,7 +22,7 @@ export const Unlock: React.FC<Props> = (props) => {
         解锁条件
       </View>
       <View className={styles.value}>
-        <ContentTransformer value={props.unlock} />
+        <ContentTransformer value={props.unlock} lockTheme={props.lockTheme} />
       </View>
     </View>
   );

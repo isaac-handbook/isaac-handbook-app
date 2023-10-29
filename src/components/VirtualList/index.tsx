@@ -1,5 +1,7 @@
 import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { ScrollView, View } from '@tarojs/components';
+import { Top } from '@nutui/icons-react-taro';
+import styles from './index.module.scss';
 
 interface VirtualListProps {
   data: any[];
@@ -11,7 +13,7 @@ interface VirtualListProps {
 }
 
 export interface VirtualListRef {
-  setScrollTop: (scrollTop: number) => void;
+  backTop: () => void;
 }
 
 const VirtualList = forwardRef<VirtualListRef, VirtualListProps>(
@@ -44,48 +46,59 @@ const VirtualList = forwardRef<VirtualListRef, VirtualListProps>(
 
     const [scrollTop, setScrollTop] = useState(0);
 
+    const backTop = () => {
+      setScrollTop(Math.random());
+    };
+
     useImperativeHandle(ref, () => ({
-      setScrollTop,
+      backTop,
     }));
 
     return (
-      <ScrollView
-        scrollY
-        enablePassive
-        onScroll={handleScroll}
-        scrollTop={scrollTop}
-        style={{
-          height: `100vh`,
-          paddingTop,
-          overflowY: 'auto',
-          position: 'relative',
-          boxSizing: 'border-box',
-        }}
-      >
-        <View
+      <>
+        <ScrollView
+          scrollY
+          enablePassive
+          onScroll={handleScroll}
+          scrollTop={scrollTop}
           style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            height: `${data.length * itemHeight}px`,
+            height: `100vh`,
+            paddingTop,
+            overflowY: 'auto',
+            position: 'relative',
+            boxSizing: 'border-box',
           }}
-        />
-        {visibleData.map((item, index) => (
+        >
           <View
-            key={index}
             style={{
               position: 'absolute',
-              top: `${startOffset + index * itemHeight}px`,
-              height: `${itemHeight}px`,
-              width: '100%',
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              height: `${data.length * itemHeight}px`,
             }}
-          >
-            {renderRow(item, index)}
-          </View>
-        ))}
-      </ScrollView>
+          />
+          {visibleData.map((item, index) => (
+            <View
+              key={index}
+              style={{
+                position: 'absolute',
+                top: `${startOffset + index * itemHeight}px`,
+                height: `${itemHeight}px`,
+                width: '100%',
+              }}
+            >
+              {renderRow(item, index)}
+            </View>
+          ))}
+          {startOffset > 0 && (
+            <View className={styles.float} onClick={backTop}>
+              <Top />
+            </View>
+          )}
+        </ScrollView>
+      </>
     );
   },
 );

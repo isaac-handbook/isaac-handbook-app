@@ -1,0 +1,38 @@
+.drawer {
+  padding: 16px;
+  padding-bottom: 32px;
+  height: 60vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.inner {
+  padding: 12px;
+  height: 50vh;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid transparent;
+  box-sizing: border-box;
+  // prettier-ignore
+  height: 56PX;
+
+  .row {
+    display: flex;
+  }
+
+  .icon {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .value {
+    flex: 8;
+    font-size: 14px;
+  }
+}

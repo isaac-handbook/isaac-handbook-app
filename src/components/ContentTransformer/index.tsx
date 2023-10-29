@@ -14,6 +14,10 @@ import { handbookDataState } from '@hooks/useHandbookData';
 import { ItemTable } from '@pages/item-detail/components/ItemTable';
 import { ItemType } from 'src/types/handbook';
 import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
+import Taro from '@tarojs/taro';
+import { formatCharaName, unFormatCharaName } from '@utils/formatCharaName';
+import { CharaUnlockDrawer } from '@components/CharaUnlockDrawer';
+import { ThemeColor } from '@hooks/useThemeInfo/style';
 
 interface Props {
   id?: string;
@@ -21,12 +25,23 @@ interface Props {
   value: string;
   lineHeight?: string;
   type?: ItemType;
+  mathFontSize?: string;
+  mode?: 'clean' | 'normal';
+  lockTheme?: ThemeColor;
 }
 
 export const ContentTransformer: React.FC<Props> = (props) => {
-  const { nameZh, lineHeight } = props;
+  const {
+    nameZh,
+    lineHeight = '60rpx',
+    mathFontSize,
+    mode = 'normal',
+    lockTheme,
+  } = props;
 
-  const [{ themeColor }] = useRecoilState(themeInfoState);
+  const [{ themeColor: themeColor_ }] = useRecoilState(themeInfoState);
+
+  const themeColor = lockTheme ?? themeColor_;
 
   const [handbookData] = useRecoilState(handbookDataState);
 
@@ -88,11 +103,22 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     const pill = handbookData.pills.find((pill) => pill.nameZh === target);
     if (pill) return pill;
 
+    if (props.type === 'chara') {
+      return handbookData.chara[target];
+    }
+
     return null;
   };
 
   // 转换value中的{{}}为对应的数据
   const transformInnerData = (data: string) => {
+    if (mode === 'clean') {
+      console.log('clean', data);
+      if (data.includes('|')) {
+        return data.split('|')[1];
+      }
+      return data;
+    }
     switch (data) {
       case '不叠加':
         return `多个${nameZh}的效果不叠加`;
@@ -159,9 +185,8 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         .replace('timesn', 'times n')
         .replace('timess', 'times s')
         .replace('timesd_0', 'times d_0');
-      console.log('math', math);
       return (
-        <View className={styles.math}>
+        <View className={styles.math} style={{ fontSize: mathFontSize }}>
           <RichText
             nodes={parse(math, {
               throwError: true,
@@ -173,7 +198,8 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     }
     // chara| 开头，表示是一个角色
     if (data.startsWith('chara|')) {
-      const chara = data.replace('chara|', '').replace('???', '？？？');
+      const chara = formatCharaName(data.replace('chara|', ''));
+      return <InlineItem item={handbookData.chara[unFormatCharaName(chara)]} />;
       let img = '';
       try {
         img = require(`@assets/chara/${chara}.png`);
@@ -181,14 +207,23 @@ export const ContentTransformer: React.FC<Props> = (props) => {
       return (
         <>
           <Image className={styles.chara} src={img} />
-          {chara.replace('？？？', '???').replace(/\|/g, ' ')}
+          <View
+            className={styles.link}
+            onClick={() => {
+              Taro.navigateTo({
+                url: `/pages/chara-detail/index?charaName=${chara}`,
+              });
+            }}
+          >
+            {unFormatCharaName(chara).replace(/\|/g, ' ')}
+          </View>
           {` `}
         </>
       );
     }
     // stage| 开头，表示是一个关卡
     if (data.startsWith('stage|')) {
-      const stage = data.replace('stage|', '').replace('???', '？？？');
+      const stage = formatCharaName(data.replace('stage|', ''));
       let img = '';
       try {
         img = require(`@assets/stage/${stage}.png`);
@@ -196,7 +231,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
       return (
         <>
           <Image className={styles.stage} src={img} />
-          {stage.replace('？？？', '???')}
+          {unFormatCharaName(stage)}
           {` `}
         </>
       );
@@ -236,6 +271,13 @@ export const ContentTransformer: React.FC<Props> = (props) => {
           </>
         );
       }
+      if (health === '钱') {
+        return (
+          <>
+            <Image className={styles.mode} src={require(`@assets/钱心.png`)} />
+          </>
+        );
+      }
       if (health === '红0|永恒之心=1') {
         health = '永恒之心';
       }
@@ -264,6 +306,22 @@ export const ContentTransformer: React.FC<Props> = (props) => {
             {`${pool}道具池`}
           </View>
         </ItemGridDrawer>
+      );
+    }
+    // charaUnlock| 开头，表示是一个角色的解锁内容池
+    if (data.startsWith('charaUnlock|')) {
+      const nameZh = data.replace('charaUnlock|', '');
+      return (
+        <CharaUnlockDrawer title={'可解锁物品：' + nameZh} nameZh={nameZh}>
+          <View
+            style={{
+              color: '#739ede',
+              display: 'inline',
+            }}
+          >
+            {`点击查看${nameZh}可解锁的物品`}
+          </View>
+        </CharaUnlockDrawer>
       );
     }
     // suit| 开头，表示是一个套装
@@ -419,10 +477,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
   };
 
   return (
-    <View
-      className={styles.container}
-      style={{ lineHeight: lineHeight ? lineHeight : '60rpx' }}
-    >
+    <View className={styles.container} style={{ lineHeight }}>
       {/* 将value中的{{}}替换为对应的数据 */}
       {/* props.value.split(/(\{\{.+?\}\})/g) */}
       {splitByNestedBrackets(props.value).map((item) => {

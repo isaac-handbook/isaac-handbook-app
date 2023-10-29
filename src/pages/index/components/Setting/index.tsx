@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
-import { Popup } from '@nutui/nutui-react-taro';
+import { Button, Popup } from '@nutui/nutui-react-taro';
 import { GridIconSizeSetting } from './GridIconSizeSetting';
 import { PerformanceSetting } from './PerformanceSetting';
 import { SortMethodSetting } from './SortMethodSetting';
@@ -10,9 +10,17 @@ import { ThemeSetting } from './ThemeSetting';
 import { GridBorderSetting } from './GridBorderSetting';
 import { DeveloperSetting } from './DeveloperSetting';
 import Taro from '@tarojs/taro';
+import { useHandBookData } from '@hooks/useHandbookData';
+import { drawerMaskColor } from '@src/styles';
 
 export const Setting: React.FC = () => {
   const [showDrawer, setShowDrawer] = React.useState(false);
+
+  const { forceRefresh } = useHandBookData();
+
+  const handleForceRefresh = () => {
+    forceRefresh();
+  };
 
   return (
     <>
@@ -30,7 +38,7 @@ export const Setting: React.FC = () => {
         }}
         closeable
         overlay={true}
-        overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+        overlayStyle={{ backgroundColor: drawerMaskColor }}
         closeIcon={
           <View
             className={styles.icon}
@@ -54,7 +62,24 @@ export const Setting: React.FC = () => {
           <SortMethodSetting />
           <ThemeSetting />
           <GridBorderSetting />
+
+          <Button
+            style={
+              {
+                width: '100%',
+                marginBottom: '8px',
+                '--nutui-button-border-width': '0px',
+                '--nutui-button-default-height': '48px',
+                '--nutui-button-default-font-size': '16px',
+              } as any
+            }
+            onClick={handleForceRefresh}
+          >
+            刷新图鉴数据
+          </Button>
+
           <PerformanceSetting />
+
           <DeveloperSetting />
         </View>
       </Popup>

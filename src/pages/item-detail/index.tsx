@@ -5,7 +5,6 @@ import styles from './index.module.scss';
 import { handbookDataState } from '@hooks/useHandbookData';
 import { Item, ItemType } from 'src/types/handbook';
 import Taro from '@tarojs/taro';
-import { EmptyDetail } from './components/EmptyDetail';
 import { Unlock } from './components/Unlock';
 import { DetailIcon } from './components/DetailIcon';
 import ErrorBoundary from '@components/ErrorBoundary';
@@ -14,6 +13,7 @@ import { DetailContent } from './components/DetailContent';
 import { DetailTopNav } from '@components/DetailTopNav';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { useRecoilState } from 'recoil';
+import LoadingPage from '@components/ErrorBoundary/LoadingPage';
 
 function ItemDetail() {
   const [handbookData] = useRecoilState(handbookDataState);
@@ -54,10 +54,7 @@ function ItemDetail() {
   }, []);
 
   if (!item) {
-    const params = Taro.getCurrentInstance().router?.params as any;
-    return (
-      <EmptyDetail id={params?.itemId as any} type={params?.type as any} />
-    );
+    return <LoadingPage />;
   }
 
   return (

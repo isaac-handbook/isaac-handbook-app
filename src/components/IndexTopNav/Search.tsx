@@ -24,7 +24,7 @@ export const Search: React.FC<SearchProps> = (props) => {
 
   const onSearch = (val: string) => {
     // 开发者模式密码
-    if (val === '697') {
+    if (val === 'p697') {
       updateSetting({
         developerMode: true,
       });
@@ -34,7 +34,7 @@ export const Search: React.FC<SearchProps> = (props) => {
       });
       return;
     }
-    if (val === 'close697') {
+    if (val === 'closep697') {
       updateSetting({
         developerMode: false,
       });
