@@ -38,6 +38,15 @@ export const convertTagToSuit = {
   鲍勃: '鲍勃套装',
   乞丐: '乞丐套装',
 };
+
+export const convertSuitToTag = Object.keys(convertTagToSuit).reduce(
+  (prev, cur) => {
+    prev[convertTagToSuit[cur]] = cur;
+    return prev;
+  },
+  {} as any,
+);
+
 const convertName = (name: string) => {
   return convertTagToSuit[name] || name;
 };

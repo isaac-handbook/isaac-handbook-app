@@ -59,6 +59,7 @@ export const InlineItem: React.FC<Props> = ({ item, linkable = true }) => {
 
   const renderIcon = () => {
     if (isChara) {
+      console.log('item.nameZh', item.nameZh);
       return (
         <Image
           className={styles.charaIcon}

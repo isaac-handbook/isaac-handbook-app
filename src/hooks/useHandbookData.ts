@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { atom, selector, useRecoilState, useRecoilValueLoadable } from 'recoil';
 import { HANDBOOK_DATA_OSS_URL } from '../constants';
 import { HandBookData } from 'src/types/handbook';
+import { forceReload } from '@utils/forceReload';
 
 const defaultHandbookData: HandBookData = {
   isLoaded: false,
@@ -92,6 +93,7 @@ export const handbookDataSelector = selector<HandBookData>({
             type: 'chara',
           };
         });
+
         return res;
       };
 
@@ -205,11 +207,14 @@ export const useHandBookData = () => {
     if (error) {
       Taro.hideLoading();
       Taro.showToast({
-        title: '加载失败',
+        title: '加载失败，即将尝试刷新',
         icon: 'none',
         duration: 2000,
       });
-      throw new Error('Failed to load handbook data');
+      setTimeout(() => {
+        // 强制重启
+        forceReload();
+      }, 2000);
     }
   }, [fetching, error, fetching]);
 

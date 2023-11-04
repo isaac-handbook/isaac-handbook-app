@@ -13,8 +13,7 @@ import { ReviveDrawer } from '@components/ReviveDrawer';
 import { handbookDataState } from '@hooks/useHandbookData';
 import { ItemTable } from '@pages/item-detail/components/ItemTable';
 import { ItemType } from 'src/types/handbook';
-import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
-import Taro from '@tarojs/taro';
+import { convertSuitToTag } from '@pages/index/components/ItemFilter/TagFilter';
 import { formatCharaName, unFormatCharaName } from '@utils/formatCharaName';
 import { CharaUnlockDrawer } from '@components/CharaUnlockDrawer';
 import { ThemeColor } from '@hooks/useThemeInfo/style';
@@ -199,27 +198,11 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     // chara| 开头，表示是一个角色
     if (data.startsWith('chara|')) {
       const chara = formatCharaName(data.replace('chara|', ''));
+      const charaData = handbookData.chara[unFormatCharaName(chara)];
+      if (!charaData) {
+        return chara;
+      }
       return <InlineItem item={handbookData.chara[unFormatCharaName(chara)]} />;
-      let img = '';
-      try {
-        img = require(`@assets/chara/${chara}.png`);
-      } catch (err) {}
-      return (
-        <>
-          <Image className={styles.chara} src={img} />
-          <View
-            className={styles.link}
-            onClick={() => {
-              Taro.navigateTo({
-                url: `/pages/chara-detail/index?charaName=${chara}`,
-              });
-            }}
-          >
-            {unFormatCharaName(chara).replace(/\|/g, ' ')}
-          </View>
-          {` `}
-        </>
-      );
     }
     // stage| 开头，表示是一个关卡
     if (data.startsWith('stage|')) {
@@ -328,14 +311,14 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     if (data.startsWith('suit|')) {
       const suit = data.replace('suit|', '');
       return (
-        <ItemGridDrawer title={convertTagToSuit[suit]} tagFilter={suit}>
+        <ItemGridDrawer title={suit} tagFilter={convertSuitToTag[suit]}>
           <View
             style={{
               color: '#739ede',
               display: 'inline',
             }}
           >
-            {convertTagToSuit[suit]}
+            {suit}
           </View>
         </ItemGridDrawer>
       );
