@@ -10,7 +10,7 @@ import { EntityIcon } from '@components/EntityIcon';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { useRecoilState } from 'recoil';
 import { ReviveDrawer } from '@components/ReviveDrawer';
-import { handbookDataState } from '@hooks/useHandbookData';
+import { useHandBookData } from '@hooks/useHandbookData';
 import { ItemTable } from '@pages/item-detail/components/ItemTable';
 import { ItemType } from 'src/types/handbook';
 import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
@@ -42,7 +42,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
 
   const themeColor = lockTheme ?? themeColor_;
 
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
 
   // 从handbookData的items中获取对应的数据
   const getItemData = (target: string) => {

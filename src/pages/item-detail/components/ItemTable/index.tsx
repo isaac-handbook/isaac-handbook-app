@@ -2,7 +2,7 @@ import React from 'react';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { ItemType } from 'src/types/handbook';
 import { useRecoilState } from 'recoil';
-import { handbookDataState } from '@hooks/useHandbookData';
+import { useHandBookData } from '@hooks/useHandbookData';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { Table } from '@components/Table';
 
@@ -15,7 +15,7 @@ interface Props {
 export const ItemTable: React.FC<Props> = (props) => {
   const { type } = props;
 
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
   const [{ themeColor }] = useRecoilState(themeInfoState);
 
   // 判断当前物品是否需要渲染table

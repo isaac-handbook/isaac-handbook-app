@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { View } from '@tarojs/components';
-import { handbookDataState } from '@hooks/useHandbookData';
+import { useHandBookData } from '@hooks/useHandbookData';
 import styles from './index.module.scss';
 import { ItemGridCell } from './ItemGridCell';
 import { settingInfoState } from '@hooks/useSetting';
@@ -19,7 +19,7 @@ export interface ItemGridProps {
 }
 
 export const ItemGrid: React.FC<ItemGridProps> = (props) => {
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
 
   const [{ gridIconSize, performance, sortMethod, showGridBorder }] =
     useRecoilState(settingInfoState);

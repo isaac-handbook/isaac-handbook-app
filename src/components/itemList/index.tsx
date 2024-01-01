@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { View } from '@tarojs/components';
-import { handbookDataState, useHandBookData } from '@hooks/useHandbookData';
+import { useHandBookData } from '@hooks/useHandbookData';
 import styles from './index.module.scss';
 import { ItemListCell } from './ItemListCell';
 import { settingInfoState } from '@hooks/useSetting';
@@ -18,8 +18,7 @@ export interface ItemListProps {
 }
 
 export const ItemList: React.FC<ItemListProps> = (props) => {
-  useHandBookData();
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
 
   const [{ performance }] = useRecoilState(settingInfoState);
 

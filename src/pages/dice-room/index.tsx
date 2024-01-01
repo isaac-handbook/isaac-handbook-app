@@ -3,8 +3,7 @@ import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { ContentTransformer } from '@components/ContentTransformer';
-import { handbookDataState } from '@hooks/useHandbookData';
-import { useRecoilState } from 'recoil';
+import { useHandBookData } from '@hooks/useHandbookData';
 import { Table } from '@components/Table';
 
 function Index() {
@@ -12,7 +11,7 @@ function Index() {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
 
   return (
     <ErrorBoundary>

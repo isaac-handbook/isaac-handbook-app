@@ -1,6 +1,5 @@
 import Taro from '@tarojs/taro';
-import { useEffect } from 'react';
-import { atom, selector, useRecoilState, useRecoilValueLoadable } from 'recoil';
+import { atom, useRecoilState } from 'recoil';
 import { GridIconSize } from '../components/ItemGrid/constants';
 
 export const sortMethodList = ['ID', '颜色'] as const;
@@ -17,8 +16,6 @@ export const themeList = [
 ] as const;
 
 export interface SettingInfo {
-  // 是否已从缓存中读取
-  isLoaded: boolean;
   // 主图鉴的网格图标大小
   gridIconSize: GridIconSize;
   // 是否开启性能模式
@@ -33,8 +30,8 @@ export interface SettingInfo {
   developerMode: boolean;
 }
 
+// 默认设置
 export const defaultSettingInfo: SettingInfo = {
-  isLoaded: false,
   gridIconSize: 'grid-normal',
   performance: true,
   sortMethod: 'ID',
@@ -48,38 +45,8 @@ export const settingInfoState = atom<SettingInfo>({
   default: defaultSettingInfo,
 });
 
-const settingInfoSelector = selector<SettingInfo>({
-  key: 'settingInfoSelector',
-  get: async () => {
-    try {
-      const storedSetting = await Taro.getStorage({ key: 'setting' });
-      return {
-        ...storedSetting.data,
-        isLoaded: true,
-      };
-    } catch {
-      return {
-        ...defaultSettingInfo,
-        isLoaded: true,
-      };
-    }
-  },
-});
-
 export const useSetting = () => {
-  const loadSetting = useRecoilValueLoadable(settingInfoSelector);
-
   const [setting, setSetting] = useRecoilState(settingInfoState);
-
-  // 根据loadSetting的状态，更新或不更新atom
-  useEffect(() => {
-    if (setting.isLoaded) {
-      return;
-    }
-    if (loadSetting.state === 'hasValue') {
-      setSetting(loadSetting.contents);
-    }
-  }, [loadSetting]);
 
   const updateSetting = (newSetting: Partial<SettingInfo>) => {
     const mergedSetting = { ...setting, ...newSetting };

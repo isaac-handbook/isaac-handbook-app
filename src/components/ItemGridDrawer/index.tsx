@@ -7,7 +7,7 @@ import { settingInfoState } from '@hooks/useSetting';
 import { gridSizeMap } from '@components/ItemGrid/constants';
 import { ItemGridCell } from '@components/ItemGrid/ItemGridCell';
 import { themeInfoState } from '@hooks/useThemeInfo';
-import { handbookDataState } from '@hooks/useHandbookData';
+import { useHandBookData } from '@hooks/useHandbookData';
 import { ContentTransformer } from '@components/ContentTransformer';
 import classNames from 'classnames';
 import { Dot } from '@components/Dot';
@@ -39,7 +39,7 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
 
   const [showDrawer, setShowDrawer] = React.useState(false);
 
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
   const [{ themeColor }] = useRecoilState(themeInfoState);
   const [{ gridIconSize, showGridBorder }] = useRecoilState(settingInfoState);
   // 一行几个格子

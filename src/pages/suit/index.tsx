@@ -2,17 +2,16 @@ import { View, Image } from '@tarojs/components';
 import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
-import { handbookDataState } from '@hooks/useHandbookData';
-import { useRecoilState } from 'recoil';
 import { ItemGridDrawer } from '@components/ItemGridDrawer';
 import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
+import { useHandBookData } from '@hooks/useHandbookData';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
 
   return (
     <ErrorBoundary>

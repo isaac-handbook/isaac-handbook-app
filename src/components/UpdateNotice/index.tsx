@@ -3,42 +3,21 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Overlay } from '@nutui/nutui-react-taro';
 import { updateInfo } from '@src/config/config.app';
-import Taro from '@tarojs/taro';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { Close, Notice, ShieldCheck, ThumbsUp } from '@nutui/icons-react-taro';
-import { useAsyncEffect } from 'ahooks';
-import { useHandBookData } from '@hooks/useHandbookData';
-import { sleep } from '@utils/sleep';
+import { useUI } from '@hooks/useUI';
 
 const Cell: React.FC = () => {
-  const [visible, setVisible] = React.useState(false);
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
-  const { forceRefresh } = useHandBookData();
+  const {
+    ui: { showUpdateModal },
+    updateSingleUIState,
+  } = useUI();
 
   const { version, updateNotice } = updateInfo;
   const { notices, features, bugs, btns } = updateNotice;
-
-  useAsyncEffect(async () => {
-    // 和本地缓存的版本号比较，如果不一致，就显示更新提示
-    const localAppInfo = Taro.getStorageSync('appInfo');
-    // 版本有变，显示更新提示
-    if (localAppInfo.version !== version) {
-      setVisible(true);
-      // 更新本地缓存
-      Taro.setStorageSync('appInfo', {
-        ...localAppInfo,
-        version,
-      });
-
-      await sleep(500);
-      // 本次是否要强制刷新
-      if (updateInfo.forceRefreshNow) {
-        forceRefresh();
-      }
-    }
-  }, []);
 
   const renderContent = () => {
     const renderNotes = (notes: typeof notices) => {
@@ -105,7 +84,7 @@ const Cell: React.FC = () => {
   };
 
   return (
-    <Overlay visible={visible}>
+    <Overlay visible={showUpdateModal}>
       <View className={styles.wrapper}>
         <View
           className={styles.container}
@@ -121,7 +100,10 @@ const Cell: React.FC = () => {
 
           {btns.length > 0 && <View className={styles.btns}>233</View>}
 
-          <View className={styles.close} onClick={() => setVisible(false)}>
+          <View
+            className={styles.close}
+            onClick={() => updateSingleUIState('showUpdateModal', false)}
+          >
             <Close size={'20'} color="#eeeeee" />
           </View>
         </View>

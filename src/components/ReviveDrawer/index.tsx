@@ -4,9 +4,9 @@ import styles from './index.module.scss';
 import { Popup } from '@nutui/nutui-react-taro';
 import { useRecoilState } from 'recoil';
 import { themeInfoState } from '@hooks/useThemeInfo';
-import { handbookDataState } from '@hooks/useHandbookData';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { drawerMaskColor } from '@src/styles';
+import { useHandBookData } from '@hooks/useHandbookData';
 
 interface Props {}
 
@@ -14,7 +14,7 @@ export const ReviveDrawer: React.FC<Props> = () => {
   const [showDrawer, setShowDrawer] = React.useState(false);
 
   const [{ themeColor }] = useRecoilState(themeInfoState);
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
 
   return (
     <>

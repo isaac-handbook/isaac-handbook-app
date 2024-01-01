@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View } from '@tarojs/components';
 import { SideNav } from '@components/SideNav';
 import styles from './index.module.scss';
-import { handbookDataState } from '@hooks/useHandbookData';
+import { useHandBookData } from '@hooks/useHandbookData';
 import { Item, ItemType } from 'src/types/handbook';
 import Taro from '@tarojs/taro';
 import { Unlock } from './components/Unlock';
@@ -16,7 +16,7 @@ import { useRecoilState } from 'recoil';
 import LoadingPage from '@components/ErrorBoundary/LoadingPage';
 
 function ItemDetail() {
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
   const [{ themeColor }] = useRecoilState(themeInfoState);
 
   const [item, setItem] = React.useState<Item>();

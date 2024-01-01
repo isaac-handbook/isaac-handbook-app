@@ -62,7 +62,6 @@ export interface Item extends BriefItem {
 }
 
 export interface HandBookData {
-  isLoaded: boolean;
   items: Item[];
   trinkets: Item[];
   cards: Item[];

@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 import { Popup } from '@nutui/nutui-react-taro';
 import { useRecoilState } from 'recoil';
 import { themeInfoState } from '@hooks/useThemeInfo';
-import { handbookDataState } from '@hooks/useHandbookData';
+import { useHandBookData } from '@hooks/useHandbookData';
 import classNames from 'classnames';
 import { UnlockItemCell } from './UnlockItemCell';
 import { drawerMaskColor } from '@src/styles';
@@ -21,7 +21,7 @@ export const CharaUnlockDrawer: React.FC<Props> = (props) => {
 
   const [showDrawer, setShowDrawer] = React.useState(false);
 
-  const [handbookData] = useRecoilState(handbookDataState);
+  const { handbookData } = useHandBookData();
   const [{ themeColor }] = useRecoilState(themeInfoState);
 
   const matchName = `chara|${nameZh}`;

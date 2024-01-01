@@ -3,7 +3,7 @@ import { ScrollView, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
-import { Popup, SideNavBar, SideNavBarItem } from '@nutui/nutui-react-taro';
+import { Popup, SideNavBarItem } from '@nutui/nutui-react-taro';
 
 // 一些特定的顺序
 const order = [
