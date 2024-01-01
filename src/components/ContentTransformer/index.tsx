@@ -13,7 +13,7 @@ import { ReviveDrawer } from '@components/ReviveDrawer';
 import { handbookDataState } from '@hooks/useHandbookData';
 import { ItemTable } from '@pages/item-detail/components/ItemTable';
 import { ItemType } from 'src/types/handbook';
-import { convertSuitToTag } from '@pages/index/components/ItemFilter/TagFilter';
+import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
 import { formatCharaName, unFormatCharaName } from '@utils/formatCharaName';
 import { CharaUnlockDrawer } from '@components/CharaUnlockDrawer';
 import { ThemeColor } from '@hooks/useThemeInfo/style';
@@ -311,14 +311,18 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     if (data.startsWith('suit|')) {
       const suit = data.replace('suit|', '');
       return (
-        <ItemGridDrawer title={suit} tagFilter={convertSuitToTag[suit]}>
+        <ItemGridDrawer
+          type="suit"
+          title={convertTagToSuit[suit]}
+          tagFilter={suit}
+        >
           <View
             style={{
               color: '#739ede',
               display: 'inline',
             }}
           >
-            {suit}
+            {convertTagToSuit[suit]}
           </View>
         </ItemGridDrawer>
       );

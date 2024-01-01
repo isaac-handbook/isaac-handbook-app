@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Popup } from '@nutui/nutui-react-taro';
-import { Horizontal, Refresh2 } from '@nutui/icons-react-taro';
+import { Horizontal, Refresh } from '@nutui/icons-react-taro';
 import { PoolFilter } from './PoolFilter';
 import { TagFilter } from './TagFilter';
 import { QualityFilter } from './QualityFilter';
@@ -31,15 +31,21 @@ export const ItemFilter: React.FC = () => {
         onClose={() => {
           setShowDrawer(false);
         }}
+        zIndex={1}
         overlay={true}
         overlayStyle={{ backgroundColor: drawerMaskColor }}
         style={{ backgroundColor: '#f5f5f5' }}
         closeIcon={
           <View
             className={styles.icon}
-            style={{ padding: '0', color: '#000000E0', fontWeight: 'normal' }}
+            style={{
+              marginTop: 4,
+              marginRight: 4,
+              color: '#000000E0',
+              fontWeight: 'normal',
+            }}
           >
-            <Refresh2 size={'32rpx'} />
+            <Refresh size={'32rpx'} />
             <View className={styles.text}>重置</View>
           </View>
         }

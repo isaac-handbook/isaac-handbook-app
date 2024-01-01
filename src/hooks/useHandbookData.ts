@@ -189,10 +189,10 @@ export const useHandBookData = () => {
         title: '加载中...',
         mask: true,
       });
-      // 最多loading十秒
+      // 最多loading五秒
       setTimeout(() => {
         Taro.hideLoading();
-      }, 10000);
+      }, 5000);
     }
 
     // 当前进行中的所有请求都完成了，关闭 loading
@@ -216,7 +216,7 @@ export const useHandBookData = () => {
         forceReload();
       }, 2000);
     }
-  }, [fetching, error, fetching]);
+  }, [fetching, error]);
 
   useEffect(() => {
     if (handbookData.isLoaded) {

@@ -6,7 +6,7 @@ import { StuffIcon } from '@components/StuffIcon';
 import { stuffIconPositionMap } from '@constants';
 import { ItemGridDrawer } from '@components/ItemGridDrawer';
 import { Popover } from '@components/Popover';
-import { RectDown } from '@nutui/icons-react-taro';
+import { ArrowDown } from '@nutui/icons-react-taro';
 import { drawerMaskColor } from '@src/styles';
 
 interface Props {
@@ -19,11 +19,12 @@ export const PoolsPopover: React.FC<Props> = ({ pools }) => {
   const list = pools.map((pool) => {
     const isGreed = pool.includes('贪婪');
     const poolName = isGreed ? pool.split('|')[1] : pool;
+    const fullPoolName = pool.replace('|', ' ');
     return {
       key: pool,
       name: (
-        <ItemGridDrawer poolFilter={pool} title={'道具池：' + pool}>
-          <View style={{ width: '100%' }}>{pool.replace('|', ' ')}</View>
+        <ItemGridDrawer poolFilter={pool} title={'道具池：' + fullPoolName}>
+          <View style={{ width: '100%' }}>{fullPoolName}</View>
         </ItemGridDrawer>
       ),
       icon: (
@@ -62,7 +63,7 @@ export const PoolsPopover: React.FC<Props> = ({ pools }) => {
           <View className={styles.cell} style={{ height: '100%' }}>
             <View className={styles.label}>
               道具池
-              <RectDown style={{ marginLeft: '4rpx' }} size={9} />
+              <ArrowDown style={{ marginLeft: '4rpx' }} size={9} />
             </View>
             <View className={classNames(styles.value, styles.link)}>
               {pools.length}个

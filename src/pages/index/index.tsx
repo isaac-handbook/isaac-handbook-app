@@ -6,6 +6,7 @@ import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { SideNav } from '@components/SideNav';
 import { useHandBookData } from '@hooks/useHandbookData';
+import { UpdateNotice } from '@components/UpdateNotice';
 
 function Index() {
   const {
@@ -21,6 +22,7 @@ function Index() {
         style={{ backgroundColor: themeColor.bgColor }}
       >
         <ItemSearchView type="item" showType="grid" />
+        <UpdateNotice />
       </View>
       <SideNav />
     </ErrorBoundary>

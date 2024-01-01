@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
-import { Image, View } from '@tarojs/components';
+import { Image, ScrollView, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
-import { SideNavBar, SideNavBarItem } from '@nutui/nutui-react-taro';
+import { Popup, SideNavBarItem } from '@nutui/nutui-react-taro';
 import { StuffIcon } from '@components/StuffIcon';
 import { stuffIconPositionMap } from '@constants';
 
@@ -110,27 +110,31 @@ const Cell: React.FC = () => {
           {poolFilter || '全部'}
         </View>
       </View>
-      <SideNavBar
+      <Popup
         visible={visible}
-        onClose={() => setVisible(false)}
+        style={{ width: '45%', height: '100%' }}
         position="right"
-        width="45%"
-        title="选择道具池"
+        onClose={() => {
+          setVisible(false);
+        }}
       >
-        {selectList.map((item) => (
-          <SideNavBarItem
-            // @ts-ignore
-            title={
-              <View>
-                {renderIcon(item)}
-                {item}
-              </View>
-            }
-            value={item}
-            onClick={onChange}
-          />
-        ))}
-      </SideNavBar>
+        <ScrollView scrollY enablePassive className={styles.sideNavContent}>
+          {selectList.map((item) => (
+            <SideNavBarItem
+              // @ts-ignore
+              title={
+                <View>
+                  {renderIcon(item)}
+                  {item}
+                </View>
+              }
+              style={{ borderBottom: '1px solid #f5f5f5' }}
+              value={item}
+              onClick={onChange}
+            />
+          ))}
+        </ScrollView>
+      </Popup>
     </>
   );
 };

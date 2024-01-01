@@ -1,0 +1,22 @@
+import { BasicComponent } from '@nutui/nutui-react-taro/dist/types/utils/typings';
+import React from 'react';
+
+export interface BasicTableProps extends BasicComponent {
+  columns: Array<TableColumnProps>;
+  data: Array<any>;
+  bordered: boolean;
+  summary?: React.ReactNode;
+  striped?: boolean;
+  noData?: React.ReactNode;
+  sorterIcon?: React.ReactNode;
+  onSort?: (item: TableColumnProps, data: Array<any>) => void;
+  showHeader?: boolean;
+}
+
+export interface TableColumnProps {
+  key: string;
+  title?: string;
+  align?: string;
+  sorter?: ((a: any, b: any) => number) | boolean | string;
+  render?: (rowData: any, rowIndex: number) => string | React.ReactNode;
+}

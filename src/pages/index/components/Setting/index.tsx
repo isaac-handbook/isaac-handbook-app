@@ -5,7 +5,7 @@ import { Button, Popup } from '@nutui/nutui-react-taro';
 import { GridIconSizeSetting } from './GridIconSizeSetting';
 import { PerformanceSetting } from './PerformanceSetting';
 import { SortMethodSetting } from './SortMethodSetting';
-import { My, Setting as SettingIcon } from '@nutui/icons-react-taro';
+import { Setting as SettingIcon, User } from '@nutui/icons-react-taro';
 import { ThemeSetting } from './ThemeSetting';
 import { GridBorderSetting } from './GridBorderSetting';
 import { DeveloperSetting } from './DeveloperSetting';
@@ -42,9 +42,14 @@ export const Setting: React.FC = () => {
         closeIcon={
           <View
             className={styles.icon}
-            style={{ padding: '0', color: '#000000E0', fontWeight: 'normal' }}
+            style={{
+              marginTop: 4,
+              marginRight: 4,
+              color: '#000000E0',
+              fontWeight: 'normal',
+            }}
           >
-            <My size={'32rpx'} />
+            <User size={'32rpx'} />
             <View className={styles.text}>关于</View>
           </View>
         }
@@ -71,6 +76,7 @@ export const Setting: React.FC = () => {
                 '--nutui-button-border-width': '0px',
                 '--nutui-button-default-height': '48px',
                 '--nutui-button-default-font-size': '16px',
+                '--nutui-button-default-background-color': '#ffffff',
               } as any
             }
             onClick={handleForceRefresh}

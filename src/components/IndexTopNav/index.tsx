@@ -5,7 +5,7 @@ import { Setting } from '../../pages/index/components/Setting';
 import styles from './index.module.scss';
 import { ItemFilter } from '../../pages/index/components/ItemFilter';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
-import { Home, Refresh2 } from '@nutui/icons-react-taro';
+import { Home, Refresh } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
 import Taro from '@tarojs/taro';
 
@@ -40,7 +40,7 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
           onClick={() => resetFilter({ refreshKeyword: true })}
           className={classNames(styles.icon, styles.refresh)}
         >
-          <Refresh2 size={'32rpx'} />
+          <Refresh size={'32rpx'} />
           <View className={styles.text}>重置</View>
         </View>
       )}

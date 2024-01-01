@@ -31,7 +31,6 @@ export interface SettingInfo {
   showGridBorder: boolean;
   // 开发者模式
   developerMode: boolean;
-  isLoading: boolean;
 }
 
 export const defaultSettingInfo: SettingInfo = {
@@ -42,7 +41,6 @@ export const defaultSettingInfo: SettingInfo = {
   theme: 'light',
   showGridBorder: true,
   developerMode: false,
-  isLoading: false,
 };
 
 export const settingInfoState = atom<SettingInfo>({

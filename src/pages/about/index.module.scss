@@ -33,7 +33,18 @@
   margin-bottom: 24px;
 }
 
-.changeDate {
+.title {
   margin-bottom: 4px;
-  font-weight: bold;
+  display: flex;
+  align-items: flex-end;
+
+  .version {
+    font-weight: bold;
+    margin-right: 12px;
+    color: #739ede;
+  }
+
+  .date {
+    font-size: 14px;
+  }
 }

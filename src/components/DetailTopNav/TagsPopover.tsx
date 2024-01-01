@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 import classNames from 'classnames';
 import { ItemGridDrawer } from '@components/ItemGridDrawer';
 import { Popover } from '@components/Popover';
-import { RectDown } from '@nutui/icons-react-taro';
+import { ArrowDown } from '@nutui/icons-react-taro';
 import { StuffIcon } from '@components/StuffIcon';
 import { stuffIconPositionMap } from '@constants';
 import { drawerMaskColor } from '@src/styles';
@@ -64,7 +64,7 @@ export const TagsPopover: React.FC<Props> = ({ tags }) => {
           >
             <View className={styles.label}>
               标签
-              <RectDown style={{ marginLeft: '4rpx' }} size={9} />
+              <ArrowDown style={{ marginLeft: '4rpx' }} size={9} />
             </View>
             <View className={classNames(styles.value, styles.link)}>
               {tags.length}个

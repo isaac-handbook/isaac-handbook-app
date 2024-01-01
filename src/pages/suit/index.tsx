@@ -28,7 +28,12 @@ function Index() {
             const { name: suit } = item;
             const curSuit = convertTagToSuit[suit];
             return (
-              <ItemGridDrawer title={curSuit} tagFilter={suit} key={index}>
+              <ItemGridDrawer
+                type="suit"
+                title={curSuit}
+                tagFilter={suit}
+                key={index}
+              >
                 <View className={styles.box}>
                   <Image
                     className={styles.img}

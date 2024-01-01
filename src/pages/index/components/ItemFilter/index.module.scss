@@ -15,6 +15,7 @@
   .text {
     margin-top: 4px;
     font-size: 12px;
+    width: 24px;
   }
 }
 
@@ -41,4 +42,13 @@
   top: -1px;
   margin-left: 9px;
   margin-right: 8px;
+}
+
+.sideNavContent {
+  height: 100%;
+  overflow: auto;
+}
+
+.sideNavContentItem {
+  border-bottom: 1px solid #e5e5e5;
 }

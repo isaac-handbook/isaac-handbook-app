@@ -1,0 +1,16 @@
+{
+  "app": {
+    "version": "",
+    "forceUpdate": false,
+    "schoolNetFucked": false,
+    "deprecated": false
+  },
+  "notice": {
+    "id": "唯一的ID，用于和本地缓存对比",
+    "loop": false,
+    "content": {
+      "info": "公告标题",
+      "comment": "公告内容"
+    }
+  }
+}

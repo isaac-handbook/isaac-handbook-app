@@ -1,10 +1,10 @@
 import React from 'react';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { ItemType } from 'src/types/handbook';
-import { Table } from '@nutui/nutui-react-taro';
 import { useRecoilState } from 'recoil';
 import { handbookDataState } from '@hooks/useHandbookData';
 import { themeInfoState } from '@hooks/useThemeInfo';
+import { Table } from '@components/Table';
 
 interface Props {
   type?: ItemType;

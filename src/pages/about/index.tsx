@@ -67,18 +67,24 @@ function Index() {
         </View>
         <View className={styles.changeLog}>
           <View className={styles.changeTitle}>更新记录</View>
-          {changeLog.changeLog.map((item, index) => (
-            <View key={index} className={styles.changeLine}>
-              <View className={styles.changeDate}>{item.date}</View>
-              <View className={styles.changeContent}>
-                {item.changes.map((change, index) => (
-                  <View key={index} className={styles.changeItem}>
-                    {change}
-                  </View>
-                ))}
+          {changeLog.changeLog
+            .slice()
+            .reverse()
+            .map((item, index) => (
+              <View key={index} className={styles.changeLine}>
+                <View className={styles.title}>
+                  <View className={styles.version}>{item.version}</View>
+                  <View className={styles.date}>{item.date}</View>
+                </View>
+                <View className={styles.changeContent}>
+                  {item.changes.map((change, index) => (
+                    <View key={index} className={styles.changeItem}>
+                      {change}
+                    </View>
+                  ))}
+                </View>
               </View>
-            </View>
-          ))}
+            ))}
         </View>
       </View>
     </ErrorBoundary>

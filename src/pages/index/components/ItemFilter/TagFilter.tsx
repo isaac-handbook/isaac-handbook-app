@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
-import { View } from '@tarojs/components';
+import { ScrollView, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
-import { SideNavBar, SideNavBarItem } from '@nutui/nutui-react-taro';
+import { Popup, SideNavBar, SideNavBarItem } from '@nutui/nutui-react-taro';
 
 // 一些特定的顺序
 const order = [
@@ -122,17 +122,27 @@ const Cell: React.FC = () => {
         <View className={styles.label}>套装、标签</View>
         <View className={styles.value}>{showLabel}</View>
       </View>
-      <SideNavBar
+
+      <Popup
         visible={visible}
-        onClose={() => setVisible(false)}
+        style={{ width: '45%', height: '100%' }}
         position="right"
-        width="45%"
-        title="选择道具池"
+        onClose={() => {
+          setVisible(false);
+        }}
       >
-        {selectList.map((item) => (
-          <SideNavBarItem title={item} value={item} onClick={onChange} />
-        ))}
-      </SideNavBar>
+        <ScrollView scrollY enablePassive className={styles.sideNavContent}>
+          {selectList.map((item) => (
+            <SideNavBarItem
+              // @ts-ignore
+              title={<View>{item}</View>}
+              style={{ borderBottom: '1px solid #f5f5f5' }}
+              value={item}
+              onClick={onChange}
+            />
+          ))}
+        </ScrollView>
+      </Popup>
     </>
   );
 };

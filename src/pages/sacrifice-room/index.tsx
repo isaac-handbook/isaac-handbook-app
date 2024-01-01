@@ -2,10 +2,10 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
-import { Table } from '@nutui/nutui-react-taro';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { handbookDataState } from '@hooks/useHandbookData';
 import { useRecoilState } from 'recoil';
+import { Table } from '@components/Table';
 
 function Index() {
   const {

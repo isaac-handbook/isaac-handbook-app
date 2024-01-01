@@ -10,9 +10,9 @@ import { themeInfoState } from '@hooks/useThemeInfo';
 import { handbookDataState } from '@hooks/useHandbookData';
 import { ContentTransformer } from '@components/ContentTransformer';
 import classNames from 'classnames';
-import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
 import { Dot } from '@components/Dot';
 import { drawerMaskColor } from '@src/styles';
+import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
 
 interface Props {
   children: React.ReactNode;
@@ -22,6 +22,7 @@ interface Props {
   title: string;
   itemInfoList?: string[];
   className?: string;
+  type?: 'default' | 'suit';
 }
 
 export const ItemGridDrawer: React.FC<Props> = (props) => {
@@ -31,9 +32,10 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
     qualityFilter,
     title,
     itemInfoList = [],
+    type = 'default',
   } = props;
 
-  const curSuit = convertTagToSuit[tagFilter ?? ''];
+  const isSuit = type === 'suit';
 
   const [showDrawer, setShowDrawer] = React.useState(false);
 
@@ -101,7 +103,7 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
       return null;
     }
     // 套装
-    if (curSuit) {
+    if (isSuit) {
       return (
         <View className={styles.header}>
           <View className={styles.suit}>
@@ -117,7 +119,7 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
               <Image
                 className={styles.img}
                 mode="heightFix"
-                src={require(`@assets/suit/${curSuit}.png`)}
+                src={require(`@assets/suit/${convertTagToSuit[tagFilter]}.png`)}
               />
             </View>
           </View>
@@ -175,7 +177,7 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
           className={styles.drawer}
           style={{
             backgroundColor: themeColor.bgColor,
-            height: curSuit ? '50vh' : '60vh',
+            height: isSuit ? '50vh' : '60vh',
           }}
           scrollY
           enablePassive

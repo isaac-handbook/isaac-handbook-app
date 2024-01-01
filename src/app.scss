@@ -3,7 +3,7 @@
   color: inherit !important;
 }
 
-.nut-fixednav__btn {
+.nut-fixednav-btn {
   background: #c4b39d !important;
   padding-left: 8px !important;
   width: auto !important;
@@ -12,6 +12,7 @@
   .nut-icon {
     font-size: 16px;
     color: #000000e0 !important;
+    background: #000000e0 !important;
   }
 
   .text {
@@ -22,11 +23,11 @@
   }
 }
 
-.nut-fixednav__list {
+.nut-fixednav-list {
   padding-right: 56px !important;
 }
 
-.nut-fixednav__list-item {
+.nut-fixednav-list-item {
   justify-content: space-between !important;
   padding: 4px 0;
   box-sizing: border-box;
@@ -36,13 +37,13 @@
     // image-rendering: pixelated !important;
     margin-bottom: 0px !important;
   }
-  .nut-fixednav__list-text {
+  .nut-fixednav-list-text {
     font-size: 11px !important;
     position: relative;
     top: -2px;
   }
 }
-.nut-fixednav__list-item:first-of-type {
+.nut-fixednav-list-item:first-of-type {
   img {
     height: 13px !important;
     margin-top: 6px !important;
@@ -53,13 +54,14 @@
 
 .my-search-bar {
   --nutui-searchbar-background: #c4b39d;
-  .nut-searchbar__content {
-    padding: 0 2px !important;
+  .nut-searchbar-content {
+    padding: 0 12px !important;
   }
-  .nut-icon {
+  .nut-searchbar-icon {
     font-size: 13px !important;
+    margin-right: 4px;
   }
-  .nut-searchbar__input {
+  .nut-searchbar-input-box {
     font-size: 13px !important;
   }
   .nut-icon-circle-close {
@@ -87,7 +89,7 @@
   overflow: hidden !important;
 }
 
-.nut-subsidenavbar__item {
+.nut-subsidenavbar-item {
   padding-left: 36px !important;
 }
 
@@ -99,3 +101,16 @@ button {
 button::after {
   border: none;
 }
+
+.nut-popup {
+  overflow-y: unset !important;
+}
+
+.nut-popup-right {
+  overflow-y: auto !important;
+  height: 100vh !important;
+}
+
+// .nut-sidenavbar-content {
+//   overflow-y: scroll !important;
+// }
