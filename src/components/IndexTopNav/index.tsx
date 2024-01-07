@@ -5,14 +5,16 @@ import { Setting } from '../../pages/index/components/Setting';
 import styles from './index.module.scss';
 import { ItemFilter } from '../../pages/index/components/ItemFilter';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
-import { Home, Refresh } from '@nutui/icons-react-taro';
+import { Filter, Home, Refresh } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
 import Taro from '@tarojs/taro';
+import { useTrinketSearchInfo } from '@hooks/useTrinketSearchInfo';
 
 export interface IndexTopNavProps extends SearchProps {
   supportFilter?: boolean;
   supportSetting?: boolean;
   supportBackHome?: boolean;
+  supportColorFilter?: boolean;
 }
 
 export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
@@ -20,28 +22,67 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
     supportFilter = true,
     supportSetting = true,
     supportBackHome = false,
+    supportColorFilter = false,
+    type,
   } = props;
 
-  const { hasFilterInfo, resetFilter } = useItemSearchInfo();
+  const {
+    hasFilterInfo: item_hasFilterInfo,
+    resetFilter: item_resetFilter,
+    updateItemSearchInfo,
+    itemSearchInfo,
+  } = useItemSearchInfo();
+
+  const {
+    hasFilterInfo: trinket_hasFilterInfo,
+    resetFilter: trinket_resetFilter,
+  } = useTrinketSearchInfo();
 
   const handleBackHome = () => {
     // 清除所有页面栈，并返回首页
     Taro.reLaunch({ url: '/pages/index/index' });
   };
 
+  const toggleColorFilter = () => {
+    updateItemSearchInfo({
+      openColorFilter: !itemSearchInfo.openColorFilter,
+    });
+  };
+
+  const shouldShowReset =
+    type === 'item' ? item_hasFilterInfo : trinket_hasFilterInfo;
+
+  const handleReset = () => {
+    if (type === 'item') {
+      item_resetFilter({ refreshKeyword: true });
+    } else {
+      trinket_resetFilter();
+    }
+  };
+
   return (
     <View className={styles.container}>
       {supportSetting && <Setting />}
 
-      <Search type={props.type} margin={!supportFilter || !supportSetting} />
+      <Search type={props.type} marginLeft={supportSetting ? '' : '24rpx'} />
 
-      {supportFilter && hasFilterInfo && (
+      {shouldShowReset && (
         <View
-          onClick={() => resetFilter({ refreshKeyword: true })}
+          onClick={handleReset}
           className={classNames(styles.icon, styles.refresh)}
         >
           <Refresh size={'32rpx'} />
           <View className={styles.text}>重置</View>
+        </View>
+      )}
+
+      {supportColorFilter && (
+        <View
+          onClick={toggleColorFilter}
+          className={classNames(styles.icon, styles.refresh)}
+        >
+          <Filter size={'32rpx'} />
+          <View className={styles.text}>颜色</View>
         </View>
       )}
 
@@ -51,7 +92,7 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
         <View
           onClick={handleBackHome}
           className={styles.icon}
-          style={{ paddingLeft: '6rpx' }}
+          // style={{ paddingLeft: '6rpx' }}
         >
           <Home size={'32rpx'} />
           <View className={styles.text}>首页</View>

@@ -31,6 +31,9 @@ export const useThemeInfo = () => {
   } = useSetting();
 
   useEffect(() => {
+    // 非常必要的 return
+    if (themeInfo.theme === theme) return;
+
     let themeColor: ThemeColor;
     switch (theme) {
       case 'dark':

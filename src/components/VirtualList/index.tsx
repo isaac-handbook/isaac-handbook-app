@@ -10,6 +10,7 @@ interface VirtualListProps {
   renderRow: (item: any, index: number) => JSX.Element;
   loadHeight: number;
   paddingTop?: string;
+  height?: string;
 }
 
 export interface VirtualListRef {
@@ -25,6 +26,7 @@ const VirtualList = forwardRef<VirtualListRef, VirtualListProps>(
       renderRow,
       loadHeight,
       paddingTop,
+      height = '100vh',
     } = props;
     const [startOffset, setStartOffset] = useState(0);
     const [visibleData, setVisibleData] = useState<any[]>([]);
@@ -62,7 +64,7 @@ const VirtualList = forwardRef<VirtualListRef, VirtualListProps>(
           onScroll={handleScroll}
           scrollTop={scrollTop}
           style={{
-            height: `100vh`,
+            height,
             paddingTop,
             overflowY: 'auto',
             position: 'relative',

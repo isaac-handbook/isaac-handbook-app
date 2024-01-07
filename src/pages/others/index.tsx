@@ -48,7 +48,7 @@ function Index() {
             })
           }
         >
-          筛子房
+          骰子房
         </Button>
 
         <Button

@@ -12,7 +12,7 @@ import { ItemType } from 'src/types/handbook';
 
 export interface SearchProps {
   type: ItemType;
-  margin?: boolean;
+  marginLeft?: string;
 }
 
 export const Search: React.FC<SearchProps> = (props) => {
@@ -128,13 +128,10 @@ export const Search: React.FC<SearchProps> = (props) => {
   }
 
   return (
-    <View
-      className={styles.search}
-      style={{ margin: props.margin ? '0rpx 24rpx' : '' }}
-    >
+    <View className={styles.search} style={{ marginLeft: props.marginLeft }}>
       <SearchBar
         shape="round"
-        placeholder={'关键字搜索'}
+        placeholder={'万能的搜索'}
         onSearch={onSearch}
         style={customStyle}
         onClear={handleClear}

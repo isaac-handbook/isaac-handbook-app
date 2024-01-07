@@ -63,7 +63,7 @@ export const PoolsPopover: React.FC<Props> = ({ pools }) => {
           <View className={styles.cell} style={{ height: '100%' }}>
             <View className={styles.label}>
               道具池
-              <ArrowDown style={{ marginLeft: '4rpx' }} size={9} />
+              <ArrowDown style={{ marginLeft: '4rpx' }} size={10} />
             </View>
             <View className={classNames(styles.value, styles.link)}>
               {pools.length}个

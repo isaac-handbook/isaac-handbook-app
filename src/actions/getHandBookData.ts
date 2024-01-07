@@ -2,6 +2,11 @@ import { HANDBOOK_DATA_OSS_URL } from '@constants';
 import Taro from '@tarojs/taro';
 import { sleep } from '@utils/sleep';
 import { HandBookData } from 'src/types/handbook';
+import alias from '@data/alias.json';
+import itemsColor from '@data/itemsColor.json';
+import trinketsColor from '@data/trinketsColor.json';
+import { colorTypeList } from '@hooks/useItemSearchInfo';
+import { isDev } from '@utils/env';
 
 // 请求失败后重试的次数
 let reTryTimes = 0;
@@ -82,11 +87,50 @@ const initJsonData = (data: string) => {
     ...item,
     type: 'item',
   }));
+  // 遍历每一个 item，将 alias.json、itemsColor.json 的内容添加进去
+  res.items = res.items.map((item) => {
+    if (alias[item.nameZh]) {
+      item.alias = alias[item.nameZh];
+    }
+    if (itemsColor[String(item.id)]) {
+      item.colors = itemsColor[String(item.id)]?.color || [];
+    }
+    if (isDev) {
+      // 如果 item.colors 中的值不存在与 ColorType 中，则提示
+      item.colors.forEach((color) => {
+        if (!colorTypeList.includes(color)) {
+          console.warn(
+            `item ${item.nameZh} ID=${item.id} 的颜色 ${color} 不存在`,
+          );
+        }
+      });
+    }
+    return item;
+  });
+
   // 所有 trinkets 都加入 type=trinket
   res.trinkets = res.trinkets.map((trinket) => ({
     ...trinket,
     type: 'trinket',
   }));
+  // 遍历每一个 trinkets，将 trinketsColor.json 的内容添加进去
+  res.trinkets = res.trinkets.map((trinket) => {
+    if (trinketsColor[String(trinket.id)]) {
+      trinket.colors = trinketsColor[String(trinket.id)]?.color || [];
+    }
+    if (isDev) {
+      // 如果 trinket.colors 中的值不存在与 ColorType 中，则提示
+      trinket.colors.forEach((color) => {
+        if (!colorTypeList.includes(color)) {
+          console.warn(
+            `trinket ${trinket.nameZh} ID=${trinket.id} 的颜色 ${color} 不存在`,
+          );
+        }
+      });
+    }
+    return trinket;
+  });
+
   // 所有 cards 都加入 type=card
   res.cards = res.cards.map((card) => ({
     ...card,

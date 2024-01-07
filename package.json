@@ -36,7 +36,7 @@
     "ios >= 8"
   ],
   "author": "",
-  "license": "MIT",
+  "license": "Apache License 2.0",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@nutui/icons-react-taro": "^1.0.0",

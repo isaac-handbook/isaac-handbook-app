@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.container {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 6px;
+  box-sizing: border-box;
+  align-items: center;
+  // 底部阴影
+  border-bottom: 1px solid #ccc;
+}
+
+.itemWrapper {
+  padding: 9px 8px;
+}
+
+.item {
+  height: 24px;
+  width: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.selected {
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 0 4px #000;
+  }
+}

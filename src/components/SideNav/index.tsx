@@ -59,6 +59,7 @@ export const SideNav: React.FC<Props> = () => {
           url: `/pages/cards/index`,
         });
         setVisible(false);
+        break;
       case 3:
         // 跳转到胶囊页面
         Taro.navigateTo({

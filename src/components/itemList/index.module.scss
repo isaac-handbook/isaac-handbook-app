@@ -32,6 +32,15 @@
   flex: 3;
   padding-left: 12px;
   box-sizing: border-box;
+  color: #faad14;
+
+  &.green {
+    color: #52c41a;
+  }
+
+  &.red {
+    color: #ff4d4f;
+  }
 }
 
 .value {

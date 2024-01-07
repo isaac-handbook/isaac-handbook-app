@@ -39,8 +39,8 @@ export const ItemFilter: React.FC = () => {
           <View
             className={styles.icon}
             style={{
-              marginTop: 4,
-              marginRight: 4,
+              marginTop: '12px',
+              marginRight: '12px',
               color: '#000000E0',
               fontWeight: 'normal',
             }}

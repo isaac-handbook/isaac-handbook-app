@@ -52,21 +52,25 @@
 .title {
   font-size: 18px;
   text-align: center;
+  margin-top: 12px;
+  margin-bottom: 20px;
 }
 
 .subTitle {
   font-size: 14px;
   margin-top: 16px;
+  margin-bottom: 2px;
   display: flex;
   align-items: center;
 
   .icon {
     margin-left: 6px;
+    opacity: 0.8;
   }
 }
 
 .notice {
-  margin-bottom: 8px;
+  margin-bottom: 0px;
   font-size: 16px;
   padding: 4px 20px;
   box-sizing: border-box;

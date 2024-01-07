@@ -19,12 +19,13 @@ function ItemDetail() {
   const { handbookData } = useHandBookData();
   const [{ themeColor }] = useRecoilState(themeInfoState);
 
+  const params = Taro.getCurrentInstance().router?.params as any;
+  const [itemId, setItemId] = React.useState<string>(params.itemId);
+  const [type, setType] = React.useState<ItemType>(params.type);
   const [item, setItem] = React.useState<Item>();
-  const [type, setType] = React.useState<ItemType>('item');
 
   // 获取页面参数中的 itemId
   useEffect(() => {
-    const { itemId, type } = Taro.getCurrentInstance().router?.params as any;
     // 道具
     if (type === 'item') {
       const item = handbookData.items.find((item) => item.id === itemId);
@@ -51,7 +52,61 @@ function ItemDetail() {
       setItem(pill);
       setType('pill');
     }
-  }, []);
+  }, [type, itemId]);
+
+  const getNextItem = () => {
+    if (type === 'item') {
+      const index = handbookData.items.findIndex((i) => i.id === item?.id);
+      return handbookData.items[index + 1];
+    }
+    if (type === 'trinket') {
+      const index = handbookData.trinkets.findIndex((i) => i.id === item?.id);
+      return handbookData.trinkets[index + 1];
+    }
+  };
+
+  // 道具翻前一页
+  const goToNextItem = () => {
+    if (type === 'item') {
+      const nextItem = getNextItem();
+      if (nextItem) {
+        setItemId(nextItem.id);
+      }
+    }
+    if (type === 'trinket') {
+      const nextItem = getNextItem();
+      if (nextItem) {
+        setItemId(nextItem.id);
+      }
+    }
+  };
+
+  const getPrevItem = () => {
+    if (type === 'item') {
+      const index = handbookData.items.findIndex((i) => i.id === item?.id);
+      return handbookData.items[index - 1];
+    }
+    if (type === 'trinket') {
+      const index = handbookData.trinkets.findIndex((i) => i.id === item?.id);
+      return handbookData.trinkets[index - 1];
+    }
+  };
+
+  // 道具翻后一页
+  const goToPrevItem = () => {
+    if (type === 'item') {
+      const prevItem = getPrevItem();
+      if (prevItem) {
+        setItemId(prevItem.id);
+      }
+    }
+    if (type === 'trinket') {
+      const prevItem = getPrevItem();
+      if (prevItem) {
+        setItemId(prevItem.id);
+      }
+    }
+  };
 
   if (!item) {
     return <LoadingPage />;
@@ -73,6 +128,10 @@ function ItemDetail() {
           iconPosition={item.iconPosition}
           type={type}
           charge={item.charge}
+          getNextItem={getNextItem}
+          goToNextItem={goToNextItem}
+          getPrevItem={getPrevItem}
+          goToPrevItem={goToPrevItem}
         />
 
         <Header descZh={item.descZh} nameZh={item.nameZh} />

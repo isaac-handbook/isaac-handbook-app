@@ -43,8 +43,8 @@ export const Setting: React.FC = () => {
           <View
             className={styles.icon}
             style={{
-              marginTop: 4,
-              marginRight: 4,
+              marginTop: '12px',
+              marginRight: '12px',
               color: '#000000E0',
               fontWeight: 'normal',
             }}
@@ -68,21 +68,37 @@ export const Setting: React.FC = () => {
           <ThemeSetting />
           <GridBorderSetting />
 
-          <Button
-            style={
-              {
-                width: '100%',
-                marginBottom: '8px',
-                '--nutui-button-border-width': '0px',
-                '--nutui-button-default-height': '48px',
-                '--nutui-button-default-font-size': '16px',
-                '--nutui-button-default-background-color': '#ffffff',
-              } as any
-            }
-            onClick={handleForceRefresh}
-          >
-            刷新图鉴数据
-          </Button>
+          <View className={styles.bottom}>
+            <Button
+              className={styles.btn}
+              style={
+                {
+                  marginRight: '12px',
+                  '--nutui-button-border-width': '0px',
+                  '--nutui-button-default-height': '48px',
+                  '--nutui-button-default-font-size': '16px',
+                  '--nutui-button-default-background-color': '#ffffff',
+                } as any
+              }
+              onClick={handleForceRefresh}
+            >
+              刷新图鉴数据
+            </Button>
+            <Button
+              className={styles.btn}
+              style={
+                {
+                  '--nutui-button-border-width': '0px',
+                  '--nutui-button-default-height': '48px',
+                  '--nutui-button-default-font-size': '16px',
+                  '--nutui-button-default-background-color': '#ffffff',
+                } as any
+              }
+              openType="feedback"
+            >
+              反馈与建议
+            </Button>
+          </View>
 
           <PerformanceSetting />
 

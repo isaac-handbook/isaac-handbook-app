@@ -5,15 +5,17 @@ import { Item, ItemType } from 'src/types/handbook';
 import styles from './index.module.scss';
 import Taro from '@tarojs/taro';
 import { useThemeInfo } from '@hooks/useThemeInfo';
+import classNames from 'classnames';
 
 interface Props {
   item: Item;
   themeColor: ReturnType<typeof useThemeInfo>['themeInfo']['themeColor'];
   type: ItemType;
+  lang?: 'zh' | 'en';
 }
 
 const Cell: React.FC<Props> = (props) => {
-  const { item, themeColor } = props;
+  const { item, themeColor, lang } = props;
   const handleClick = () => {
     Taro.navigateTo({
       url: `/pages/item-detail/index?itemId=${item.id}&type=${props.type}`,
@@ -40,9 +42,18 @@ const Cell: React.FC<Props> = (props) => {
         />
       </View>
       {props.type === 'pill' && (
-        <View className={styles.quality}>{item.quality}</View>
+        <View
+          className={classNames(styles.quality, {
+            [styles.green]: item.quality === '正面',
+            [styles.red]: item.quality === '负面',
+          })}
+        >
+          {item.quality}
+        </View>
       )}
-      <View className={styles.value}>{item.nameZh}</View>
+      <View className={styles.value}>
+        {lang === 'zh' ? item.nameZh : item.nameEn}
+      </View>
     </View>
   );
 };

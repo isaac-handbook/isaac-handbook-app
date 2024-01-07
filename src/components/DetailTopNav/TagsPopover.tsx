@@ -64,7 +64,7 @@ export const TagsPopover: React.FC<Props> = ({ tags }) => {
           >
             <View className={styles.label}>
               标签
-              <ArrowDown style={{ marginLeft: '4rpx' }} size={9} />
+              <ArrowDown style={{ marginLeft: '4rpx' }} size={10} />
             </View>
             <View className={classNames(styles.value, styles.link)}>
               {tags.length}个

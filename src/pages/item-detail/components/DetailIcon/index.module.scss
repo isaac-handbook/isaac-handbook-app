@@ -13,3 +13,19 @@
   top: 52px;
   right: 0px;
 }
+
+.turnPrev {
+  position: absolute;
+  top: 28px;
+  left: -96px;
+  padding: 24px;
+  opacity: 0.9;
+}
+
+.turnNext {
+  position: absolute;
+  top: 28px;
+  right: -96px;
+  padding: 24px;
+  opacity: 0.9;
+}

@@ -1,6 +1,5 @@
 .page {
   width: 100vw;
-  height: 100vh;
   background-color: transparent;
   box-sizing: border-box;
   padding: 24px;
@@ -26,6 +25,7 @@
 .changeTitle {
   font-size: 18px;
   margin: 16px 0;
+  margin-top: 0px;
   font-weight: bold;
 }
 

@@ -21,7 +21,7 @@ function Index() {
         className={styles.page}
         style={{ backgroundColor: themeColor.bgColor }}
       >
-        <ItemSearchView type="item" showType="grid" />
+        <ItemSearchView supportColorFilter type="item" showType="grid" />
         <UpdateNotice />
       </View>
       <SideNav />

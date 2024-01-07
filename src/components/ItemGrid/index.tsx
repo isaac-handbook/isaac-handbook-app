@@ -13,6 +13,7 @@ import { themeInfoState } from '@hooks/useThemeInfo';
 import { trinketSearchInfoState } from '@hooks/useTrinketSearchInfo';
 import { useRecoilState } from 'recoil';
 import { BottomTips } from '@components/BottomTips';
+import { ColorFilter } from './ColorFilter';
 
 export interface ItemGridProps {
   type: ItemType;
@@ -34,16 +35,19 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
       qualityFilter,
       chargeFilter,
       unlockFilter,
+      openColorFilter,
+      filteredColors: item_filteredColors,
     },
   ] = useRecoilState(itemSearchInfoState);
 
-  const [{ keyword: trinketKeyword }] = useRecoilState(trinketSearchInfoState);
+  const [{ keyword: trinket_keyword, filteredColors: trinket_filteredColors }] =
+    useRecoilState(trinketSearchInfoState);
 
   let keyword: string = '';
   let initDataList: Item[] = [];
   // 饰品
   if (props.type === 'trinket') {
-    keyword = trinketKeyword;
+    keyword = trinket_keyword;
     initDataList = handbookData.trinkets;
   }
   // 道具
@@ -62,6 +66,8 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
     let show = true;
     // 关键字搜索
     if (keyword) {
+      // 去掉空格
+      keyword = keyword.replace(/\s/g, '');
       if (
         !item.nameZh.includes(keyword) &&
         !item.description.includes(keyword) &&
@@ -69,9 +75,35 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
         !(item.id === keyword) &&
         !item.tags.includes(keyword) &&
         !item.descEn.toLowerCase().includes(keyword.toLowerCase()) &&
-        !item.nameEn.toLowerCase().includes(keyword.toLowerCase())
+        !item.nameEn.toLowerCase().includes(keyword.toLowerCase()) &&
+        // alias 别名
+        !item.alias?.join('')?.toLowerCase()?.includes(keyword)
       ) {
         show = false;
+      }
+    }
+    // 道具颜色过滤
+    if (props.type === 'item') {
+      if (item_filteredColors.length) {
+        // item.colors、item_filteredColors 是数组。如果当前 item_filteredColors 中的颜色有一个不在 item.colors 中，就不显示
+        if (
+          !item_filteredColors?.every((color) => item.colors?.includes(color))
+        ) {
+          show = false;
+        }
+      }
+    }
+    // 饰品颜色过滤
+    if (props.type === 'trinket') {
+      if (trinket_filteredColors.length) {
+        // item.colors、trinket_filteredColors 是数组。如果当前 trinket_filteredColors 中的颜色有一个不在 item.colors 中，就不显示
+        if (
+          !trinket_filteredColors?.every(
+            (color) => item.colors?.includes(color),
+          )
+        ) {
+          show = false;
+        }
       }
     }
     // 如果当前是饰品，直接返回
@@ -217,6 +249,11 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
             : 'transparent',
         }}
       >
+        {openColorFilter ? (
+          <ColorFilter type={props.type} />
+        ) : (
+          <View style={{ height: '104rpx' }} />
+        )}
         <VirtualList
           ref={scrollRef}
           itemHeight={375 / columnCount}
@@ -224,14 +261,17 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
           renderRow={itemRender}
           loadHeight={1500}
           preloadHeight={375}
-          paddingTop="53px"
+          height={
+            openColorFilter ? 'calc(100vh - 208rpx)' : 'calc(100vh - 104rpx)'
+          }
         />
       </View>
     );
   }
 
   return (
-    <View style={{ paddingTop: '53px' }}>
+    <View style={{ paddingTop: '104rpx' }}>
+      <ColorFilter type={props.type} height="104rpx" />
       <View
         className={styles.grid}
         style={{

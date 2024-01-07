@@ -1,7 +1,7 @@
 import { UpdateInfo } from './type';
 
 // 当前版本
-const version = '1.3.0';
+const version = '1.5.0';
 
 // 是否要强制刷新
 const forceRefreshNow = false;
@@ -13,13 +13,12 @@ const updateNotice: UpdateInfo = {
   // 功能更新
   features: [
     {
-      title: '更好的道具颜色排序',
-      content: ['在左上角设置-排序方式中，可以选择按照道具颜色排序'],
+      title: '【道具和饰品】按照颜色过滤',
+      content: ['点击顶部的颜色按钮试试吧~'],
     },
-    // {
-    //   title: '道具颜色分类',
-    //   content: ['还是点右上角试试吧~'],
-    // },
+    {
+      title: '【道具和饰品】翻页功能',
+    },
   ],
   // 问题修复
   bugs: [

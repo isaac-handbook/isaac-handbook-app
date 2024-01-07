@@ -10,8 +10,8 @@ import { themeInfoState } from '@hooks/useThemeInfo';
 import { cardSearchInfoState } from '@hooks/useCardSearchInfo';
 import { pillSearchInfoState } from '@hooks/usePillSearchInfo';
 import { useRecoilState } from 'recoil';
-import { itemSearchInfoState } from '@hooks/useItemSearchInfo';
 import { BottomTips } from '@components/BottomTips';
+import { TopFilter } from './TopFilter';
 
 export interface ItemListProps {
   type: ItemType;
@@ -24,9 +24,8 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
 
   const [{ themeColor }] = useRecoilState(themeInfoState);
 
-  const [{ keyword: cardKeyword }] = useRecoilState(cardSearchInfoState);
+  const [{ keyword: cardKeyword, lang }] = useRecoilState(cardSearchInfoState);
   const [{ keyword: pillKeyword }] = useRecoilState(pillSearchInfoState);
-  const [{ keyword: itemKeyword }] = useRecoilState(itemSearchInfoState);
 
   let keyword: string = '';
   let initDataList: Item[] = [];
@@ -40,11 +39,6 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
     keyword = pillKeyword;
     initDataList = handbookData.pills;
   }
-  // 道具
-  if (props.type === 'item') {
-    keyword = itemKeyword;
-    initDataList = handbookData.items;
-  }
 
   const scrollRef = React.useRef<any>();
 
@@ -56,6 +50,8 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
     let show = true;
     // 关键字搜索
     if (keyword) {
+      // 去掉空格
+      keyword = keyword.replace(/\s/g, '');
       if (
         !item.nameZh.includes(keyword) &&
         !item.description.includes(keyword) &&
@@ -75,7 +71,19 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
   });
 
   // 当前展示的道具
-  const showingItems = filteredItems.filter((item) => item.show);
+  let showingItems = filteredItems.filter((item) => item.show);
+
+  // 如果是药丸，则将药丸的 quality 排序，正面、负面、中性
+  if (props.type === 'pill') {
+    showingItems = showingItems.sort((a, b) => {
+      const qualityMap = {
+        正面: 1,
+        中性: 2,
+        负面: 3,
+      };
+      return qualityMap[a.quality] - qualityMap[b.quality];
+    });
+  }
 
   // 性能模式，走 VirtualList
   if (performance) {
@@ -98,12 +106,14 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
           key={rowData.item?.id as string}
           themeColor={themeColor}
           type={props.type}
+          lang={lang}
         />
       );
     };
 
     return (
       <View className={styles.listContainer}>
+        <TopFilter type="item" />
         <VirtualList
           ref={scrollRef}
           itemHeight={48}
@@ -111,14 +121,15 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
           renderRow={itemRender}
           loadHeight={1500}
           preloadHeight={375}
-          paddingTop="53px"
+          height="calc(100vh - 208rpx)"
         />
       </View>
     );
   }
 
   return (
-    <View style={{ paddingTop: '53px' }}>
+    <View style={{ paddingTop: '104rpx' }}>
+      <TopFilter type="item" height="104rpx" />
       <View className={styles.list}>
         {showingItems.map((item) => (
           <ItemListCell
@@ -126,6 +137,7 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
             key={item.id}
             themeColor={themeColor}
             type={props.type}
+            lang={lang}
           />
         ))}
       </View>

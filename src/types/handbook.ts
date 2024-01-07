@@ -1,3 +1,4 @@
+import { ColorType } from '@hooks/useItemSearchInfo';
 import { TableColumnProps } from '@nutui/nutui-react-taro/dist/types/packages/table/types';
 
 export type ItemType = 'item' | 'trinket' | 'card' | 'pill' | 'chara';
@@ -59,6 +60,10 @@ export interface Item extends BriefItem {
   show?: boolean;
   // 类型
   type: ItemType;
+  // 别名
+  alias?: string[];
+  // 颜色
+  colors: ColorType[];
 }
 
 export interface HandBookData {

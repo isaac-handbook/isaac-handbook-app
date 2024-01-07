@@ -112,7 +112,6 @@ export const ContentTransformer: React.FC<Props> = (props) => {
   // 转换value中的{{}}为对应的数据
   const transformInnerData = (data: string) => {
     if (mode === 'clean') {
-      console.log('clean', data);
       if (data.includes('|')) {
         return data.split('|')[1];
       }

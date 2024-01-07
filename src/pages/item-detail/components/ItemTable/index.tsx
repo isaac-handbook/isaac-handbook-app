@@ -22,9 +22,6 @@ export const ItemTable: React.FC<Props> = (props) => {
   const tableName = type + '|' + (type === 'chara' ? props.nameZh : props.id);
   const hasTable = Object.keys(handbookData.extra.table).includes(tableName);
 
-  console.log(tableName);
-  console.log(hasTable);
-
   if (!hasTable) {
     return null;
   }

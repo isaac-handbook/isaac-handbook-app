@@ -19,6 +19,7 @@ function Index() {
         <ItemSearchView
           supportFilter={false}
           supportSetting={false}
+          supportColorFilter
           supportBackHome
           showType="grid"
           type="trinket"

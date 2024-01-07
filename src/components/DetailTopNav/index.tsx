@@ -58,7 +58,7 @@ export const DetailTopNav: React.FC<Props> = (props) => {
           <View className={styles.cell}>
             <View className={styles.label}>
               品质
-              <ArrowDown style={{ marginLeft: '4rpx' }} size={9} />
+              <ArrowDown style={{ marginLeft: '4rpx' }} size={10} />
             </View>
             <View className={classNames(styles.value, styles.link)}>
               {item.quality}级

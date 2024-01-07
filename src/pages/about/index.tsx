@@ -2,7 +2,6 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
-import classNames from 'classnames';
 import Taro from '@tarojs/taro';
 import changeLog from './assets/changeLog.json';
 
@@ -34,6 +33,9 @@ function Index() {
       'https://github.com/isaac-handbook/isaac-handbook-app/blob/main/LICENSE',
     );
 
+  const copyCcUrl = () =>
+    copyUrl('https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh-hans');
+
   return (
     <ErrorBoundary>
       <View
@@ -44,26 +46,26 @@ function Index() {
         }}
       >
         <View className={styles.p}>
-          移动端以撒图鉴，专注于移动便携体验。数据主要来源于：
+          移动端以撒图鉴，专注于移动便携体验。数据部分来源于：
           <View className={styles.inline} onClick={copyWikiUrl}>
             以撒的结合中文维基
           </View>
-        </View>
-        <View className={styles.p}>
-          本项目以个人学习、方便玩家为目的而创建，不作任何商业用途。
-        </View>
-        <View className={styles.p}>
-          本项目遵从
-          <View className={styles.inline} onClick={copyRuleUrl}>
-            MIT协议
+          。协议许可：
+          <View className={styles.inline} onClick={copyCcUrl}>
+            CC BY-NC-SA 3.0
           </View>
-          进行开源，欢迎大家提出问题或建议，一起参与建设。
+          。在此基础上进行二次创作。
         </View>
-        <View
-          className={classNames(styles.p, styles.inline)}
-          onClick={copyCodeUrl}
-        >
-          开源仓库地址
+        <View className={styles.p}>
+          本项目以个人学习为目的而创立，不作商业用途。遵从
+          <View className={styles.inline} onClick={copyRuleUrl}>
+            Apache License 2.0协议
+          </View>
+          进行开源。
+          <View className={styles.inline} onClick={copyCodeUrl}>
+            点击复制开源仓库地址
+          </View>
+          。
         </View>
         <View className={styles.changeLog}>
           <View className={styles.changeTitle}>更新记录</View>

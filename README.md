@@ -1,10 +1,10 @@
 # Isaac Handbook
 
-移动端以撒图鉴，专注于移动便携体验。数据主要来源于：[以撒的结合中文维基](https://isaac.huijiwiki.com/wiki/%E9%A6%96%E9%A1%B5)
+移动端以撒图鉴，专注于移动便携体验。数据部分来源于：[以撒的结合中文维基](https://isaac.huijiwiki.com/wiki/%E9%A6%96%E9%A1%B5)
 
-微信小程序《以撒图鉴无敌版》
+微信小程序《以撒图鉴》
 
-<img src="./assets/qrcode.JPG">
+<img src="./assets/qrcode.jpg">
 
 <table>
   <tr>
@@ -25,6 +25,6 @@ npm run dev
 ```
 
 ## 声明
-本项目以个人学习、方便玩家为目的而创建，不作任何商业用途。
+本项目以个人学习为目的而创建，不作商业用途。
 
-本项目遵从 [MIT协议](./LICENSE) 进行开源，欢迎大家提出问题或建议，一起参与建设。
+本项目遵从 [Apache License 2.0协议](./LICENSE) 进行开源，欢迎大家提出问题或建议，一起参与建设。

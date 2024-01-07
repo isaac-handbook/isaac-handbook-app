@@ -98,8 +98,6 @@ const Cell: React.FC = () => {
             <View className={styles.content}>{renderContent()}</View>
           </View>
 
-          {btns.length > 0 && <View className={styles.btns}>233</View>}
-
           <View
             className={styles.close}
             onClick={() => updateSingleUIState('showUpdateModal', false)}

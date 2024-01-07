@@ -111,9 +111,10 @@ export const DetailContent: React.FC<Props> = (props) => {
         );
       })}
       {(curItem.nameEn || curItem.descEn) &&
-        renderSingleModule('英文', [
-          `名称：${curItem.nameEn}`,
-          curItem.descEn ? `描述：${curItem.descEn}` : '',
+        renderSingleModule('其他名称', [
+          curItem.alias?.length ? `民间叫法：${curItem.alias.join('、')}` : '',
+          `英文名称：${curItem.nameEn}`,
+          curItem.descEn ? `英文描述：${curItem.descEn}` : '',
         ])}
     </View>
   );

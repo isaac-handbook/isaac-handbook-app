@@ -1,10 +1,14 @@
+page {
+  --nutui-color-primary: #c4b39d;
+}
+
 .nut-popup-title {
   background-color: transparent !important;
   color: inherit !important;
 }
 
 .nut-fixednav-btn {
-  background: #c4b39d !important;
+  // background: #c4b39d !important;
   padding-left: 8px !important;
   width: auto !important;
   padding-right: 8px;
@@ -111,6 +115,6 @@ button::after {
   height: 100vh !important;
 }
 
-// .nut-sidenavbar-content {
-//   overflow-y: scroll !important;
-// }
+.nut-radio-icon-checked {
+  color: #739ede !important;
+}
