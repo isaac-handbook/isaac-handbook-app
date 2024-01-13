@@ -15,11 +15,10 @@ import { sleep } from '@utils/sleep';
 import { resizeFrameImage } from './utils/resizeFrameImage';
 import { hammingDistance } from './utils/hamming';
 import { cosineSimilarity } from './utils/cosine';
-import { saveImgByFailPath } from '@utils/img/saveImg';
 // import { saveImgByFailPath } from '@utils/img/saveImg';
 
 // 间隔时长，单位：毫秒
-const INTERVAL = 500;
+const INTERVAL = 0;
 // 生成多少个结果（6、12、18）
 const RESULT_COUNT = 18;
 
@@ -39,6 +38,25 @@ function Scan() {
   const [otpItems, setOtpItems] = useState<[string, number][]>([]);
 
   const hide = useRef(false);
+
+  const tmpCanvasRef = useRef<any>();
+
+  useEffect(() => {
+    if (!canScan) return;
+    const query = Taro.createSelectorQuery();
+    query
+      .select('#tmpFileCanvas')
+      .fields({
+        node: true,
+        size: true,
+      })
+      .exec((res) => {
+        console.log('tmpFileCanvas', res);
+        const canvas = res[0].node;
+        tmpCanvasRef.current = canvas;
+        console.log('tmpCanvasRef', tmpCanvasRef.current);
+      });
+  }, [canScan]);
 
   useDidHide(() => {
     hide.current = true;
@@ -101,7 +119,10 @@ function Scan() {
       const mergedArr: [string, number][] = [];
       Object.entries(pHashHammingOtp).forEach((item) => {
         const [itemId, hummimgValue] = item;
-        mergedArr.push([itemId, hummimgValue * (1 - colorCosineOtp[itemId])]);
+        mergedArr.push([
+          itemId,
+          hummimgValue * (1 - colorCosineOtp[itemId]) ** 1,
+        ]);
       });
       res.push(...mergedArr);
       // res.push(...Object.entries(colorCosineOtp));
@@ -173,63 +194,48 @@ function Scan() {
   };
 
   /** 通过 tmpImgPath 绘制图片、缩小尺寸、计算 hash */
-  const hashTmpImg = async (cut = 0) => {
-    const size = 32 + cut * 2;
-    return new Promise<Awaited<ReturnType<typeof imagePHash>>>(
-      (resolve, reject) => {
-        const query = Taro.createSelectorQuery();
-        query
-          .select('#tmpFileCanvas')
-          .fields({
-            node: true,
-            size: true,
-          })
-          .exec((res) => {
-            try {
-              const canvas = res[0].node;
-              const ctx = canvas.getContext('2d');
-              // 先清空
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-              const img = canvas.createImage();
-              img.src = tmpImgPath;
-              img.onload = async () => {
-                ctx.drawImage(img, 0, 0, size, size);
-                // if (!tmpFileCanvasScaled.current) {
-                //   tmpFileCanvasScaled.current = true;
-                //   ctx.scale(2, 2);
-                // }
-                const res = await imagePHash(ctx, canvas, cut);
-                // console.log('当前图片 hash = ', String(hash));
-                resolve(res);
-              };
-            } catch (error) {
-              console.log('hash 计算异常', error);
-              reject(error);
-            }
-          });
-      },
-    );
+  const hashTmpImg = async (
+    size: number, // 画布宽度
+    x: number, // 内容 x 位移
+    y: number, // 内容 y 位移
+  ) => {
+    return new Promise<Awaited<ReturnType<typeof imagePHash>>>((resolve) => {
+      const canvas = tmpCanvasRef.current;
+      const ctx = canvas.getContext('2d');
+      // 先清空
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const img = canvas.createImage();
+      img.src = tmpImgPath;
+      img.onload = async () => {
+        ctx.drawImage(img, 0, 0, size, size);
+        const res = await imagePHash(ctx, x, y);
+        // console.log('当前图片 hash = ', String(hash));
+        await sleep(INTERVAL / 5);
+        resolve(res);
+      };
+    });
   };
 
   // tmpImgPath 变化时，计算 hash
   useAsyncEffect(async () => {
     if (!tmpImgPath) return;
     if (hide.current) return;
-    // hash 两轮结果
-    const res0 = await hashTmpImg(0);
-    // await sleep(INTERVAL / 10);
-    // const res1 = await hashTmpImg(1);
-    // await sleep(INTERVAL / 10);
-    // const res2 = await hashTmpImg(2);
-    // await sleep(INTERVAL / 10);
-    const res3 = await hashTmpImg(3);
-    // await sleep(INTERVAL / 10);
-    // const res4 = await hashTmpImg(4);
-    // await sleep(INTERVAL / 10);
-    // const res5 = await hashTmpImg(5);
-    // await sleep(INTERVAL / 10);
-    const res6 = await hashTmpImg(6);
-    handleHashedImg([res0, res3, res6]);
+    // hash 多轮结果
+    handleHashedImg([
+      await hashTmpImg(32, 0, 0),
+
+      await hashTmpImg(34, 1, 1),
+      await hashTmpImg(34, 0, 0),
+      await hashTmpImg(34, 2, 0),
+      await hashTmpImg(34, 2, 2),
+      await hashTmpImg(34, 0, 2),
+
+      await hashTmpImg(36, 2, 2),
+      // await hashTmpImg(36, 0, 0),
+      // await hashTmpImg(36, 4, 0),
+      // await hashTmpImg(36, 4, 4),
+      // await hashTmpImg(36, 0, 4),
+    ]);
   }, [tmpImgPath]);
 
   /** 处理图片帧数据 */

@@ -25,9 +25,9 @@ function dctTransform(matrix) {
 }
 
 // pHash函数
-export async function imagePHash(ctx: any, canvas: any, cut: number) {
+export async function imagePHash(ctx: any, x: number, y: number) {
   // 简化色彩
-  const imageData = ctx.getImageData(cut, cut, 32, 32).data;
+  const imageData = ctx.getImageData(x, y, 32, 32).data;
 
   let grayMatrix = new Array(32).fill(0).map(() => new Array(32).fill(0));
   for (let i = 0; i < imageData.length; i += 4) {
