@@ -1,6 +1,9 @@
 export default defineAppConfig({
   pages: [
+    // 'pages/scan/index',
+
     'pages/index/index',
+    'pages/scan/index',
     'pages/item-detail/index',
     'pages/trinkets/index',
     'pages/cards/index',

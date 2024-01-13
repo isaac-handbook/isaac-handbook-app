@@ -44,9 +44,11 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
   };
 
   const toggleColorFilter = () => {
-    updateItemSearchInfo({
-      openColorFilter: !itemSearchInfo.openColorFilter,
-    });
+    // updateItemSearchInfo({
+    //   openColorFilter: !itemSearchInfo.openColorFilter,
+    // });
+    // 跳转到 scan 页面
+    Taro.navigateTo({ url: '/pages/scan/index' });
   };
 
   const shouldShowReset =

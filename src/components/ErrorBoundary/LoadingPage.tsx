@@ -6,7 +6,13 @@ import { useRecoilState } from 'recoil';
 import styles from './index.module.scss';
 import { useEffect, useState } from 'react';
 
-function LoadingPage() {
+interface Props {
+  type?: 'canRefresh' | 'custom';
+  children?: React.ReactNode;
+}
+
+const LoadingPage: React.FC<Props> = (props) => {
+  const { type = 'canRefresh', children = '' } = props;
   const [{ themeColor }] = useRecoilState(themeInfoState);
   const [contentVisible, setContentVisible] = useState(false);
 
@@ -15,6 +21,17 @@ function LoadingPage() {
       setContentVisible(true);
     }, 1000);
   }, []);
+
+  const renderContent = () => {
+    if (type === 'canRefresh') {
+      return (
+        <Button onClick={forceReload} type="default" size="mini">
+          长时间没有反应？点我进行数据更新。
+        </Button>
+      );
+    }
+    return children;
+  };
 
   return (
     <View
@@ -27,22 +44,18 @@ function LoadingPage() {
       {contentVisible && (
         <Empty
           status="error"
-          description="加载中"
+          description="..."
           style={{
             backgroundColor: themeColor.bgColor,
             color: themeColor.textColor,
-            opacity: '0.8',
+            opacity: '0.9',
           }}
         >
-          <div style={{ marginTop: '36px' }}>
-            <Button onClick={forceReload} type="default" size="mini">
-              长时间没有反应？点我进行数据更新。
-            </Button>
-          </div>
+          <div style={{ marginTop: '36px' }}>{renderContent()}</div>
         </Empty>
       )}
     </View>
   );
-}
+};
 
 export default LoadingPage;
