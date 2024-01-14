@@ -48,7 +48,7 @@ export const ScanHelpButton: React.FC<Props> = (props) => {
         <Ask color={themeColor.textColor} size={25} />
       </Button>
       <Popup
-        title={'帮助'}
+        title={'识别帮助'}
         visible={showDrawer}
         position="bottom"
         round
