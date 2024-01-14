@@ -1,69 +1,36 @@
 import Taro from '@tarojs/taro';
 import { getcolorFin } from './colorDis';
-
-// DCT函数
-function dctTransform(matrix) {
-  let N = matrix.length;
-  let result = new Array(N).fill(0).map(() => new Array(N).fill(0));
-
-  for (let u = 0; u < N; u++) {
-    for (let v = 0; v < N; v++) {
-      let sum = 0;
-      for (let i = 0; i < N; i++) {
-        for (let j = 0; j < N; j++) {
-          sum +=
-            matrix[i][j] *
-            Math.cos(((2 * i + 1) * u * Math.PI) / (2 * N)) *
-            Math.cos(((2 * j + 1) * v * Math.PI) / (2 * N));
-        }
-      }
-      sum *= ((u === 0 ? 1 : 2) * (v === 0 ? 1 : 2)) / (2 * N);
-      result[u][v] = sum;
-    }
-  }
-  return result;
-}
+import { dctTransform_fast } from './dtc/dct_fast';
+// import { twoDimensionalDCT, dct, fft } from './dtc/dct_fft';
+// import { getPHashFingerprint } from './dct';
 
 // pHash函数
 export async function imagePHash(ctx: any, x: number, y: number) {
   // 简化色彩
   const imageData = ctx.getImageData(x, y, 32, 32).data;
 
+  // 测试新 dct 算法
+  // try {
+  //   const testDct = getPHashFingerprint(imageData);
+  //   console.log('testDct', testDct);
+  // } catch (error) {
+  //   console.log('testDct error', error);
+  // }
+
   let grayMatrix = new Array(32).fill(0).map(() => new Array(32).fill(0));
   for (let i = 0; i < imageData.length; i += 4) {
     const gray = Math.floor(
-      (imageData[i] + imageData[i + 1] + imageData[i + 2]) / 3,
+      (imageData[i] + imageData[i + 1] + imageData[i + 2]) / 4,
     );
     let row = Math.floor(i / 4 / 32);
     let col = (i / 4) % 32;
     grayMatrix[row][col] = gray;
   }
 
-  // 提高对比度，但不要变成黑白的
-  // let threshold = 0;
+  // 降低对比度，提高鲁棒性
   // for (let i = 0; i < grayMatrix.length; i++) {
   //   for (let j = 0; j < grayMatrix[i].length; j++) {
-  //     threshold += grayMatrix[i][j];
-  //   }
-  // }
-  // threshold /= 1024;
-  // for (let i = 0; i < grayMatrix.length; i++) {
-  //   for (let j = 0; j < grayMatrix[i].length; j++) {
-  //     grayMatrix[i][j] = grayMatrix[i][j] > threshold ? grayMatrix[i][j] : 0;
-  //   }
-  // }
-
-  // 提高对比度
-  // let threshold = 0;
-  // for (let i = 0; i < grayMatrix.length; i++) {
-  //   for (let j = 0; j < grayMatrix[i].length; j++) {
-  //     threshold += grayMatrix[i][j];
-  //   }
-  // }
-  // threshold /= 1024;
-  // for (let i = 0; i < grayMatrix.length; i++) {
-  //   for (let j = 0; j < grayMatrix[i].length; j++) {
-  //     grayMatrix[i][j] = grayMatrix[i][j] > threshold ? 255 : 0;
+  //     grayMatrix[i][j] = Math.floor(grayMatrix[i][j] / 2);
   //   }
   // }
 
@@ -96,7 +63,9 @@ export async function imagePHash(ctx: any, x: number, y: number) {
     });
 
   // 计算DCT
-  let dctMatrix = dctTransform(grayMatrix);
+  // let dctMatrix = dctTransform_stand(grayMatrix);
+  let dctMatrix = dctTransform_fast(grayMatrix);
+  // let dctMatrix = twoDimensionalDCT(grayMatrix);
 
   // 缩小DCT
   let dctLowFreq = dctMatrix.slice(0, 8).map((row) => row.slice(0, 8));

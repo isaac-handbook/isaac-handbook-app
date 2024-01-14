@@ -5,17 +5,15 @@
   bottom: 0;
   z-index: 3;
   padding: 12px 0;
+  padding-bottom: 18px;
 }
 
 .itemGrid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   box-sizing: border-box;
 
   .item {
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
     position: relative;
     border-top: 1px solid transparent;
   }
@@ -25,6 +23,20 @@
     justify-content: center;
     width: 100%;
     font-size: 14px;
-    // margin-bottom: 4px;
   }
+}
+
+.tip {
+  position: absolute;
+  // 左右居中
+  left: 50%;
+  top: -44px;
+  transform: translateX(-50%);
+  padding: 5px;
+  width: 196px;
+  border-radius: 50px;
+  z-index: 2;
+  text-align: center;
+  opacity: 0.8;
+  font-size: 15px;
 }

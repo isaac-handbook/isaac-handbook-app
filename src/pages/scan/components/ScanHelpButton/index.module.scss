@@ -1,0 +1,56 @@
+.drawer {
+  padding: 24px;
+  padding-top: 0px;
+  padding-bottom: 48px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.title {
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.caseRow {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  .caseBox {
+    position: relative;
+  }
+
+  .img {
+    width: 94px;
+    height: 94px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  .judge {
+    width: 94px;
+    margin-right: 4px;
+  }
+
+  .tip {
+    width: 94px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // line-height: 10px;
+    margin-bottom: 16px;
+  }
+}
+
+.p {
+  font-size: 16px;
+  margin-top: 6px;
+}
+
+.margin {
+  margin-bottom: 16px;
+}

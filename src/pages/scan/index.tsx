@@ -1,4 +1,4 @@
-import { Camera, Canvas, View } from '@tarojs/components';
+import { Button, Camera, Canvas, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
@@ -6,8 +6,7 @@ import Taro, { useDidHide, useDidShow } from '@tarojs/taro';
 import { useEffect, useRef, useState } from 'react';
 import { imagePHash } from './utils/phash';
 import { useAsyncEffect, useDebounceFn } from 'ahooks';
-import { Range } from '@nutui/nutui-react-taro';
-import hashDic from './data/hashDic.json';
+import hashDic from './data/hash.json';
 import { ResultList } from './components/ResultList';
 import { requestCameraPermission } from './utils/permission';
 import { Loading } from './components/Loading';
@@ -15,10 +14,11 @@ import { sleep } from '@utils/sleep';
 import { resizeFrameImage } from './utils/resizeFrameImage';
 import { hammingDistance } from './utils/hamming';
 import { cosineSimilarity } from './utils/cosine';
+import { ScanHelpButton } from './components/ScanHelpButton';
 // import { saveImgByFailPath } from '@utils/img/saveImg';
 
 // 间隔时长，单位：毫秒
-const INTERVAL = 0;
+const INTERVAL = 200;
 // 生成多少个结果（6、12、18）
 const RESULT_COUNT = 18;
 
@@ -26,20 +26,24 @@ function Scan() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
-
+  // 是否可以扫描（有权限）
   const [canScan, setCanScan] = useState(false);
+  // 扫描相机实例
   const cameraRef = useRef<any>();
-
-  const [scale, setScale] = useState(60);
+  // 当前白框的缩放值
+  const [scale, setScale] = useState(100);
+  // scaleRef 解闭包问题。可以用 useLatest，但不想。
   const scaleRef = useRef(scale);
-
+  // 当前帧的临时图片路径
   const [tmpImgPath, setTmpImgPath] = useState('');
   // 最终计算结果前 RESULT_COUNT 个
   const [otpItems, setOtpItems] = useState<[string, number][]>([]);
-
+  // 页面是否隐藏（压后台）
   const hide = useRef(false);
-
+  // 提前获取 tmpCanvas 画布，减少后续耗时
   const tmpCanvasRef = useRef<any>();
+  // pageRef 给 Popup 使用
+  const pageRef = useRef<any>();
 
   useEffect(() => {
     if (!canScan) return;
@@ -51,10 +55,8 @@ function Scan() {
         size: true,
       })
       .exec((res) => {
-        console.log('tmpFileCanvas', res);
         const canvas = res[0].node;
         tmpCanvasRef.current = canvas;
-        console.log('tmpCanvasRef', tmpCanvasRef.current);
       });
   }, [canScan]);
 
@@ -87,11 +89,11 @@ function Scan() {
 
       // 计算与所有道具的相似度
       Object.keys(hashDic).forEach((itemId) => {
-        for (let ihash = 0; ihash < hashDic[itemId].phash.length; ihash++) {
+        for (let ihash = 0; ihash < hashDic[itemId].length; ihash++) {
           // 汉明距离 计算 感知哈希
           const distance = hammingDistance(
             curPHash,
-            BigInt(hashDic[itemId].phash[ihash]),
+            BigInt(hashDic[itemId][ihash].phash),
           );
           if (pHashHammingOtp[itemId]) {
             // 汉明距离越小越相似
@@ -104,15 +106,17 @@ function Scan() {
           // 余弦相似度 计算 颜色分布
           const cosine = cosineSimilarity(
             curColorFin,
-            hashDic[itemId].color[ihash],
+            hashDic[itemId][ihash].colorFin,
           );
-          if (colorCosineOtp[itemId]) {
-            // 余弦值越大越相似
-            if (cosine > colorCosineOtp[itemId]) {
+          if (cosine !== null) {
+            if (colorCosineOtp[itemId]) {
+              // 余弦值越大越相似
+              if (cosine > colorCosineOtp[itemId]) {
+                colorCosineOtp[itemId] = cosine;
+              }
+            } else {
               colorCosineOtp[itemId] = cosine;
             }
-          } else {
-            colorCosineOtp[itemId] = cosine;
           }
         }
       });
@@ -121,7 +125,9 @@ function Scan() {
         const [itemId, hummimgValue] = item;
         mergedArr.push([
           itemId,
-          hummimgValue * (1 - colorCosineOtp[itemId]) ** 1,
+          // hummimgValue,
+          // hummimgValue * (1 - colorCosineOtp[itemId]) ** 0.2,
+          hummimgValue * (1 - colorCosineOtp[itemId]),
         ]);
       });
       res.push(...mergedArr);
@@ -142,7 +148,6 @@ function Scan() {
     });
     const resArr2 = Array.from(resMap.entries());
     resArr2.sort((a, b) => a[1] - b[1]);
-    console.log('resArr2', resArr2);
     const otpItems = resArr2.slice(0, RESULT_COUNT);
     // console.log('综合计算结果', otpItems);
     setOtpItems(otpItems);
@@ -224,17 +229,21 @@ function Scan() {
     handleHashedImg([
       await hashTmpImg(32, 0, 0),
 
-      await hashTmpImg(34, 1, 1),
+      // await hashTmpImg(34, 1, 1),
       await hashTmpImg(34, 0, 0),
       await hashTmpImg(34, 2, 0),
       await hashTmpImg(34, 2, 2),
       await hashTmpImg(34, 0, 2),
 
       await hashTmpImg(36, 2, 2),
-      // await hashTmpImg(36, 0, 0),
-      // await hashTmpImg(36, 4, 0),
-      // await hashTmpImg(36, 4, 4),
-      // await hashTmpImg(36, 0, 4),
+
+      // await hashTmpImg(38, 3, 3),
+      // await hashTmpImg(38, 2, 2),
+      // await hashTmpImg(38, 6, 2),
+      // await hashTmpImg(38, 6, 6),
+      // await hashTmpImg(38, 2, 6),
+
+      // await hashTmpImg(40, 4, 4),
     ]);
   }, [tmpImgPath]);
 
@@ -286,11 +295,25 @@ function Scan() {
       });
   };
 
+  const maxScale = 220;
+  const minScale = 50;
+  const scaleStep = 10;
+  const canScaleUp = scale < maxScale;
+  const canScaleDown = scale > minScale;
+
+  const handleScaleUp = () => {
+    if (!canScaleUp) return;
+    setScale(scale + scaleStep);
+  };
+
+  const handleScaleDown = () => {
+    if (!canScaleDown) return;
+    setScale(scale - scaleStep);
+  };
+
   if (!canScan) {
     return <Loading />;
   }
-
-  // console.log('scanLocatioin', scanLocatioin);
 
   return (
     <ErrorBoundary>
@@ -300,6 +323,7 @@ function Scan() {
           backgroundColor: themeColor.bgColor,
           color: themeColor.textColor,
         }}
+        ref={pageRef}
       >
         <Camera className={styles.camera} mode="normal" flash="auto"></Camera>
 
@@ -312,19 +336,30 @@ function Scan() {
           }
         ></View>
 
-        <View className={styles.range}>
-          <Range
-            min={50}
-            max={110}
-            value={scale}
-            vertical
-            onChange={(val) => {
-              setScale(val as any);
+        <View className={styles.side}>
+          <Button
+            onClick={handleScaleDown}
+            disabled={!canScaleDown}
+            className={styles.bubble}
+            style={{
+              backgroundColor: themeColor.gridColor,
+              color: themeColor.textColor,
             }}
-            currentDescription={null}
-            maxDescription={'缩小'}
-            minDescription={'放大'}
-          />
+          >
+            放大白框
+          </Button>
+          <Button
+            onClick={handleScaleUp}
+            disabled={!canScaleUp}
+            className={styles.bubble}
+            style={{
+              backgroundColor: themeColor.gridColor,
+              color: themeColor.textColor,
+            }}
+          >
+            缩小白框
+          </Button>
+          <ScanHelpButton portal={pageRef} />
         </View>
 
         <ResultList otpItems={otpItems} />

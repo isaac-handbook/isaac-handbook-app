@@ -1,7 +1,7 @@
 import { UpdateInfo } from './type';
 
 // 当前版本
-const version = '1.5.0';
+const version = '1.6.0';
 
 // 是否要强制刷新
 const forceRefreshNow = false;
@@ -13,11 +13,8 @@ const updateNotice: UpdateInfo = {
   // 功能更新
   features: [
     {
-      title: '【道具和饰品】按照颜色过滤',
-      content: ['点击顶部的颜色按钮试试吧~'],
-    },
-    {
-      title: '【道具和饰品】翻页功能',
+      title: '拍照识图查道具功能',
+      content: ['目前处于实验阶段，欢迎来尝鲜~'],
     },
   ],
   // 问题修复

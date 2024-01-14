@@ -25,8 +25,17 @@ const Cell: React.FC<Props> = (props) => {
         backgroundColor: themeColor.bgColor,
       }}
     >
+      <View
+        className={styles.tip}
+        style={{
+          background: themeColor.gridColor,
+          color: themeColor.textColor,
+        }}
+      >
+        提示：可以用两指放大缩小
+      </View>
       <View className={styles.itemGrid}>
-        {otpItems.map((arr) => {
+        {otpItems.slice(0, 15).map((arr) => {
           const item = handbookData.items.find((item) => item.id === arr[0]);
           if (!item) return null;
           return (
@@ -36,40 +45,17 @@ const Cell: React.FC<Props> = (props) => {
             >
               <ItemGridCell
                 item={{ ...item, show: true }}
-                size="grid-normal"
+                // size="grid-normal"
+                size="grid-large"
                 key={item.id}
                 themeColor={themeColor}
                 showGridBorder={true}
                 type="item"
               />
-              <View className={styles.extra}>{arr[1].toFixed(4)}</View>
+              {/* <View className={styles.extra}>{arr[1].toFixed(4)}</View> */}
             </View>
           );
         })}
-        {/* {handbookData.items
-          .filter((item) =>
-            otpItems.map((arr) => arr[0]).includes(String(item.id)),
-          )
-          .map((item, index) => {
-            return (
-              <View
-                className={styles.item}
-                style={{ borderColor: themeColor.gridBorderColor }}
-              >
-                <ItemGridCell
-                  item={{ ...item, show: true }}
-                  size="grid-normal"
-                  key={item.id}
-                  themeColor={themeColor}
-                  showGridBorder={true}
-                  type="item"
-                />
-                <View className={styles.extra}>
-                  {otpItems[index][1].toFixed(4)}
-                </View>
-              </View>
-            );
-          })} */}
       </View>
     </View>
   );

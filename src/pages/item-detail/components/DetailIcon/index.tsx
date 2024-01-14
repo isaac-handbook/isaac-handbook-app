@@ -29,7 +29,7 @@ export const DetailIcon: React.FC<Props> = (props) => {
     <View className={styles.container}>
       {getPrevItem() && (
         <View onClick={goToPrevItem} className={styles.turnPrev}>
-          <ArrowLeft size={28} color={themeColor.textColor} />
+          <ArrowLeft size={24} color={themeColor.textColor} />
         </View>
       )}
 
@@ -46,7 +46,7 @@ export const DetailIcon: React.FC<Props> = (props) => {
 
       {getNextItem() && (
         <View onClick={goToNextItem} className={styles.turnNext}>
-          <ArrowRight size={28} color={themeColor.textColor} />
+          <ArrowRight size={24} color={themeColor.textColor} />
         </View>
       )}
     </View>

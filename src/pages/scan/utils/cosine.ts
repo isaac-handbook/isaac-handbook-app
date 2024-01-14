@@ -2,6 +2,9 @@ export function cosineSimilarity(
   sampleFingerprint: number[],
   targetFingerprint: number[],
 ) {
+  if (!sampleFingerprint?.length || !targetFingerprint?.length) {
+    return null;
+  }
   const length = sampleFingerprint.length;
   let innerProduct = 0;
   for (let i = 0; i < length; i++) {

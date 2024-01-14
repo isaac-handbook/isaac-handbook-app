@@ -5,7 +5,7 @@ import { Setting } from '../../pages/index/components/Setting';
 import styles from './index.module.scss';
 import { ItemFilter } from '../../pages/index/components/ItemFilter';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
-import { Filter, Home, Refresh } from '@nutui/icons-react-taro';
+import { Home, Photograph, Refresh } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
 import Taro from '@tarojs/taro';
 import { useTrinketSearchInfo } from '@hooks/useTrinketSearchInfo';
@@ -78,13 +78,13 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
         </View>
       )}
 
-      {supportColorFilter && (
+      {type === 'item' && (
         <View
           onClick={toggleColorFilter}
           className={classNames(styles.icon, styles.refresh)}
         >
-          <Filter size={'32rpx'} />
-          <View className={styles.text}>颜色</View>
+          <Photograph size={'32rpx'} />
+          <View className={styles.text}>识别</View>
         </View>
       )}
 

@@ -1,5 +1,5 @@
 export default definePageConfig({
-  navigationBarTitleText: '扫描啦',
+  navigationBarTitleText: '道具识别',
   navigationBarBackgroundColor: '#c4b39d',
   backgroundColor: '#c4b39d',
   backgroundColorTop: '#c4b39d',
