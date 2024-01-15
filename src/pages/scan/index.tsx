@@ -58,6 +58,14 @@ function Scan() {
         const canvas = res[0].node;
         tmpCanvasRef.current = canvas;
       });
+    return () => {
+      // 防止内存泄漏
+      stopCapturing();
+      cameraRef.current = null;
+      tmpCanvasRef.current = null;
+      hide.current = true;
+      setCanScan(false);
+    };
   }, [canScan]);
 
   useDidHide(() => {
@@ -331,7 +339,7 @@ function Scan() {
           className={styles.scanBox}
           style={
             {
-              '--scale': 3 * ((scale * 2) / 100),
+              '--scale': 2.5 * ((scale * 2) / 100),
             } as any
           }
         ></View>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Button, View, Image } from '@tarojs/components';
+import { View, Image } from '@tarojs/components';
 import styles from './index.module.scss';
-import { Popup } from '@nutui/nutui-react-taro';
+import { Button, Popup } from '@nutui/nutui-react-taro';
 import { useRecoilState } from 'recoil';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { drawerMaskColor } from '@src/styles';
@@ -45,7 +45,11 @@ export const ScanHelpButton: React.FC<Props> = (props) => {
           color: themeColor.textColor,
         }}
       >
-        <Ask color={themeColor.textColor} size={25} />
+        <Ask
+          className={styles.askIcon}
+          color={themeColor.textColor}
+          size={22}
+        />
       </Button>
       <Popup
         title={'识别帮助'}
@@ -111,15 +115,13 @@ export const ScanHelpButton: React.FC<Props> = (props) => {
 
           <View className={styles.title}>其他提示</View>
           <View className={styles.p}>
-            1. 识别有 1~2s
-            的延时。如果总是识别不上，可以尝试放大图像（超出白框一点也可以）。
+            1. 识别有 1~2s 的延时。如果总是识别不上，可以尝试放大图像。
           </View>
           <View className={styles.p}>
-            2.
-            本功能目前处于实验阶段，可能存在识别不准等情况。后续会持续优化识别效果。
+            2. 手机摄像头比较费电，请注意不要过长时间停留在本页面。
           </View>
           <View className={styles.p}>
-            3. 手机摄像头比较费电，请注意不要过长时间停留在本页面。
+            3. 本功能处于试验阶段，后面会持续优化识别效果、加入更多功能。
           </View>
         </View>
       </Popup>

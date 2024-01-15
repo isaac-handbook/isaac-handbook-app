@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Popup } from '@nutui/nutui-react-taro';
-import { Horizontal, Refresh } from '@nutui/icons-react-taro';
+import { Filter, Refresh } from '@nutui/icons-react-taro';
 import { PoolFilter } from './PoolFilter';
 import { TagFilter } from './TagFilter';
 import { QualityFilter } from './QualityFilter';
@@ -19,7 +19,7 @@ export const ItemFilter: React.FC = () => {
   return (
     <>
       <View className={styles.icon} onClick={() => setShowDrawer(true)}>
-        <Horizontal size={'32rpx'} />
+        <Filter size={'32rpx'} />
         <View className={styles.text}>过滤</View>
       </View>
       <Popup
