@@ -4,13 +4,13 @@
 
 微信小程序《以撒图鉴》
 
-<img src="./assets/qrcode.jpg">
+<img src="./assets/readme/qrcode.jpg">
 
 <table>
   <tr>
-    <td><img src="./assets/index.JPG"></td>
-    <td><img src="./assets/detail.JPG"></td>
-    <td><img src="./assets/filter.JPG"></td>
+    <td><img src="./assets/readme/index.JPG"></td>
+    <td><img src="./assets/readme/detail.JPG"></td>
+    <td><img src="./assets/readme/filter.JPG"></td>
   </tr>
  </table>
 

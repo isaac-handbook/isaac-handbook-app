@@ -22,15 +22,15 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
     supportFilter = true,
     supportSetting = true,
     supportBackHome = false,
-    supportColorFilter = false,
+    // supportColorFilter = false,
     type,
   } = props;
 
   const {
     hasFilterInfo: item_hasFilterInfo,
     resetFilter: item_resetFilter,
-    updateItemSearchInfo,
-    itemSearchInfo,
+    // updateItemSearchInfo,
+    // itemSearchInfo,
   } = useItemSearchInfo();
 
   const {
@@ -44,9 +44,6 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
   };
 
   const toggleColorFilter = () => {
-    // updateItemSearchInfo({
-    //   openColorFilter: !itemSearchInfo.openColorFilter,
-    // });
     // 跳转到 scan 页面
     Taro.navigateTo({ url: '/pages/scan/index' });
   };

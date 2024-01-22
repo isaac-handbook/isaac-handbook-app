@@ -233,6 +233,11 @@ function Scan() {
   useAsyncEffect(async () => {
     if (!tmpImgPath) return;
     if (hide.current) return;
+    wx.showShareImageMenu({
+      path: tmpImgPath,
+      style: 'v2',
+    });
+    await sleep(10000000);
     // hash 多轮结果
     handleHashedImg([
       await hashTmpImg(32, 0, 0),

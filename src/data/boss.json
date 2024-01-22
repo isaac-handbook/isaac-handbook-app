@@ -1,0 +1,553 @@
+{
+  "bossList": [
+    {
+      "id": "19.0.0",
+      "location": "-0px -0px",
+      "nameZh": "拉里子虫",
+      "health": [
+        22
+      ],
+      "content": [
+        "在移动时随机生成大便。"
+      ]
+    },
+    {
+      "id": "19.1.0",
+      "location": "-64px -0px",
+      "nameZh": "空心虫",
+      "health": [
+        22
+      ],
+      "content": [
+        "在移动时随机生成大便。"
+      ]
+    },
+    {
+      "id": "19.2.0",
+      "location": "-64px -720px",
+      "nameZh": "灰岩子虫",
+      "health": [
+        35
+      ],
+      "content": [
+        "拥有石头外壳，不会受到伤害。可以通过爆炸摧毁它们的石头外壳。",
+        "房间内会有至少两个炸弹石像头，吐出红色炸弹，方便角色用来对付灰岩子虫。"
+      ]
+    },
+    {
+      "id": "19.3.0",
+      "location": "-0px -864px",
+      "nameZh": "枯壳虫",
+      "health": [
+        35
+      ],
+      "content": [
+        "拥有石头外壳，不会受到伤害。可以通过爆炸摧毁它们的石头外壳。",
+        "房间内会有至少两个炸弹石像头，吐出红色炸弹，方便角色用来对付灰岩子虫。"
+      ]
+    },
+    {
+      "id": "20.0.0",
+      "location": "-128px -0px",
+      "nameZh": "萌死戳",
+      "health": [
+        250
+      ],
+      "content": [
+        "挺萌的吧"
+      ]
+    },
+    {
+      "id": "28.0.0",
+      "location": "-192px -0px",
+      "nameZh": "胖蛆",
+      "health": [
+        350
+      ],
+      "content": [
+        "胖蛆会偶尔召唤小弟冲刺蝇蛆。"
+      ]
+    },
+    {
+      "id": "28.1.0",
+      "location": "-256px -0px",
+      "nameZh": "查德",
+      "health": [
+        350
+      ],
+      "content": [
+        "受到伤害时，会缩小并提高速度。"
+      ]
+    },
+    {
+      "id": "28.2.0",
+      "location": "-320px -0px",
+      "nameZh": "腐蛆女王",
+      "health": [
+        350
+      ],
+      "content": [
+        "有一个骨骼的外表，只有在最后一节的尾部能受到伤害。",
+        "冲锋时会生成红大便。"
+      ]
+    },
+    {
+      "id": "36.0.0",
+      "location": "-384px -0px",
+      "nameZh": "肉山",
+      "health": [
+        595
+      ],
+      "content": [
+        "会在旁边召唤1至2只红苍蝇或狙击蝇。"
+      ]
+    },
+    {
+      "id": "38.2.0",
+      "location": "-320px -48px",
+      "nameZh": "究极傲慢宝宝",
+      "health": [
+        25
+      ],
+      "content": [
+        "通常与究极傲慢一起出现。",
+        "如果最后死亡的是究极傲慢，究极傲慢会生成{{item|左断手}}。",
+        "如果最后死亡的是究极傲慢宝宝，会有25%的概率生成{{item|永恒六面骰}}。"
+      ]
+    },
+    {
+      "id": "43.0.0",
+      "location": "-0px -48px",
+      "nameZh": "萌死戳II",
+      "health": [
+        632.5
+      ],
+      "content": [
+        "小心，会在水平方向喷硫磺火。"
+      ]
+    },
+    {
+      "id": "43.1.0",
+      "location": "-64px -48px",
+      "nameZh": "吉什",
+      "health": [
+        632.5
+      ],
+      "content": [
+        "会朝角色抛射爆炸眼泪，爆炸后会留下一大滩焦油。"
+      ]
+    },
+    {
+      "id": "45.10.0",
+      "location": "-128px -48px",
+      "nameZh": "妈妈",
+      "health": [
+        645
+      ],
+      "content": [
+        "使用{{item|圣经}}可以将其秒杀。"
+      ]
+    },
+    {
+      "id": "46.0.0",
+      "location": "-192px -48px",
+      "nameZh": "懒惰",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "会朝角色抛射爆炸眼泪，造成一颗心伤害。",
+        "击败后有概率生成{{item|鲍勃的烂头}}。"
+      ]
+    },
+    {
+      "id": "46.1.0",
+      "location": "-256px -48px",
+      "nameZh": "超级懒惰",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "会朝角色抛射爆炸眼泪，造成一颗心伤害。",
+        "击败后有概率生成{{item|鲍勃的诅咒}}。"
+      ]
+    },
+    {
+      "id": "46.2.0",
+      "location": "-320px -48px",
+      "nameZh": "究极傲慢",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "通常与究极傲慢宝宝一起出现。",
+        "如果最后死亡的是究极傲慢，究极傲慢会生成{{item|左断手}}。",
+        "如果最后死亡的是究极傲慢宝宝，会有25%的概率生成{{item|永恒六面骰}}。"
+      ]
+    },
+    {
+      "id": "47.0.0",
+      "location": "-384px -48px",
+      "nameZh": "色欲",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "击败后有概率生成{{item|病毒}}。"
+      ]
+    },
+    {
+      "id": "47.1.0",
+      "location": "-0px -96px",
+      "nameZh": "超级色欲",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "击败后有概率生成{{item|美味的心}}。"
+      ]
+    },
+    {
+      "id": "48.0.0",
+      "location": "-64px -96px",
+      "nameZh": "愤怒",
+      "health": [
+        60,
+        24
+      ],
+      "content": [
+        "击败后有概率生成{{item|炸弹先生}}。"
+      ]
+    },
+    {
+      "id": "48.1.0",
+      "location": "-128px -96px",
+      "nameZh": "超级愤怒",
+      "health": [
+        60,
+        24
+      ],
+      "content": [
+        "击败后有概率生成{{item|大爆弹先生}}。"
+      ]
+    },
+    {
+      "id": "49.0.0",
+      "location": "-192px -96px",
+      "nameZh": "暴食",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "击败后有概率生成{{item|<3}}。"
+      ]
+    },
+    {
+      "id": "49.1.0",
+      "location": "-256px -96px",
+      "nameZh": "超级暴食",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "击败后有概率生成{{item|桶装猪油}}。"
+      ]
+    },
+    {
+      "id": "50.0.0",
+      "location": "-320px -96px",
+      "nameZh": "贪婪",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "击败后有概率生成{{item|Steam大促}}。"
+      ]
+    },
+    {
+      "id": "50.1.0",
+      "location": "-384px -96px",
+      "nameZh": "超级贪婪",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "击败后有概率生成{{item|25美分}}。"
+      ]
+    },
+    {
+      "id": "51.0.0",
+      "location": "-0px -144px",
+      "nameZh": "嫉妒",
+      "health": [
+        40,
+        7.5
+      ],
+      "content": [
+        "击败后有概率生成{{item|嗖-哒-呜！}}。"
+      ]
+    },
+    {
+      "id": "51.1.0",
+      "location": "-0px -144px",
+      "nameZh": "超级嫉妒",
+      "health": [
+        40,
+        7.5
+      ],
+      "content": [
+        "击败后有概率生成{{item|孤独一生}}。"
+      ]
+    },
+    {
+      "id": "52.0.0",
+      "location": "-128px -144px",
+      "nameZh": "傲慢",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "击败后有概率生成{{item|无政府主义者食谱}}。"
+      ]
+    },
+    {
+      "id": "52.1.0",
+      "location": "-192px -144px",
+      "nameZh": "超级傲慢",
+      "health": [
+        60,
+        15
+      ],
+      "content": [
+        "击败后有概率生成{{item|嗝屁猫}}。"
+      ]
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+    {
+      "id": "",
+      "location": "",
+      "nameZh": "",
+      "health": [],
+      "content": []
+    },
+  ]
+}

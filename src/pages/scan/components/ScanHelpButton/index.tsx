@@ -115,13 +115,11 @@ export const ScanHelpButton: React.FC<Props> = (props) => {
 
           <View className={styles.title}>其他提示</View>
           <View className={styles.p}>
-            1. 识别有 1~2s 的延时。如果总是识别不上，可以尝试放大图像。
+            1. 识别有 1~2s
+            的延时。如果总是识别不上，可以试试放大图像或缩小白框。
           </View>
           <View className={styles.p}>
-            2. 手机摄像头比较费电，请注意不要过长时间停留在本页面。
-          </View>
-          <View className={styles.p}>
-            3. 本功能处于试验阶段，后面会持续优化识别效果、加入更多功能。
+            2. 本功能处于试验阶段，后面会持续优化识别效果、加入更多功能。
           </View>
         </View>
       </Popup>

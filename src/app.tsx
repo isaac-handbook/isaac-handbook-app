@@ -1,5 +1,4 @@
 import { ReactNode, useEffect } from 'react';
-import { useDidShow, useDidHide } from '@tarojs/taro';
 // 全局样式
 import './app.scss';
 import { RecoilRoot } from 'recoil';
@@ -24,12 +23,6 @@ function App(props: AppProps) {
       checkMiniUpdate();
     }, 60000);
   }, []);
-
-  // 对应 onShow
-  useDidShow(() => {});
-
-  // 对应 onHide
-  useDidHide(() => {});
 
   return (
     <ErrorBoundary>
