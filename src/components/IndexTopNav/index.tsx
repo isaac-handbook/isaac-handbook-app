@@ -43,9 +43,9 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
     Taro.reLaunch({ url: '/pages/index/index' });
   };
 
-  const toggleColorFilter = () => {
+  const handleScanClick = () => {
     // 跳转到 scan 页面
-    Taro.navigateTo({ url: '/pages/scan/index' });
+    Taro.navigateTo({ url: '/package-scan/pages/scan/index' });
   };
 
   const shouldShowReset =
@@ -77,7 +77,7 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
 
       {type === 'item' && (
         <View
-          onClick={toggleColorFilter}
+          onClick={handleScanClick}
           className={classNames(styles.icon, styles.refresh)}
         >
           <Photograph

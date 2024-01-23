@@ -3,8 +3,8 @@ import Taro from '@tarojs/taro';
 import { sleep } from '@utils/sleep';
 import { HandBookData } from 'src/types/handbook';
 import alias from '@data/alias.json';
-import itemsColor from '@data/itemsColor.json';
-import trinketsColor from '@data/trinketsColor.json';
+import itemsExtra from '@data/itemsExtra.json';
+import trinketsExtra from '@data/trinketsExtra.json';
 import { colorTypeList } from '@hooks/useItemSearchInfo';
 import { isDev } from '@utils/env';
 
@@ -87,13 +87,18 @@ const initJsonData = (data: string) => {
     ...item,
     type: 'item',
   }));
-  // 遍历每一个 item，将 alias.json、itemsColor.json 的内容添加进去
+  // 遍历每一个 item，将 alias.json、itemsExtra.json 的内容添加进去
   res.items = res.items.map((item) => {
     if (alias[item.nameZh]) {
       item.alias = alias[item.nameZh];
     }
-    if (itemsColor[String(item.id)]) {
-      item.colors = itemsColor[String(item.id)]?.color || [];
+    // 塞 colors
+    if (itemsExtra[String(item.id)]) {
+      item.colors = itemsExtra[String(item.id)]?.color || [];
+    }
+    // 塞 classes
+    if (itemsExtra[String(item.id)]) {
+      item.classes = itemsExtra[String(item.id)]?.classes || [];
     }
     if (isDev) {
       // 如果 item.colors 中的值不存在与 ColorType 中，则提示
@@ -113,10 +118,15 @@ const initJsonData = (data: string) => {
     ...trinket,
     type: 'trinket',
   }));
-  // 遍历每一个 trinkets，将 trinketsColor.json 的内容添加进去
+  // 遍历每一个 trinkets，将 trinketsExtra.json 的内容添加进去
   res.trinkets = res.trinkets.map((trinket) => {
-    if (trinketsColor[String(trinket.id)]) {
-      trinket.colors = trinketsColor[String(trinket.id)]?.color || [];
+    // 塞 colors
+    if (trinketsExtra[String(trinket.id)]) {
+      trinket.colors = trinketsExtra[String(trinket.id)]?.color || [];
+    }
+    // 塞 classes
+    if (trinketsExtra[String(trinket.id)]) {
+      trinket.classes = trinketsExtra[String(trinket.id)]?.classes || [];
     }
     if (isDev) {
       // 如果 trinket.colors 中的值不存在与 ColorType 中，则提示

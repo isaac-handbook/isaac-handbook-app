@@ -3,18 +3,27 @@
     "color": [
       "gre",
       "blu"
+    ],
+    "classes": [
+      "tears"
     ]
   },
   "2": {
     "color": [
       "whi",
       "bla"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "3": {
     "color": [
       "whi",
       "bla"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "4": {
@@ -22,88 +31,162 @@
       "yel",
       "bro",
       "rou"
+    ],
+    "classes": [
+      "dmg",
+      "auto-spec"
     ]
   },
   "5": {
     "color": [
       "whi"
+    ],
+    "classes": [
+      "dmg",
+      "tears",
+      "shots",
+      "range",
+      "luck",
+      "auto-spec"
     ]
   },
   "6": {
     "color": [
       "yel"
+    ],
+    "classes": [
+      "shots",
+      "range"
     ]
   },
   "7": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "dmg"
     ]
   },
   "8": {
     "color": [
       "blu"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "9": {
     "color": [
       "bla",
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "10": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "11": {
     "color": [
       "gre"
+    ],
+    "classes": [
+      "hp",
+      "auto-spec"
     ]
   },
   "12": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "dmg",
+      "tears",
+      "range",
+      "hp",
+      "speed",
+      "auto-spec"
     ]
   },
   "13": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "speed",
+      "auto-spec"
     ]
   },
   "14": {
     "color": [
       "gre"
+    ],
+    "classes": [
+      "range",
+      "speed"
     ]
   },
   "15": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "hp"
     ]
   },
   "16": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "dmg",
+      "tears",
+      "shots",
+      "range",
+      "luck",
+      "hp",
+      "speed",
+      "auto-spec",
+      "use-spec"
     ]
   },
   "17": {
     "color": [
       "whi",
       "bla"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "18": {
     "color": [
       "gre"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "19": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "20": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "21": {
@@ -111,113 +194,179 @@
       "red",
       "bro",
       "yel"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "22": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "hp"
     ]
   },
   "23": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "hp"
     ]
   },
   "24": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "hp"
     ]
   },
   "25": {
     "color": [
       "whi"
+    ],
+    "classes": [
+      "hp"
     ]
   },
   "26": {
     "color": [
       "yel",
       "whi"
+    ],
+    "classes": [
+      "hp"
     ]
   },
   "27": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "speed"
     ]
   },
   "28": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "speed"
     ]
   },
   "29": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "range"
     ]
   },
   "30": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "range"
     ]
   },
   "31": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "range"
     ]
   },
   "32": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "tears"
     ]
   },
   "33": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "34": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "35": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "36": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "37": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "38": {
     "color": [
       "whi"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "39": {
     "color": [
       "whi"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "40": {
     "color": [
       "red",
       "whi"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "41": {
     "color": [
       "whi"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "42": {
     "color": [
       "gre"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "43": {
@@ -229,83 +378,131 @@
     "color": [
       "blu",
       "bla"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "45": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "hp",
+      "use-spec"
     ]
   },
   "46": {
     "color": [
       "yel",
       "rou"
+    ],
+    "classes": [
+      "luck",
+      "auto-spec"
     ]
   },
   "47": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "48": {
     "color": [
       "bla",
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "49": {
     "color": [
       "red",
       "whi"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "50": {
     "color": [
       "bla",
       "whi"
+    ],
+    "classes": [
+      "dmg"
     ]
   },
   "51": {
     "color": [
       "red",
       "bla"
+    ],
+    "classes": [
+      "dmg",
+      "auto-spec"
     ]
   },
   "52": {
     "color": [
       "rou"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "53": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "54": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "55": {
     "color": [
       "whi",
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "56": {
     "color": [
       "yel"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "57": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "58": {
     "color": [
       "whi",
       "rou"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "59": {
@@ -316,6 +513,9 @@
   "60": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "61": {
@@ -326,12 +526,20 @@
   "62": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "dmg",
+      "hp",
+      "auto-spec"
     ]
   },
   "63": {
     "color": [
       "bro",
       "whi"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "64": {
@@ -339,65 +547,115 @@
       "red",
       "rou",
       "whi"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "65": {
     "color": [
       "red",
       "whi"
+    ],
+    "classes": [
+      "dmg",
+      "tears",
+      "shots",
+      "range",
+      "luck",
+      "hp",
+      "speed",
+      "auto-spec",
+      "use-spec"
     ]
   },
   "66": {
     "color": [
       "bro",
       "yel"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "67": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "68": {
     "color": [
       "whi",
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "69": {
     "color": [
       "bro"
+    ],
+    "classes": [
+      "dmg",
+      "auto-spec"
     ]
   },
   "70": {
     "color": [
       "pur"
+    ],
+    "classes": [
+      "dmg",
+      "speed"
     ]
   },
   "71": {
     "color": [
       "blu"
+    ],
+    "classes": [
+      "range",
+      "speed",
+      "auto-spec"
     ]
   },
   "72": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "hp",
+      "shots",
+      "auto-spec"
     ]
   },
   "73": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "74": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "75": {
     "color": [
       "rou",
       "yel"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "76": {
@@ -405,85 +663,142 @@
       "bro",
       "bla",
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "77": {
     "color": [
       "whi"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "78": {
     "color": [
       "pur",
       "whi"
+    ],
+    "classes": [
+      "hp",
+      "use-spec"
     ]
   },
   "79": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "dmg",
+      "hp",
+      "speed"
     ]
   },
   "80": {
     "color": [
       "red",
       "whi"
+    ],
+    "classes": [
+      "dmg",
+      "tears",
+      "hp"
     ]
   },
   "81": {
     "color": [
       "bla",
       "whi"
+    ],
+    "classes": [
+      "hp",
+      "auto-spec"
     ]
   },
   "82": {
     "color": [
       "red",
       "bla"
+    ],
+    "classes": [
+      "speed",
+      "auto-spec"
     ]
   },
   "83": {
     "color": [
       "red",
       "bla"
+    ],
+    "classes": [
+      "dmg",
+      "hp",
+      "speed",
+      "use-spec"
     ]
   },
   "84": {
     "color": [
       "bro",
       "bla"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "85": {
     "color": [
       "bro",
       "rou"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "86": {
     "color": [
       "whi",
       "red"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "87": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "88": {
     "color": [
       "yel"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "89": {
     "color": [
       "bla",
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "90": {
     "color": [
       "bla"
+    ],
+    "classes": [
+      "dmg",
+      "tears",
+      "speed"
     ]
   },
   "91": {
@@ -491,61 +806,107 @@
       "bla",
       "bro",
       "gre"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "92": {
     "color": [
       "rou"
+    ],
+    "classes": [
+      "hp"
     ]
   },
   "93": {
     "color": [
       "whi",
       "gre"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "94": {
     "color": [
       "pur"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "95": {
     "color": [
       "whi",
       "red"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "96": {
     "color": [
       "red"
+    ],
+    "classes": [
+      "dmg",
+      "tears",
+      "shots",
+      "range",
+      "luck",
+      "hp",
+      "speed",
+      "auto-spec",
+      "use-spec"
     ]
   },
   "97": {
     "color": [
       "bla",
       "red"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "98": {
     "color": [
       "blu"
+    ],
+    "classes": [
+      "hp",
+      "auto-spec"
     ]
   },
   "99": {
     "color": [
       "bla",
       "yel"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "100": {
     "color": [
       "bla",
       "whi"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "101": {
     "color": [
       "yel"
+    ],
+    "classes": [
+      "dmg",
+      "tears",
+      "range",
+      "hp",
+      "speed"
     ]
   },
   "102": {
@@ -553,11 +914,17 @@
       "yel",
       "blu",
       "red"
+    ],
+    "classes": [
+      "use-spec"
     ]
   },
   "103": {
     "color": [
       "gre"
+    ],
+    "classes": [
+      "auto-spec"
     ]
   },
   "104": {

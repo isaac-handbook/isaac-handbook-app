@@ -4,14 +4,12 @@ import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { ItemGridDrawer } from '@components/ItemGridDrawer';
 import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
-import { useHandBookData } from '@hooks/useHandbookData';
+import suitList from '@data/suit.json';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
-
-  const { handbookData } = useHandBookData();
 
   return (
     <ErrorBoundary>
@@ -23,7 +21,7 @@ function Index() {
         }}
       >
         <View className={styles.boxContainer}>
-          {handbookData.extra.suitList.map((item, index) => {
+          {suitList.map((item, index) => {
             const { name: suit } = item;
             const curSuit = convertTagToSuit[suit];
             return (

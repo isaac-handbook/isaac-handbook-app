@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Button, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import LoadingPage from '@components/ErrorBoundary/LoadingPage';
-import { requestCameraPermission } from '@pages/scan/utils/permission';
+import { requestCameraPermission } from '../../utils/permission';
 
 interface Props {}
 

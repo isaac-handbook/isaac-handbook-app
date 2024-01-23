@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  margin-bottom: 12px;
+  // background-color: #c4b39d;
+  padding: 24px;
+  padding-top: 32px;
+  padding-bottom: 12px;
+}
+
+.question {
+  margin-top: 48px;
+  font-size: 18px;
+}

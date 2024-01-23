@@ -29,7 +29,7 @@
       "@utils/*": ["src/utils/*"],
       "@hooks": ["src/hooks/"],
       "@hooks/*": ["src/hooks/*"],
-      "@types/*": ["src/types/*"],
+      "@typers/*": ["src/types/*"],
       "@data/*": ["src/data/*"],
       "@src/*": ["src/*"]
     }

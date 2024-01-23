@@ -9,7 +9,7 @@ interface Props {
   scale: number;
 }
 
-const levelBgPositionMap = {
+export const chargeLevelBgMap = {
   '1': '16px 32px',
   '2': '32px 32px',
   '3': '48px 32px',
@@ -29,9 +29,9 @@ export const ChargeBar: React.FC<Props> = (props) => {
 
   const half = charge.includes('秒') || charge === '0';
 
-  let bgPosition = levelBgPositionMap[charge];
-  if (yellow || half) {
-    bgPosition = levelBgPositionMap['1'];
+  let bgPosition = chargeLevelBgMap[charge.replace(',一次性使用', '')];
+  if ((yellow || half) && !bgPosition) {
+    bgPosition = chargeLevelBgMap['1'];
   }
 
   return (

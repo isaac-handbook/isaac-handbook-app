@@ -3,6 +3,18 @@ import { TableColumnProps } from '@nutui/nutui-react-taro/dist/types/packages/ta
 
 export type ItemType = 'item' | 'trinket' | 'card' | 'pill' | 'chara';
 
+// 人工打标的道具类型
+export type ItemClass =
+  | 'dmg'
+  | 'tears'
+  | 'shots'
+  | 'range'
+  | 'luck'
+  | 'hp'
+  | 'speed'
+  | 'auto-spec'
+  | 'use-spec';
+
 export interface ItemGridVirtualListItem {
   type: 'items' | 'component';
   items?: Item[];
@@ -64,6 +76,8 @@ export interface Item extends BriefItem {
   alias?: string[];
   // 颜色
   colors: ColorType[];
+  // 类别
+  classes: string[];
 }
 
 export interface HandBookData {

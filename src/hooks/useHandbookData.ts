@@ -26,9 +26,18 @@ export const useHandBookData = () => {
     setHandbookData(newHandbookData);
   };
 
+  // 通过 type 和 id 获取图鉴数据
+  const getItemDataById = (
+    type: keyof Omit<HandBookData, 'extra' | 'chara'>,
+    id: string,
+  ) => {
+    return handbookData[type].find((item) => item.id === id);
+  };
+
   return {
     handbookData,
     setHandbookData,
     forceRefresh,
+    getItemDataById,
   };
 };

@@ -15,7 +15,7 @@ export const uiState = atom<UI>({
 export const useUI = () => {
   const [ui, setUI] = useRecoilState(uiState);
 
-  const updateSingleUIState = (key: keyof UI, value: any) => {
+  const updateSingleUIState = <T extends keyof UI>(key: T, value: UI[T]) => {
     setUI({
       ...ui,
       [key]: value,

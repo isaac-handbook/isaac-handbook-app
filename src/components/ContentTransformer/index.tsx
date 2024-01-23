@@ -27,6 +27,8 @@ interface Props {
   mathFontSize?: string;
   mode?: 'clean' | 'normal';
   lockTheme?: ThemeColor;
+  // 是否可点击跳转
+  linkable?: boolean;
 }
 
 export const ContentTransformer: React.FC<Props> = (props) => {
@@ -173,7 +175,10 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         return '{{FIXME 没有命中的item}}' + item;
       }
       return (
-        <InlineItem item={targetItem} linkable={props.id !== targetItem?.id} />
+        <InlineItem
+          item={targetItem}
+          linkable={props.id !== targetItem?.id && props.linkable}
+        />
       );
     }
     // math| 开头，表示是一个计算公式
@@ -201,7 +206,12 @@ export const ContentTransformer: React.FC<Props> = (props) => {
       if (!charaData) {
         return chara;
       }
-      return <InlineItem item={handbookData.chara[unFormatCharaName(chara)]} />;
+      return (
+        <InlineItem
+          linkable={props.linkable}
+          item={handbookData.chara[unFormatCharaName(chara)]}
+        />
+      );
     }
     // stage| 开头，表示是一个关卡
     if (data.startsWith('stage|')) {
