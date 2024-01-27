@@ -3,6 +3,9 @@ import { Item } from '@typers/handbook';
 import { generateDescTopic } from './topicType/descTopic';
 import { generateCustomTopic } from './topicType/customTopic';
 
+// const customTopicWeight = 0.65;
+const customTopicWeight = 0.85;
+
 interface Options {
   topicMeta: TopicMeta;
   item: Item;
@@ -15,7 +18,7 @@ export const generateStage1Topic = (options: Options): Topic | null => {
   const weight = Math.random();
 
   // 生成一个 stage1 的 custom topic
-  if (weight < 0.65) {
+  if (weight < customTopicWeight) {
     const topic = generateCustomTopic({
       item,
       items,

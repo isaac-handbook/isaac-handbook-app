@@ -10,8 +10,13 @@ import { useExamPaper } from '@hooks/useExamPaper';
 import { Header } from './components/Header';
 import { Question } from './components/Question';
 import { Options } from './components/Options';
+import Taro from '@tarojs/taro';
+import { paperLevelMap } from './constant';
 
 function Index() {
+  const params = Taro.getCurrentInstance().router?.params as any;
+  const level = params?.level;
+
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
@@ -27,15 +32,13 @@ function Index() {
   } = useExamPaper();
 
   useEffect(() => {
-    if (!items?.length) return;
+    if (!items?.length || !level) return;
+    const { stageMap, sort } = paperLevelMap[String(level)];
     const newTopicList = paperGenerator({
       items,
       topicMetaList: itemExamRawData.item as unknown as any,
-      condition: [
-        { stage: 1, count: 10 },
-        { stage: 2, count: 10 },
-        { stage: 3, count: 10 },
-      ],
+      stageMap,
+      sort,
     });
     updateSingleExamPaperState('topicList', newTopicList);
     console.log('生成试卷', newTopicList);
@@ -44,6 +47,10 @@ function Index() {
       // 用户退出页面，清空试卷
       clearExamPaper();
       console.warn('清空试卷');
+      Taro.showToast({
+        title: '已退出答题',
+        icon: 'none',
+      });
     };
   }, [items]);
 

@@ -9,7 +9,7 @@ interface Options {
   items: Item[];
   topicMetaList: TopicMeta[];
   /** 生成的题目数量与难易分布 */
-  condition: {
+  stageMap: {
     stage: 1 | 2 | 3;
     count: number;
   }[];
@@ -19,9 +19,9 @@ interface Options {
 
 /** 生成一份考卷 */
 export const paperGenerator = (options: Options): Topic[] => {
-  const { items, topicMetaList, condition, sort = true } = options;
+  const { items, topicMetaList, stageMap, sort = true } = options;
 
-  const oparateCondition = _.cloneDeep(condition);
+  const oparateStageMap = _.cloneDeep(stageMap);
 
   const otpTopics: Topic[] = [];
 
@@ -33,7 +33,7 @@ export const paperGenerator = (options: Options): Topic[] => {
     const item = items.find((item) => item.id === String(topicMeta.id));
     if (!item) continue;
     // 如果 stage1 的题目还没满，生成 stage1 的题目
-    if (oparateCondition[0].count > 0) {
+    if (oparateStageMap[0].count > 0) {
       const topic = generateStage1Topic({
         topicMeta,
         item,
@@ -41,12 +41,12 @@ export const paperGenerator = (options: Options): Topic[] => {
       });
       if (topic) {
         otpTopics.push(topic);
-        oparateCondition[0].count--;
+        oparateStageMap[0].count--;
         continue;
       }
     }
     // 如果 stage2 的题目还没满，生成 stage2 的题目
-    if (oparateCondition[1].count > 0) {
+    if (oparateStageMap[1].count > 0) {
       const topic = generateStage2Topic({
         topicMeta,
         item,
@@ -54,12 +54,12 @@ export const paperGenerator = (options: Options): Topic[] => {
       });
       if (topic) {
         otpTopics.push(topic);
-        oparateCondition[1].count--;
+        oparateStageMap[1].count--;
         continue;
       }
     }
     // 如果 stage3 的题目还没满，生成 stage3 的题目
-    if (oparateCondition[2].count > 0) {
+    if (oparateStageMap[2].count > 0) {
       const topic = generateStage3Topic({
         topicMeta,
         item,
@@ -67,7 +67,7 @@ export const paperGenerator = (options: Options): Topic[] => {
       });
       if (topic) {
         otpTopics.push(topic);
-        oparateCondition[2].count--;
+        oparateStageMap[2].count--;
         continue;
       }
     }

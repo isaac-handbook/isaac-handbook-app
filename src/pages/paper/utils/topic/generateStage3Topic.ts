@@ -4,6 +4,9 @@ import { generateCustomTopic } from './topicType/customTopic';
 import { generateQualityTopic } from './topicType/qualityTopic';
 import { generateUnlockTopic } from './topicType/unlockTopic';
 
+// const customTopicWeight = 0.55;
+const customTopicWeight = 0.65;
+
 interface Options {
   topicMeta: TopicMeta;
   item: Item;
@@ -16,7 +19,7 @@ export const generateStage3Topic = (options: Options): Topic | null => {
   const weight = Math.random();
 
   // 生成一个 stage3 的 custom topic
-  if (weight < 0.55) {
+  if (weight < customTopicWeight) {
     // if (weight < 0) {
     return generateCustomTopic({
       item,
@@ -27,16 +30,18 @@ export const generateStage3Topic = (options: Options): Topic | null => {
   }
 
   // 生成一个 stage3 的 unlock topic
-  if (weight < 0.85) {
+  if (weight < customTopicWeight + 0.3) {
     // if (weight < 1) {
     return generateUnlockTopic({
       item,
       items,
+      optionCount: 2,
     });
   }
 
   // 生成一个 stage3 的 quality topic
   return generateQualityTopic({
     item,
+    optionCount: 2,
   });
 };

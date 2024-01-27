@@ -5,6 +5,9 @@ import { generateChargeTopic } from './topicType/chargeTopic';
 import { generatePoolTopic } from './topicType/poolTopic';
 import { generateSuitTopic } from './topicType/suitTopic';
 
+// const customTopicWeight = 0.5;
+const customTopicWeight = 0.6;
+
 interface Options {
   topicMeta: TopicMeta;
   item: Item;
@@ -17,7 +20,7 @@ export const generateStage2Topic = (options: Options): Topic | null => {
   const weight = Math.random();
 
   // 生成一个 stage2 的 custom topic
-  if (weight < 0.5) {
+  if (weight < customTopicWeight) {
     return generateCustomTopic({
       item,
       items,
@@ -27,14 +30,14 @@ export const generateStage2Topic = (options: Options): Topic | null => {
   }
 
   // 生成一个 stage2 的 suit topic
-  if (weight < 0.75) {
+  if (weight < customTopicWeight + 0.2) {
     return generateSuitTopic({
       item,
     });
   }
 
   // 生成一个 stage2 的 charge topic
-  if (weight < 0.85) {
+  if (weight < customTopicWeight + 0.4) {
     return generateChargeTopic({
       item,
     });
