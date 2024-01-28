@@ -3,31 +3,23 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useExamPaper } from '@hooks/useExamPaper';
 import { useHandBookData } from '@hooks/useHandbookData';
-import { ContentTransformer } from '@components/ContentTransformer';
 import { Button } from '@nutui/nutui-react-taro';
-import { useThemeInfo } from '@hooks/useThemeInfo';
-import { Checklist } from '@nutui/icons-react-taro';
-import classNames from 'classnames';
+import { OptionItem } from './OptionItem';
 
 interface Props {
   curIndex: number;
+  selected: number | null;
+  setSelected: (index: number | null) => void;
 }
 
 export const Options: React.FC<Props> = (props) => {
-  const { curIndex } = props;
+  const { curIndex, selected, setSelected } = props;
   const {
     examPaper: { topicList },
     submitSingleTopic,
   } = useExamPaper();
 
   const { getItemDataById } = useHandBookData();
-
-  const {
-    themeInfo: { themeColor },
-  } = useThemeInfo();
-
-  // 当前选中的
-  const [selected, setSelected] = React.useState<number | null>(null);
 
   useEffect(() => {
     setSelected(null);
@@ -49,7 +41,7 @@ export const Options: React.FC<Props> = (props) => {
 
   const handleNext = () => {
     // 如果已经是最后一题了，那么就不再跳转了
-    submitSingleTopic(2);
+    submitSingleTopic(selected);
   };
 
   const handleOptionClick = (index: number) => {
@@ -59,46 +51,13 @@ export const Options: React.FC<Props> = (props) => {
   return (
     <View className={styles.container}>
       {curTopic.options.map((option, index) => {
-        let boxShadow = '';
-        if (selected === index) {
-          boxShadow =
-            themeColor.type === 'dark'
-              ? '0 0 8px rgba(255, 255, 255, 0.3)'
-              : '0 0 8px rgba(0, 0, 0, 0.2)';
-        }
         return (
-          <View
-            key={`key${index}`}
-            className={classNames(styles.option, {
-              [styles.selected]: selected === index,
-            })}
+          <OptionItem
+            selected={selected === index}
+            item={item}
+            optionValue={option}
             onClick={() => handleOptionClick(index)}
-            style={{
-              background: themeColor.gridColor,
-              color: themeColor.textColor,
-              boxShadow,
-            }}
-          >
-            <View
-              className={styles.check}
-              style={{ borderColor: themeColor.textColor }}
-            >
-              {selected === index && (
-                <View className={styles.checkIcon}>
-                  <Checklist size={14} color={themeColor.textColor} />
-                </View>
-              )}
-            </View>
-            <View className={styles.value}>
-              <ContentTransformer
-                id={item.id}
-                nameZh={item.nameZh}
-                value={String(option)}
-                linkable={false}
-                lineHeight="60rpx"
-              />
-            </View>
-          </View>
+          />
         );
       })}
       <Button

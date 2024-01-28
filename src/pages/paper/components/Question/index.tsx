@@ -5,13 +5,14 @@ import { useExamPaper } from '@hooks/useExamPaper';
 import { ItemIcon } from '@components/ItemIcon';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { ContentTransformer } from '@components/ContentTransformer';
+import { Topic } from '@typers/exam';
 
 interface Props {
-  curIndex: number;
+  topic: Topic;
 }
 
 export const Question: React.FC<Props> = (props) => {
-  const { curIndex } = props;
+  const { topic } = props;
   const {
     examPaper: { topicList },
   } = useExamPaper();
@@ -19,15 +20,10 @@ export const Question: React.FC<Props> = (props) => {
 
   if (!topicList.length) return null;
 
-  const curTopic = topicList[curIndex - 1];
-
-  const item = getItemDataById(
-    (curTopic.itemType + 's') as any,
-    curTopic.itemId,
-  );
+  const item = getItemDataById((topic.itemType + 's') as any, topic.itemId);
 
   if (!item) {
-    console.error('没有定位到 Item', curTopic);
+    console.error('没有定位到 Item', topic);
     return '哎呀，出大错了，快去锤开发者';
   }
 
@@ -44,7 +40,7 @@ export const Question: React.FC<Props> = (props) => {
       </View>
       <View className={styles.question}>
         <ContentTransformer
-          value={curTopic.question}
+          value={topic.question}
           id={item.id}
           nameZh={item.nameZh}
           linkable={false}

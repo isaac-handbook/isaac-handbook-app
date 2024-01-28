@@ -1,0 +1,64 @@
+.navItem {
+  width: 100%;
+  padding: 18px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    width: 56px;
+    height: 56px;
+    margin-right: 16px;
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      image-rendering: pixelated;
+    }
+  }
+
+  .content {
+    flex: 1;
+
+    .title {
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 5px;
+
+      .name {
+        font-size: 17px;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .score {
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .desc {
+      opacity: 0.8;
+      font-size: 14px;
+    }
+  }
+
+  .right {
+    margin-left: 16px;
+    margin-right: 8px;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+}

@@ -1,7 +1,15 @@
+export const levelStringMap = {
+  '1': '青铜卷',
+  '2': '白银卷',
+  '3': '钻石卷',
+  '100': '王者卷',
+};
+
 export const paperLevelMap = {
   '1': {
     stageMap: [
-      { stage: 1, count: 17 },
+      // { stage: 1, count: 17 },
+      { stage: 1, count: 2 },
       { stage: 2, count: 3 },
       { stage: 3, count: 0 },
     ],

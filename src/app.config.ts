@@ -16,6 +16,7 @@ export default defineAppConfig({
     'pages/suit/index',
     'pages/charas/index',
     'pages/chara-detail/index',
+    'pages/user-edit/index',
   ],
   subpackages: [
     {

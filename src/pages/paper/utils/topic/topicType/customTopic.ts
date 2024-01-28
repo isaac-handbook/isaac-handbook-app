@@ -29,7 +29,7 @@ export const generateCustomTopic = (params: Params): Topic | null => {
     return null;
   }
 
-  const question = rawTopic.value.replace(/\[\[.*?\]\]/g, '____');
+  const question = rawTopic.value.replace(/\[\[.*?\]\]/g, '_____');
   const cleanCorrectOption = correctOption.replace(/\[\[|\]\]/g, '');
   const options = randomAnswer(cleanCorrectOption, rawTopic.wrongList, 3);
 

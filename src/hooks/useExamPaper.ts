@@ -34,16 +34,8 @@ export const useExamPaper = () => {
     });
   };
 
-  /** 交一份白卷 */
-  const submitWhitePaper = () => {
-    updateSingleExamPaperState('userAnswerList', [
-      ...examPaper.userAnswerList,
-      null,
-    ]);
-  };
-
   /** 提交一次答案 */
-  const submitSingleTopic = (answer: number) => {
+  const submitSingleTopic = (answer: number | null) => {
     updateSingleExamPaperState('userAnswerList', [
       ...examPaper.userAnswerList,
       answer,
@@ -55,10 +47,25 @@ export const useExamPaper = () => {
     setExamPaper(defaultExamPaper);
   };
 
+  /** 阅卷，得出分数 */
+  const getScore = () => {
+    const { topicList, userAnswerList } = examPaper;
+    const score = topicList.reduce((prev, curr, index) => {
+      if (curr.answer === userAnswerList[index]) {
+        return prev + 1;
+      }
+      return prev;
+    }, 0);
+    // 换算成百分制
+    const totalScore = topicList.length;
+    const scorePercent = (score / totalScore) * 100;
+    return Math.floor(scorePercent);
+  };
+
   return {
     examPaper,
+    getScore,
     updateSingleExamPaperState,
-    submitWhitePaper,
     clearExamPaper,
     submitSingleTopic,
   };

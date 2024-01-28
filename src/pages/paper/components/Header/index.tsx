@@ -9,13 +9,14 @@ const timeout = 20;
 
 interface Props {
   curIndex: number;
+  selected: number | null;
 }
 
 export const Header: React.FC<Props> = (props) => {
-  const { curIndex } = props;
+  const { curIndex, selected } = props;
   const {
     examPaper: { topicList },
-    submitWhitePaper,
+    submitSingleTopic,
   } = useExamPaper();
 
   const countdownRef = React.useRef<any>(null);
@@ -36,7 +37,7 @@ export const Header: React.FC<Props> = (props) => {
     if (countdown > timeout) {
       // 超时，自动提交
       setCountdown(0);
-      submitWhitePaper();
+      submitSingleTopic(selected ?? null);
     }
   }, [countdown]);
 
