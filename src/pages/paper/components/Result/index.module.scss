@@ -7,6 +7,7 @@
   background-color: #c4b39d;
   position: fixed;
   z-index: 2;
+  color: #000000;
 
   .score {
     font-size: 18px;
@@ -15,14 +16,29 @@
 
     .number {
       font-size: 26px;
-      font-weight: bold;
       position: relative;
+      display: flex;
+      align-items: center;
 
-      .tag {
-        position: absolute;
-        width: 48px;
-        top: -2px;
-        right: -56px;
+      .tags {
+        display: flex;
+        flex-direction: column;
+        margin-left: 8px;
+
+        .tagUpdate {
+          margin-bottom: 4px;
+          width: fit-content;
+        }
+
+        .tagSuccess {
+          margin-bottom: 4px;
+          width: fit-content;
+        }
+
+        .tagWarning {
+          margin-bottom: 4px;
+          width: fit-content;
+        }
       }
     }
   }

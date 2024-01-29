@@ -3,7 +3,7 @@
   min-height: 100vh;
   background-color: transparent;
   box-sizing: border-box;
-  padding-top: 24px;
+  // padding-top: 24px;
 }
 
 .item {
@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 18px;
+  font-size: 16px;
   height: 80px;
 
   &.tall {
@@ -40,8 +40,8 @@
     background-color: transparent;
 
     .avatar {
-      width: 80px;
-      height: 80px;
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
       border: 2px solid #fff;
       background-color: #ffffff;
@@ -50,7 +50,7 @@
 }
 
 .submit {
-  margin-top: 24px;
+  margin-top: 12px;
   width: 200px;
   text-align: center;
   background-color: #f7b733;

@@ -45,7 +45,7 @@ export const ResultDrawer: React.FC<Props> = (props) => {
         <View className={styles.drawer}>
           {topic && item && (
             <>
-              <Question topic={topic} />
+              <Question topic={topic} linkable />
               {topic.options.map((option, index) => {
                 return (
                   <OptionItem

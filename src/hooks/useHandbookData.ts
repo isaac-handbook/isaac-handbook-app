@@ -28,7 +28,7 @@ export const useHandBookData = () => {
 
   // 通过 type 和 id 获取图鉴数据
   const getItemDataById = (
-    type: keyof Omit<HandBookData, 'extra' | 'chara'>,
+    type: keyof Omit<HandBookData, 'extra' | 'chara' | 'version'>,
     id: string,
   ) => {
     return handbookData[type].find((item) => item.id === id);

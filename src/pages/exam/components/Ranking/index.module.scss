@@ -1,0 +1,54 @@
+.container {
+  padding: 8px 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.count {
+  flex: 1;
+  text-align: center;
+
+  &.medal {
+    font-size: 25px;
+  }
+}
+
+.avatar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  flex: 3;
+}
+
+.score {
+  flex: 1;
+}
+
+.avatarImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.line {
+  height: 1px;
+  width: calc(100% - 24px);
+  position: relative;
+  bottom: 0;
+  left: 24px;
+  opacity: 0.5;
+}
+// 最后一个 line 不展示
+.line:last-child {
+  display: none;
+}

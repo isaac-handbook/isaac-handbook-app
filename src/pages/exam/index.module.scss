@@ -46,5 +46,18 @@
   font-size: 18px;
   font-weight: bold;
   margin: 12px 0;
-  margin-top: 20px;
+  margin-top: 24px;
+  display: flex;
+  align-items: flex-end;
+
+  .wangzheTip {
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 8px;
+    opacity: 0.8;
+  }
+}
+
+.clearBtn {
+  margin-top: 24px;
 }

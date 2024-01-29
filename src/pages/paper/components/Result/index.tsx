@@ -20,7 +20,7 @@ interface Props {
 export const Result: React.FC<Props> = (props) => {
   const { level } = props;
   const {
-    examPaper: { topicList, userAnswerList },
+    examPaper: { topicList, userAnswerList, userScoreMap },
     getScore,
   } = useExamPaper();
 
@@ -67,6 +67,8 @@ export const Result: React.FC<Props> = (props) => {
           data: {
             level: Number(level),
             score: curScore,
+            avatar: user.avatar,
+            nickname: user.nickname,
           },
         });
       } else {
@@ -92,34 +94,52 @@ export const Result: React.FC<Props> = (props) => {
     });
   };
 
+  const shouldShowUnlocked = (() => {
+    const oldScore = userScoreMap[`level${level}`];
+    const newScore = score;
+    if (oldScore < 60 && newScore >= 60) {
+      return true;
+    }
+    return false;
+  })();
+
+  const shouldShowUnlocking = (() => {
+    const oldScore = userScoreMap[`level${level}`];
+    const newScore = score;
+    if (oldScore < 60 && newScore < 60) {
+      return true;
+    }
+    return false;
+  })();
+
   return (
     <View className={styles.container}>
-      <ResultDrawer
-        drawerVisible={drawerData?.visible}
-        closeDrawer={() =>
-          setDrawerData((prev) => ({
-            ...prev,
-            visible: false,
-          }))
-        }
-        topic={drawerData.topic}
-        item={drawerData.item}
-        userSelect={drawerData.userSelect}
-      />
-
       <View className={styles.header}>
         <View className={styles.score}>
-          {levelStringMap[String(level)]}得分：
+          {levelStringMap[String(level)]}卷 得分：
           <View className={styles.number}>
             {score}
-            {showUpdate && (
-              <Tag type="primary" className={styles.tag}>
-                记录更新！
-              </Tag>
-            )}
+            <View className={styles.tags}>
+              {showUpdate && (
+                <Tag type="primary" className={styles.tagUpdate}>
+                  记录更新！
+                </Tag>
+              )}
+              {shouldShowUnlocked && Number(level) !== 100 && (
+                <Tag type="success" className={styles.tagSuccess}>
+                  下一关已解锁
+                </Tag>
+              )}
+              {shouldShowUnlocking && Number(level) !== 100 && (
+                <Tag type="warning" className={styles.tagWarning}>
+                  还差{60 - score}分解锁下一关
+                </Tag>
+              )}
+            </View>
           </View>
         </View>
       </View>
+
       <View className={styles.list}>
         <View className={styles.tip}>点击条目查看题目详细</View>
         {topicList.map((topic, index) => {
@@ -168,6 +188,19 @@ export const Result: React.FC<Props> = (props) => {
           );
         })}
       </View>
+
+      <ResultDrawer
+        drawerVisible={drawerData?.visible}
+        closeDrawer={() =>
+          setDrawerData((prev) => ({
+            ...prev,
+            visible: false,
+          }))
+        }
+        topic={drawerData.topic}
+        item={drawerData.item}
+        userSelect={drawerData.userSelect}
+      />
     </View>
   );
 };

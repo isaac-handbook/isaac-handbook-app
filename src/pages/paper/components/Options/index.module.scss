@@ -23,6 +23,7 @@
   padding: 16px 12px;
   transition: all 0.2s ease-in-out;
   border: 2px transparent solid;
+  font-size: 15px;
 
   .check {
     height: 16px;
@@ -38,9 +39,10 @@
     justify-content: center;
 
     .checkIcon {
-      height: 10px;
-      width: 10px;
+      height: 9px;
+      width: 9px;
       border-radius: 50%;
+      // background-color: #f7b733;
     }
   }
 

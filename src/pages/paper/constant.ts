@@ -1,8 +1,8 @@
 export const levelStringMap = {
-  '1': '青铜卷',
-  '2': '白银卷',
-  '3': '钻石卷',
-  '100': '王者卷',
+  '1': '青铜',
+  '2': '白银',
+  '3': '钻石',
+  '100': '王者',
 };
 
 export const paperLevelMap = {

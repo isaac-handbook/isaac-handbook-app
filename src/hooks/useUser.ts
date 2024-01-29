@@ -4,7 +4,7 @@ interface User {
   // 用户的 openid
   openid: string;
   // 用户的昵称
-  nickName: string;
+  nickname: string;
   // 用户的头像
   avatar: string;
 }
@@ -13,7 +13,7 @@ export const userState = atom<User>({
   key: 'userState',
   default: {
     openid: '',
-    nickName: '',
+    nickname: '',
     avatar: '',
   },
 });

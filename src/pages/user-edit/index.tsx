@@ -7,6 +7,7 @@ import { ArrowSize6 } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import Taro from '@tarojs/taro';
+import emptyAvatar from '@assets/emptyAvatar.png';
 
 function Index() {
   const {
@@ -14,21 +15,22 @@ function Index() {
   } = useThemeInfo();
 
   const {
-    user: { avatar, nickName, openid },
+    user: { avatar, nickname, openid },
+    setUser,
   } = useUser();
 
-  const [inputNickName, setInputNickName] = useState<string>(nickName);
-  const [inputAvatar, setInputAvatar] = useState<string>(avatar);
+  const [inputNickName, setInputNickName] = useState<string>(nickname);
+  const [inputAvatar, setInputAvatar] = useState<string>(avatar || emptyAvatar);
   const [uploadedAvatar, setUploadedAvatar] = useState<string>();
 
   useEffect(() => {
-    if (nickName) {
-      setInputNickName(nickName);
+    if (nickname) {
+      setInputNickName(nickname);
     }
     if (avatar) {
       setInputAvatar(avatar);
     }
-  }, [avatar, nickName]);
+  }, [avatar, nickname]);
 
   const handleChooseAvatar = (e) => {
     const tmpUrl = e.detail?.avatarUrl;
@@ -57,6 +59,25 @@ function Index() {
     });
   };
 
+  // 更新个人信息后，需要同步更新 score 表中所有该用户的记录
+  const updateAllScoreData = async () => {
+    const db = Taro.cloud.database();
+    const col = db.collection('score');
+    const queryRes = col.where({
+      _openid: openid,
+    });
+    await queryRes.get().then((res) => {
+      res.data.forEach((item) => {
+        col.doc(item._id as any).update({
+          data: {
+            avatar: uploadedAvatar,
+            nickname: inputNickName,
+          },
+        });
+      });
+    });
+  };
+
   const handleSubmit = () => {
     Taro.showLoading({
       title: '更新中...',
@@ -75,7 +96,7 @@ function Index() {
         await col.add({
           data: {
             avatar: uploadedAvatar,
-            nickName: inputNickName,
+            nickname: inputNickName,
           },
         });
       } else {
@@ -83,10 +104,16 @@ function Index() {
         await col.doc(res.data[0]._id as any).update({
           data: {
             avatar: uploadedAvatar,
-            nickName: inputNickName,
+            nickname: inputNickName,
           },
         });
       }
+      await updateAllScoreData();
+      setUser((prev) => ({
+        ...prev,
+        avatar: uploadedAvatar || '',
+        nickname: inputNickName,
+      }));
       Taro.hideLoading();
       Taro.showToast({
         title: '更新成功',
@@ -129,7 +156,7 @@ function Index() {
             <Input
               type="nickname"
               placeholder="请输入昵称"
-              className={styles.nickName}
+              className={styles.nickname}
               onInput={(e) => setInputNickName(e.detail.value)}
               value={inputNickName}
             ></Input>

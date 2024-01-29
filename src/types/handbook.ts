@@ -81,6 +81,7 @@ export interface Item extends BriefItem {
 }
 
 export interface HandBookData {
+  version?: number;
   items: Item[];
   trinkets: Item[];
   cards: Item[];

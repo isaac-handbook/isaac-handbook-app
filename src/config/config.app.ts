@@ -3,9 +3,6 @@ import { UpdateInfo } from './type';
 // 当前版本
 const version = '1.6.0';
 
-// 是否要强制刷新
-const forceRefreshNow = false;
-
 // 更新通知
 const updateNotice: UpdateInfo = {
   // 通知
@@ -31,5 +28,4 @@ const updateNotice: UpdateInfo = {
 export const updateInfo = {
   version,
   updateNotice,
-  forceRefreshNow,
 };

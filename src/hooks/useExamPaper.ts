@@ -1,6 +1,20 @@
 import { ExamRawData, Topic, UserAnswer } from '../types/exam';
 import { atom, useRecoilState } from 'recoil';
 
+export type UserScoreMap = {
+  level1: number;
+  level2: number;
+  level3: number;
+  level100: number;
+};
+
+export const defaultUserScoreMap: UserScoreMap = {
+  level1: 0,
+  level2: 0,
+  level3: 0,
+  level100: 0,
+};
+
 interface ExamPaper {
   // 原始试卷数据
   rawData: ExamRawData;
@@ -8,12 +22,15 @@ interface ExamPaper {
   topicList: Topic[];
   // 用户当前选择的答案
   userAnswerList: UserAnswer[];
+  // 用户的分数记录
+  userScoreMap: UserScoreMap;
 }
 
 const defaultExamPaper: ExamPaper = {
   rawData: {},
   topicList: [],
   userAnswerList: [],
+  userScoreMap: defaultUserScoreMap,
 };
 
 export const examPaperState = atom<ExamPaper>({
@@ -28,10 +45,10 @@ export const useExamPaper = () => {
     key: T,
     value: ExamPaper[T],
   ) => {
-    setExamPaper({
-      ...examPaper,
+    setExamPaper((prev) => ({
+      ...prev,
       [key]: value,
-    });
+    }));
   };
 
   /** 提交一次答案 */
@@ -44,7 +61,10 @@ export const useExamPaper = () => {
 
   /** 清空试卷 */
   const clearExamPaper = () => {
-    setExamPaper(defaultExamPaper);
+    setExamPaper((prev) => ({
+      ...defaultExamPaper,
+      userScoreMap: prev.userScoreMap,
+    }));
   };
 
   /** 阅卷，得出分数 */
