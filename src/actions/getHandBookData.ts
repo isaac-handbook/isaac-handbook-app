@@ -14,7 +14,7 @@ let reTryTimes = 0;
 /**
  * 从缓存或接口获取图鉴数据
  */
-export const getHandBookData = async () => {
+export const getHandBookData = async (): Promise<HandBookData> => {
   try {
     const cacheData = getFromStorage();
     if (cacheData.length > 0) {
@@ -37,6 +37,7 @@ export const getHandBookData = async () => {
         saveToStorage(fileData);
         return initJsonData(fileData);
       }
+      throw new Error('数据获取失败');
     }
   } catch (error) {
     if (++reTryTimes > 5) {
@@ -49,6 +50,7 @@ export const getHandBookData = async () => {
       throw new Error('数据获取失败，重试次数过多');
     }
     console.warn('数据获取失败，即将重试');
+    console.warn(error);
     await sleep(500);
     return getHandBookData();
   }

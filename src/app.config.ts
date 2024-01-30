@@ -25,22 +25,22 @@ export default defineAppConfig({
     },
   ],
   tabBar: {
-    color: '#606468',
-    selectedColor: '#0089ff',
+    color: '#000000',
+    selectedColor: '#000000',
     backgroundColor: '#c4b39d',
     custom: false,
     list: [
       {
         pagePath: 'pages/index/index',
         text: '图鉴',
-        iconPath: 'assets/tab/event.png',
-        selectedIconPath: 'assets/tab/event_active.png',
+        iconPath: 'assets/tab/home.png',
+        selectedIconPath: 'assets/tab/home-fill.png',
       },
       {
         pagePath: 'pages/exam/index',
         text: '课堂',
-        iconPath: 'assets/tab/schedule.png',
-        selectedIconPath: 'assets/tab/schedule_active.png',
+        iconPath: 'assets/tab/writing.png',
+        selectedIconPath: 'assets/tab/writing-fill.png',
       },
     ],
   },

@@ -13,6 +13,7 @@ import { userScoreToStageString } from './utils/userScoreToStageString';
 import { defaultUserScoreMap, useExamPaper } from '@hooks/useExamPaper';
 import { Ranking } from './components/Ranking';
 import { useSetting } from '@hooks/useSetting';
+import { useLockFn } from 'ahooks';
 
 function Index() {
   const {
@@ -20,6 +21,7 @@ function Index() {
   } = useThemeInfo();
 
   const { user, setUser } = useUser();
+  const { openid } = user;
 
   const {
     examPaper: { userScoreMap },
@@ -30,25 +32,17 @@ function Index() {
     setting: { developerMode },
   } = useSetting();
 
-  const userLogin = async () => {
-    // 获取用户当前 openid
-    const login = (await Taro.cloud.callFunction({
-      name: 'login',
-    })) as any;
-    const OPENID = login?.result?.OPENID;
-    if (!OPENID) {
-      return;
-    }
+  const userInit = useLockFn(async () => {
     // 获取用户头像、昵称
     const db = Taro.cloud.database();
     const col = db.collection('user');
-    const res = await col.where({ _openid: OPENID }).get();
+    const res = await col.where({ _openid: openid }).get();
     const user = res.data[0];
     if (user) {
       setUser({
         avatar: user.avatar || '',
         nickname: user.nickname,
-        openid: OPENID,
+        openid: openid,
       });
       return;
     }
@@ -60,29 +54,35 @@ function Index() {
     setUser({
       avatar: '',
       nickname: newUser.nickname,
-      openid: OPENID,
+      openid: openid,
     });
-  };
+  });
 
   // 获取到用户的 openid 之后，查询数据库，用户的得分
   useEffect(() => {
-    updateUserScore();
+    if (!user.openid) {
+      return;
+    }
+    pageResume();
   }, [user.openid]);
 
-  useDidShow(async () => {
+  useDidShow(() => {
+    if (!user.openid) {
+      return;
+    }
+    pageResume();
+  });
+
+  const pageResume = useLockFn(async () => {
     Taro.showLoading({
       title: '',
     });
-    await userLogin();
-    await updateUserScore();
+    await Promise.all([userInit(), updateUserScore()]);
     Taro.hideLoading();
   });
 
   // 获取数据库里用户的得分
-  const updateUserScore = async () => {
-    if (!user.openid) {
-      return;
-    }
+  const updateUserScore = useLockFn(async () => {
     const db = Taro.cloud.database();
     const col = db.collection('score');
     const res = await col.where({ _openid: user.openid }).get();
@@ -102,7 +102,7 @@ function Index() {
       }
     }
     updateSingleExamPaperState('userScoreMap', scoreMap);
-  };
+  });
 
   const handleUserEdit = async () => {
     Taro.navigateTo({
@@ -197,7 +197,9 @@ function Index() {
 
         <View className={styles.wangzheTitle}>
           王者排名
-          <View className={styles.wangzheTip}>王者卷排名前100的玩家可上榜</View>
+          <View className={styles.wangzheTip}>
+            王者卷排名前100的玩家均可上榜
+          </View>
         </View>
 
         <Ranking />

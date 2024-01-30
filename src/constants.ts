@@ -3,31 +3,31 @@ export const HANDBOOK_DATA_OSS_URL =
   'cloud://isaac-handbook-6gfcp1zy588edf1a.6973-isaac-handbook-6gfcp1zy588edf1a-1317852125/online/isaac-handbook-data.json';
 // 开发链接
 // export const HANDBOOK_DATA_OSS_URL =
-//   'cloud://isaac-handbook-6gfcp1zy588edf1a.6973-isaac-handbook-6gfcp1zy588edf1a-1317852125/online/isaac-handbook-data-1704379448087.json';
+//   'cloud://isaac-handbook-6gfcp1zy588edf1a.6973-isaac-handbook-6gfcp1zy588edf1a-1317852125/dev/isaac-handbook-data.json';
 // 道具
 export const ITEM_ICON_IMG_URL =
-  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/isaac-items.png';
+  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-items.png';
 // 饰品
 export const TRINKET_ICON_IMG_URL =
-  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/isaac-trinkets.png';
+  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-trinkets.png';
 // 卡牌
 export const CARD_ICON_IMG_URL =
-  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/isaac-cards.png';
+  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-cards.png';
 // 8个特殊符文
 export const RUNE_ICON_IMG_URL =
-  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/isaac-runes.png';
+  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-runes.png';
 // 杂项
 export const STUFF_ICON_IMG_URL =
-  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/isaac-stuff.png';
+  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-stuff.png';
 // 充能条
 export const CHARGE_BAR_IMG_URL =
-  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/isaac-charge-bar.png';
+  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-charge-bar.png';
 // 实体&普通敌人
 export const ENTITY_ENEMY_IMG_URL =
-  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/isaac-entity-death-enemy.png';
+  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-entity-death-enemy.png';
 // 实体&BOSS
 export const ENTITY_BOSS_IMG_URL =
-  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/isaac-entity-death-boss.png';
+  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-entity-death-boss.png';
 
 export const specialRuneIdList = [
   '32',

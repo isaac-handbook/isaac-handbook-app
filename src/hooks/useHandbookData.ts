@@ -34,10 +34,21 @@ export const useHandBookData = () => {
     return handbookData[type].find((item) => item.id === id);
   };
 
+  const updateSingleHandbookState = <T extends keyof HandBookData>(
+    key: T,
+    value: HandBookData[T],
+  ) => {
+    setHandbookData({
+      ...handbookData,
+      [key]: value,
+    });
+  };
+
   return {
     handbookData,
     setHandbookData,
     forceRefresh,
     getItemDataById,
+    updateSingleHandbookState,
   };
 };
