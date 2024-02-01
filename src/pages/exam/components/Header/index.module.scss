@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  margin-bottom: 16px;
+
+  .left {
+    margin-left: 20px;
+    .title {
+      font-size: 19px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      height: 24px;
+      // 过长的话自动省略
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 200px;
+    }
+    .subtitle {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      .icon {
+        margin-left: 2px;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+  .right {
+    .avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      border: #ffffff 2px solid;
+    }
+  }
+}

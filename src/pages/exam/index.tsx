@@ -1,4 +1,4 @@
-import { View, Image, Button } from '@tarojs/components';
+import { View, Button } from '@tarojs/components';
 import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
@@ -6,14 +6,12 @@ import Taro, { useDidShow } from '@tarojs/taro';
 import { useUser } from '@hooks/useUser';
 import { useEffect } from 'react';
 import { NavItem } from './components/NavItem';
-import { ArrowSize6 } from '@nutui/icons-react-taro';
 import { levelStringMap } from '@pages/paper/constant';
-import emptyAvatar from '@assets/emptyAvatar.png';
-import { userScoreToStageString } from './utils/userScoreToStageString';
 import { defaultUserScoreMap, useExamPaper } from '@hooks/useExamPaper';
 import { Ranking } from './components/Ranking';
 import { useSetting } from '@hooks/useSetting';
 import { useLockFn } from 'ahooks';
+import { Header } from './components/Header';
 
 function Index() {
   const {
@@ -104,25 +102,31 @@ function Index() {
     updateSingleExamPaperState('userScoreMap', scoreMap);
   });
 
-  const handleUserEdit = async () => {
-    Taro.navigateTo({
-      url: `/pages/user-edit/index`,
-    });
-  };
-
   // 清空 score 集合中所有个人的数据
-  const handleClearSelf = async () => {
+  const handleClearUser = async () => {
     Taro.showLoading({
       title: '清理中',
     });
+    // 获取剪切板中的 openid
+    const clipRes = await Taro.getClipboardData();
+    const openid = clipRes.data;
+    if (!openid || openid.length > 30) {
+      Taro.showToast({
+        title: '剪切板中没有 openid',
+        icon: 'none',
+      });
+      return;
+    }
     const db = Taro.cloud.database();
     const col = db.collection('score');
-    const res = await col.where({ _openid: user.openid }).get();
+    const res = await col.where({ _openid: openid }).get();
     const ids = res.data.map((item) => item._id);
     for (const id of ids) {
       await col.doc(id as any).remove({});
     }
-    await updateUserScore();
+    setTimeout(() => {
+      updateUserScore();
+    }, 1000);
     Taro.hideLoading();
   };
 
@@ -135,28 +139,7 @@ function Index() {
           color: themeColor.textColor,
         }}
       >
-        <View className={styles.header} onClick={handleUserEdit}>
-          <View className={styles.right}>
-            <Image src={user.avatar || emptyAvatar} className={styles.avatar} />
-          </View>
-          <View className={styles.left}>
-            <View className={styles.title}>{user.nickname}</View>
-            <View className={styles.subtitle}>
-              {user.avatar ? (
-                '当前段位：' + userScoreToStageString(userScoreMap)
-              ) : (
-                <>
-                  点击编辑名片
-                  <ArrowSize6
-                    className={styles.icon}
-                    size={9}
-                    color="#666666"
-                  />
-                </>
-              )}
-            </View>
-          </View>
-        </View>
+        <Header />
 
         <NavItem
           level={1}
@@ -195,18 +178,11 @@ function Index() {
           iconSrc={require('../../assets/chara/堕化游魂.png')}
         />
 
-        <View className={styles.wangzheTitle}>
-          王者排名
-          <View className={styles.wangzheTip}>
-            王者卷排名前100的玩家均可上榜
-          </View>
-        </View>
-
         <Ranking />
 
         {developerMode && (
-          <Button className={styles.clearBtn} onClick={handleClearSelf}>
-            清空个人分数数据
+          <Button className={styles.clearBtn} onClick={handleClearUser}>
+            清除剪切板中 openid 的数据
           </Button>
         )}
       </View>

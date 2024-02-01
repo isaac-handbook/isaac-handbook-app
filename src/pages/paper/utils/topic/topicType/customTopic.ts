@@ -8,11 +8,12 @@ interface Params {
   item: Item;
   topicMeta: TopicMeta;
   stage: TopicStage;
+  optionCount?: number;
 }
 
 /** 生成一个任意 stage 的 custom 试题 */
 export const generateCustomTopic = (params: Params): Topic | null => {
-  const { item, topicMeta, stage } = params;
+  const { item, topicMeta, stage, optionCount = 3 } = params;
 
   if (!topicMeta.questions.find((question) => question.stage === stage)) {
     return null;
@@ -31,7 +32,11 @@ export const generateCustomTopic = (params: Params): Topic | null => {
 
   const question = rawTopic.value.replace(/\[\[.*?\]\]/g, '_____');
   const cleanCorrectOption = correctOption.replace(/\[\[|\]\]/g, '');
-  const options = randomAnswer(cleanCorrectOption, rawTopic.wrongList, 3);
+  const options = randomAnswer(
+    cleanCorrectOption,
+    rawTopic.wrongList,
+    optionCount,
+  );
 
   const topic: Topic = {
     itemId: item.id,

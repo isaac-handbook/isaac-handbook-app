@@ -6,58 +6,6 @@
   padding: 20px;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  margin-top: 4px;
-  margin-bottom: 20px;
-
-  .left {
-    margin-left: 20px;
-    .title {
-      font-size: 19px;
-      font-weight: bold;
-      margin-bottom: 6px;
-      height: 24px;
-    }
-    .subtitle {
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-      .icon {
-        margin-left: 2px;
-        position: relative;
-        top: 1px;
-      }
-    }
-  }
-  .right {
-    .avatar {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      background-color: #ffffff;
-      border: #ffffff 2px solid;
-    }
-  }
-}
-
-.wangzheTitle {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 12px 0;
-  margin-top: 24px;
-  display: flex;
-  align-items: flex-end;
-
-  .wangzheTip {
-    font-size: 14px;
-    font-weight: normal;
-    margin-left: 8px;
-    opacity: 0.8;
-  }
-}
-
 .clearBtn {
   margin-top: 24px;
 }

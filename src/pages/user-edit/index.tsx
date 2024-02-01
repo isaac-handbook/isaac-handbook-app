@@ -41,8 +41,10 @@ function Index() {
       });
       return;
     }
+    // 获取当前时间戳
+    const timestamp = new Date().getTime();
     // 上传到对象存储 user-avatar 目录下
-    const cloudPath = `user-avatar/${openid}.png`;
+    const cloudPath = `user-avatar/${openid}-${timestamp}.png`;
     Taro.cloud.uploadFile({
       cloudPath,
       filePath: tmpUrl,
@@ -122,6 +124,10 @@ function Index() {
     });
   };
 
+  const checkAndSetInputNickname = (nickname: string) => {
+    setInputNickName(nickname);
+  };
+
   return (
     <ErrorBoundary>
       <View
@@ -157,8 +163,9 @@ function Index() {
               type="nickname"
               placeholder="请输入昵称"
               className={styles.nickname}
-              onInput={(e) => setInputNickName(e.detail.value)}
+              onInput={(e) => checkAndSetInputNickname(e.detail.value)}
               value={inputNickName}
+              maxlength={20}
             ></Input>
           </View>
         </View>

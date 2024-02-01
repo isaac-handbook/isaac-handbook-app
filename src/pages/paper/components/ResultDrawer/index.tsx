@@ -46,6 +46,9 @@ export const ResultDrawer: React.FC<Props> = (props) => {
           {topic && item && (
             <>
               <Question topic={topic} linkable />
+              {userSelect === null && (
+                <View className={styles.null}>本题超时未作答</View>
+              )}
               {topic.options.map((option, index) => {
                 return (
                   <OptionItem

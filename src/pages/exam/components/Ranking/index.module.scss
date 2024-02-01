@@ -1,5 +1,7 @@
 .container {
   padding: 8px 0;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .item {
@@ -13,9 +15,10 @@
 .count {
   flex: 1;
   text-align: center;
+  position: relative;
 
   &.medal {
-    font-size: 25px;
+    font-size: 26px;
   }
 }
 
@@ -27,10 +30,27 @@
 
 .name {
   flex: 3;
+  // 过长的话自动省略
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .score {
   flex: 1;
+  padding-left: 16px;
+  position: relative;
+
+  .mine {
+    position: absolute;
+    right: 12px;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
 }
 
 .avatarImg {
@@ -51,4 +71,20 @@
 // 最后一个 line 不展示
 .line:last-child {
   display: none;
+}
+
+.wangzheTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 12px 0;
+  margin-top: 24px;
+  display: flex;
+  align-items: flex-end;
+
+  .wangzheTip {
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 8px;
+    opacity: 0.8;
+  }
 }
