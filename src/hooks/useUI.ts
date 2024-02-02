@@ -1,7 +1,7 @@
 import { atom, useRecoilState } from 'recoil';
 
 interface UI {
-  // 是否展示更新弹窗
+  /** 是否展示更新弹窗 */
   showUpdateModal: boolean;
 }
 

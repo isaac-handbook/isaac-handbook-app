@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View } from '@tarojs/components';
+import { Ad, View } from '@tarojs/components';
 import { SideNav } from '@components/SideNav';
 import styles from './index.module.scss';
 import { useHandBookData } from '@hooks/useHandbookData';
@@ -139,6 +139,17 @@ function ItemDetail() {
         <Unlock unlock={item.unlock} />
 
         <DetailContent item={item} handbookData={handbookData} type={type} />
+
+        <Ad
+          style={{ marginTop: '0rpx', marginBottom: '16rpx' }}
+          unitId="adunit-77323283421750ec"
+          onLoad={() => {
+            console.log('道具详情页Banner广告加载成功');
+          }}
+          onError={(err) => {
+            console.log('道具详情页Banner广告加载失败', err);
+          }}
+        ></Ad>
       </View>
       <SideNav />
     </ErrorBoundary>

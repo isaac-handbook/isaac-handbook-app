@@ -1,0 +1,48 @@
+.drawer {
+  padding: 24px;
+  padding-top: 0px;
+  padding-bottom: 48px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.title {
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.askBtn {
+  border: none;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: flex-end;
+
+  .inner {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .askIcon {
+    margin-right: 3px;
+    position: relative;
+    top: 2px;
+  }
+}
+
+.p {
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+.margin {
+  margin-bottom: 12px;
+}
+
+.askIcon {
+  position: relative;
+  top: 2px;
+  font-size: 14px;
+}

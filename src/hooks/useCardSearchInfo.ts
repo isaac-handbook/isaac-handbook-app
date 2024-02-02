@@ -1,9 +1,9 @@
 import { atom, useRecoilState } from 'recoil';
 
 interface CardSearchInfo {
-  // 搜索关键字
+  /** 搜索关键字 */
   keyword: string;
-  // 列表中展示中文还是英文
+  /** 列表中展示中文还是英文 */
   lang: 'zh' | 'en';
 }
 

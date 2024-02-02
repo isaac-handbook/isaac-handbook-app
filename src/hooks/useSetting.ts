@@ -16,21 +16,21 @@ export const themeList = [
 ] as const;
 
 export interface SettingInfo {
-  // 主图鉴的网格图标大小
+  /** 主图鉴的网格图标大小 */
   gridIconSize: GridIconSize;
-  // 是否开启性能模式
+  /** 是否开启性能模式 */
   performance: boolean;
-  // 排序方式
+  /** 排序方式 */
   sortMethod: (typeof sortMethodList)[number];
-  // 主题色
+  /** 主题色 */
   theme: (typeof themeList)[number]['value'];
-  // 是否展示间隔线
+  /** 是否展示间隔线 */
   showGridBorder: boolean;
-  // 开发者模式
+  /** 开发者模式 */
   developerMode: boolean;
 }
 
-// 默认设置
+/** 默认设置 */
 export const defaultSettingInfo: SettingInfo = {
   gridIconSize: 'grid-normal',
   performance: true,

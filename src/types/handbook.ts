@@ -3,7 +3,7 @@ import { TableColumnProps } from '@nutui/nutui-react-taro/dist/types/packages/ta
 
 export type ItemType = 'item' | 'trinket' | 'card' | 'pill' | 'chara';
 
-// 人工打标的道具类型
+/** 人工打标的道具类型 */
 export type ItemClass =
   | 'dmg'
   | 'tears'
@@ -27,24 +27,24 @@ export interface ItemListVirtualListItem {
   component?: React.ReactNode;
 }
 
-// 道具列表
+/** 道具列表 */
 export type BriefItemList = Array<BriefItem>;
 
-// 单个道具
+/** 单个道具 */
 export type BriefItem = {
-  // 道具中文名称
+  /** 道具中文名称 */
   nameZh: string;
-  // 道具英文名称
+  /** 道具英文名称 */
   nameEn: string;
-  // 道具ID
+  /** 道具ID */
   id: string;
-  // 图标坐标
+  /** 图标坐标 */
   iconPosition: string;
-  // 品质 1-4
+  /** 品质 1-4 */
   quality: string;
-  // 充电格数
+  /** 充电格数 */
   charge: string;
-  // 简要介绍
+  /** 简要介绍 */
   description: string;
 };
 
@@ -56,27 +56,27 @@ export type ItemDetailNode = {
 };
 
 export interface Item extends BriefItem {
-  // 详细介绍
+  /** 详细介绍 */
   content: ItemDetailNode[];
-  // 道具标签
+  /** 道具标签 */
   tags: string[];
-  // 道具池信息
+  /** 道具池信息 */
   pools: string[];
-  // 解锁条件
+  /** 解锁条件 */
   unlock: string;
-  // 官方简介-中文
+  /** 官方简介-中文 */
   descZh: string;
-  // 官方简介-英文
+  /** 官方简介-英文 */
   descEn: string;
-  // 是否显示
+  /** 是否显示 */
   show?: boolean;
-  // 类型
+  /** 类型 */
   type: ItemType;
-  // 别名
+  /** 别名 */
   alias?: string[];
-  // 颜色
+  /** 颜色 */
   colors: ColorType[];
-  // 类别
+  /** 类别 */
   classes: string[];
 }
 
@@ -114,27 +114,27 @@ export interface HandBookData {
   chara: Record<string, Chara>;
 }
 
-// 单个角色信息
+/** 单个角色信息 */
 export interface CharaInfo {
-  // 中文名称
+  /** 中文名称 */
   nameZh: string;
-  // 英文名称
+  /** 英文名称 */
   nameEn: string;
-  // 血量
+  /** 血量 */
   health: string;
-  // 移速
+  /** 移速 */
   speed: string;
-  // 射速
+  /** 射速 */
   tears: string;
-  // 伤害
+  /** 伤害 */
   damage: string;
-  // 射程
+  /** 射程 */
   range: string;
-  // 弹速
+  /** 弹速 */
   shotSpeed: string;
-  // 幸运
+  /** 幸运 */
   luck: string;
-  // 解锁条件
+  /** 解锁条件 */
   unlock: string;
 }
 

@@ -1,11 +1,11 @@
 import { atom, useRecoilState } from 'recoil';
 
 interface User {
-  // 用户的 openid
+  /** 用户的 openid */
   openid: string;
-  // 用户的昵称
+  /** 用户的昵称 */
   nickname: string;
-  // 用户的头像
+  /** 用户的头像 */
   avatar: string;
 }
 

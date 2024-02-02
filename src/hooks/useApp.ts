@@ -1,10 +1,12 @@
 import { atom, useRecoilState } from 'recoil';
 
 export interface AppState {
-  // 图鉴主数据 handbook.json 的版本
+  /** 图鉴主数据 handbook.json 的版本 */
   handbookJSONVersion: number | null;
-  // 问卷数据 question.json 的版本
+  /** 问卷数据 question.json 的版本 */
   questionJSONVersion: number | null;
+  /** 课堂页面的排名是否降级 */
+  examRankingDegraded: boolean;
 }
 
 export const appState = atom<AppState>({
@@ -12,6 +14,7 @@ export const appState = atom<AppState>({
   default: {
     handbookJSONVersion: null,
     questionJSONVersion: null,
+    examRankingDegraded: false,
   },
 });
 

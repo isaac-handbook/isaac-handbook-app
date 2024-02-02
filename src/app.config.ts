@@ -3,7 +3,7 @@ export default defineAppConfig({
     'pages/index/index',
     'pages/exam/index',
     'pages/paper/index',
-    // 'pages/scan/index',
+    'pages/paper-result/index',
     'pages/item-detail/index',
     'pages/trinkets/index',
     'pages/cards/index',

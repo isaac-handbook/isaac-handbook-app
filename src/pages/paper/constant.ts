@@ -8,8 +8,8 @@ export const levelStringMap = {
 export const paperLevelMap = {
   '1': {
     stageMap: [
-      { stage: 1, count: 17 },
-      // { stage: 1, count: 2 },
+      // { stage: 1, count: 17 },
+      { stage: 1, count: 2 },
       { stage: 2, count: 3 },
       { stage: 3, count: 0 },
     ],

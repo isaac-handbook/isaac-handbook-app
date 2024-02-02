@@ -1,7 +1,7 @@
 import { atom, useRecoilState } from 'recoil';
 
 interface PillSearchInfo {
-  // 搜索关键字
+  /** 搜索关键字 */
   keyword: string;
 }
 

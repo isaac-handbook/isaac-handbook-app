@@ -5,6 +5,16 @@
   margin-bottom: 16px;
 
   .left {
+    .avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      border: #ffffff 2px solid;
+    }
+  }
+
+  .content {
     margin-left: 20px;
     .title {
       font-size: 19px;
@@ -28,13 +38,10 @@
       }
     }
   }
+
   .right {
-    .avatar {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      background-color: #ffffff;
-      border: #ffffff 2px solid;
-    }
+    height: 48px;
+    display: flex;
+    align-items: flex-end;
   }
 }

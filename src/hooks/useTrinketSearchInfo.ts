@@ -3,9 +3,9 @@ import { ColorType } from './useItemSearchInfo';
 import { useMemo } from 'react';
 
 interface TrinketSearchInfo {
-  // 搜索关键字
+  /** 搜索关键字 */
   keyword: string;
-  // 过滤中的颜色
+  /** 过滤中的颜色 */
   filteredColors: ColorType[];
 }
 

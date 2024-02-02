@@ -1,3 +1,4 @@
+import Taro from '@tarojs/taro';
 import { ExamRawData, Topic, UserAnswer } from '../types/exam';
 import { atom, useRecoilState } from 'recoil';
 
@@ -16,14 +17,16 @@ export const defaultUserScoreMap: UserScoreMap = {
 };
 
 interface ExamPaper {
-  // 原始试卷数据
+  /** 原始试卷数据 */
   rawData: ExamRawData;
-  // 当前生成的试卷
+  /** 当前生成的试卷 */
   topicList: Topic[];
-  // 用户当前选择的答案
+  /** 用户当前选择的答案 */
   userAnswerList: UserAnswer[];
-  // 用户的分数记录
+  /** 用户的分数记录 */
   userScoreMap: UserScoreMap;
+  /** 试卷完成后的广告实例 */
+  examFinishAd: Taro.InterstitialAd | null;
 }
 
 const defaultExamPaper: ExamPaper = {
@@ -31,6 +34,7 @@ const defaultExamPaper: ExamPaper = {
   topicList: [],
   userAnswerList: [],
   userScoreMap: defaultUserScoreMap,
+  examFinishAd: null,
 };
 
 export const examPaperState = atom<ExamPaper>({

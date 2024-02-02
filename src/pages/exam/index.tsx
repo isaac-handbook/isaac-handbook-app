@@ -12,11 +12,16 @@ import { Ranking } from './components/Ranking';
 import { useSetting } from '@hooks/useSetting';
 import { useLockFn } from 'ahooks';
 import { Header } from './components/Header';
+import { useApp } from '@hooks/useApp';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
+
+  const {
+    app: { examRankingDegraded },
+  } = useApp();
 
   const { user, setUser } = useUser();
   const { openid } = user;
@@ -178,7 +183,7 @@ function Index() {
           iconSrc={require('../../assets/chara/堕化游魂.png')}
         />
 
-        <Ranking />
+        {!examRankingDegraded && <Ranking />}
 
         {developerMode && (
           <Button className={styles.clearBtn} onClick={handleClearUser}>

@@ -5,6 +5,7 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import Taro from '@tarojs/taro';
 import { ArrowSize6, Lock } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
+import { useExamPaper } from '@hooks/useExamPaper';
 
 interface Props {
   levelScore: number;
@@ -23,6 +24,8 @@ export const NavItem: React.FC<Props> = (props) => {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
+  const { clearExamPaper } = useExamPaper();
+
   const handleStartExam = () => {
     if (disabled) {
       Taro.showToast({
@@ -31,9 +34,12 @@ export const NavItem: React.FC<Props> = (props) => {
       });
       return;
     }
-    // 跳转到 paper 页面
-    Taro.navigateTo({
-      url: `/pages/paper/index?level=${level}`,
+    clearExamPaper();
+    setTimeout(() => {
+      // 跳转到 paper 页面
+      Taro.navigateTo({
+        url: `/pages/paper/index?level=${level}`,
+      });
     });
   };
 

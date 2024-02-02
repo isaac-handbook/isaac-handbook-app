@@ -7,6 +7,7 @@ import { userScoreToStageString } from '@pages/exam/utils/userScoreToStageString
 import { useExamPaper } from '@hooks/useExamPaper';
 import emptyAvatar from '@assets/emptyAvatar.png';
 import { useUser } from '@hooks/useUser';
+import { Help } from '../Help';
 
 interface Props {}
 
@@ -24,11 +25,11 @@ export const Header: React.FC<Props> = () => {
   };
 
   return (
-    <View className={styles.header} onClick={handleUserEdit}>
-      <View className={styles.right}>
+    <View className={styles.header}>
+      <View className={styles.left} onClick={handleUserEdit}>
         <Image src={user.avatar || emptyAvatar} className={styles.avatar} />
       </View>
-      <View className={styles.left}>
+      <View className={styles.content} onClick={handleUserEdit}>
         <View className={styles.title}>{user.nickname}</View>
         <View className={styles.subtitle}>
           {user.avatar ? (
@@ -40,6 +41,9 @@ export const Header: React.FC<Props> = () => {
             </>
           )}
         </View>
+      </View>
+      <View className={styles.right}>
+        <Help />
       </View>
     </View>
   );

@@ -1,0 +1,103 @@
+.header {
+  height: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c4b39d;
+  position: fixed;
+  z-index: 2;
+  color: #000000;
+
+  .score {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+
+    .number {
+      font-size: 26px;
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .tags {
+        display: flex;
+        flex-direction: column;
+        margin-left: 8px;
+
+        .tagUpdate {
+          margin-bottom: 4px;
+          width: fit-content;
+        }
+
+        .tagSuccess {
+          margin-bottom: 4px;
+          width: fit-content;
+        }
+
+        .tagWarning {
+          margin-bottom: 4px;
+          width: fit-content;
+        }
+      }
+    }
+  }
+}
+
+.list {
+  z-index: 1;
+  padding-bottom: 36px;
+  padding-top: 64px;
+
+  .tip {
+    font-size: 14px;
+    opacity: 0.5;
+    width: 100%;
+    text-align: right;
+    padding-top: 6px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    margin-bottom: -4px;
+  }
+}
+
+.item {
+  height: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 24px;
+  position: relative;
+
+  .count {
+    margin-right: 28px;
+    font-size: 19px;
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .name {
+      margin-left: 28px;
+    }
+  }
+
+  .answer {
+    width: 24px;
+    height: 24px;
+  }
+
+  .line {
+    height: 1px;
+    width: calc(100% - 24px);
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    opacity: 0.5;
+  }
+}

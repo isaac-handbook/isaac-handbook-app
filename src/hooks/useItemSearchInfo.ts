@@ -20,21 +20,21 @@ export const colorTypeList = [
 export type ColorType = (typeof colorTypeList)[number];
 
 interface ItemSearchInfo {
-  // 搜索关键字
+  /** 搜索关键字 */
   keyword: string;
-  // 道具池过滤
+  /** 道具池过滤 */
   poolFilter: string;
-  // 标签过滤
+  /** 标签过滤 */
   tagFilter: string;
-  // 道具质量
+  /** 道具质量 */
   qualityFilter: string;
-  // 充能数量过滤。 chargeTypeList 的元素的类型
+  /** 充能数量过滤。 chargeTypeList 的元素的类型 */
   chargeFilter: (typeof chargeTypeList)[number];
-  // 是否要解锁
+  /** 是否要解锁 */
   unlockFilter: (typeof unlockTypeList)[number];
-  // 是否打开颜色过滤器
+  /** 是否打开颜色过滤器 */
   openColorFilter: boolean;
-  // 过滤中的颜色
+  /** 过滤中的颜色 */
   filteredColors: ColorType[];
 }
 
