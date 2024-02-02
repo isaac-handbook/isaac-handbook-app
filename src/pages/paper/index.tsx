@@ -5,7 +5,6 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { paperGenerator } from '@pages/paper/utils/paper/generator';
 import { useEffect, useMemo, useState } from 'react';
-import itemExamRawData from './item.json';
 import { useExamPaper } from '@hooks/useExamPaper';
 import { Header } from './components/Header';
 import { Question } from './components/Question';
@@ -26,7 +25,7 @@ function Index() {
   } = useHandBookData();
 
   const {
-    examPaper: { userAnswerList, topicList },
+    examPaper: { userAnswerList, topicList, examRawData },
     updateSingleExamPaperState,
   } = useExamPaper();
 
@@ -38,7 +37,7 @@ function Index() {
     const { stageMap, sort } = paperLevelMap[String(level)];
     const newTopicList = paperGenerator({
       items,
-      topicMetaList: itemExamRawData.item as unknown as any,
+      topicMetaList: examRawData.item,
       stageMap,
       sort,
     });

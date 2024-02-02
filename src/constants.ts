@@ -4,6 +4,9 @@ export const HANDBOOK_DATA_OSS_URL =
 // 开发链接
 // export const HANDBOOK_DATA_OSS_URL =
 //   'cloud://isaac-handbook-6gfcp1zy588edf1a.6973-isaac-handbook-6gfcp1zy588edf1a-1317852125/dev/isaac-handbook-data.json';
+// 线上链接 - 试卷数据
+export const EXAM_DATA_OSS_URL =
+  'cloud://isaac-handbook-6gfcp1zy588edf1a.6973-isaac-handbook-6gfcp1zy588edf1a-1317852125/online/isaac-exam-data.json';
 // 道具
 export const ITEM_ICON_IMG_URL =
   'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-items.png';

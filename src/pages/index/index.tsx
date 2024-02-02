@@ -6,14 +6,16 @@ import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { SideNav } from '@components/SideNav';
 import { UpdateNotice } from '@components/UpdateNotice';
-import { useInit } from '@hooks/useInit';
+import { useHandbookInit } from '@hooks/useHandbookInit';
+import { useExamInit } from '@hooks/useExamInit';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
-  useInit();
+  useHandbookInit();
+  useExamInit();
 
   return (
     <ErrorBoundary>

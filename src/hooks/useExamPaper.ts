@@ -18,7 +18,7 @@ export const defaultUserScoreMap: UserScoreMap = {
 
 interface ExamPaper {
   /** 原始试卷数据 */
-  rawData: ExamRawData;
+  examRawData: ExamRawData;
   /** 当前生成的试卷 */
   topicList: Topic[];
   /** 用户当前选择的答案 */
@@ -30,7 +30,9 @@ interface ExamPaper {
 }
 
 const defaultExamPaper: ExamPaper = {
-  rawData: {},
+  examRawData: {
+    item: [],
+  },
   topicList: [],
   userAnswerList: [],
   userScoreMap: defaultUserScoreMap,
@@ -68,6 +70,7 @@ export const useExamPaper = () => {
     setExamPaper((prev) => ({
       ...defaultExamPaper,
       userScoreMap: prev.userScoreMap,
+      examRawData: prev.examRawData,
     }));
   };
 
@@ -86,10 +89,22 @@ export const useExamPaper = () => {
     return Math.floor(scorePercent);
   };
 
+  /** 更新 examRawData 中的某个数据 */
+  const updateSingleExamRawData = <T extends keyof ExamRawData>(
+    key: T,
+    value: any,
+  ) => {
+    updateSingleExamPaperState('examRawData', {
+      ...examPaper.examRawData,
+      [key]: value,
+    });
+  };
+
   return {
     examPaper,
     getScore,
     updateSingleExamPaperState,
+    updateSingleExamRawData,
     clearExamPaper,
     submitSingleTopic,
   };

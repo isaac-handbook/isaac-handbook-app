@@ -26,7 +26,10 @@ export interface TopicMeta {
   questions: RawTopic[];
 }
 
-export type ExamRawData = Record<string, TopicMeta[]>;
+export interface ExamRawData {
+  item: TopicMeta[];
+  version?: number;
+}
 
 export interface Topic {
   // 当前 item 的 ID

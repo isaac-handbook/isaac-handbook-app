@@ -1,4 +1,4 @@
-import { refreshHandBookData } from '@src/actions/refreshHandBookData';
+import { refreshHandBookData } from '@src/actions/handbook/refreshHandBookData';
 import { atom, useRecoilState } from 'recoil';
 import { HandBookData } from 'src/types/handbook';
 
