@@ -13,32 +13,52 @@
     font-size: 18px;
     display: flex;
     align-items: center;
+    position: relative;
+    right: 10px;
+
+    .cup {
+      height: 22px;
+      width: 22px;
+      margin: 0 8px;
+    }
 
     .number {
-      font-size: 26px;
+      font-size: 28px;
+      font-weight: bold;
       position: relative;
       display: flex;
       align-items: center;
 
-      .tags {
-        display: flex;
-        flex-direction: column;
-        margin-left: 8px;
+      .fen {
+        font-size: 15px;
+        position: relative;
+        left: 4px;
+        top: 4px;
+      }
+    }
 
-        .tagUpdate {
-          margin-bottom: 4px;
-          width: fit-content;
-        }
+    .tags {
+      display: flex;
+      flex-direction: column;
+      margin-left: 8px;
+      position: absolute;
+      right: -116px;
+      top: 0px;
+      width: 104px;
 
-        .tagSuccess {
-          margin-bottom: 4px;
-          width: fit-content;
-        }
+      .tagUpdate {
+        margin-bottom: 4px;
+        width: fit-content;
+      }
 
-        .tagWarning {
-          margin-bottom: 4px;
-          width: fit-content;
-        }
+      .tagSuccess {
+        margin-bottom: 4px;
+        width: fit-content;
+      }
+
+      .tagWarning {
+        margin-bottom: 4px;
+        width: fit-content;
       }
     }
   }
@@ -47,22 +67,26 @@
 .list {
   z-index: 1;
   padding-bottom: 36px;
-  padding-top: 64px;
+  padding-top: 70px;
 
   .tip {
     font-size: 14px;
-    opacity: 0.5;
+    opacity: 0.6;
     width: 100%;
-    text-align: right;
-    padding-top: 6px;
-    padding-right: 10px;
+    text-align: center;
     box-sizing: border-box;
-    margin-bottom: -4px;
+    margin-bottom: 0px;
+  }
+
+  .btnContainer {
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
   }
 }
 
 .item {
-  height: 64px;
+  height: 60px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -73,7 +97,7 @@
 
   .count {
     margin-right: 28px;
-    font-size: 19px;
+    font-size: 16px;
   }
 
   .content {
@@ -88,8 +112,8 @@
   }
 
   .answer {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
 
   .line {
@@ -98,6 +122,6 @@
     position: absolute;
     bottom: 0;
     left: 24px;
-    opacity: 0.5;
+    opacity: 0.2;
   }
 }

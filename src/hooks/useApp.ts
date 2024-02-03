@@ -7,6 +7,8 @@ export interface AppState {
   questionJSONVersion: number | null;
   /** 课堂页面的排名是否降级 */
   examRankingDegraded: boolean;
+  /** exam 页面王者排名的提示 */
+  rankTip: string;
 }
 
 export const appState = atom<AppState>({
@@ -15,6 +17,7 @@ export const appState = atom<AppState>({
     handbookJSONVersion: null,
     questionJSONVersion: null,
     examRankingDegraded: false,
+    rankTip: '',
   },
 });
 

@@ -12,6 +12,7 @@ import { levelStringMap } from '@pages/paper/constant';
 import { useUser } from '@hooks/useUser';
 import Taro from '@tarojs/taro';
 import { Tag } from '@nutui/nutui-react-taro';
+import cup from '@assets/奖杯.png';
 
 interface Props {
   level: number;
@@ -22,6 +23,7 @@ export const Result: React.FC<Props> = (props) => {
   const {
     examPaper: { topicList, userAnswerList, userScoreMap, examFinishAd },
     getScore,
+    clearExamPaper,
   } = useExamPaper();
 
   const {
@@ -129,32 +131,35 @@ export const Result: React.FC<Props> = (props) => {
     <View className={styles.container}>
       <View className={styles.header}>
         <View className={styles.score}>
-          {levelStringMap[String(level)]}卷 得分：
+          <Image src={cup} className={styles.cup} />
+
           <View className={styles.number}>
             {score}
-            <View className={styles.tags}>
-              {showUpdate && (
-                <Tag type="primary" className={styles.tagUpdate}>
-                  记录更新！
-                </Tag>
-              )}
-              {shouldShowUnlocked && Number(level) !== 100 && (
-                <Tag type="success" className={styles.tagSuccess}>
-                  下一关已解锁
-                </Tag>
-              )}
-              {shouldShowUnlocking && Number(level) !== 100 && (
-                <Tag type="warning" className={styles.tagWarning}>
-                  还差{60 - score}分解锁下一关
-                </Tag>
-              )}
-            </View>
+            <View className={styles.fen}>分</View>
+          </View>
+
+          <View className={styles.tags}>
+            {showUpdate && (
+              <Tag type="primary" className={styles.tagUpdate}>
+                记录更新！
+              </Tag>
+            )}
+            {shouldShowUnlocked && Number(level) !== 100 && (
+              <Tag type="success" className={styles.tagSuccess}>
+                下一关已解锁
+              </Tag>
+            )}
+            {shouldShowUnlocking && Number(level) !== 100 && (
+              <Tag type="warning" className={styles.tagWarning}>
+                还差{60 - score}分解锁下一关
+              </Tag>
+            )}
           </View>
         </View>
       </View>
 
       <View className={styles.list}>
-        <View className={styles.tip}>点击条目查看题目详细</View>
+        <View className={styles.tip}>{levelStringMap[String(level)]}卷</View>
         {topicList.map((topic, index) => {
           const item = getItemDataById(
             (topic.itemType + 's') as any,
@@ -178,7 +183,7 @@ export const Result: React.FC<Props> = (props) => {
                   id={item.id}
                   location={item.iconPosition}
                   size="grid-large"
-                  scaleRate={0.9}
+                  scaleRate={0.8}
                 />
                 <View className={styles.name}>{item.nameZh}</View>
               </View>

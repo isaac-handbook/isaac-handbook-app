@@ -140,7 +140,7 @@ function Index() {
       <View
         className={styles.page}
         style={{
-          backgroundColor: themeColor.gridColor,
+          backgroundColor: themeColor.bgColor,
           color: themeColor.textColor,
         }}
       >
@@ -151,7 +151,7 @@ function Index() {
           title={levelStringMap['1']}
           disabled={false}
           showBoxShadow={userScoreMap.level1 < 60 && userScoreMap.level2 < 60}
-          desc="20道题，证明你玩过以撒"
+          desc="10道题，证明你玩过以撒"
           levelScore={userScoreMap.level1}
           iconSrc={require('../../assets/chara/以撒.png')}
         />
@@ -160,7 +160,7 @@ function Index() {
           title={levelStringMap['2']}
           disabled={userScoreMap.level1 < 60}
           showBoxShadow={userScoreMap.level1 >= 60 && userScoreMap.level2 < 60}
-          desc="20道题，证明你有游戏理解"
+          desc="10道题，证明你有游戏理解"
           levelScore={userScoreMap.level2}
           iconSrc={require('../../assets/chara/堕化以撒.png')}
         />
@@ -169,7 +169,7 @@ function Index() {
           title={levelStringMap['3']}
           disabled={userScoreMap.level2 < 60}
           showBoxShadow={userScoreMap.level2 >= 60 && userScoreMap.level3 < 60}
-          desc="20道题，证明你是资深大佬"
+          desc="10道题，证明你是资深大佬"
           levelScore={userScoreMap.level3}
           iconSrc={require('../../assets/chara/游魂.png')}
         />
@@ -178,7 +178,7 @@ function Index() {
           title={levelStringMap['100']}
           disabled={userScoreMap.level3 < 60}
           showBoxShadow={userScoreMap.level3 >= 60}
-          desc="100道题，成为榜上的王者"
+          desc="50道题，成为榜上的王者"
           levelScore={userScoreMap.level100}
           iconSrc={require('../../assets/chara/堕化游魂.png')}
         />

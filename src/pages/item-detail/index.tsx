@@ -141,7 +141,7 @@ function ItemDetail() {
         <DetailContent item={item} handbookData={handbookData} type={type} />
 
         <Ad
-          style={{ marginTop: '0rpx', marginBottom: '16rpx' }}
+          style={{ marginTop: '0rpx', marginBottom: '32rpx' }}
           unitId="adunit-77323283421750ec"
           onLoad={() => {
             console.log('道具详情页Banner广告加载成功');

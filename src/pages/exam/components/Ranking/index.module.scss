@@ -1,7 +1,7 @@
 .container {
   padding: 8px 0;
   border-radius: 16px;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .item {
@@ -9,7 +9,8 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 8px 0;
+  padding: 9px 0;
+  border-radius: 12px;
 }
 
 .count {
@@ -18,7 +19,7 @@
   position: relative;
 
   &.medal {
-    font-size: 26px;
+    font-size: 27px;
   }
 }
 
@@ -40,16 +41,17 @@
   flex: 1;
   padding-left: 16px;
   position: relative;
+  font-size: 17px;
 
   .mine {
     position: absolute;
-    right: 12px;
+    right: 11px;
     top: 0;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
@@ -66,7 +68,7 @@
   position: relative;
   bottom: 0;
   left: 24px;
-  opacity: 0.5;
+  opacity: 0.2;
 }
 // 最后一个 line 不展示
 .line:last-child {

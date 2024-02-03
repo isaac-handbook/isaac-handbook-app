@@ -36,7 +36,9 @@ export const darkThemeColor: ThemeColor = {
 // 浅色系主题
 export const lightThemeColor: ThemeColor = {
   type: 'light',
-  bgColor: '#FFEFD5',
+  // bgColor: '#FFEFD5',
+  bgColor: '#F5E5CD',
+  // bgColor: '	#FFE4B5',
   gridColor: '#FDF5E6',
   gridBorderColor: '#bbbbbb',
   textColor: '#000000E0',

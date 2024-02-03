@@ -3,8 +3,8 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useExamPaper } from '@hooks/useExamPaper';
 import { useHandBookData } from '@hooks/useHandbookData';
-import { Button } from '@nutui/nutui-react-taro';
 import { OptionItem } from './OptionItem';
+import { CustomButton } from '@components/CustomButton';
 
 interface Props {
   curIndex: number;
@@ -60,21 +60,12 @@ export const Options: React.FC<Props> = (props) => {
           />
         );
       })}
-      <Button
-        className={styles.btn}
+
+      <CustomButton
+        value={curIndex === topicList.length ? '交卷' : '下一题'}
         disabled={selected === null}
         onClick={handleNext}
-        style={
-          {
-            '--nutui-button-border-width': '0px',
-            '--nutui-button-default-height': '48px',
-            '--nutui-button-default-font-size': '16px',
-            '--nutui-button-default-background-color': '#ffffff',
-          } as any
-        }
-      >
-        {curIndex === topicList.length ? '交卷' : '下一题'}
-      </Button>
+      />
     </View>
   );
 };

@@ -7,6 +7,7 @@ import emptyAvatar from '@assets/emptyAvatar.png';
 import classNames from 'classnames';
 import { useUser } from '@hooks/useUser';
 import { useSetting } from '@hooks/useSetting';
+import { useApp } from '@hooks/useApp';
 
 interface RankItem {
   avatar: string;
@@ -30,6 +31,10 @@ export const Ranking: React.FC<Props> = () => {
   const {
     setting: { developerMode },
   } = useSetting();
+
+  const {
+    app: { rankTip },
+  } = useApp();
 
   const [rankList, setRankList] = React.useState<RankItem[]>([]);
 
@@ -90,11 +95,16 @@ export const Ranking: React.FC<Props> = () => {
     });
   };
 
+  const boxShadow =
+    themeColor.type === 'dark'
+      ? '0 0 8px rgba(0, 0, 0, 0.5)'
+      : '0 0 8px rgba(0, 0, 0, 0.2)';
+
   return (
     <>
       <View className={styles.wangzheTitle}>
         王者排名
-        <View className={styles.wangzheTip}>王者卷排名前100的玩家均可上榜</View>
+        <View className={styles.wangzheTip}>{rankTip}</View>
       </View>
       <View
         className={styles.container}
@@ -104,9 +114,14 @@ export const Ranking: React.FC<Props> = () => {
         }}
       >
         {rankList.map((item, index) => {
+          const mine = item.openid === openid;
           return (
             <>
-              <View key={`key${item.openid}${index}`} className={styles.item}>
+              <View
+                key={`key${item.openid}${index}`}
+                className={styles.item}
+                style={{ boxShadow: mine ? boxShadow : '' }}
+              >
                 <View
                   className={classNames(styles.count, {
                     [styles.medal]: index < 3,
@@ -126,9 +141,7 @@ export const Ranking: React.FC<Props> = () => {
                 <View className={styles.name}> {item.nickname}</View>
                 <View className={styles.score}>
                   {item.score}
-                  {item.openid === openid && (
-                    <View className={styles.mine}>我</View>
-                  )}
+                  {mine && <View className={styles.mine}>我</View>}
                 </View>
               </View>
               <View

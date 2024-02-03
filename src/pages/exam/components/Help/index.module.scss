@@ -1,7 +1,7 @@
 .drawer {
   padding: 24px;
   padding-top: 0px;
-  padding-bottom: 48px;
+  padding-bottom: 32px;
   box-sizing: border-box;
   position: relative;
 }
@@ -10,6 +10,11 @@
   font-size: 16px;
   margin-bottom: 12px;
   font-weight: bold;
+  margin-top: 24px;
+}
+// 第一个 title
+.title:first-child {
+  margin-top: 8px;
 }
 
 .askBtn {
@@ -34,7 +39,7 @@
 
 .p {
   font-size: 15px;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .margin {
