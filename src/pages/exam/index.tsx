@@ -6,7 +6,7 @@ import Taro, { useDidShow } from '@tarojs/taro';
 import { useUser } from '@hooks/useUser';
 import { useEffect } from 'react';
 import { NavItem } from './components/NavItem';
-import { levelStringMap } from '@pages/paper/constant';
+import { levelStringMap, paperLevelMap } from '@pages/paper/constant';
 import { defaultUserScoreMap, useExamPaper } from '@hooks/useExamPaper';
 import { Ranking } from './components/Ranking';
 import { useSetting } from '@hooks/useSetting';
@@ -20,7 +20,7 @@ function Index() {
   } = useThemeInfo();
 
   const {
-    app: { examRankingDegraded },
+    app: { examConfig },
   } = useApp();
 
   const { user, setUser } = useUser();
@@ -129,10 +129,23 @@ function Index() {
     for (const id of ids) {
       await col.doc(id as any).remove({});
     }
-    setTimeout(() => {
-      updateUserScore();
-    }, 1000);
     Taro.hideLoading();
+    Taro.showToast({
+      title: '清理成功',
+      icon: 'success',
+    });
+  };
+
+  const getLevelDesc = (level: number) => {
+    const configTip = examConfig[`level${level}Tip`];
+    // 从 paperLevelMap 计算当前 level 有多少个题目
+    const levelCount = paperLevelMap[String(level)].stageMap.reduce(
+      (pre, cur) => {
+        return pre + cur.count;
+      },
+      0,
+    );
+    return configTip.replace(/\{\{count\}\}/g, String(levelCount));
   };
 
   return (
@@ -151,7 +164,7 @@ function Index() {
           title={levelStringMap['1']}
           disabled={false}
           showBoxShadow={userScoreMap.level1 < 60 && userScoreMap.level2 < 60}
-          desc="10道题，证明你玩过以撒"
+          desc={getLevelDesc(1)}
           levelScore={userScoreMap.level1}
           iconSrc={require('../../assets/chara/以撒.png')}
         />
@@ -160,7 +173,7 @@ function Index() {
           title={levelStringMap['2']}
           disabled={userScoreMap.level1 < 60}
           showBoxShadow={userScoreMap.level1 >= 60 && userScoreMap.level2 < 60}
-          desc="10道题，证明你有游戏理解"
+          desc={getLevelDesc(2)}
           levelScore={userScoreMap.level2}
           iconSrc={require('../../assets/chara/堕化以撒.png')}
         />
@@ -169,7 +182,7 @@ function Index() {
           title={levelStringMap['3']}
           disabled={userScoreMap.level2 < 60}
           showBoxShadow={userScoreMap.level2 >= 60 && userScoreMap.level3 < 60}
-          desc="10道题，证明你是资深大佬"
+          desc={getLevelDesc(3)}
           levelScore={userScoreMap.level3}
           iconSrc={require('../../assets/chara/游魂.png')}
         />
@@ -178,12 +191,12 @@ function Index() {
           title={levelStringMap['100']}
           disabled={userScoreMap.level3 < 60}
           showBoxShadow={userScoreMap.level3 >= 60}
-          desc="50道题，成为榜上的王者"
+          desc={getLevelDesc(100)}
           levelScore={userScoreMap.level100}
           iconSrc={require('../../assets/chara/堕化游魂.png')}
         />
 
-        {!examRankingDegraded && <Ranking />}
+        {(!examConfig.rankDegrade || developerMode) && <Ranking />}
 
         {developerMode && (
           <Button className={styles.clearBtn} onClick={handleClearUser}>

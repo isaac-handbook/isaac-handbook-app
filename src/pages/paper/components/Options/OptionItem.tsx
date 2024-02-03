@@ -25,8 +25,8 @@ export const OptionItem: React.FC<Props> = (props) => {
   if (selected) {
     boxShadow =
       themeColor.type === 'dark'
-        ? '0 0 8px rgba(255, 255, 255, 0.3)'
-        : '0 0 8px rgba(0, 0, 0, 0.2)';
+        ? '0 0 6px rgba(255, 255, 255, 0.3)'
+        : '0 0 6px rgba(0, 0, 0, 0.2)';
   }
 
   let borderColor = themeColor.gridColor;

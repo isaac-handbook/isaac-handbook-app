@@ -1,6 +1,7 @@
 import React, { CSSProperties, memo } from 'react';
 import styles from './index.module.scss';
-import { Button } from '@nutui/nutui-react-taro';
+import { Button } from '@tarojs/components';
+import classNames from 'classnames';
 
 interface Props {
   value: string;
@@ -13,18 +14,10 @@ const Cell: React.FC<Props> = (props) => {
   const { value, disabled, onClick, style } = props;
   return (
     <Button
-      className={styles.btn}
+      className={classNames(styles.btn, { [styles.disabled]: disabled })}
       disabled={disabled}
       onClick={onClick}
-      style={
-        {
-          '--nutui-button-border-width': '0px',
-          '--nutui-button-default-height': '48px',
-          '--nutui-button-default-font-size': '16px',
-          '--nutui-button-default-background-color': '#ffffff',
-          ...style,
-        } as CSSProperties
-      }
+      style={style}
     >
       {value}
     </Button>

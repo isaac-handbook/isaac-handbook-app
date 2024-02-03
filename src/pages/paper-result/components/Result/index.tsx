@@ -23,7 +23,6 @@ export const Result: React.FC<Props> = (props) => {
   const {
     examPaper: { topicList, userAnswerList, userScoreMap, examFinishAd },
     getScore,
-    clearExamPaper,
   } = useExamPaper();
 
   const {

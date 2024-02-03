@@ -8,7 +8,7 @@ export const requestCameraPermission = () =>
     // 如果 res 为 true，则刷新页面
     if (res) {
       wx.reLaunch({
-        url: '/pages/scan/index',
+        url: '/package-scan/pages/scan/index',
       });
     }
   });

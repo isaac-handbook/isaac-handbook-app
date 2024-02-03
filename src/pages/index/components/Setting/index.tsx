@@ -12,14 +12,17 @@ import { DeveloperSetting } from './DeveloperSetting';
 import Taro from '@tarojs/taro';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { drawerMaskColor } from '@src/styles';
+import { useExamPaper } from '@hooks/useExamPaper';
 
 export const Setting: React.FC = () => {
   const [showDrawer, setShowDrawer] = React.useState(false);
 
-  const { forceRefresh } = useHandBookData();
+  const { forceRefresh: refreshHandbook } = useHandBookData();
+  const { forceRefresh: refreshExam } = useExamPaper();
 
   const handleForceRefresh = () => {
-    forceRefresh();
+    refreshHandbook();
+    refreshExam();
   };
 
   return (

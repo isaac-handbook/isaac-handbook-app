@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro';
 import { ExamRawData, Topic, UserAnswer } from '../types/exam';
 import { atom, useRecoilState } from 'recoil';
+import { refreshExamData } from '@src/actions/exam/refreshExamData';
 
 export type UserScoreMap = {
   level1: number;
@@ -86,7 +87,7 @@ export const useExamPaper = () => {
     // 换算成百分制
     const totalScore = topicList.length;
     const scorePercent = (score / totalScore) * 100;
-    return Math.floor(scorePercent);
+    return Math.round(scorePercent);
   };
 
   /** 更新 examRawData 中的某个数据 */
@@ -100,8 +101,15 @@ export const useExamPaper = () => {
     });
   };
 
+  // 刷新题目数据（重新下载）
+  const forceRefresh = async () => {
+    const newHandbookData = await refreshExamData();
+    updateSingleExamPaperState('examRawData', newHandbookData);
+  };
+
   return {
     examPaper,
+    forceRefresh,
     getScore,
     updateSingleExamPaperState,
     updateSingleExamRawData,

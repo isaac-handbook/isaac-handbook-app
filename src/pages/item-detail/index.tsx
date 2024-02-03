@@ -24,6 +24,9 @@ function ItemDetail() {
   const [type, setType] = React.useState<ItemType>(params.type);
   const [item, setItem] = React.useState<Item>();
 
+  // 广告加载失败，隐藏组件
+  const [adError, setAdError] = React.useState(false);
+
   // 获取页面参数中的 itemId
   useEffect(() => {
     // 道具
@@ -140,16 +143,25 @@ function ItemDetail() {
 
         <DetailContent item={item} handbookData={handbookData} type={type} />
 
-        <Ad
-          style={{ marginTop: '0rpx', marginBottom: '32rpx' }}
-          unitId="adunit-77323283421750ec"
-          onLoad={() => {
-            console.log('道具详情页Banner广告加载成功');
-          }}
-          onError={(err) => {
-            console.log('道具详情页Banner广告加载失败', err);
-          }}
-        ></Ad>
+        {
+          // 广告
+          !adError && (
+            <Ad
+              style={{
+                marginTop: '0rpx',
+                marginBottom: '32rpx',
+              }}
+              unitId="adunit-77323283421750ec"
+              onLoad={() => {
+                console.log('道具详情页Banner广告加载成功');
+              }}
+              onError={(err) => {
+                console.log('道具详情页Banner广告加载失败', err);
+                setAdError(true);
+              }}
+            />
+          )
+        }
       </View>
       <SideNav />
     </ErrorBoundary>

@@ -5,10 +5,19 @@ export interface AppState {
   handbookJSONVersion: number | null;
   /** 问卷数据 question.json 的版本 */
   questionJSONVersion: number | null;
-  /** 课堂页面的排名是否降级 */
-  examRankingDegraded: boolean;
-  /** exam 页面王者排名的提示 */
-  rankTip: string;
+  /** 试卷页面的配置项 */
+  examConfig: {
+    /** exam 页面王者排名的提示 */
+    rankTip: string;
+    /** 是否降级排行榜 */
+    rankDegrade: boolean;
+    level1Tip: string;
+    level2Tip: string;
+    level3Tip: string;
+    level100Tip: string;
+  };
+  /** 开发者模式 openid 白名单 */
+  devWhiteList: string[];
 }
 
 export const appState = atom<AppState>({
@@ -16,8 +25,15 @@ export const appState = atom<AppState>({
   default: {
     handbookJSONVersion: null,
     questionJSONVersion: null,
-    examRankingDegraded: false,
-    rankTip: '',
+    examConfig: {
+      rankTip: '',
+      rankDegrade: false,
+      level1Tip: '',
+      level2Tip: '',
+      level3Tip: '',
+      level100Tip: '',
+    },
+    devWhiteList: [],
   },
 });
 

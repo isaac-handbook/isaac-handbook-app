@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import Taro from '@tarojs/taro';
 import emptyAvatar from '@assets/emptyAvatar.png';
+import { CustomButton } from '@components/CustomButton';
 
 function Index() {
   const {
@@ -170,9 +171,9 @@ function Index() {
           </View>
         </View>
 
-        <Button className={styles.submit} onClick={handleSubmit}>
-          确认
-        </Button>
+        <View className={styles.btnContainer}>
+          <CustomButton value={'确认'} onClick={handleSubmit} />
+        </View>
       </View>
     </ErrorBoundary>
   );

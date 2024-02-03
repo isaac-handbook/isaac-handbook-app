@@ -204,7 +204,16 @@ export const ContentTransformer: React.FC<Props> = (props) => {
       const chara = formatCharaName(data.replace('chara|', ''));
       const charaData = handbookData.chara[unFormatCharaName(chara)];
       if (!charaData) {
-        return chara;
+        return (
+          <>
+            <Image
+              className={styles.chara}
+              src={require(`@assets/chara/${formatCharaName(chara)}.png`)}
+            />
+            {chara}
+            {` `}
+          </>
+        );
       }
       return (
         <InlineItem

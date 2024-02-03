@@ -9,7 +9,6 @@ import { useUI } from './useUI';
 import Taro from '@tarojs/taro';
 import { useUser } from './useUser';
 import { AppState, useApp } from './useApp';
-import { useEffect } from 'react';
 import { refreshHandBookData } from '@src/actions/handbook/refreshHandBookData';
 
 // 初始化，只在进入首页时执行一次
@@ -72,9 +71,9 @@ export const useHandbookInit = () => {
   }, []);
 
   // 入口逻辑
-  useEffect(() => {
+  useAsyncEffect(async () => {
     // 获取设置数据并更新
-    getSettingData().then((res) => {
+    await getSettingData().then((res) => {
       setSettingData(res);
     });
 

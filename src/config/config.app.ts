@@ -1,7 +1,7 @@
 import { UpdateInfo } from './type';
 
 // 当前版本
-const version = '1.6.0';
+const version = '2.0.0';
 
 // 更新通知
 const updateNotice: UpdateInfo = {
@@ -10,8 +10,8 @@ const updateNotice: UpdateInfo = {
   // 功能更新
   features: [
     {
-      title: '拍照识图查道具功能',
-      content: ['目前处于实验阶段，欢迎来尝鲜~'],
+      title: '以撒课堂上线！！！',
+      content: ['想证明你的游戏理解吗？不同段位的题目等你来挑战~'],
     },
   ],
   // 问题修复

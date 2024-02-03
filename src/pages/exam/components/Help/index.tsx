@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Popup } from '@nutui/nutui-react-taro';
@@ -6,13 +6,21 @@ import { useRecoilState } from 'recoil';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { drawerMaskColor } from '@src/styles';
 import { Ask } from '@nutui/icons-react-taro';
+import { useExamPaper } from '@hooks/useExamPaper';
 
 interface Props {}
 
-export const Help: React.FC<Props> = () => {
+const Cell: React.FC<Props> = () => {
   const [showDrawer, setShowDrawer] = React.useState(false);
 
   const [{ themeColor }] = useRecoilState(themeInfoState);
+
+  const {
+    examPaper: { examRawData },
+  } = useExamPaper();
+
+  // 取 examRawData.item 的最后一个的道具ID
+  const lastItemId = examRawData.item[examRawData.item.length - 1].id;
 
   return (
     <>
@@ -45,24 +53,32 @@ export const Help: React.FC<Props> = () => {
         <View className={styles.drawer}>
           <View className={styles.title}>规则</View>
           <View className={styles.p}>
-            1. 每一次答题的题目都是随机生成的，只有达到 60
-            分及以上才能解锁下一个阶段。
+            1. 答题过程中不要退出，否则会丢失答题进度。
           </View>
           <View className={styles.p}>
-            2. 答题的过程中不要退出页面，否则会丢失答题进度。每道题有 20s
-            的答题时间。
-          </View>
-          <View className={styles.p}>
-            3. 所有题目均基于忏悔版本的游戏数据。
+            2. 每道题有 20s 的答题时间。超时算作答错。
           </View>
           {/* <View className={styles.title}>帮助</View>
           <View className={styles.p}>
             1. 有题库吗？
-            答：没有，大部分题目都是根据图鉴数据智能生成的，只有少数题目有人工介入。
+            答：没有，大部分题目都是根据图鉴数据实时生成的，只有少数题目有人工介入。
           </View>
           <View className={styles.p}>
             2. 我的分数是否记录在云端？ 答：是的。和用户当前微信号绑定。
           </View> */}
+
+          <View className={styles.title}>题目</View>
+          <View className={styles.p}>
+            1.
+            每道题目都是根据图鉴数据实时生成的，没有固定题库，但有开发者人工打标。
+          </View>
+          <View className={styles.p}>
+            2. 目前仅支持道具题目，支持的道具ID：1~{lastItemId}。
+          </View>
+          <View className={styles.p}>
+            3. 所有题目均基于忏悔版本的游戏数据。
+          </View>
+
           <View className={styles.title}>其他</View>
           <View className={styles.p}>
             后续会支持更多玩法、更有趣的题目。如果你有任何建议、或发现任何问题，欢迎联系开发者反馈。
@@ -72,3 +88,5 @@ export const Help: React.FC<Props> = () => {
     </>
   );
 };
+
+export const Help = memo(Cell);

@@ -11,6 +11,7 @@
   width: 100%;
   padding: 9px 0;
   border-radius: 12px;
+  transition: all 0.2s ease-in-out;
 }
 
 .count {
@@ -42,6 +43,15 @@
   padding-left: 16px;
   position: relative;
   font-size: 17px;
+  display: flex;
+  align-items: flex-end;
+
+  .fen {
+    font-size: 13px;
+    position: relative;
+    bottom: 1px;
+    left: 2px;
+  }
 
   .mine {
     position: absolute;
@@ -78,8 +88,8 @@
 .wangzheTitle {
   font-size: 18px;
   font-weight: bold;
-  margin: 12px 0;
   margin-top: 24px;
+  margin-bottom: 4px;
   display: flex;
   align-items: flex-end;
 

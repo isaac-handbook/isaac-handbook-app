@@ -11,6 +11,10 @@ interface Props {
 const Cell: React.FC<Props> = (props) => {
   const { themeColor, count } = props;
 
+  if (!count) {
+    return null;
+  }
+
   return (
     <View
       className={styles.bottomTips}

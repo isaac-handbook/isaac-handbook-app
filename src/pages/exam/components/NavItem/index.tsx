@@ -43,24 +43,16 @@ export const NavItem: React.FC<Props> = (props) => {
     });
   };
 
-  let boxShadow = '';
-  if (showBoxShadow) {
-    boxShadow =
-      themeColor.type === 'dark'
-        ? '0 0 8px rgba(0, 0, 0, 0.5)'
-        : '0 0 8px rgba(0, 0, 0, 0.2)';
-  }
-
   return (
     <View
       className={classNames(styles.navItem, {
         [styles.disabled]: disabled,
       })}
-      style={{ backgroundColor: themeColor.gridColor, boxShadow }}
+      style={{ backgroundColor: themeColor.gridColor }}
       onClick={handleStartExam}
     >
       {disabled && (
-        <Lock className={styles.lock} color={themeColor.textColor} size={20} />
+        <Lock className={styles.lock} color={themeColor.textColor} size={19} />
       )}
       <View
         className={styles.left}
@@ -80,7 +72,7 @@ export const NavItem: React.FC<Props> = (props) => {
         <View className={styles.desc}>{desc}</View>
       </View>
       <View className={styles.right}>
-        <ArrowSize6 size={15} color="#c4b39d" />
+        <ArrowSize6 size={14} color="#c4b39d" />
       </View>
     </View>
   );

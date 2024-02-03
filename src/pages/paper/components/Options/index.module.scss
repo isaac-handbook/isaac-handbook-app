@@ -52,5 +52,7 @@
 
   &.selected {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    // 放大一点
+    transform: scale(1.05);
   }
 }

@@ -5,8 +5,8 @@ import { generateChargeTopic } from './topicType/chargeTopic';
 import { generatePoolTopic } from './topicType/poolTopic';
 import { generateSuitTopic } from './topicType/suitTopic';
 
-// const customTopicWeight = 0.5;
-const customTopicWeight = 0.6;
+const customTopicWeight = 0.5;
+// const customTopicWeight = 0.55;
 
 interface Options {
   topicMeta: TopicMeta;

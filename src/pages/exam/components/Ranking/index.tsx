@@ -33,7 +33,7 @@ export const Ranking: React.FC<Props> = () => {
   } = useSetting();
 
   const {
-    app: { rankTip },
+    app: { examConfig },
   } = useApp();
 
   const [rankList, setRankList] = React.useState<RankItem[]>([]);
@@ -97,14 +97,14 @@ export const Ranking: React.FC<Props> = () => {
 
   const boxShadow =
     themeColor.type === 'dark'
-      ? '0 0 8px rgba(0, 0, 0, 0.5)'
-      : '0 0 8px rgba(0, 0, 0, 0.2)';
+      ? '0 0 6px rgba(255, 255, 255, 0.3)'
+      : '0 0 6px rgba(0, 0, 0, 0.2)';
 
   return (
     <>
       <View className={styles.wangzheTitle}>
         王者排名
-        <View className={styles.wangzheTip}>{rankTip}</View>
+        <View className={styles.wangzheTip}>{examConfig.rankTip}</View>
       </View>
       <View
         className={styles.container}
@@ -141,7 +141,8 @@ export const Ranking: React.FC<Props> = () => {
                 <View className={styles.name}> {item.nickname}</View>
                 <View className={styles.score}>
                   {item.score}
-                  {mine && <View className={styles.mine}>我</View>}
+                  <View className={styles.fen}>分</View>
+                  {/* {mine && <View className={styles.mine}>我</View>} */}
                 </View>
               </View>
               <View

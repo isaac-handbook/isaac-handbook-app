@@ -9,6 +9,8 @@ import { useTrinketSearchInfo } from '@hooks/useTrinketSearchInfo';
 import { useCardSearchInfo } from '@hooks/useCardSearchInfo';
 import { usePillSearchInfo } from '@hooks/usePillSearchInfo';
 import { ItemType } from 'src/types/handbook';
+import { useApp } from '@hooks/useApp';
+import { useUser } from '@hooks/useUser';
 
 export interface SearchProps {
   type: ItemType;
@@ -20,28 +22,40 @@ export const Search: React.FC<SearchProps> = (props) => {
   const { trinketSearchInfo, setTrinketSearchInfo } = useTrinketSearchInfo();
   const { cardSearchInfo, setCardSearchInfo } = useCardSearchInfo();
   const { pillSearchInfo, setPillSearchInfo } = usePillSearchInfo();
-  const { updateSetting } = useSetting();
+
+  const {
+    updateSetting,
+    setting: { developerMode },
+  } = useSetting();
+
+  const {
+    app: { devWhiteList },
+  } = useApp();
+
+  const {
+    user: { openid },
+  } = useUser();
 
   const onSearch = (val: string) => {
     // 开发者模式密码
-    if (val === 'p697') {
-      updateSetting({
-        developerMode: true,
-      });
-      Taro.showToast({
-        title: '已进入开发者模式',
-        icon: 'none',
-      });
-      return;
-    }
-    if (val === 'closep697') {
-      updateSetting({
-        developerMode: false,
-      });
-      Taro.showToast({
-        title: '已退出开发者模式',
-        icon: 'none',
-      });
+    if (val === 'p697' && devWhiteList.includes(openid)) {
+      if (developerMode) {
+        updateSetting({
+          developerMode: false,
+        });
+        Taro.showToast({
+          title: '已退出开发者模式',
+          icon: 'none',
+        });
+      } else {
+        updateSetting({
+          developerMode: true,
+        });
+        Taro.showToast({
+          title: '已进入开发者模式',
+          icon: 'none',
+        });
+      }
       return;
     }
     // 搜索道具

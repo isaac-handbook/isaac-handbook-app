@@ -4,7 +4,7 @@ import { generateDescTopic } from './topicType/descTopic';
 import { generateCustomTopic } from './topicType/customTopic';
 
 // const customTopicWeight = 0.65;
-const customTopicWeight = 0.85;
+const customTopicWeight = 0.8;
 
 interface Options {
   topicMeta: TopicMeta;
