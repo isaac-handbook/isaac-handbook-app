@@ -43,9 +43,9 @@ export const paperLevelMap: PaperLevelMap = {
   },
   '100': {
     stageMap: [
-      { stage: 1, count: 10 },
-      { stage: 2, count: 20 },
-      { stage: 3, count: 20 },
+      { stage: 1, count: 0 },
+      { stage: 2, count: 25 },
+      { stage: 3, count: 25 },
     ],
     sort: false,
   },

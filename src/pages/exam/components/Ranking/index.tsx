@@ -39,27 +39,11 @@ export const Ranking: React.FC<Props> = () => {
   const [rankList, setRankList] = React.useState<RankItem[]>([]);
 
   const updateRankList = async () => {
-    // 查询 score 表，搜索 level=100，按照 score 降序排列，取前 100 条
-    const db = Taro.cloud.database();
-    const col = db.collection('score');
-    col
-      .where({ level: 100 })
-      .orderBy('score', 'desc')
-      .limit(100)
-      .get()
-      .then((res) => {
-        const data = res.data;
-        const rankList = data.map((item) => {
-          return {
-            avatar: item.avatar,
-            nickname: item.nickname,
-            score: item.score,
-            level: item.level,
-            openid: item._openid,
-          };
-        });
-        setRankList(rankList);
-      });
+    // 通过云函数查询 rankList
+    const res = (await Taro.cloud.callFunction({
+      name: 'rank',
+    })) as any;
+    setRankList(res?.result?.rankList || []);
   };
 
   useDidShow(() => {
