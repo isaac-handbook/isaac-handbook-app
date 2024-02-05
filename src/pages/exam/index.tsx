@@ -163,7 +163,6 @@ function Index() {
           level={1}
           title={levelStringMap['1']}
           disabled={false}
-          showBoxShadow={userScoreMap.level1 < 60 && userScoreMap.level2 < 60}
           desc={getLevelDesc(1)}
           levelScore={userScoreMap.level1}
           iconSrc={require('../../assets/chara/以撒.png')}
@@ -172,7 +171,6 @@ function Index() {
           level={2}
           title={levelStringMap['2']}
           disabled={userScoreMap.level1 < 60}
-          showBoxShadow={userScoreMap.level1 >= 60 && userScoreMap.level2 < 60}
           desc={getLevelDesc(2)}
           levelScore={userScoreMap.level2}
           iconSrc={require('../../assets/chara/堕化以撒.png')}
@@ -181,16 +179,22 @@ function Index() {
           level={3}
           title={levelStringMap['3']}
           disabled={userScoreMap.level2 < 60}
-          showBoxShadow={userScoreMap.level2 >= 60 && userScoreMap.level3 < 60}
           desc={getLevelDesc(3)}
           levelScore={userScoreMap.level3}
           iconSrc={require('../../assets/chara/游魂.png')}
         />
         <NavItem
+          level={999}
+          title={levelStringMap['999']}
+          disabled={userScoreMap.level3 < 60}
+          desc={getLevelDesc(999)}
+          levelScore={userScoreMap.level999}
+          iconSrc={require('../../assets/chara/以撒.png')}
+        />
+        <NavItem
           level={100}
           title={levelStringMap['100']}
           disabled={userScoreMap.level3 < 60}
-          showBoxShadow={userScoreMap.level3 >= 60}
           desc={getLevelDesc(100)}
           levelScore={userScoreMap.level100}
           iconSrc={require('../../assets/chara/堕化游魂.png')}

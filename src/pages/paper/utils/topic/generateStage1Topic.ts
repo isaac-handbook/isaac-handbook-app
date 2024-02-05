@@ -12,6 +12,7 @@ interface Options {
   items: Item[];
 }
 
+/** 随机生成 1 个 stage1 的题目 */
 export const generateStage1Topic = (options: Options): Topic | null => {
   const { item, topicMeta, items } = options;
 
@@ -38,4 +39,33 @@ export const generateStage1Topic = (options: Options): Topic | null => {
     optionCount,
   });
   return topic;
+};
+
+/** 生成当前 item 的所有 stage1 题目 */
+export const generateAllStage1Topic = (options: Options): Topic[] => {
+  const { item, items, topicMeta } = options;
+
+  const topics: Topic[] = [];
+
+  // 生成 1 个 stage1 的 custom topic
+  const customTopic = generateCustomTopic({
+    item,
+    items,
+    topicMeta,
+    stage: 1,
+  });
+  if (customTopic) {
+    topics.push(customTopic);
+  }
+
+  // 生成 1 个 stage1 的 desc topic
+  const descTopic = generateDescTopic({
+    item,
+    items,
+  });
+  if (descTopic) {
+    topics.push(descTopic);
+  }
+
+  return topics;
 };

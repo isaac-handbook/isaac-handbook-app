@@ -15,6 +15,7 @@ interface Options {
   items: Item[];
 }
 
+/** 随机生成 1 个 stage3 的题目 */
 export const generateStage3Topic = (options: Options): Topic | null => {
   const { item, topicMeta, items } = options;
 
@@ -46,4 +47,43 @@ export const generateStage3Topic = (options: Options): Topic | null => {
     item,
     optionCount: 2,
   });
+};
+
+/** 生成当前 item 的所有 stage3 题目 */
+export const generateAllStage3Topic = (options: Options): Topic[] => {
+  const { item, items, topicMeta } = options;
+
+  const topics: Topic[] = [];
+
+  // 生成 1 个 stage3 的 custom topic
+  const customTopic = generateCustomTopic({
+    item,
+    items,
+    topicMeta,
+    stage: 3,
+  });
+  if (customTopic) {
+    topics.push(customTopic);
+  }
+
+  // 生成 1 个 stage3 的 unlock topic
+  const unlockTopic = generateUnlockTopic({
+    item,
+    items,
+    optionCount: 2,
+  });
+  if (unlockTopic) {
+    topics.push(unlockTopic);
+  }
+
+  // 生成 1 个 stage3 的 quality topic
+  const qualityTopic = generateQualityTopic({
+    item,
+    optionCount: 2,
+  });
+  if (qualityTopic) {
+    topics.push(qualityTopic);
+  }
+
+  return topics;
 };

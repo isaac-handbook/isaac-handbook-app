@@ -10,7 +10,7 @@ interface Options {
   topicMetaList: TopicMeta[];
   /** 生成的题目数量与难易分布 */
   stageMap: {
-    stage: 1 | 2 | 3;
+    stage: number;
     count: number;
   }[];
   /** 结果是否要按照 stage 从小到大排序 */
@@ -18,7 +18,7 @@ interface Options {
 }
 
 /** 生成一份考卷 */
-export const paperGenerator = (options: Options): Topic[] => {
+export const commonPaperGenerator = (options: Options): Topic[] => {
   const { items, topicMetaList, stageMap, sort = true } = options;
 
   const oparateStageMap = _.cloneDeep(stageMap);

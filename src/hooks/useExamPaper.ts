@@ -2,12 +2,14 @@ import Taro from '@tarojs/taro';
 import { ExamRawData, Topic, UserAnswer } from '../types/exam';
 import { atom, useRecoilState } from 'recoil';
 import { refreshExamData } from '@src/actions/exam/refreshExamData';
+import { useHandBookData } from './useHandbookData';
 
 export type UserScoreMap = {
   level1: number;
   level2: number;
   level3: number;
   level100: number;
+  level999: number;
 };
 
 export const defaultUserScoreMap: UserScoreMap = {
@@ -15,6 +17,7 @@ export const defaultUserScoreMap: UserScoreMap = {
   level2: 0,
   level3: 0,
   level100: 0,
+  level999: 0,
 };
 
 interface ExamPaper {
@@ -48,6 +51,10 @@ export const examPaperState = atom<ExamPaper>({
 export const useExamPaper = () => {
   const [examPaper, setExamPaper] = useRecoilState(examPaperState);
 
+  const {
+    handbookData: { items },
+  } = useHandBookData();
+
   const updateSingleExamPaperState = <T extends keyof ExamPaper>(
     key: T,
     value: ExamPaper[T],
@@ -78,16 +85,20 @@ export const useExamPaper = () => {
   /** 阅卷，得出分数 */
   const getScore = () => {
     const { topicList, userAnswerList } = examPaper;
-    const score = topicList.reduce((prev, curr, index) => {
+    const correctCount = topicList.reduce((prev, curr, index) => {
       if (curr.answer === userAnswerList[index]) {
         return prev + 1;
       }
       return prev;
     }, 0);
     // 换算成百分制
-    const totalScore = topicList.length;
-    const scorePercent = (score / totalScore) * 100;
-    return Math.round(scorePercent);
+    const totalCount = topicList.length;
+    const scorePercent = (correctCount / totalCount) * 100;
+    return {
+      score: Math.round(scorePercent),
+      totalCount,
+      correctCount,
+    };
   };
 
   /** 更新 examRawData 中的某个数据 */
@@ -101,7 +112,7 @@ export const useExamPaper = () => {
     });
   };
 
-  // 刷新题目数据（重新下载）
+  /** 刷新题目数据（重新下载） */
   const forceRefresh = async () => {
     const newHandbookData = await refreshExamData();
     updateSingleExamPaperState('examRawData', newHandbookData);

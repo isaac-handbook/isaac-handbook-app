@@ -14,6 +14,7 @@ interface Options {
   items: Item[];
 }
 
+/** 随机生成 1 个 stage2 的题目 */
 export const generateStage2Topic = (options: Options): Topic | null => {
   const { item, topicMeta, items } = options;
 
@@ -47,4 +48,48 @@ export const generateStage2Topic = (options: Options): Topic | null => {
   return generatePoolTopic({
     item,
   });
+};
+
+/** 生成当前 item 的所有 stage2 题目 */
+export const generateAllStage2Topic = (options: Options): Topic[] => {
+  const { item, items, topicMeta } = options;
+
+  const topics: Topic[] = [];
+
+  // 生成 1 个 stage2 的 custom topic
+  const customTopic = generateCustomTopic({
+    item,
+    items,
+    topicMeta,
+    stage: 2,
+  });
+  if (customTopic) {
+    topics.push(customTopic);
+  }
+
+  // 生成 1 个 stage2 的 suit topic
+  const suitTopic = generateSuitTopic({
+    item,
+  });
+  if (suitTopic) {
+    topics.push(suitTopic);
+  }
+
+  // 生成 1 个 stage2 的 charge topic
+  const chargeTopic = generateChargeTopic({
+    item,
+  });
+  if (chargeTopic) {
+    topics.push(chargeTopic);
+  }
+
+  // 生成 1 个 stage2 的 pool topic
+  const poolTopic = generatePoolTopic({
+    item,
+  });
+  if (poolTopic) {
+    topics.push(poolTopic);
+  }
+
+  return topics;
 };

@@ -14,12 +14,10 @@ interface Props {
   desc: string;
   level: number;
   disabled: boolean;
-  showBoxShadow: boolean;
 }
 
 export const NavItem: React.FC<Props> = (props) => {
-  const { levelScore, level, title, desc, iconSrc, disabled, showBoxShadow } =
-    props;
+  const { levelScore, level, title, desc, iconSrc, disabled } = props;
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();

@@ -3,6 +3,7 @@ export const levelStringMap = {
   '2': '白银',
   '3': '钻石',
   '100': '王者',
+  '999': '无尽',
 };
 
 type PaperLevelMap = {

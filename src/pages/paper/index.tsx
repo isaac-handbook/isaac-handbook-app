@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
-import { paperGenerator } from '@pages/paper/utils/paper/generator';
+import { commonPaperGenerator } from '@pages/paper/utils/paper/commonPaperGenerator';
 import { useEffect, useMemo, useState } from 'react';
 import { useExamPaper } from '@hooks/useExamPaper';
 import { Header } from './components/Header';
@@ -11,6 +11,8 @@ import { Question } from './components/Question';
 import { Options } from './components/Options';
 import Taro from '@tarojs/taro';
 import { paperLevelMap } from './constant';
+import { Topic } from '@typers/exam';
+import { endlessPaperGenerator } from './utils/paper/endlessPaperGenerator';
 
 function Index() {
   const params = Taro.getCurrentInstance().router?.params as any;
@@ -35,12 +37,24 @@ function Index() {
   useEffect(() => {
     if (!items?.length || !level) return;
     const { stageMap, sort } = paperLevelMap[String(level)];
-    const newTopicList = paperGenerator({
-      items,
-      topicMetaList: examRawData.item,
-      stageMap,
-      sort,
-    });
+    let newTopicList: Topic[] = [];
+    if (level === '999') {
+      // 生成无尽模式试卷
+      newTopicList = endlessPaperGenerator({
+        items,
+        topicMetaList: examRawData.item,
+        stageList: [1, 2, 3],
+      });
+    } else {
+      // 生成普通模式试卷
+      newTopicList = commonPaperGenerator({
+        items,
+        topicMetaList: examRawData.item,
+        stageMap,
+        sort,
+      });
+    }
+
     updateSingleExamPaperState('topicList', newTopicList);
     console.log('生成试卷', newTopicList);
   }, [items]);

@@ -63,7 +63,7 @@ export const Result: React.FC<Props> = (props) => {
   // 完成后，展示分数、更新数据库
   useEffect(() => {
     if (!user?.openid) return;
-    const curScore = getScore();
+    const curScore = getScore().score;
     setScore(curScore);
     // 更新数据库。如果试一次答当前 level，就插入一条新的记录。
     // 如果不是第一次答当前 level，就更新记录。
