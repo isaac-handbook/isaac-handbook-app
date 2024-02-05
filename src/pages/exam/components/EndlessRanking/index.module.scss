@@ -1,5 +1,6 @@
 .container {
   padding: 8px 0;
+  padding-bottom: 24px;
   border-radius: 16px;
   // overflow: hidden;
 }
@@ -80,10 +81,6 @@
   left: 24px;
   opacity: 0.2;
 }
-// 最后一个 line 不展示
-.line:last-child {
-  display: none;
-}
 
 .wangzheTitle {
   font-size: 18px;
@@ -108,5 +105,4 @@
   align-items: center;
   padding: 16px;
   box-sizing: border-box;
-  opacity: 0.6;
 }

@@ -2,7 +2,6 @@ import Taro from '@tarojs/taro';
 import { ExamRawData, Topic, UserAnswer } from '../types/exam';
 import { atom, useRecoilState } from 'recoil';
 import { refreshExamData } from '@src/actions/exam/refreshExamData';
-import { useHandBookData } from './useHandbookData';
 
 export type UserScoreMap = {
   level1: number;
@@ -25,6 +24,8 @@ interface ExamPaper {
   examRawData: ExamRawData;
   /** 当前生成的试卷 */
   topicList: Topic[];
+  /** 用户当前处于哪一题 */
+  currentTopicIndex: number;
   /** 用户当前选择的答案 */
   userAnswerList: UserAnswer[];
   /** 用户的分数记录 */
@@ -37,6 +38,7 @@ const defaultExamPaper: ExamPaper = {
   examRawData: {
     item: [],
   },
+  currentTopicIndex: 1,
   topicList: [],
   userAnswerList: [],
   userScoreMap: defaultUserScoreMap,
@@ -51,10 +53,6 @@ export const examPaperState = atom<ExamPaper>({
 export const useExamPaper = () => {
   const [examPaper, setExamPaper] = useRecoilState(examPaperState);
 
-  const {
-    handbookData: { items },
-  } = useHandBookData();
-
   const updateSingleExamPaperState = <T extends keyof ExamPaper>(
     key: T,
     value: ExamPaper[T],
@@ -66,11 +64,18 @@ export const useExamPaper = () => {
   };
 
   /** 提交一次答案 */
-  const submitSingleTopic = (answer: number | null) => {
+  const submitSingleTopic = (answer: number | null, delay = 0) => {
     updateSingleExamPaperState('userAnswerList', [
       ...examPaper.userAnswerList,
       answer,
     ]);
+    // 到下一题
+    setTimeout(() => {
+      updateSingleExamPaperState(
+        'currentTopicIndex',
+        examPaper.currentTopicIndex + 1,
+      );
+    }, delay);
   };
 
   /** 清空试卷 */

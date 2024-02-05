@@ -8,7 +8,6 @@ import classNames from 'classnames';
 import { useUser } from '@hooks/useUser';
 import { useSetting } from '@hooks/useSetting';
 import { useApp } from '@hooks/useApp';
-import honorList from './honorList.json';
 
 interface RankItem {
   avatar: string;
@@ -20,7 +19,7 @@ interface RankItem {
 
 interface Props {}
 
-export const Ranking: React.FC<Props> = () => {
+export const EndlessRanking: React.FC<Props> = () => {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
@@ -43,18 +42,10 @@ export const Ranking: React.FC<Props> = () => {
 
   const updateRankList = async () => {
     // 通过云函数查询 rankList
-    // const res = (await Taro.cloud.callFunction({
-    //   name: 'rank',
-    // })) as any;
-    // setRankList(res?.result?.rankList || []);
-
-    // 前一百名一天就被大佬占满了。先存本地做成荣誉榜吧
-    setRankList(
-      honorList.map((item) => ({
-        ...item,
-        openid: item._openid,
-      })),
-    );
+    const res = (await Taro.cloud.callFunction({
+      name: 'endlessRank',
+    })) as any;
+    setRankList(res?.result?.rankList || []);
   };
 
   useDidShow(() => {
@@ -98,8 +89,8 @@ export const Ranking: React.FC<Props> = () => {
   return (
     <>
       <View className={styles.wangzheTitle}>
-        王者榜
-        <View className={styles.wangzheTip}>{examConfig.rankTip}</View>
+        彩蛋：无尽榜
+        <View className={styles.wangzheTip}>{examConfig.endlessRankTip}</View>
       </View>
       <View
         className={styles.container}
@@ -147,9 +138,26 @@ export const Ranking: React.FC<Props> = () => {
           );
         })}
 
-        <View className={styles.hide} onClick={() => setHide(!hide)}>
-          点击{hide ? '展开' : '收起'}所有前100位
-        </View>
+        {rankList.length === 0 && (
+          <>
+            {' '}
+            <View className={styles.item}>
+              <View className={styles.count}>?</View>
+              <View className={styles.avatar}>
+                <Image src={emptyAvatar} className={styles.avatarImg} />
+              </View>
+              <View className={styles.name}> ????</View>
+              <View className={styles.score}>
+                ??
+                <View className={styles.fen}>分</View>
+              </View>
+            </View>
+            <View
+              className={styles.line}
+              style={{ backgroundColor: themeColor.gridBorderColor }}
+            ></View>
+          </>
+        )}
       </View>
     </>
   );

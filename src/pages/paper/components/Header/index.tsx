@@ -8,14 +8,14 @@ import { Progress } from '@nutui/nutui-react-taro';
 const timeout = 20;
 
 interface Props {
-  curIndex: number;
   selected: number | null;
+  relex: boolean;
 }
 
 export const Header: React.FC<Props> = (props) => {
-  const { curIndex, selected } = props;
+  const { selected, relex } = props;
   const {
-    examPaper: { topicList },
+    examPaper: { topicList, currentTopicIndex },
     submitSingleTopic,
   } = useExamPaper();
 
@@ -23,6 +23,10 @@ export const Header: React.FC<Props> = (props) => {
   const [countdown, setCountdown] = React.useState(0);
 
   useEffect(() => {
+    if (relex) {
+      // 娱乐模式没有倒计时
+      return;
+    }
     if (countdownRef.current) {
       clearInterval(countdownRef.current);
     }
@@ -31,7 +35,7 @@ export const Header: React.FC<Props> = (props) => {
     countdownRef.current = setInterval(() => {
       setCountdown((prev) => prev + 1);
     }, 1000);
-  }, [curIndex]);
+  }, [currentTopicIndex, relex]);
 
   useEffect(() => {
     if (countdown > timeout) {
@@ -49,24 +53,30 @@ export const Header: React.FC<Props> = (props) => {
         <View className={styles.counter}>
           问题
           <View className={styles.number}>
-            {curIndex}/{topicList.length}
+            {currentTopicIndex}/{topicList.length}
           </View>
         </View>
         <View className={styles.countdown}>
-          本题倒计时
-          <View
-            className={styles.number}
-            style={{
-              color: warning ? '#ff4d4f' : 'inherit',
-            }}
-          >
-            {timeout - countdown}s
-          </View>
+          {relex ? (
+            <>提示：道具可点击</>
+          ) : (
+            <>
+              本题倒计时
+              <View
+                className={styles.number}
+                style={{
+                  color: warning ? '#ff4d4f' : 'inherit',
+                }}
+              >
+                {timeout - countdown}s
+              </View>
+            </>
+          )}
         </View>
       </View>
       <View className={styles.progress}>
         <Progress
-          percent={(curIndex / topicList.length) * 100}
+          percent={(currentTopicIndex / topicList.length) * 100}
           color="linear-gradient(270deg, #fc4a1a 0%,#f7b733 100%)"
           // animated
         />

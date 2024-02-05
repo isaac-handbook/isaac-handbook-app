@@ -4,9 +4,7 @@ import { randomAnswer } from '../../randomAnswer';
 import { chargeLevelBgMap } from '@components/ChargeBar';
 
 // 所有可能电池充能数量
-const allBatteryCharge = Object.keys(chargeLevelBgMap).map((key) =>
-  Number(key),
-);
+const allBatteryCharge = Object.keys(chargeLevelBgMap);
 
 interface Params {
   item: Item;
@@ -46,8 +44,13 @@ export const generateChargeTopic = (params: Params): Topic | null => {
   }
 
   // 电池充能
-  const battery = Number(charge.replace(',一次性使用', ''));
-  if (!battery || isNaN(battery)) {
+  let battery: string;
+  if (charge.includes('一次性使用')) {
+    battery = '一次性';
+  } else {
+    battery = charge;
+  }
+  if (!battery || battery === '0') {
     return null;
   }
   // 从 allBatteryCharge 中随机选出 2 个不同的电池充能数量作为 worngList

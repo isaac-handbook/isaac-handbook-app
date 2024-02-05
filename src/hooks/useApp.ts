@@ -9,6 +9,8 @@ export interface AppState {
   examConfig: {
     /** exam 页面王者排名的提示 */
     rankTip: string;
+    /** exam 页面无尽排名的提示 */
+    endlessRankTip: string;
     /** 是否降级排行榜 */
     rankDegrade: boolean;
     level1Tip: string;
@@ -27,6 +29,7 @@ export const appState = atom<AppState>({
     questionJSONVersion: null,
     examConfig: {
       rankTip: '',
+      endlessRankTip: '',
       rankDegrade: false,
       level1Tip: '',
       level2Tip: '',

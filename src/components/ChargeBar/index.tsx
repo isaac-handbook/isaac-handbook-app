@@ -11,6 +11,7 @@ interface Props {
 
 export const chargeLevelBgMap = {
   '1': '16px 32px',
+  一次性: '16px 32px',
   '2': '32px 32px',
   '3': '48px 32px',
   '4': '0px 32px',

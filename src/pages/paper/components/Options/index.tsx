@@ -7,27 +7,33 @@ import { OptionItem } from './OptionItem';
 import { CustomButton } from '@components/CustomButton';
 
 interface Props {
-  curIndex: number;
   selected: number | null;
   setSelected: (index: number | null) => void;
+  relex?: boolean;
 }
 
 export const Options: React.FC<Props> = (props) => {
-  const { curIndex, selected, setSelected } = props;
+  const { selected, setSelected, relex = false } = props;
   const {
-    examPaper: { topicList },
+    examPaper: { topicList, currentTopicIndex, userAnswerList },
     submitSingleTopic,
   } = useExamPaper();
 
   const { getItemDataById } = useHandBookData();
 
   useEffect(() => {
-    setSelected(null);
-  }, [curIndex]);
+    // 如果用户当前已经选过这道题，则默认选中
+    const curSelect = userAnswerList[currentTopicIndex - 1];
+    if (curSelect !== null && curSelect !== undefined) {
+      setSelected(curSelect);
+    } else {
+      setSelected(null);
+    }
+  }, [currentTopicIndex]);
 
   if (!topicList.length) return null;
 
-  const curTopic = topicList[curIndex - 1];
+  const curTopic = topicList[currentTopicIndex - 1];
 
   const item = getItemDataById(
     (curTopic.itemType + 's') as any,
@@ -40,7 +46,11 @@ export const Options: React.FC<Props> = (props) => {
   }
 
   const handleNext = () => {
-    // 如果已经是最后一题了，那么就不再跳转了
+    if (relex) {
+      // 娱乐模式下直接检查实发答对了
+      submitSingleTopic(selected, 750);
+      return;
+    }
     submitSingleTopic(selected);
   };
 
@@ -57,15 +67,22 @@ export const Options: React.FC<Props> = (props) => {
             item={item}
             optionValue={option}
             onClick={() => handleOptionClick(index)}
+            correctBg={
+              relex &&
+              currentTopicIndex <= userAnswerList.length &&
+              index === curTopic.answer
+            }
           />
         );
       })}
 
-      <CustomButton
-        value={curIndex === topicList.length ? '交卷' : '下一题'}
-        disabled={selected === null}
-        onClick={handleNext}
-      />
+      {currentTopicIndex === userAnswerList.length + 1 && (
+        <CustomButton
+          value={currentTopicIndex === topicList.length ? '交卷' : '下一题'}
+          disabled={selected === null}
+          onClick={handleNext}
+        />
+      )}
     </View>
   );
 };

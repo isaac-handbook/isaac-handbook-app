@@ -29,7 +29,7 @@ export const generateStage3Topic = (options: Options): Topic | null => {
       items,
       topicMeta,
       stage: 3,
-    });
+    })[0];
   }
 
   // 生成一个 stage3 的 unlock topic
@@ -55,15 +55,16 @@ export const generateAllStage3Topic = (options: Options): Topic[] => {
 
   const topics: Topic[] = [];
 
-  // 生成 1 个 stage3 的 custom topic
-  const customTopic = generateCustomTopic({
+  // 生成所有 stage3 的 custom topic
+  const customTopics = generateCustomTopic({
     item,
     items,
     topicMeta,
     stage: 3,
+    all: true,
   });
-  if (customTopic) {
-    topics.push(customTopic);
+  if (customTopics.length) {
+    topics.push(...customTopics);
   }
 
   // 生成 1 个 stage3 的 unlock topic

@@ -103,7 +103,8 @@
   },
   "12": {
     "color": [
-      "red"
+      "red",
+      "whi"
     ],
     "classes": [
       "dmg",
@@ -1548,7 +1549,8 @@
       "pur",
       "red",
       "yel",
-      "blu"
+      "blu",
+      "gre"
     ],
     "classes": [
       "auto-spec"

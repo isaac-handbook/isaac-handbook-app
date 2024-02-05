@@ -17,3 +17,23 @@
   margin-top: 48px;
   font-size: 18px;
 }
+
+.icon {
+  position: relative;
+}
+
+.turnPrev {
+  position: absolute;
+  top: 12px;
+  left: 0px;
+  padding: 24px;
+  opacity: 0.9;
+}
+
+.turnNext {
+  position: absolute;
+  top: 12px;
+  right: 0px;
+  padding: 24px;
+  opacity: 0.9;
+}

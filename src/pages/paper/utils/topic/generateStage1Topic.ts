@@ -25,7 +25,7 @@ export const generateStage1Topic = (options: Options): Topic | null => {
       items,
       topicMeta,
       stage: 1,
-    });
+    })[0];
     return topic;
   }
 
@@ -48,14 +48,15 @@ export const generateAllStage1Topic = (options: Options): Topic[] => {
   const topics: Topic[] = [];
 
   // 生成 1 个 stage1 的 custom topic
-  const customTopic = generateCustomTopic({
+  const customTopics = generateCustomTopic({
     item,
     items,
     topicMeta,
     stage: 1,
+    all: true,
   });
-  if (customTopic) {
-    topics.push(customTopic);
+  if (customTopics.length) {
+    topics.push(...customTopics);
   }
 
   // 生成 1 个 stage1 的 desc topic

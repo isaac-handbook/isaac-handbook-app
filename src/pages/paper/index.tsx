@@ -27,7 +27,7 @@ function Index() {
   } = useHandBookData();
 
   const {
-    examPaper: { userAnswerList, topicList, examRawData },
+    examPaper: { currentTopicIndex, topicList, examRawData },
     updateSingleExamPaperState,
   } = useExamPaper();
 
@@ -36,7 +36,6 @@ function Index() {
 
   useEffect(() => {
     if (!items?.length || !level) return;
-    const { stageMap, sort } = paperLevelMap[String(level)];
     let newTopicList: Topic[] = [];
     if (level === '999') {
       // 生成无尽模式试卷
@@ -47,6 +46,7 @@ function Index() {
       });
     } else {
       // 生成普通模式试卷
+      const { stageMap, sort } = paperLevelMap[String(level)];
       newTopicList = commonPaperGenerator({
         items,
         topicMetaList: examRawData.item,
@@ -60,12 +60,12 @@ function Index() {
   }, [items]);
 
   // 用户当前在答第几题
-  const curIndex = useMemo(() => userAnswerList.length + 1, [userAnswerList]);
+  // const curIndex = useMemo(() => userAnswerList.length + 1, [userAnswerList]);
 
   // 当前已经完成了答题
   const isFinished = useMemo(
-    () => curIndex > topicList.length && topicList.length > 0,
-    [curIndex, topicList],
+    () => currentTopicIndex > topicList.length && topicList.length > 0,
+    [currentTopicIndex, topicList],
   );
 
   useEffect(() => {
@@ -75,6 +75,8 @@ function Index() {
       url: `/pages/paper-result/index?level=${level}`,
     });
   }, [isFinished]);
+
+  const relex = level === '999';
 
   return (
     <ErrorBoundary>
@@ -87,12 +89,16 @@ function Index() {
       >
         {!isFinished && (
           <>
-            <Header curIndex={curIndex} selected={selected} />
-            <Question topic={topicList[curIndex - 1]} />
+            <Header selected={selected} relex={relex} />
+            <Question
+              topic={topicList[currentTopicIndex - 1]}
+              linkable={relex}
+              relex={relex}
+            />
             <Options
-              curIndex={curIndex}
               selected={selected}
               setSelected={setSelected}
+              relex={relex}
             />
           </>
         )}

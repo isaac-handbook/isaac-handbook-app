@@ -2,8 +2,8 @@ import { TopicMeta, Topic } from '../../../../types/exam';
 import { Item } from '../../../../types/handbook';
 import * as _ from 'lodash';
 import { generateAllStage1Topic } from '../topic/generateStage1Topic';
-import { generateStage2Topic } from '../topic/generateStage2Topic';
-import { generateStage3Topic } from '../topic/generateStage3Topic';
+import { generateAllStage2Topic } from '../topic/generateStage2Topic';
+import { generateAllStage3Topic } from '../topic/generateStage3Topic';
 
 interface Options {
   items: Item[];
@@ -36,24 +36,24 @@ export const endlessPaperGenerator = (options: Options): Topic[] => {
     }
     // 生成 stage2 的题目
     if (stageList.includes(2)) {
-      const topic = generateStage2Topic({
+      const topics = generateAllStage2Topic({
         topicMeta,
         item,
         items,
       });
-      if (topic) {
-        otpTopics.push(topic);
+      if (topics.length) {
+        otpTopics.push(...topics);
       }
     }
     // 生成 stage3 的题目
     if (stageList.includes(3)) {
-      const topic = generateStage3Topic({
+      const topics = generateAllStage3Topic({
         topicMeta,
         item,
         items,
       });
-      if (topic) {
-        otpTopics.push(topic);
+      if (topics.length) {
+        otpTopics.push(...topics);
       }
     }
   }

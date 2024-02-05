@@ -27,7 +27,7 @@ export const generateStage2Topic = (options: Options): Topic | null => {
       items,
       topicMeta,
       stage: 2,
-    });
+    })[0];
   }
 
   // 生成一个 stage2 的 suit topic
@@ -57,14 +57,15 @@ export const generateAllStage2Topic = (options: Options): Topic[] => {
   const topics: Topic[] = [];
 
   // 生成 1 个 stage2 的 custom topic
-  const customTopic = generateCustomTopic({
+  const customTopics = generateCustomTopic({
     item,
     items,
     topicMeta,
     stage: 2,
+    all: true,
   });
-  if (customTopic) {
-    topics.push(customTopic);
+  if (customTopics.length) {
+    topics.push(...customTopics);
   }
 
   // 生成 1 个 stage2 的 suit topic

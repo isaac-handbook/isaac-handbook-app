@@ -13,6 +13,7 @@ import { useSetting } from '@hooks/useSetting';
 import { useLockFn } from 'ahooks';
 import { Header } from './components/Header';
 import { useApp } from '@hooks/useApp';
+import { EndlessRanking } from './components/EndlessRanking';
 
 function Index() {
   const {
@@ -139,13 +140,13 @@ function Index() {
   const getLevelDesc = (level: number) => {
     const configTip = examConfig[`level${level}Tip`];
     // 从 paperLevelMap 计算当前 level 有多少个题目
-    const levelCount = paperLevelMap[String(level)].stageMap.reduce(
-      (pre, cur) => {
+    let levelCount: number = 0;
+    if (level !== 999) {
+      levelCount = paperLevelMap[String(level)].stageMap.reduce((pre, cur) => {
         return pre + cur.count;
-      },
-      0,
-    );
-    return configTip.replace(/\{\{count\}\}/g, String(levelCount));
+      }, 0);
+    }
+    return configTip?.replace(/\{\{count\}\}/g, String(levelCount));
   };
 
   return (
@@ -184,14 +185,6 @@ function Index() {
           iconSrc={require('../../assets/chara/游魂.png')}
         />
         <NavItem
-          level={999}
-          title={levelStringMap['999']}
-          disabled={userScoreMap.level3 < 60}
-          desc={getLevelDesc(999)}
-          levelScore={userScoreMap.level999}
-          iconSrc={require('../../assets/chara/以撒.png')}
-        />
-        <NavItem
           level={100}
           title={levelStringMap['100']}
           disabled={userScoreMap.level3 < 60}
@@ -199,8 +192,21 @@ function Index() {
           levelScore={userScoreMap.level100}
           iconSrc={require('../../assets/chara/堕化游魂.png')}
         />
+        <NavItem
+          level={999}
+          title={levelStringMap['999']}
+          disabled={userScoreMap.level3 < 60}
+          desc={getLevelDesc(999)}
+          levelScore={userScoreMap.level999}
+          iconSrc={require('../../assets/chara/以撒.png')}
+        />
 
-        {(!examConfig.rankDegrade || developerMode) && <Ranking />}
+        {(!examConfig.rankDegrade || developerMode) && (
+          <>
+            <Ranking />
+            <EndlessRanking />
+          </>
+        )}
 
         {developerMode && (
           <Button className={styles.clearBtn} onClick={handleClearUser}>
