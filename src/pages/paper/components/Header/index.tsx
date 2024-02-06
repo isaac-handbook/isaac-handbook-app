@@ -38,12 +38,16 @@ export const Header: React.FC<Props> = (props) => {
   }, [currentTopicIndex, relex]);
 
   useEffect(() => {
+    if (relex) {
+      // 娱乐模式没有倒计时
+      return;
+    }
     if (countdown > timeout) {
       // 超时，自动提交
       setCountdown(0);
       submitSingleTopic(selected ?? null);
     }
-  }, [countdown]);
+  }, [countdown, relex]);
 
   const warning = countdown > timeout - 5;
 

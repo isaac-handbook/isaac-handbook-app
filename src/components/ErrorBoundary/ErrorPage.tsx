@@ -25,9 +25,24 @@ function ErrorPage() {
           opacity: '1',
         }}
       >
-        <div style={{ marginTop: '36px', opacity: '0.5' }}>
-          <Button onClick={forceReload} type="default" size="mini">
-            点我清理缓存并重试。
+        <div
+          style={{
+            marginTop: '36px',
+            opacity: '0.5',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <Button
+            style={{ marginBottom: '36rpx' }}
+            onClick={forceReload}
+            type="default"
+            size="mini"
+          >
+            点我清理缓存并重试
+          </Button>
+          <Button openType="feedback" type="default" size="mini">
+            点我联系开发者反馈
           </Button>
         </div>
       </Empty>
