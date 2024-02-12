@@ -8,6 +8,8 @@ import { useRecoilState } from 'recoil';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { Dot } from '@components/Dot';
 import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
+import { LinkText } from '@components/LinkText';
+import { getItemWikiLink } from '@utils/wiki';
 
 interface Props {
   item: Item | Chara;
@@ -50,7 +52,7 @@ export const DetailContent: React.FC<Props> = (props) => {
     );
   };
 
-  const renderSingleModule = (title: string, contents: string[]) => {
+  const renderSingleModule = (title: string, contents: React.ReactNode[]) => {
     if (!contents.length) {
       return null;
     }
@@ -110,12 +112,16 @@ export const DetailContent: React.FC<Props> = (props) => {
           </View>
         );
       })}
-      {(curItem.nameEn || curItem.descEn) &&
-        renderSingleModule('其他名称', [
-          curItem.alias?.length ? `民间叫法：${curItem.alias.join('、')}` : '',
-          `英文名称：${curItem.nameEn}`,
-          curItem.descEn ? `英文描述：${curItem.descEn}` : '',
-        ])}
+      {renderSingleModule('其他', [
+        curItem.alias?.length ? `民间叫法：${curItem.alias.join('、')}` : '',
+        curItem.nameEn ? `英文名称：${curItem.nameEn}` : '',
+        curItem.descEn ? `英文描述：${curItem.descEn}` : '',
+        <LinkText
+          value="点击复制 WIKI 链接"
+          action="copy"
+          copyValue={getItemWikiLink(curItem)}
+        />,
+      ])}
     </View>
   );
 };

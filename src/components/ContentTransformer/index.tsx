@@ -21,7 +21,7 @@ import { ThemeColor } from '@hooks/useThemeInfo/style';
 interface Props {
   id?: string;
   nameZh?: string;
-  value: string;
+  value: React.ReactNode;
   lineHeight?: string;
   type?: ItemType;
   mathFontSize?: string;
@@ -481,18 +481,24 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     return data;
   };
 
-  return (
-    <View className={styles.container} style={{ lineHeight }}>
-      {/* 将value中的{{}}替换为对应的数据 */}
-      {/* props.value.split(/(\{\{.+?\}\})/g) */}
-      {splitByNestedBrackets(props.value).map((item) => {
+  const renderInner = () => {
+    if (typeof props.value === 'string') {
+      return splitByNestedBrackets(props.value).map((item) => {
         if (item.startsWith('{{')) {
           let inner = item.slice(2, -2);
           inner = inner.replace('}}点伤害（n为炸弹的爆炸伤害', '点伤害');
           return transformInnerData(inner);
         }
         return item.replace(/\{\{/g, '').replace(/\}\}/g, '').replace(/'/g, '');
-      })}
+      });
+    }
+    return props.value;
+  };
+
+  return (
+    <View className={styles.container} style={{ lineHeight }}>
+      {/* 将value中的{{}}替换为对应的数据 */}
+      {renderInner()}
     </View>
   );
 };

@@ -25,9 +25,26 @@ const LoadingPage: React.FC<Props> = (props) => {
   const renderContent = () => {
     if (type === 'canRefresh') {
       return (
-        <Button onClick={forceReload} type="default" size="mini">
-          长时间没有反应？点我进行数据更新。
-        </Button>
+        <div
+          style={{
+            marginTop: '36px',
+            opacity: '0.5',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <Button
+            style={{ marginBottom: '36rpx' }}
+            onClick={forceReload}
+            type="default"
+            size="mini"
+          >
+            长时间没有反应？点我清理缓存并重试
+          </Button>
+          <Button openType="feedback" type="default" size="mini">
+            点我联系开发者反馈
+          </Button>
+        </div>
       );
     }
     return children;

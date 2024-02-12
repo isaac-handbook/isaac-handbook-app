@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Ad, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { SideNav } from '@components/SideNav';
 import styles from './index.module.scss';
 import { useHandBookData } from '@hooks/useHandbookData';
@@ -14,6 +14,7 @@ import { DetailTopNav } from '@components/DetailTopNav';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { useRecoilState } from 'recoil';
 import LoadingPage from '@components/ErrorBoundary/LoadingPage';
+import { CharaFigure } from './components/CharaFigure';
 
 function ItemDetail() {
   const { handbookData } = useHandBookData();
@@ -25,7 +26,7 @@ function ItemDetail() {
   const [item, setItem] = React.useState<Item>();
 
   // 广告加载失败，隐藏组件
-  const [adError, setAdError] = React.useState(false);
+  // const [adError, setAdError] = React.useState(false);
 
   // 获取页面参数中的 itemId
   useEffect(() => {
@@ -143,7 +144,9 @@ function ItemDetail() {
 
         <DetailContent item={item} handbookData={handbookData} type={type} />
 
-        {
+        <CharaFigure itemId={item.id} />
+
+        {/* {
           // 广告
           !adError && (
             <Ad
@@ -161,7 +164,7 @@ function ItemDetail() {
               }}
             />
           )
-        }
+        } */}
       </View>
       <SideNav />
     </ErrorBoundary>
