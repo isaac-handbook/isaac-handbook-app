@@ -1,12 +1,11 @@
 import { useRecoilState } from 'recoil';
-import { useAsyncEffect, useDeepCompareEffect } from 'ahooks';
+import { useDeepCompareEffect } from 'ahooks';
 import { getSettingData } from '@src/actions/getSettingData';
 import { settingInfoState } from './useSetting';
 import { checkAndUpdateApp } from '@src/actions/checkAndUpdateApp';
 import { useUI } from './useUI';
-import Taro from '@tarojs/taro';
 import { useUser } from './useUser';
-import { AppState, useApp } from './useApp';
+import { useApp } from './useApp';
 import { useEffect } from 'react';
 import { useExamPaper } from './useExamPaper';
 import { refreshExamData } from '@src/actions/exam/refreshExamData';
@@ -25,15 +24,7 @@ export const useExamInit = () => {
 
   const { updateSingleUserState } = useUser();
 
-  const { app, setApp } = useApp();
-
-  useAsyncEffect(async () => {
-    // 读取数据库的 app 集合，获取设置
-    const db = Taro.cloud.database();
-    const res = await db.collection('app').get();
-    const config = res.data[0] as AppState;
-    setApp(config);
-  }, []);
+  const { app } = useApp();
 
   useDeepCompareEffect(() => {
     if (!examRawData?.item?.length) {
@@ -61,18 +52,6 @@ export const useExamInit = () => {
       console.log('试卷数据无需更新');
     }
   }, [examRawData, app]);
-
-  useAsyncEffect(async () => {
-    // 获取用户当前 openid
-    const login = (await Taro.cloud.callFunction({
-      name: 'login',
-    })) as any;
-    const OPENID = login?.result?.OPENID;
-    if (!OPENID) {
-      return;
-    }
-    updateSingleUserState('openid', OPENID);
-  }, []);
 
   // 入口逻辑
   useEffect(() => {

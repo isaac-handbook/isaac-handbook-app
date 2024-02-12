@@ -71,6 +71,9 @@ dependencies:
   classnames:
     specifier: ^2.5.1
     version: 2.5.1
+  laf-client-sdk:
+    specifier: 1.0.0-beta.14
+    version: 1.0.0-beta.14
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -5266,6 +5269,15 @@ packages:
       whatwg-url: 12.0.1
     dev: true
 
+  /database-ql@1.0.0-beta.14:
+    resolution: {integrity: sha512-h1wv352fQHhFf36+QZUHpiiBreqZ+yIg6UWYcDoO02+TsX/4A2HTb1ZgIz3A5sixkMfsh2REud7/hb+GKlC9UQ==}
+    dependencies:
+      bson: 4.7.2
+      lodash.clonedeep: 4.5.0
+      lodash.set: 4.3.2
+      lodash.unset: 4.5.2
+    dev: false
+
   /dayjs@1.11.10:
     resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
     dev: false
@@ -8233,6 +8245,15 @@ packages:
   /known-css-properties@0.26.0:
     resolution: {integrity: sha512-5FZRzrZzNTBruuurWpvZnvP9pum+fe0HcK8z/ooo+U+Hmp4vtbyp1/QDsqmufirXy4egGzbaH/y2uCZf+6W5Kg==}
     dev: true
+
+  /laf-client-sdk@1.0.0-beta.14:
+    resolution: {integrity: sha512-viYbhpSm8BPZkSVeWLRl8SHwXMRaXTgzgAvWyx4kXzCALVhdf03bonxULJA5VskTsBWabCsC17I/rviYRjaZtw==}
+    dependencies:
+      axios: 0.21.4
+      database-ql: 1.0.0-beta.14
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /latest-version@5.1.0:
     resolution: {integrity: sha512-weT+r0kTkRQdCdYCNtkMwWXQTMEswKrFBkm4ckQOMVhhqhIMI1UT2hMj+1iigIhgSZm5gTmrRXBNoGUgaTY1xA==}

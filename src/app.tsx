@@ -6,6 +6,7 @@ import Taro from '@tarojs/taro';
 import ErrorBoundary from './components/ErrorBoundary';
 import './styles/katex.wxss';
 import { checkMiniUpdate } from '@utils/checkMiniUpdate';
+import { getGlobalData } from './global_data';
 
 interface AppProps {
   children: ReactNode;
@@ -22,6 +23,10 @@ function App(props: AppProps) {
     setInterval(() => {
       checkMiniUpdate();
     }, 60000);
+
+    // TODO laf 测试，看一下成本。
+    const cloud = getGlobalData('cloud');
+    cloud.invoke('access_token');
   }, []);
 
   return (
