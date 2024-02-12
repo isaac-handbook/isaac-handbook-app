@@ -9,14 +9,15 @@
     "es6": false,
     "enhance": false,
     "compileHotReLoad": false,
-    "postcss": false,
-    "minified": false,
+    "postcss": true,
+    "minified": true,
     "bigPackageSizeSupport": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "uglifyFileName": false
   },
   "compileType": "miniprogram",
   "libVersion": "3.3.3",

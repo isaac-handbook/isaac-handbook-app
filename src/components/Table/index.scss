@@ -1,34 +1,33 @@
-@import '../../styles/variables-jmapp.scss';
-
 .nut-table {
   display: flex;
   width: 100%;
   flex-direction: column;
+  --nutui-table-border-color: #e8e8e8;
 
   &__main {
     display: table;
     width: 100%;
     border-collapse: collapse;
     overflow-x: hidden;
-    color: $title-color;
-    background-color: $background-color3;
+    color: #262626;
+    background-color: #ffffff;
 
     &--striped {
       .nut-table__main__head {
         &__tr {
-          background-color: $table-tr-even-bg-color;
+          background-color: #f4f4f4;
         }
       }
 
       .nut-table__main__body {
         &__tr:nth-child(odd) {
-          background-color: $table-tr-odd-bg-color;
+          background-color: #ffffff;
         }
       }
 
       .nut-table__main__body {
         &__tr:nth-child(even) {
-          background-color: $table-tr-even-bg-color;
+          background-color: #f4f4f4;
         }
       }
     }
@@ -40,12 +39,12 @@
 
         &__th {
           display: table-cell;
-          padding: $table-cols-padding;
+          padding: 10px;
         }
 
         &__td {
           display: table-cell;
-          padding: $table-cols-padding;
+          padding: 10px;
 
           &__nodata {
             display: flex;
@@ -56,7 +55,7 @@
         }
 
         &--border {
-          border: 1px solid $table-border-color;
+          border: 1px solid var(--nutui-table-border-color, red);
         }
 
         &--alignleft,
@@ -84,12 +83,12 @@
   }
 
   &__summary {
-    color: $title-color;
-    background-color: $background-color3;
+    color: #262626;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 30px;
-    padding: $table-cols-padding;
+    padding: 10px;
   }
 }

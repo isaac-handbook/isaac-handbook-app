@@ -23,6 +23,7 @@ const config = {
     type: 'webpack5',
     prebundle: { enable: false },
   },
+  cache: { enable: true },
   alias: {
     // 配置taro项目的绝对路径
     '@src': path.resolve(__dirname, '..', 'src'),
