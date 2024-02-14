@@ -172,7 +172,7 @@ function Index() {
         </View>
 
         <View className={styles.btnContainer}>
-          <CustomButton value={'确认'} onClick={handleSubmit} />
+          <CustomButton value={'确认'} onClick={handleSubmit} type="primary" />
         </View>
       </View>
     </ErrorBoundary>

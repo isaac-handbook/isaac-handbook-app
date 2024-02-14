@@ -6,6 +6,7 @@ const globalData = {
     getAccessToken: () => wx.getStorageSync('access_token'),
     environment: EnvironmentType.WX_MP,
   }),
+  transformerLogs: [],
 };
 
 export function setGlobalData(key, val) {

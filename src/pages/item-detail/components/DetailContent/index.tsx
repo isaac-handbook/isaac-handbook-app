@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
-import { Chara, HandBookData, Item, ItemType } from 'src/types/handbook';
+import { Chara, Item } from 'src/types/handbook';
 import classNames from 'classnames';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { useRecoilState } from 'recoil';
@@ -13,13 +13,13 @@ import { getItemWikiLink } from '@utils/wiki';
 
 interface Props {
   item: Item | Chara;
-  handbookData: HandBookData;
-  type: ItemType;
 }
 
 export const DetailContent: React.FC<Props> = (props) => {
   const { item: curItem } = props;
   const [{ themeColor }] = useRecoilState(themeInfoState);
+
+  console.log(curItem.nameZh);
 
   if (!curItem) {
     return null;
@@ -44,7 +44,7 @@ export const DetailContent: React.FC<Props> = (props) => {
             id={curItem.id}
             value={item.value}
             nameZh={curItem.nameZh}
-            type={props.type}
+            type={curItem.type}
           />
         </View>
         {item.children && item.children.map((child) => renderSections(child))}
@@ -75,7 +75,7 @@ export const DetailContent: React.FC<Props> = (props) => {
                   id={curItem.id}
                   value={content}
                   nameZh={curItem.nameZh}
-                  type={props.type}
+                  type={curItem.type}
                 />
               </View>
             );
@@ -95,7 +95,7 @@ export const DetailContent: React.FC<Props> = (props) => {
 
   return (
     <View className={styles.container}>
-      {props.type === 'chara' &&
+      {curItem.type === 'chara' &&
         renderSingleModule('可解锁物品', [`{{charaUnlock|${curItem.nameZh}}}`])}
       {curItem.description &&
         renderSingleModule('简介', [

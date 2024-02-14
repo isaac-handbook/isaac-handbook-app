@@ -3,7 +3,6 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Button, Popup } from '@nutui/nutui-react-taro';
 import { GridIconSizeSetting } from './GridIconSizeSetting';
-import { PerformanceSetting } from './PerformanceSetting';
 import { SortMethodSetting } from './SortMethodSetting';
 import { Setting as SettingIcon, User } from '@nutui/icons-react-taro';
 import { ThemeSetting } from './ThemeSetting';
@@ -102,8 +101,6 @@ export const Setting: React.FC = () => {
               反馈与建议
             </Button>
           </View>
-
-          <PerformanceSetting />
 
           <DeveloperSetting />
         </View>

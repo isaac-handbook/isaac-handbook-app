@@ -17,6 +17,7 @@ import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
 import { formatCharaName, unFormatCharaName } from '@utils/formatCharaName';
 import { CharaUnlockDrawer } from '@components/CharaUnlockDrawer';
 import { ThemeColor } from '@hooks/useThemeInfo/style';
+import { getGlobalData, setGlobalData } from '@src/global_data';
 
 interface Props {
   id?: string;
@@ -45,6 +46,21 @@ export const ContentTransformer: React.FC<Props> = (props) => {
   const themeColor = lockTheme ?? themeColor_;
 
   const { handbookData } = useHandBookData();
+
+  const log = (msg: string, tagType: string) => {
+    console.log(msg, props.id, props.nameZh, props.type);
+    const transformerLogs = getGlobalData('transformerLogs');
+    setGlobalData('transformerLogs', [
+      ...transformerLogs,
+      {
+        id: props.id,
+        nameZh: props.nameZh,
+        type: props.type,
+        msg,
+        tagType,
+      },
+    ]);
+  };
 
   // 从handbookData的items中获取对应的数据
   const getItemData = (target: string) => {
@@ -172,7 +188,8 @@ export const ContentTransformer: React.FC<Props> = (props) => {
       const item = data.replace('item|', '');
       const targetItem = getItemData(item);
       if (!targetItem) {
-        return '{{FIXME 没有命中的item}}' + item;
+        log(`没有命中的item: ${item}`, 'danger');
+        return `「${item}」`;
       }
       return (
         <InlineItem
@@ -476,8 +493,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         </>
       );
     }
-    // 以上都不是，直接返回data
-    console.warn('未知的data', data);
+    log(`未知的data: ${data}`, 'info');
     return data;
   };
 

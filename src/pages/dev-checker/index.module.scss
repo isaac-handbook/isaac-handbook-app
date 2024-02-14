@@ -1,0 +1,23 @@
+.page {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: transparent;
+  box-sizing: border-box;
+  padding: 16px 12px;
+}
+
+.checkerTitle {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.checkerContainer {
+  height: 104px;
+  overflow: hidden;
+  filter: blur(1px);
+  opacity: 0.8;
+  transform: scale(0.5);
+  position: relative;
+  top: -16px;
+  left: -4px;
+}

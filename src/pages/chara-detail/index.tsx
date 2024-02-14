@@ -47,7 +47,7 @@ function ItemDetail() {
           <SingleCharaBox charaInfo={charaInfo} />
         ))}
 
-        <DetailContent item={chara} handbookData={handbookData} type="chara" />
+        <DetailContent item={chara} />
       </View>
       <SideNav />
     </ErrorBoundary>

@@ -81,6 +81,7 @@ export const Options: React.FC<Props> = (props) => {
           value={currentTopicIndex === topicList.length ? '交卷' : '下一题'}
           disabled={selected === null}
           onClick={handleNext}
+          type="primary"
         />
       )}
     </View>

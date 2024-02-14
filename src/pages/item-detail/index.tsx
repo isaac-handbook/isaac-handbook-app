@@ -142,7 +142,7 @@ function ItemDetail() {
 
         <Unlock unlock={item.unlock} />
 
-        <DetailContent item={item} handbookData={handbookData} type={type} />
+        <DetailContent item={item} />
 
         <CharaFigure itemId={item.id} />
 

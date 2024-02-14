@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
 import { View } from '@tarojs/components';
-import styles from './index.module.scss';
 import { useSetting } from '@hooks/useSetting';
-import { forceReload } from '@utils/forceReload';
-import { Button } from '@nutui/nutui-react-taro';
+import { CustomButton } from '@components/CustomButton';
+import Taro from '@tarojs/taro';
 
 const Cell: React.FC = () => {
   const {
@@ -14,9 +13,18 @@ const Cell: React.FC = () => {
     return null;
   }
 
+  const handleClick = () => {
+    // 跳转到开发者页面
+    Taro.navigateTo({ url: '/pages/developer/index' });
+  };
+
   return (
-    <View className={styles.item}>
-      <Button onClick={forceReload}>清理所有缓存</Button>
+    <View>
+      <CustomButton
+        style={{ marginTop: '24rpx', height: '104rpx' }}
+        value="前往开发者设置"
+        onClick={handleClick}
+      />
     </View>
   );
 };

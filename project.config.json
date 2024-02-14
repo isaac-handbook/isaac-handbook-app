@@ -17,7 +17,8 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "uglifyFileName": false
+    "uglifyFileName": false,
+    "condition": true
   },
   "compileType": "miniprogram",
   "libVersion": "3.3.3",
@@ -31,5 +32,9 @@
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
+  "projectArchitecture": "multiPlatform",
+  "simulatorPluginLibVersion": {
+    "wxext14566970e7e9f62": "2.27.3-4"
+  }
 }

@@ -8,16 +8,21 @@ interface Props {
   disabled?: boolean;
   style?: CSSProperties;
   onClick?: () => void;
+  type?: 'primary' | 'default';
 }
 
 const Cell: React.FC<Props> = (props) => {
-  const { value, disabled, onClick, style } = props;
+  const { value, disabled, onClick, style, type = 'default' } = props;
   return (
     <Button
       className={classNames(styles.btn, { [styles.disabled]: disabled })}
       disabled={disabled}
       onClick={onClick}
-      style={style}
+      style={{
+        ...style,
+        backgroundColor: type === 'primary' ? '#f7b733' : '#ffffff',
+        color: type === 'primary' ? '#fff' : '#333',
+      }}
     >
       {value}
     </Button>

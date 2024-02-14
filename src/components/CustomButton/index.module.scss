@@ -1,8 +1,7 @@
 .btn {
-  margin-top: 28px;
+  margin-top: 24px;
   width: 100%;
   height: 56px;
-  line-height: 56px;
   font-size: 18px;
   border-radius: 16px;
   transition: all 0.2s ease-in-out;
@@ -10,6 +9,9 @@
   background-color: #f7b733;
   color: #ffffff;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &.disabled {
     opacity: 0.5;

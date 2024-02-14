@@ -1,0 +1,29 @@
+.page {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: transparent;
+  box-sizing: border-box;
+  padding: 16px 12px;
+}
+
+.logs {
+  margin-top: 12px;
+  .log {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+
+    .logHeader {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+    .logTitle {
+      font-weight: bold;
+      margin-left: 6px;
+    }
+    .logContent {
+      font-size: 12px;
+    }
+  }
+}

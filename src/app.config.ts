@@ -17,6 +17,8 @@ export default defineAppConfig({
     'pages/charas/index',
     'pages/chara-detail/index',
     'pages/user-edit/index',
+    'pages/developer/index',
+    'pages/dev-checker/index',
   ],
   subpackages: [
     {
