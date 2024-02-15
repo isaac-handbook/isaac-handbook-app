@@ -10,6 +10,7 @@ import { useExamPaper } from '@hooks/useExamPaper';
 function Index() {
   const params = Taro.getCurrentInstance().router?.params as any;
   const level = params?.level;
+  const seasonID = params?.seasonID;
 
   const {
     themeInfo: { themeColor },
@@ -41,7 +42,7 @@ function Index() {
           color: themeColor.textColor,
         }}
       >
-        <Result level={level} />
+        <Result level={level} seasonID={seasonID} />
       </View>
     </ErrorBoundary>
   );

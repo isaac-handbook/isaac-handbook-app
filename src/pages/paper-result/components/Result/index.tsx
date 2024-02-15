@@ -16,10 +16,11 @@ import cup from '@assets/奖杯.png';
 
 interface Props {
   level: number;
+  seasonID: string;
 }
 
 export const Result: React.FC<Props> = (props) => {
-  const { level } = props;
+  const { level, seasonID } = props;
   const {
     examPaper: { topicList, userAnswerList, userScoreMap, examFinishAd },
     getScore,
@@ -72,6 +73,7 @@ export const Result: React.FC<Props> = (props) => {
     const queryRes = col.where({
       _openid: user.openid,
       level: Number(level),
+      seasonID: seasonID === 'item1' ? null : seasonID,
     });
     queryRes.get().then((res) => {
       if (!res.data.length) {
@@ -83,6 +85,7 @@ export const Result: React.FC<Props> = (props) => {
             score: curScore,
             avatar: user.avatar,
             nickname: user.nickname,
+            seasonID: seasonID === 'item1' ? null : seasonID,
           },
         });
       } else {

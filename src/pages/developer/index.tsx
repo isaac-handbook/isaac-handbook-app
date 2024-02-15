@@ -10,11 +10,16 @@ import { getGlobalData } from '@src/global_data';
 import { useState } from 'react';
 import { Tag } from '@nutui/nutui-react-taro';
 import { formatCharaName } from '@utils/formatCharaName';
+import { useUser } from '@hooks/useUser';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
+
+  const {
+    user: { openid },
+  } = useUser();
 
   // 重新 render
   const [, update] = useState({});
@@ -39,6 +44,12 @@ function Index() {
     });
   };
 
+  const handleCopyOpenid = () => {
+    Taro.setClipboardData({
+      data: openid,
+    });
+  };
+
   const transformerLogs = getGlobalData('transformerLogs');
 
   return (
@@ -47,7 +58,6 @@ function Index() {
         className={styles.page}
         style={{
           backgroundColor: themeColor.bgColor,
-          color: themeColor.textColor,
         }}
       >
         <PerformanceSetting />
@@ -55,6 +65,11 @@ function Index() {
           style={{ marginTop: 0, height: '104rpx' }}
           value="清理所有缓存"
           onClick={forceReload}
+        />
+        <CustomButton
+          style={{ marginTop: '24rpx', height: '104rpx' }}
+          value="复制当前账号 openid"
+          onClick={handleCopyOpenid}
         />
         <CustomButton
           style={{ marginTop: '24rpx', height: '104rpx' }}
@@ -67,7 +82,7 @@ function Index() {
           onClick={() => update({})}
         />
 
-        <View className={styles.logs}>
+        <View className={styles.logs} style={{ color: themeColor.textColor }}>
           <View style={{ marginBottom: '24rpx', marginTop: '48rpx' }}>
             transformer 日志
           </View>

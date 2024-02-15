@@ -2,9 +2,7 @@ import { useRecoilState } from 'recoil';
 import { useDeepCompareEffect } from 'ahooks';
 import { getSettingData } from '@src/actions/getSettingData';
 import { settingInfoState } from './useSetting';
-import { checkAndUpdateApp } from '@src/actions/checkAndUpdateApp';
 import { useUI } from './useUI';
-import { useUser } from './useUser';
 import { useApp } from './useApp';
 import { useEffect } from 'react';
 import { useExamPaper } from './useExamPaper';
@@ -21,8 +19,6 @@ export const useExamInit = () => {
   const [, setSettingData] = useRecoilState(settingInfoState);
 
   const { updateSingleUIState } = useUI();
-
-  const { updateSingleUserState } = useUser();
 
   const { app } = useApp();
 
@@ -60,17 +56,9 @@ export const useExamInit = () => {
       setSettingData(res);
     });
 
-    // 正常获取图鉴数据并更新
+    // 获取试卷数据并更新
     getExamData().then((res) => {
       updateSingleExamPaperState('examRawData', res);
-    });
-
-    // 读取app缓存，检查是否需要更新
-    checkAndUpdateApp().then((res) => {
-      if (res.shouldUpdate) {
-        // 本地需要更新，展示弹窗
-        updateSingleUIState('showUpdateModal', true);
-      }
     });
   }, []);
 };

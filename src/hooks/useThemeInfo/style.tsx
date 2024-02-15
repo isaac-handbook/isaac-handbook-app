@@ -13,7 +13,16 @@ export interface ThemeColor {
   gridBorderColor: Color;
   // 文字颜色
   textColor: Color;
+  // link 颜色
+  linkColor: Color;
+  // 重点颜色
+  primaryColor: Color;
 }
+
+const baseColor: Pick<ThemeColor, 'linkColor' | 'primaryColor'> = {
+  linkColor: '#739ede',
+  primaryColor: '#f7b733',
+};
 
 // 初始化主题
 export const initThemeColor: ThemeColor = {
@@ -22,6 +31,7 @@ export const initThemeColor: ThemeColor = {
   gridColor: 'transparent',
   gridBorderColor: 'transparent',
   textColor: '#000000',
+  ...baseColor,
 };
 
 // 深色系主题
@@ -31,6 +41,7 @@ export const darkThemeColor: ThemeColor = {
   gridColor: '#353535',
   gridBorderColor: '#000000',
   textColor: '#FFFFFFD9',
+  ...baseColor,
 };
 
 // 浅色系主题
@@ -42,4 +53,5 @@ export const lightThemeColor: ThemeColor = {
   gridColor: '#FDF5E6',
   gridBorderColor: '#bbbbbb',
   textColor: '#000000E0',
+  ...baseColor,
 };

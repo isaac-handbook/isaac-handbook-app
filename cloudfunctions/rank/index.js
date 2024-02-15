@@ -6,10 +6,18 @@ cloud.init();
  * 查询 score 表，搜索 level=100，按照 score 降序排列，取前 100 条
  */
 exports.main = async (event, context) => {
+  // 获取入参
+  const level = event.level;
+  const seasonID = event.seasonID;
+  if (!level) {
+    return {
+      rankList: [],
+    };
+  }
   const db = cloud.database();
   const col = db.collection('score');
   const res = await col
-    .where({ level: 100 })
+    .where({ level: Number(level), seasonID: seasonID ? seasonID : null })
     .orderBy('score', 'desc')
     .limit(100)
     .get();

@@ -2,8 +2,9 @@ import Taro from '@tarojs/taro';
 import { ExamRawData, Topic, UserAnswer } from '../types/exam';
 import { atom, useRecoilState } from 'recoil';
 import { refreshExamData } from '@src/actions/exam/refreshExamData';
+import { examSeasonConfig } from '@src/config/config.app';
 
-export type UserScoreMap = {
+export type SingleScoreMap = {
   level1: number;
   level2: number;
   level3: number;
@@ -11,13 +12,26 @@ export type UserScoreMap = {
   level999: number;
 };
 
-export const defaultUserScoreMap: UserScoreMap = {
+export const emptyUserScoreMap: SingleScoreMap = {
   level1: 0,
   level2: 0,
   level3: 0,
   level100: 0,
   level999: 0,
 };
+
+export type UserScoreMap = Record<
+  (typeof examSeasonConfig.seasonList)[number]['id'],
+  SingleScoreMap
+>;
+
+export const defaultUserScoreMap: Record<
+  (typeof examSeasonConfig.seasonList)[number]['id'],
+  SingleScoreMap
+> = examSeasonConfig.seasonList.reduce((prev, curr) => {
+  prev[curr.id] = { ...emptyUserScoreMap };
+  return prev;
+}, {} as UserScoreMap);
 
 interface ExamPaper {
   /** 原始试卷数据 */

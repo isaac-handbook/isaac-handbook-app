@@ -22,6 +22,7 @@ export const generateUnlockTopic = (params: Params): Topic | null => {
   const wrongList = _.shuffle(items)
     .filter((it) => it.id !== item.id)
     .filter((it) => it.unlock)
+    .filter((it) => it.unlock !== item.unlock)
     .map((it) => it.unlock)
     .slice(0, optionCount - 1);
 

@@ -10,6 +10,8 @@ interface Options {
   topicMetaList: TopicMeta[];
   /** 生成的题目包含的难度 */
   stageList: number[];
+  /** 赛季 ID */
+  seasonID: string;
 }
 
 /**
@@ -17,10 +19,22 @@ interface Options {
  * 生成 topicMetaList 中每个 item 每个 stage 的所有 type 的题目
  */
 export const endlessPaperGenerator = (options: Options): Topic[] => {
-  const { items, topicMetaList, stageList = [1, 2, 3] } = options;
+  const { items, topicMetaList, stageList = [1, 2, 3], seasonID } = options;
+
+  // 根据当前的赛季来裁剪 topicMetaList
+  let seasonTopicMetaList: typeof topicMetaList = [];
+  if (seasonID === 'item1') {
+    seasonTopicMetaList = topicMetaList.filter(
+      (item) => Number(item.id) <= 365,
+    );
+  }
+  if (seasonID === 'item2') {
+    seasonTopicMetaList = topicMetaList.filter((item) => Number(item.id) > 365);
+  }
+
   const otpTopics: Topic[] = [];
 
-  for (const topicMeta of topicMetaList) {
+  for (const topicMeta of seasonTopicMetaList) {
     const item = items.find((item) => item.id === String(topicMeta.id));
     if (!item) continue;
     // 生成 stage1 的题目

@@ -1,4 +1,4 @@
-import { UpdateInfo } from './type';
+import { ExamSeasonConfig, UpdateInfo } from './type';
 
 // 当前版本
 const version = '2.0.0';
@@ -28,4 +28,25 @@ const updateNotice: UpdateInfo = {
 export const updateInfo = {
   version,
   updateNotice,
+};
+
+export const examSeasonConfig: ExamSeasonConfig = {
+  seasonList: [
+    {
+      name: '道具篇：上',
+      id: 'item1',
+      enable: true,
+      enableEndless: true,
+      rankStatus: 'local',
+      endlessRankStatus: 'query',
+    },
+    {
+      name: '道具篇：下',
+      id: 'item2',
+      enable: false,
+      enableEndless: false,
+      rankStatus: 'query',
+      endlessRankStatus: 'query',
+    },
+  ],
 };

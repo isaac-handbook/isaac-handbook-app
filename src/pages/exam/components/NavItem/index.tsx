@@ -6,6 +6,7 @@ import Taro from '@tarojs/taro';
 import { ArrowSize6, Lock } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
 import { useExamPaper } from '@hooks/useExamPaper';
+import { Season } from '@src/config/type';
 
 interface Props {
   levelScore: number;
@@ -14,10 +15,11 @@ interface Props {
   desc: string;
   level: number;
   disabled: boolean;
+  season: Season;
 }
 
 export const NavItem: React.FC<Props> = (props) => {
-  const { levelScore, level, title, desc, iconSrc, disabled } = props;
+  const { levelScore, level, title, desc, iconSrc, disabled, season } = props;
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
@@ -36,7 +38,7 @@ export const NavItem: React.FC<Props> = (props) => {
     setTimeout(() => {
       // 跳转到 paper 页面
       Taro.navigateTo({
-        url: `/pages/paper/index?level=${level}`,
+        url: `/pages/paper/index?level=${level}&seasonID=${season.id}`,
       });
     });
   };
@@ -46,7 +48,10 @@ export const NavItem: React.FC<Props> = (props) => {
       className={classNames(styles.navItem, {
         [styles.disabled]: disabled,
       })}
-      style={{ backgroundColor: themeColor.gridColor }}
+      style={{
+        backgroundColor: themeColor.gridColor,
+        color: themeColor.textColor,
+      }}
       onClick={handleStartExam}
     >
       {disabled && (

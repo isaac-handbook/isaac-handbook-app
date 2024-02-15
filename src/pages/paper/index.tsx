@@ -17,6 +17,7 @@ import { endlessPaperGenerator } from './utils/paper/endlessPaperGenerator';
 function Index() {
   const params = Taro.getCurrentInstance().router?.params as any;
   const level = params?.level;
+  const seasonID = params?.seasonID;
 
   const {
     themeInfo: { themeColor },
@@ -43,6 +44,7 @@ function Index() {
         items,
         topicMetaList: examRawData.item,
         stageList: [1, 2, 3],
+        seasonID,
       });
     } else {
       // 生成普通模式试卷
@@ -52,15 +54,13 @@ function Index() {
         topicMetaList: examRawData.item,
         stageMap,
         sort,
+        seasonID,
       });
     }
 
     updateSingleExamPaperState('topicList', newTopicList);
     console.log('生成试卷', newTopicList);
   }, [items]);
-
-  // 用户当前在答第几题
-  // const curIndex = useMemo(() => userAnswerList.length + 1, [userAnswerList]);
 
   // 当前已经完成了答题
   const isFinished = useMemo(
@@ -72,7 +72,7 @@ function Index() {
     if (!isFinished) return;
     // 完成后，清空当前页面并跳转到结果页
     Taro.redirectTo({
-      url: `/pages/paper-result/index?level=${level}`,
+      url: `/pages/paper-result/index?level=${level}&seasonID=${seasonID}`,
     });
   }, [isFinished]);
 

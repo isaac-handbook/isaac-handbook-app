@@ -1,40 +1,29 @@
-import { View, Button } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import Taro, { useDidShow } from '@tarojs/taro';
 import { useUser } from '@hooks/useUser';
-import { useEffect } from 'react';
-import { NavItem } from './components/NavItem';
-import { levelStringMap, paperLevelMap } from '@pages/paper/constant';
+import { useEffect, useState } from 'react';
 import { defaultUserScoreMap, useExamPaper } from '@hooks/useExamPaper';
-import { Ranking } from './components/Ranking';
-import { useSetting } from '@hooks/useSetting';
 import { useLockFn } from 'ahooks';
 import { Header } from './components/Header';
-import { useApp } from '@hooks/useApp';
-import { EndlessRanking } from './components/EndlessRanking';
+import { Empty, Tabs } from '@nutui/nutui-react-taro';
+import { ExamContent } from './components/ExamContent';
+import { examSeasonConfig } from '@src/config/config.app';
+import _ from 'lodash';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
-  const {
-    app: { examConfig },
-  } = useApp();
-
   const { user, setUser } = useUser();
   const { openid } = user;
 
-  const {
-    examPaper: { userScoreMap },
-    updateSingleExamPaperState,
-  } = useExamPaper();
+  const { updateSingleExamPaperState } = useExamPaper();
 
-  const {
-    setting: { developerMode },
-  } = useSetting();
+  const [seasonTab, setSeasonTab] = useState<any>('0');
 
   const userInit = useLockFn(async () => {
     // 获取用户头像、昵称
@@ -90,64 +79,27 @@ function Index() {
     const db = Taro.cloud.database();
     const col = db.collection('score');
     const res = await col.where({ _openid: user.openid }).get();
-    let scoreMap = { ...defaultUserScoreMap };
+    let scoreMap = _.cloneDeep(defaultUserScoreMap);
     for (const item of res.data) {
-      if (item.level === 1 && item.score) {
-        scoreMap.level1 = item.score;
+      if (!item.score) {
+        continue;
       }
-      if (item.level === 2 && item.score) {
-        scoreMap.level2 = item.score;
+      const seasonID = item.seasonID ? item.seasonID : 'item1';
+      if (item.level === 1) {
+        scoreMap[seasonID].level1 = item.score;
       }
-      if (item.level === 3 && item.score) {
-        scoreMap.level3 = item.score;
+      if (item.level === 2) {
+        scoreMap[seasonID].level2 = item.score;
       }
-      if (item.level === 100 && item.score) {
-        scoreMap.level100 = item.score;
+      if (item.level === 3) {
+        scoreMap[seasonID].level3 = item.score;
+      }
+      if (item.level === 100) {
+        scoreMap[seasonID].level100 = item.score;
       }
     }
     updateSingleExamPaperState('userScoreMap', scoreMap);
   });
-
-  // 清空 score 集合中所有个人的数据
-  const handleClearUser = async () => {
-    Taro.showLoading({
-      title: '清理中',
-    });
-    // 获取剪切板中的 openid
-    const clipRes = await Taro.getClipboardData();
-    const openid = clipRes.data;
-    if (!openid || openid.length > 30) {
-      Taro.showToast({
-        title: '剪切板中没有 openid',
-        icon: 'none',
-      });
-      return;
-    }
-    const db = Taro.cloud.database();
-    const col = db.collection('score');
-    const res = await col.where({ _openid: openid }).get();
-    const ids = res.data.map((item) => item._id);
-    for (const id of ids) {
-      await col.doc(id as any).remove({});
-    }
-    Taro.hideLoading();
-    Taro.showToast({
-      title: '清理成功',
-      icon: 'success',
-    });
-  };
-
-  const getLevelDesc = (level: number) => {
-    const configTip = examConfig[`level${level}Tip`];
-    // 从 paperLevelMap 计算当前 level 有多少个题目
-    let levelCount: number = 0;
-    if (level !== 999) {
-      levelCount = paperLevelMap[String(level)].stageMap.reduce((pre, cur) => {
-        return pre + cur.count;
-      }, 0);
-    }
-    return configTip?.replace(/\{\{count\}\}/g, String(levelCount));
-  };
 
   return (
     <ErrorBoundary>
@@ -160,59 +112,45 @@ function Index() {
       >
         <Header />
 
-        <NavItem
-          level={1}
-          title={levelStringMap['1']}
-          disabled={false}
-          desc={getLevelDesc(1)}
-          levelScore={userScoreMap.level1}
-          iconSrc={require('../../assets/chara/以撒.png')}
-        />
-        <NavItem
-          level={2}
-          title={levelStringMap['2']}
-          disabled={userScoreMap.level1 < 60}
-          desc={getLevelDesc(2)}
-          levelScore={userScoreMap.level2}
-          iconSrc={require('../../assets/chara/堕化以撒.png')}
-        />
-        <NavItem
-          level={3}
-          title={levelStringMap['3']}
-          disabled={userScoreMap.level2 < 60}
-          desc={getLevelDesc(3)}
-          levelScore={userScoreMap.level3}
-          iconSrc={require('../../assets/chara/游魂.png')}
-        />
-        <NavItem
-          level={100}
-          title={levelStringMap['100']}
-          disabled={userScoreMap.level3 < 60}
-          desc={getLevelDesc(100)}
-          levelScore={userScoreMap.level100}
-          iconSrc={require('../../assets/chara/堕化游魂.png')}
-        />
-        <NavItem
-          level={999}
-          title={levelStringMap['999']}
-          disabled={userScoreMap.level3 < 60}
-          desc={getLevelDesc(999)}
-          levelScore={userScoreMap.level999}
-          iconSrc={require('../../assets/chara/以撒.png')}
-        />
-
-        {(!examConfig.rankDegrade || developerMode) && (
-          <>
-            <Ranking />
-            <EndlessRanking />
-          </>
-        )}
-
-        {developerMode && (
-          <Button className={styles.clearBtn} onClick={handleClearUser}>
-            清除剪切板中 openid 的数据
-          </Button>
-        )}
+        <Tabs
+          value={seasonTab}
+          onChange={(value) => {
+            setSeasonTab(value);
+          }}
+          style={
+            {
+              '--nutui-tabs-titles-background-color': themeColor.bgColor,
+              '--nutui-tabs-titles-item-color': themeColor.textColor,
+              '--nutui-tabs-titles-item-active-color': themeColor.primaryColor,
+              '--nutui-tabs-tab-line-color': themeColor.primaryColor,
+              '--nutui-tabs-titles-font-size': '28rpx',
+              '--nutui-tabs-tab-line-width': '32rpx',
+              '--nutui-tabs-tab-line-height': '6rpx',
+              '--nutui-tabs-line-border-radius': '6rpx',
+            } as any
+          }
+        >
+          {examSeasonConfig.seasonList.map((season) => {
+            return (
+              <Tabs.TabPane key={season.id} title={season.name}>
+                {season.enable ? (
+                  <ExamContent season={season} />
+                ) : (
+                  <Empty
+                    title={
+                      <View style={{ color: themeColor.textColor }}>
+                        即将上线
+                      </View>
+                    }
+                    style={{
+                      backgroundColor: 'transparent',
+                    }}
+                  />
+                )}
+              </Tabs.TabPane>
+            );
+          })}
+        </Tabs>
       </View>
     </ErrorBoundary>
   );

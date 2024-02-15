@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import { useUser } from '@hooks/useUser';
 import { useSetting } from '@hooks/useSetting';
 import { useApp } from '@hooks/useApp';
-import honorList from './honorList.json';
+import { Season } from '@src/config/type';
 
 interface RankItem {
   avatar: string;
@@ -18,9 +18,14 @@ interface RankItem {
   openid: string;
 }
 
-interface Props {}
+interface Props {
+  season: Season;
+  rankType: 'endless' | 'normal';
+}
 
-export const Ranking: React.FC<Props> = () => {
+export const Ranking: React.FC<Props> = (props) => {
+  const { season, rankType } = props;
+
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
@@ -41,20 +46,62 @@ export const Ranking: React.FC<Props> = () => {
 
   const [rankList, setRankList] = React.useState<RankItem[]>([]);
 
-  const updateRankList = async () => {
+  const queryAndUpdateRankList = async () => {
     // 通过云函数查询 rankList
-    // const res = (await Taro.cloud.callFunction({
-    //   name: 'rank',
-    // })) as any;
-    // setRankList(res?.result?.rankList || []);
+    const res = (await Taro.cloud.callFunction({
+      name: 'rank',
+      data: {
+        seasonID: season.id === 'item1' ? '' : season.id,
+        level: rankType === 'endless' ? 999 : 100,
+      },
+    })) as any;
+    setRankList(res?.result?.rankList || []);
+  };
 
-    // 前一百名一天就被大佬占满了。先存本地做成荣誉榜吧
-    setRankList(
-      honorList.map((item) => ({
-        ...item,
-        openid: item._openid,
-      })),
-    );
+  /** 获取本地的荣誉列表 */
+  const getLocalHonorList = () => {
+    let honorList: any[] = [];
+    try {
+      honorList = require(`./data/${season.id}_${rankType}_honorList.json`);
+      if (!Array.isArray(honorList)) {
+        throw new Error('');
+      }
+    } catch (error) {
+      honorList = [];
+    }
+    return honorList;
+  };
+
+  const updateRankList = async () => {
+    if (rankType === 'endless') {
+      if (season.endlessRankStatus === 'local') {
+        // 本地的
+        setRankList(
+          getLocalHonorList().map((item) => ({
+            ...item,
+            openid: item._openid,
+          })),
+        );
+        return;
+      }
+      // 通过云函数查询 rankList
+      queryAndUpdateRankList();
+      return;
+    }
+    if (rankType === 'normal') {
+      if (season.rankStatus === 'local') {
+        // 本地的
+        setRankList(
+          getLocalHonorList().map((item) => ({
+            ...item,
+            openid: item._openid,
+          })),
+        );
+        return;
+      }
+      // 通过云函数查询 rankList
+      queryAndUpdateRankList();
+    }
   };
 
   useDidShow(() => {
@@ -97,9 +144,16 @@ export const Ranking: React.FC<Props> = () => {
 
   return (
     <>
-      <View className={styles.wangzheTitle}>
-        王者榜
-        <View className={styles.wangzheTip}>{examConfig.rankTip}</View>
+      <View
+        className={styles.wangzheTitle}
+        style={{ color: themeColor.textColor }}
+      >
+        {rankType === 'normal' ? '王者' : '无尽'}榜
+        <View className={styles.wangzheTip}>
+          {rankType === 'normal'
+            ? examConfig.rankTip
+            : examConfig.endlessRankTip}
+        </View>
       </View>
       <View
         className={styles.container}
@@ -147,9 +201,32 @@ export const Ranking: React.FC<Props> = () => {
           );
         })}
 
-        <View className={styles.hide} onClick={() => setHide(!hide)}>
-          点击{hide ? '展开' : '收起'}所有前100位
-        </View>
+        {rankList.length > 10 && (
+          <View className={styles.hide} onClick={() => setHide(!hide)}>
+            点击{hide ? '展开' : '收起'}全部{rankList.length}位
+          </View>
+        )}
+
+        {rankList.length === 0 && (
+          <>
+            {' '}
+            <View className={styles.item}>
+              <View className={styles.count}>?</View>
+              <View className={styles.avatar}>
+                <Image src={emptyAvatar} className={styles.avatarImg} />
+              </View>
+              <View className={styles.name}> ????</View>
+              <View className={styles.score}>
+                ??
+                <View className={styles.fen}>分</View>
+              </View>
+            </View>
+            <View
+              className={styles.line}
+              style={{ backgroundColor: themeColor.gridBorderColor }}
+            ></View>
+          </>
+        )}
       </View>
     </>
   );

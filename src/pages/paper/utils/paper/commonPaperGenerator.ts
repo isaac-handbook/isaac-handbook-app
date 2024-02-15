@@ -15,17 +15,30 @@ interface Options {
   }[];
   /** 结果是否要按照 stage 从小到大排序 */
   sort?: boolean;
+  /** 赛季 ID */
+  seasonID: string;
 }
 
 /** 生成一份考卷 */
 export const commonPaperGenerator = (options: Options): Topic[] => {
-  const { items, topicMetaList, stageMap, sort = true } = options;
+  const { items, topicMetaList, stageMap, sort = true, seasonID } = options;
+
+  // 根据当前的赛季来裁剪 topicMetaList
+  let seasonTopicMetaList: typeof topicMetaList = [];
+  if (seasonID === 'item1') {
+    seasonTopicMetaList = topicMetaList.filter(
+      (item) => Number(item.id) <= 365,
+    );
+  }
+  if (seasonID === 'item2') {
+    seasonTopicMetaList = topicMetaList.filter((item) => Number(item.id) > 365);
+  }
 
   const oparateStageMap = _.cloneDeep(stageMap);
 
   const otpTopics: Topic[] = [];
 
-  for (const topicMeta of _.shuffle(topicMetaList)) {
+  for (const topicMeta of _.shuffle(seasonTopicMetaList)) {
     // 如果当前 otpTopics 已经有这个 item 了，则返回 null
     if (otpTopics.some((topic) => topic.itemId === String(topicMeta.id))) {
       continue;
