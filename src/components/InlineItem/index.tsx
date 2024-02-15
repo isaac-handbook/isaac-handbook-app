@@ -23,7 +23,7 @@ export const InlineItem: React.FC<Props> = ({ item, linkable = true }) => {
   const type = item.type;
   const isChara = type === 'chara';
 
-  const color = linkable ? '#739ede' : themeColor.textColor;
+  const color = linkable ? themeColor.linkColor : themeColor.textColor;
 
   const handleClick = () => {
     if (!linkable) {

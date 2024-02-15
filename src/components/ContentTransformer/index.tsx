@@ -317,7 +317,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         <ItemGridDrawer title={'道具池：' + pool} poolFilter={pool}>
           <View
             style={{
-              color: '#739ede',
+              color: themeColor.linkColor,
               display: 'inline',
             }}
           >
@@ -333,7 +333,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         <CharaUnlockDrawer title={'可解锁物品：' + nameZh} nameZh={nameZh}>
           <View
             style={{
-              color: '#739ede',
+              color: themeColor.linkColor,
               display: 'inline',
             }}
           >
@@ -353,7 +353,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         >
           <View
             style={{
-              color: '#739ede',
+              color: themeColor.linkColor,
               display: 'inline',
             }}
           >
@@ -369,7 +369,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         <ItemGridDrawer title={'标签：' + TTL} tagFilter={TTL}>
           <View
             style={{
-              color: '#739ede',
+              color: themeColor.linkColor,
               display: 'inline',
             }}
           >
@@ -462,7 +462,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         <ItemGridDrawer title={'道具列表'} itemInfoList={table.split(',')}>
           <View
             style={{
-              color: '#739ede',
+              color: themeColor.linkColor,
             }}
           >
             点击查看道具列表

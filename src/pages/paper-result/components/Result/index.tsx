@@ -112,7 +112,7 @@ export const Result: React.FC<Props> = (props) => {
   };
 
   const shouldShowUnlocked = (() => {
-    const oldScore = userScoreMap[`level${level}`];
+    const oldScore = userScoreMap[seasonID][`level${level}`];
     const newScore = score;
     if (oldScore < 60 && newScore >= 60) {
       return true;
@@ -121,7 +121,7 @@ export const Result: React.FC<Props> = (props) => {
   })();
 
   const shouldShowUnlocking = (() => {
-    const oldScore = userScoreMap[`level${level}`];
+    const oldScore = userScoreMap[seasonID][`level${level}`];
     const newScore = score;
     if (oldScore < 60 && newScore < 60) {
       return true;

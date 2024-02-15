@@ -17,11 +17,21 @@ export interface ThemeColor {
   linkColor: Color;
   // 重点颜色
   primaryColor: Color;
+  // 错误颜色
+  errorColor: Color;
+  // 成功颜色
+  successColor: Color;
 }
 
-const baseColor: Pick<ThemeColor, 'linkColor' | 'primaryColor'> = {
+const baseColor: Pick<
+  ThemeColor,
+  'linkColor' | 'primaryColor' | 'errorColor' | 'successColor'
+> = {
   linkColor: '#739ede',
-  primaryColor: '#f7b733',
+  // primaryColor: '#f7b733',
+  primaryColor: '#FF8C00',
+  errorColor: '#ff4d4f',
+  successColor: '#52c41a',
 };
 
 // 初始化主题

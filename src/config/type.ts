@@ -26,4 +26,5 @@ export type Season = {
 
 export type ExamSeasonConfig = {
   seasonList: Season[];
+  itemSeasonSplitID: number;
 };

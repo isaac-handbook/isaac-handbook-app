@@ -31,10 +31,10 @@ export const OptionItem: React.FC<Props> = (props) => {
 
   let borderColor = themeColor.gridColor;
   if (correctBg) {
-    borderColor = '#52c41a';
+    borderColor = themeColor.successColor;
   }
   if (wrongBg) {
-    borderColor = '#ff4d4f';
+    borderColor = themeColor.errorColor;
   }
 
   return (

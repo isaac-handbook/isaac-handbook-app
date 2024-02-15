@@ -33,20 +33,22 @@ export const updateInfo = {
 export const examSeasonConfig: ExamSeasonConfig = {
   seasonList: [
     {
+      enable: true,
       name: '道具篇：上',
       id: 'item1',
-      enable: true,
       enableEndless: true,
       rankStatus: 'local',
       endlessRankStatus: 'query',
     },
     {
+      enable: true,
       name: '道具篇：下',
       id: 'item2',
-      enable: false,
       enableEndless: false,
       rankStatus: 'query',
       endlessRankStatus: 'query',
     },
   ],
+  /** 道具篇的分隔道具ID */
+  itemSeasonSplitID: 300,
 };

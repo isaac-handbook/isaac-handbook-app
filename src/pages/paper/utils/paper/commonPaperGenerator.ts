@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import { generateStage1Topic } from '../topic/generateStage1Topic';
 import { generateStage2Topic } from '../topic/generateStage2Topic';
 import { generateStage3Topic } from '../topic/generateStage3Topic';
+import { examSeasonConfig } from '@src/config/config.app';
 
 interface Options {
   items: Item[];
@@ -27,11 +28,13 @@ export const commonPaperGenerator = (options: Options): Topic[] => {
   let seasonTopicMetaList: typeof topicMetaList = [];
   if (seasonID === 'item1') {
     seasonTopicMetaList = topicMetaList.filter(
-      (item) => Number(item.id) <= 365,
+      (item) => Number(item.id) <= examSeasonConfig.itemSeasonSplitID,
     );
   }
   if (seasonID === 'item2') {
-    seasonTopicMetaList = topicMetaList.filter((item) => Number(item.id) > 365);
+    seasonTopicMetaList = topicMetaList.filter(
+      (item) => Number(item.id) > examSeasonConfig.itemSeasonSplitID,
+    );
   }
 
   const oparateStageMap = _.cloneDeep(stageMap);

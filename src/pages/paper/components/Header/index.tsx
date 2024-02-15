@@ -3,6 +3,7 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useExamPaper } from '@hooks/useExamPaper';
 import { Progress } from '@nutui/nutui-react-taro';
+import { useThemeInfo } from '@hooks/useThemeInfo';
 
 // 做题时间，单位s
 const timeout = 20;
@@ -18,6 +19,10 @@ export const Header: React.FC<Props> = (props) => {
     examPaper: { topicList, currentTopicIndex },
     submitSingleTopic,
   } = useExamPaper();
+
+  const {
+    themeInfo: { themeColor },
+  } = useThemeInfo();
 
   const countdownRef = React.useRef<any>(null);
   const [countdown, setCountdown] = React.useState(0);
@@ -69,7 +74,7 @@ export const Header: React.FC<Props> = (props) => {
               <View
                 className={styles.number}
                 style={{
-                  color: warning ? '#ff4d4f' : 'inherit',
+                  color: warning ? themeColor.errorColor : 'inherit',
                 }}
               >
                 {timeout - countdown}s
@@ -81,7 +86,7 @@ export const Header: React.FC<Props> = (props) => {
       <View className={styles.progress}>
         <Progress
           percent={(currentTopicIndex / topicList.length) * 100}
-          color="linear-gradient(270deg, #fc4a1a 0%,#f7b733 100%)"
+          color={`linear-gradient(270deg, #fc4a1a 0%,${themeColor.primaryColor} 100%)`}
           // animated
         />
       </View>

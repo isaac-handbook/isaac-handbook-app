@@ -79,15 +79,27 @@ export const ScanHelpButton: React.FC<Props> = (props) => {
           </View>
           <View className={styles.caseRow}>
             <View className={styles.tip}>
-              <ThumbsUp size={22} color="#52c41a" className={styles.judge} />
+              <ThumbsUp
+                size={22}
+                color={themeColor.successColor}
+                className={styles.judge}
+              />
               优秀
             </View>
             <View className={styles.tip}>
-              <ThumbsUp size={22} color="#52c41a" className={styles.judge} />
+              <ThumbsUp
+                size={22}
+                color={themeColor.successColor}
+                className={styles.judge}
+              />
               优秀
             </View>
             <View className={styles.tip}>
-              <ThumbsUp size={22} color="#52c41a" className={styles.judge} />
+              <ThumbsUp
+                size={22}
+                color={themeColor.successColor}
+                className={styles.judge}
+              />
               优秀
             </View>
           </View>
@@ -98,15 +110,27 @@ export const ScanHelpButton: React.FC<Props> = (props) => {
           </View>
           <View className={styles.caseRow}>
             <View className={styles.tip}>
-              <ThumbsDown size={22} color="#ff4d4f" className={styles.judge} />
+              <ThumbsDown
+                size={22}
+                color={themeColor.errorColor}
+                className={styles.judge}
+              />
               歪了
             </View>
             <View className={styles.tip}>
-              <ThumbsDown size={22} color="#ff4d4f" className={styles.judge} />
+              <ThumbsDown
+                size={22}
+                color={themeColor.errorColor}
+                className={styles.judge}
+              />
               距离太远
             </View>
             <View className={styles.tip}>
-              <ThumbsDown size={22} color="#ff4d4f" className={styles.judge} />
+              <ThumbsDown
+                size={22}
+                color={themeColor.errorColor}
+                className={styles.judge}
+              />
               光线不好
             </View>
           </View>

@@ -53,7 +53,7 @@ const Cell: React.FC = () => {
         {notices.length > 0 && (
           <>
             <View className={styles.subTitle}>
-              <Notice size={'16'} color="#739ede" />
+              <Notice size={'16'} color={themeColor.linkColor} />
               <View className={styles.icon}>通知</View>
             </View>
             {renderNotes(notices)}
@@ -63,7 +63,7 @@ const Cell: React.FC = () => {
         {features.length > 0 && (
           <>
             <View className={styles.subTitle}>
-              <ThumbsUp size={'16'} color="#739ede" />
+              <ThumbsUp size={'16'} color={themeColor.linkColor} />
               <View className={styles.icon}>功能更新</View>
             </View>
             {renderNotes(features)}
@@ -73,7 +73,7 @@ const Cell: React.FC = () => {
         {bugs.length > 0 && (
           <>
             <View className={styles.subTitle}>
-              <ShieldCheck size={'16'} color="#739ede" />
+              <ShieldCheck size={'16'} color={themeColor.linkColor} />
               <View className={styles.icon}>修复问题</View>
             </View>
             {renderNotes(bugs)}

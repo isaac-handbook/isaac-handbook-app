@@ -118,15 +118,17 @@ export const ExamContent: React.FC<Props> = (props) => {
           iconSrc={require('../../../../assets/chara/堕化游魂.png')}
           season={season}
         />
-        <NavItem
-          level={999}
-          title={levelStringMap['999']}
-          disabled={userScoreMap[season.id].level3 < 60}
-          desc={getLevelDesc(999)}
-          levelScore={userScoreMap[season.id].level999}
-          iconSrc={require('../../../../assets/chara/以撒.png')}
-          season={season}
-        />
+        {season.enableEndless && (
+          <NavItem
+            level={999}
+            title={levelStringMap['999']}
+            disabled={userScoreMap[season.id].level3 < 60}
+            desc={getLevelDesc(999)}
+            levelScore={userScoreMap[season.id].level999}
+            iconSrc={require('../../../../assets/chara/以撒.png')}
+            season={season}
+          />
+        )}
 
         {(!examConfig.rankDegrade || developerMode) && (
           <>
