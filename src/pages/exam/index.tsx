@@ -124,9 +124,9 @@ function Index() {
               '--nutui-tabs-titles-item-active-color': themeColor.primaryColor,
               '--nutui-tabs-tab-line-color': themeColor.primaryColor,
               '--nutui-tabs-titles-font-size': '28rpx',
-              '--nutui-tabs-tab-line-width': '32rpx',
-              '--nutui-tabs-tab-line-height': '6rpx',
-              '--nutui-tabs-line-border-radius': '6rpx',
+              '--nutui-tabs-tab-line-width': '64rpx',
+              '--nutui-tabs-tab-line-height': '4rpx',
+              '--nutui-tabs-line-border-radius': '4rpx',
             } as any
           }
         >
