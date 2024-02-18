@@ -44,11 +44,11 @@ export const examSeasonConfig: ExamSeasonConfig = {
       enable: true,
       name: '道具篇：下',
       id: 'item2',
-      enableEndless: false,
+      enableEndless: true,
       rankStatus: 'query',
       endlessRankStatus: 'query',
     },
   ],
   /** 道具篇的分隔道具ID */
-  itemSeasonSplitID: 300,
+  itemSeasonSplitID: 365,
 };

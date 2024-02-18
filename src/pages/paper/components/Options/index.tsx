@@ -48,7 +48,7 @@ export const Options: React.FC<Props> = (props) => {
   const handleNext = () => {
     if (relex) {
       // 娱乐模式下直接检查实发答对了
-      submitSingleTopic(selected, 650);
+      submitSingleTopic(selected, 600);
       return;
     }
     submitSingleTopic(selected);

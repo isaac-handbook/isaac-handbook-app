@@ -20,7 +20,7 @@ export interface RawTopic {
 }
 
 export interface TopicMeta {
-  stage: TopicStage;
+  // stage: TopicStage;
   type: ItemType;
   id: string;
   questions: RawTopic[];

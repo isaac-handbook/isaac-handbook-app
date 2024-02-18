@@ -98,10 +98,6 @@ const initJsonData = (data: string) => {
     if (itemsExtra[String(item.id)]) {
       item.colors = itemsExtra[String(item.id)]?.color || [];
     }
-    // 塞 classes
-    if (itemsExtra[String(item.id)]) {
-      item.classes = itemsExtra[String(item.id)]?.classes || [];
-    }
     if (isDev) {
       // 如果 item.colors 中的值不存在与 ColorType 中，则提示
       item.colors.forEach((color) => {
@@ -125,10 +121,6 @@ const initJsonData = (data: string) => {
     // 塞 colors
     if (trinketsExtra[String(trinket.id)]) {
       trinket.colors = trinketsExtra[String(trinket.id)]?.color || [];
-    }
-    // 塞 classes
-    if (trinketsExtra[String(trinket.id)]) {
-      trinket.classes = trinketsExtra[String(trinket.id)]?.classes || [];
     }
     if (isDev) {
       // 如果 trinket.colors 中的值不存在与 ColorType 中，则提示

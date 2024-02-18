@@ -13,20 +13,21 @@ interface Params {
 export const generateDescTopic = (params: Params): Topic | null => {
   const { items, item, optionCount = 3 } = params;
 
-  const itemClasses = item.classes;
-  if (!itemClasses?.length) return null;
+  const itemTags = item.tags;
+  if (!itemTags?.length) return null;
 
-  // 寻找 items 中 classess 与 itemClasses 不相同的 item
+  // 寻找 items 中 tagss 与 itemTags 不相同的 item
   const descItems = items.filter((it) => {
-    const itemClasses = it.classes.join(',');
-    if (!itemClasses?.length) return false;
-    if (itemClasses === item.classes.join(',')) return false;
+    const itemTags = it.tags.join(',');
+    if (it.description === item.description) return false;
+    if (!itemTags?.length) return false;
+    if (itemTags === item.tags.join(',')) return false;
     return true;
   });
 
-  // 打乱 descItems 的顺序，并随机选出 optionCount 个 classes 不同的
+  // 打乱 descItems 的顺序，并随机选出 optionCount 个 tags 不同的
   const wrongList = _.shuffle(descItems)
-    .filter((it) => it.classes.length)
+    .filter((it) => it.tags.length)
     .slice(0, optionCount - 1)
     .map((it) => it.description);
 

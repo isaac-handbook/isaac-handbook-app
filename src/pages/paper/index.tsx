@@ -42,7 +42,7 @@ function Index() {
       // 生成无尽模式试卷
       newTopicList = endlessPaperGenerator({
         items,
-        topicMetaList: examRawData.item,
+        examRawData,
         stageList: [1, 2, 3],
         seasonID,
       });
@@ -51,7 +51,7 @@ function Index() {
       const { stageMap, sort } = paperLevelMap[String(level)];
       newTopicList = commonPaperGenerator({
         items,
-        topicMetaList: examRawData.item,
+        examRawData,
         stageMap,
         sort,
         seasonID,

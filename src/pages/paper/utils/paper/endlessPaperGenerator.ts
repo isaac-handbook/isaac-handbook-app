@@ -1,14 +1,15 @@
-import { TopicMeta, Topic } from '../../../../types/exam';
+import { TopicMeta, Topic, ExamRawData } from '../../../../types/exam';
 import { Item } from '../../../../types/handbook';
 import * as _ from 'lodash';
 import { generateAllStage1Topic } from '../topic/generateStage1Topic';
 import { generateAllStage2Topic } from '../topic/generateStage2Topic';
 import { generateAllStage3Topic } from '../topic/generateStage3Topic';
 import { examSeasonConfig } from '@src/config/config.app';
+import { generateItemTopicMetaList } from './generateMetaList';
 
 interface Options {
   items: Item[];
-  topicMetaList: TopicMeta[];
+  examRawData: ExamRawData;
   /** 生成的题目包含的难度 */
   stageList: number[];
   /** 赛季 ID */
@@ -20,7 +21,12 @@ interface Options {
  * 生成 topicMetaList 中每个 item 每个 stage 的所有 type 的题目
  */
 export const endlessPaperGenerator = (options: Options): Topic[] => {
-  const { items, topicMetaList, stageList = [1, 2, 3], seasonID } = options;
+  const { items, examRawData, stageList = [1, 2, 3], seasonID } = options;
+
+  let topicMetaList: TopicMeta[] = [];
+  if (seasonID.includes('item')) {
+    topicMetaList = generateItemTopicMetaList(items, examRawData.item);
+  }
 
   // 根据当前的赛季来裁剪 topicMetaList
   let seasonTopicMetaList: typeof topicMetaList = [];

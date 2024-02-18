@@ -76,8 +76,6 @@ export interface Item extends BriefItem {
   alias?: string[];
   /** 颜色 */
   colors: ColorType[];
-  /** 类别 */
-  classes: string[];
 }
 
 export interface HandBookData {

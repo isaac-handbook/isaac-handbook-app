@@ -1,14 +1,15 @@
-import { TopicMeta, Topic } from '../../../../types/exam';
+import { TopicMeta, Topic, ExamRawData } from '../../../../types/exam';
 import { Item } from '../../../../types/handbook';
 import * as _ from 'lodash';
 import { generateStage1Topic } from '../topic/generateStage1Topic';
 import { generateStage2Topic } from '../topic/generateStage2Topic';
 import { generateStage3Topic } from '../topic/generateStage3Topic';
 import { examSeasonConfig } from '@src/config/config.app';
+import { generateItemTopicMetaList } from './generateMetaList';
 
 interface Options {
   items: Item[];
-  topicMetaList: TopicMeta[];
+  examRawData: ExamRawData;
   /** 生成的题目数量与难易分布 */
   stageMap: {
     stage: number;
@@ -22,7 +23,12 @@ interface Options {
 
 /** 生成一份考卷 */
 export const commonPaperGenerator = (options: Options): Topic[] => {
-  const { items, topicMetaList, stageMap, sort = true, seasonID } = options;
+  const { items, examRawData, stageMap, sort = true, seasonID } = options;
+
+  let topicMetaList: TopicMeta[] = [];
+  if (seasonID.includes('item')) {
+    topicMetaList = generateItemTopicMetaList(items, examRawData.item);
+  }
 
   // 根据当前的赛季来裁剪 topicMetaList
   let seasonTopicMetaList: typeof topicMetaList = [];
