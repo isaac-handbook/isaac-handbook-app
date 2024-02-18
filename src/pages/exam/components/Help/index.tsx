@@ -78,9 +78,11 @@ const Cell: React.FC<Props> = () => {
           <View className={styles.title}>其他</View>
           <View className={styles.p}>
             1.
-            后续会支持更多玩法、更有趣的题目。如果你有任何建议、或发现任何问题，欢迎联系开发者反馈。
+            不定期更新更有趣的玩法、题目。如果你有任何建议、或发现任何问题，欢迎联系开发者反馈。
           </View>
-          <View className={styles.p}>2. 通关率每小时更新一次。</View>
+          <View className={styles.p}>
+            2. 通关率计算方式：当前卷大于60分人数/总参与人数。每小时更新一次。
+          </View>
         </View>
       </Popup>
     </>

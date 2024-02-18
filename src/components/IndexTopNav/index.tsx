@@ -82,7 +82,7 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
         >
           <Photograph
             size={'32rpx'}
-            className="nut-icon-am-breathe nut-icon-am-infinite"
+            // className="nut-icon-am-breathe nut-icon-am-infinite"
           />
           <View className={styles.text}>识别</View>
         </View>

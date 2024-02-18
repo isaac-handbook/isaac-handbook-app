@@ -1,7 +1,7 @@
 import { ExamSeasonConfig, UpdateInfo } from './type';
 
 // 当前版本
-const version = '2.0.0';
+const version = '2.1.0';
 
 // 更新通知
 const updateNotice: UpdateInfo = {
@@ -10,8 +10,12 @@ const updateNotice: UpdateInfo = {
   // 功能更新
   features: [
     {
-      title: '以撒课堂上线！！！',
-      content: ['想证明你的游戏理解吗？不同段位的题目等你来挑战~'],
+      title: '「课堂」新增通关率',
+      content: ['看看整体水平如何~'],
+    },
+    {
+      title: '「课堂」新题库即将到来',
+      content: ['开发者说：正在编了'],
     },
   ],
   // 问题修复
@@ -41,7 +45,7 @@ export const examSeasonConfig: ExamSeasonConfig = {
       endlessRankStatus: 'query',
     },
     {
-      enable: true,
+      enable: false,
       name: '道具篇：下',
       id: 'item2',
       enableEndless: true,

@@ -139,7 +139,7 @@ function Index() {
                   <Empty
                     title={
                       <View style={{ color: themeColor.textColor }}>
-                        即将上线
+                        马上来啦
                       </View>
                     }
                     style={{
