@@ -8,8 +8,10 @@ import { checkAndUpdateApp } from '@src/actions/checkAndUpdateApp';
 import { useUI } from './useUI';
 import Taro from '@tarojs/taro';
 import { useUser } from './useUser';
-import { AppState, useApp } from './useApp';
+import { AppState, defaultAppState, useApp } from './useApp';
 import { refreshHandBookData } from '@src/actions/handbook/refreshHandBookData';
+import { useEffect } from 'react';
+import { updateInfo } from '@src/config/config.app';
 
 // 初始化，只在进入首页时执行一次
 export const useHandbookInit = () => {
@@ -26,8 +28,12 @@ export const useHandbookInit = () => {
   useAsyncEffect(async () => {
     // 读取数据库的 app 集合，获取设置
     const db = Taro.cloud.database();
-    const res = await db.collection('app').get();
-    const config = res.data[0] as AppState;
+    const res = await db
+      .collection('app')
+      // ID 写死
+      .doc('f531710465b7ae5000bfc8f91f80646a')
+      .get({});
+    const config = (res.data || defaultAppState) as AppState;
     setApp(config);
   }, []);
 
@@ -69,6 +75,26 @@ export const useHandbookInit = () => {
     }
     updateSingleUserState('openid', OPENID);
   }, []);
+
+  // 是否要给课堂 Tab 展示红点
+  useEffect(() => {
+    if (!app.examConfig.tabBarBadge) {
+      return;
+    }
+    // 检查缓存
+    const cache = Taro.getStorageSync('examTabBarBadge');
+    if (cache === app.examConfig.tabBarBadge) {
+      return;
+    }
+    if (app.examConfig.tabBarBadge === updateInfo.version) {
+      Taro.setTabBarBadge({
+        index: 1,
+        text: 'New',
+      });
+      // 存缓存
+      Taro.setStorageSync('examTabBarBadge', updateInfo.version);
+    }
+  }, [app]);
 
   // 入口逻辑
   useAsyncEffect(async () => {

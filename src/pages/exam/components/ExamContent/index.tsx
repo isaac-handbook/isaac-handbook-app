@@ -28,7 +28,7 @@ export const ExamContent: React.FC<Props> = (props) => {
   } = useExamPaper();
 
   const {
-    app: { examConfig },
+    app: { examConfig, examPassRate },
   } = useApp();
 
   const {
@@ -36,15 +36,27 @@ export const ExamContent: React.FC<Props> = (props) => {
   } = useSetting();
 
   const getLevelDesc = (level: number) => {
-    const configTip = examConfig[`level${level}Tip`];
+    let configTip = examConfig[`level${level}Tip`];
     // 从 paperLevelMap 计算当前 level 有多少个题目
-    let levelCount: number = 0;
-    if (level !== 999) {
-      levelCount = paperLevelMap[String(level)].stageMap.reduce((pre, cur) => {
-        return pre + cur.count;
-      }, 0);
+    if (configTip.includes('{{count}}')) {
+      let levelCount: number = 0;
+      if (level !== 999) {
+        levelCount = paperLevelMap[String(level)].stageMap.reduce(
+          (pre, cur) => {
+            return pre + cur.count;
+          },
+          0,
+        );
+      }
+      configTip = configTip?.replace(/\{\{count\}\}/g, String(levelCount));
     }
-    return configTip?.replace(/\{\{count\}\}/g, String(levelCount));
+    // 加上完成率
+    let passRate = examPassRate?.[`${season.id}Level${level}`];
+    if (passRate && examConfig.showPassRate) {
+      passRate = Math.floor(Number(passRate) * 100).toFixed(0);
+      configTip += `，通关率 ${passRate}%`;
+    }
+    return configTip;
   };
 
   // 清空 score 集合中所有个人的数据

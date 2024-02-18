@@ -69,20 +69,18 @@ const Cell: React.FC<Props> = () => {
 
           <View className={styles.title}>题目</View>
           <View className={styles.p}>
-            1.
-            每道题目都是根据图鉴数据实时生成的，没有固定题库，但有开发者人工打标。
+            1. 80%的题目是智能实时生成的，20%的题目是有固定题库的。
           </View>
           <View className={styles.p}>
-            2. 目前仅支持道具题目，支持的道具ID：1~{lastItemId}。
-          </View>
-          <View className={styles.p}>
-            3. 所有题目均基于忏悔版本的游戏数据。
+            2. 所有题目均基于忏悔版本的游戏数据。
           </View>
 
           <View className={styles.title}>其他</View>
           <View className={styles.p}>
+            1.
             后续会支持更多玩法、更有趣的题目。如果你有任何建议、或发现任何问题，欢迎联系开发者反馈。
           </View>
+          <View className={styles.p}>2. 通关率每小时更新一次。</View>
         </View>
       </Popup>
     </>

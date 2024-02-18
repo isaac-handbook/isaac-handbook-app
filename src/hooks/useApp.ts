@@ -17,27 +17,38 @@ export interface AppState {
     level2Tip: string;
     level3Tip: string;
     level100Tip: string;
+    /** 是否展示通关率 */
+    showPassRate: boolean;
+    /** 是否给课堂 Tab 展示红点，值为 app 版本 */
+    tabBarBadge: string;
   };
+  /** 各试卷的通关率 ，每1小时刷新 */
+  examPassRate: Record<string, string>;
   /** 开发者模式 openid 白名单 */
   devWhiteList: string[];
 }
 
+export const defaultAppState: AppState = {
+  handbookJSONVersion: null,
+  questionJSONVersion: null,
+  examConfig: {
+    rankTip: '',
+    endlessRankTip: '',
+    rankDegrade: false,
+    level1Tip: '试试身手',
+    level2Tip: '更进一步',
+    level3Tip: '小小挑战',
+    level100Tip: '榜上有名',
+    showPassRate: true,
+    tabBarBadge: '',
+  },
+  examPassRate: {},
+  devWhiteList: [],
+};
+
 export const appState = atom<AppState>({
   key: 'appState',
-  default: {
-    handbookJSONVersion: null,
-    questionJSONVersion: null,
-    examConfig: {
-      rankTip: '',
-      endlessRankTip: '',
-      rankDegrade: false,
-      level1Tip: '',
-      level2Tip: '',
-      level3Tip: '',
-      level100Tip: '',
-    },
-    devWhiteList: [],
-  },
+  default: defaultAppState,
 });
 
 export const useApp = () => {
