@@ -3,13 +3,14 @@ import { Item } from '@typers/handbook';
 import { generateDescTopic } from './topicType/descTopic';
 import { generateCustomTopic } from './topicType/customTopic';
 
-// const customTopicWeight = 0.65;
-const customTopicWeight = 0.8;
+// const customTopicWeight = 0.8;
+const customTopicWeight = 1;
 
 interface Options {
   topicMeta: TopicMeta;
   item: Item;
   items: Item[];
+  customOnly?: boolean;
 }
 
 /** 随机生成 1 个 stage1 的题目 */
@@ -43,7 +44,7 @@ export const generateStage1Topic = (options: Options): Topic | null => {
 
 /** 生成当前 item 的所有 stage1 题目 */
 export const generateAllStage1Topic = (options: Options): Topic[] => {
-  const { item, items, topicMeta } = options;
+  const { item, items, topicMeta, customOnly } = options;
 
   const topics: Topic[] = [];
 
@@ -57,6 +58,10 @@ export const generateAllStage1Topic = (options: Options): Topic[] => {
   });
   if (customTopics.length) {
     topics.push(...customTopics);
+  }
+
+  if (customOnly) {
+    return topics;
   }
 
   // 生成 1 个 stage1 的 desc topic

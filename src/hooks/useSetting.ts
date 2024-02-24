@@ -28,6 +28,8 @@ export interface SettingInfo {
   showGridBorder: boolean;
   /** 开发者模式 */
   developerMode: boolean;
+  /** 【开发者】无尽模式试卷是否只生成自定义题目 */
+  customOnlyOnEndlessPaper: boolean;
 }
 
 /** 默认设置 */
@@ -38,6 +40,7 @@ export const defaultSettingInfo: SettingInfo = {
   theme: 'light',
   showGridBorder: true,
   developerMode: false,
+  customOnlyOnEndlessPaper: false,
 };
 
 export const settingInfoState = atom<SettingInfo>({

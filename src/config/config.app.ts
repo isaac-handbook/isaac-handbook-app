@@ -3,6 +3,9 @@ import { ExamSeasonConfig, UpdateInfo } from './type';
 // 当前版本
 const version = '2.1.0';
 
+/** 生成无尽卷时，只生成自定义试题 */
+export const customOnlyOnEndlessPaper = true;
+
 // 更新通知
 const updateNotice: UpdateInfo = {
   // 通知
@@ -45,7 +48,7 @@ export const examSeasonConfig: ExamSeasonConfig = {
       endlessRankStatus: 'query',
     },
     {
-      enable: false,
+      enable: true,
       name: '道具篇：下',
       id: 'item2',
       enableEndless: true,

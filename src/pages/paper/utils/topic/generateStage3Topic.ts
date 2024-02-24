@@ -4,8 +4,8 @@ import { generateCustomTopic } from './topicType/customTopic';
 import { generateQualityTopic } from './topicType/qualityTopic';
 import { generateUnlockTopic } from './topicType/unlockTopic';
 
-const customTopicWeight = 0.55;
-// const customTopicWeight = 0.65;
+// const customTopicWeight = 0.55;
+const customTopicWeight = 1;
 const unlockTopicWeight = 0.4;
 // const unlockTopicWeight = 0.3;
 
@@ -13,6 +13,7 @@ interface Options {
   topicMeta: TopicMeta;
   item: Item;
   items: Item[];
+  customOnly?: boolean;
 }
 
 /** 随机生成 1 个 stage3 的题目 */
@@ -51,7 +52,7 @@ export const generateStage3Topic = (options: Options): Topic | null => {
 
 /** 生成当前 item 的所有 stage3 题目 */
 export const generateAllStage3Topic = (options: Options): Topic[] => {
-  const { item, items, topicMeta } = options;
+  const { item, items, topicMeta, customOnly } = options;
 
   const topics: Topic[] = [];
 
@@ -65,6 +66,10 @@ export const generateAllStage3Topic = (options: Options): Topic[] => {
   });
   if (customTopics.length) {
     topics.push(...customTopics);
+  }
+
+  if (customOnly) {
+    return topics;
   }
 
   // 生成 1 个 stage3 的 unlock topic

@@ -5,9 +5,9 @@ import _ from 'lodash';
  * @param semiOptions
  */
 export const randomAnswer = (correct: any, wrongList: any[], count = 3) => {
-  let cuttedWrongList = wrongList;
+  let cuttedWrongList = _.shuffle(wrongList);
   if (wrongList.length > count - 1) {
-    cuttedWrongList = wrongList.slice(0, count - 1);
+    cuttedWrongList = cuttedWrongList.slice(0, count - 1);
   }
   const shuffledOptions = _.shuffle([correct, ...cuttedWrongList]);
   const answer = shuffledOptions.findIndex((option) => option === correct);

@@ -36,9 +36,9 @@ export const ExamContent: React.FC<Props> = (props) => {
   } = useSetting();
 
   const getLevelDesc = (level: number) => {
-    let configTip = examConfig[`level${level}Tip`];
+    let configTip = examConfig[`level${level}Tip`] || '';
     // 从 paperLevelMap 计算当前 level 有多少个题目
-    if (configTip.includes('{{count}}')) {
+    if (configTip?.includes('{{count}}')) {
       let levelCount: number = 0;
       if (level !== 999) {
         levelCount = paperLevelMap[String(level)].stageMap.reduce(

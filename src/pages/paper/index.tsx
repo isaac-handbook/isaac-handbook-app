@@ -13,6 +13,7 @@ import Taro from '@tarojs/taro';
 import { paperLevelMap } from './constant';
 import { Topic } from '@typers/exam';
 import { endlessPaperGenerator } from './utils/paper/endlessPaperGenerator';
+import { useSetting } from '@hooks/useSetting';
 
 function Index() {
   const params = Taro.getCurrentInstance().router?.params as any;
@@ -32,6 +33,10 @@ function Index() {
     updateSingleExamPaperState,
   } = useExamPaper();
 
+  const {
+    setting: { customOnlyOnEndlessPaper },
+  } = useSetting();
+
   // 当前选中的
   const [selected, setSelected] = useState<number | null>(null);
 
@@ -41,10 +46,12 @@ function Index() {
     if (level === '999') {
       // 生成无尽模式试卷
       newTopicList = endlessPaperGenerator({
+        // items: items.filter((it) => it.id === '527'),
         items,
         examRawData,
         stageList: [1, 2, 3],
         seasonID,
+        customOnly: customOnlyOnEndlessPaper,
       });
     } else {
       // 生成普通模式试卷

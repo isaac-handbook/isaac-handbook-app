@@ -14,6 +14,8 @@ interface Options {
   stageList: number[];
   /** 赛季 ID */
   seasonID: string;
+  /** 只生成自定义试题 */
+  customOnly?: boolean;
 }
 
 /**
@@ -21,7 +23,13 @@ interface Options {
  * 生成 topicMetaList 中每个 item 每个 stage 的所有 type 的题目
  */
 export const endlessPaperGenerator = (options: Options): Topic[] => {
-  const { items, examRawData, stageList = [1, 2, 3], seasonID } = options;
+  const {
+    items,
+    examRawData,
+    stageList = [1, 2, 3],
+    seasonID,
+    customOnly = false,
+  } = options;
 
   let topicMetaList: TopicMeta[] = [];
   if (seasonID.includes('item')) {
@@ -52,6 +60,7 @@ export const endlessPaperGenerator = (options: Options): Topic[] => {
         topicMeta,
         item,
         items,
+        customOnly,
       });
       if (topics.length) {
         otpTopics.push(...topics);
@@ -63,6 +72,7 @@ export const endlessPaperGenerator = (options: Options): Topic[] => {
         topicMeta,
         item,
         items,
+        customOnly,
       });
       if (topics.length) {
         otpTopics.push(...topics);
@@ -74,6 +84,7 @@ export const endlessPaperGenerator = (options: Options): Topic[] => {
         topicMeta,
         item,
         items,
+        customOnly,
       });
       if (topics.length) {
         otpTopics.push(...topics);

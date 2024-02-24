@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { Tag } from '@nutui/nutui-react-taro';
 import { formatCharaName } from '@utils/formatCharaName';
 import { useUser } from '@hooks/useUser';
+import { CustomOnlyOnEndlessPaperSetting } from '@pages/index/components/Setting/CustomOnlyOnEndlesspaperSetting';
 
 function Index() {
   const {
@@ -61,6 +62,9 @@ function Index() {
         }}
       >
         <PerformanceSetting />
+
+        <CustomOnlyOnEndlessPaperSetting />
+
         <CustomButton
           style={{ marginTop: 0, height: '104rpx' }}
           value="清理所有缓存"

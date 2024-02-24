@@ -5,12 +5,12 @@ import { useSetting } from '@hooks/useSetting';
 
 const Cell: React.FC = () => {
   const {
-    setting: { performance, developerMode },
+    setting: { customOnlyOnEndlessPaper, developerMode },
     updateSetting,
   } = useSetting();
 
   const onChange = () => {
-    updateSetting({ performance: !performance });
+    updateSetting({ customOnlyOnEndlessPaper: !customOnlyOnEndlessPaper });
   };
 
   if (!developerMode) {
@@ -19,10 +19,10 @@ const Cell: React.FC = () => {
 
   return (
     <View className={styles.item}>
-      <View className={styles.label}>VirtualList 模式</View>
-      <Switch checked={performance} onClick={onChange} />
+      <View className={styles.label}>无尽试卷只生成自定义题目</View>
+      <Switch checked={customOnlyOnEndlessPaper} onClick={onChange} />
     </View>
   );
 };
 
-export const PerformanceSetting = memo(Cell);
+export const CustomOnlyOnEndlessPaperSetting = memo(Cell);
