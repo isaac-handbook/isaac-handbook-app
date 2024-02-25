@@ -1,10 +1,7 @@
 import { ExamSeasonConfig, UpdateInfo } from './type';
 
 // 当前版本
-const version = '2.1.0';
-
-/** 生成无尽卷时，只生成自定义试题 */
-export const customOnlyOnEndlessPaper = true;
+const version = '2.2.0';
 
 // 更新通知
 const updateNotice: UpdateInfo = {
@@ -13,13 +10,13 @@ const updateNotice: UpdateInfo = {
   // 功能更新
   features: [
     {
-      title: '「课堂」新增通关率',
-      content: ['看看整体水平如何~'],
+      title: '「课堂」道具篇：下',
+      content: ['全新题目，更有挑战~'],
     },
-    {
-      title: '「课堂」新题库即将到来',
-      content: ['开发者说：正在编了'],
-    },
+    // {
+    //   title: '「课堂」新题库即将到来',
+    //   content: ['开发者说：正在编了'],
+    // },
   ],
   // 问题修复
   bugs: [
@@ -41,18 +38,18 @@ export const examSeasonConfig: ExamSeasonConfig = {
   seasonList: [
     {
       enable: true,
-      name: '道具篇：上',
-      id: 'item1',
-      enableEndless: true,
-      rankStatus: 'local',
+      name: '道具篇：下',
+      id: 'item2',
+      enableEndless: false,
+      rankStatus: 'query',
       endlessRankStatus: 'query',
     },
     {
       enable: true,
-      name: '道具篇：下',
-      id: 'item2',
+      name: '道具篇：上',
+      id: 'item1',
       enableEndless: true,
-      rankStatus: 'query',
+      rankStatus: 'local',
       endlessRankStatus: 'query',
     },
   ],

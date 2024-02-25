@@ -3,8 +3,8 @@ import { Item } from '@typers/handbook';
 import { generateDescTopic } from './topicType/descTopic';
 import { generateCustomTopic } from './topicType/customTopic';
 
-// const customTopicWeight = 0.8;
-const customTopicWeight = 1;
+const customTopicWeight = 0.8;
+// const customTopicWeight = 1;
 
 interface Options {
   topicMeta: TopicMeta;

@@ -66,6 +66,13 @@ function Index() {
     pageResume();
   });
 
+  useEffect(() => {
+    // 清除 TabBar 的红点
+    Taro.hideTabBarRedDot({
+      index: 1,
+    });
+  }, []);
+
   const pageResume = useLockFn(async () => {
     Taro.showLoading({
       title: '',

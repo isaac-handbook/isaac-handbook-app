@@ -4,10 +4,9 @@ import { generateCustomTopic } from './topicType/customTopic';
 import { generateQualityTopic } from './topicType/qualityTopic';
 import { generateUnlockTopic } from './topicType/unlockTopic';
 
-// const customTopicWeight = 0.55;
-const customTopicWeight = 1;
-const unlockTopicWeight = 0.4;
-// const unlockTopicWeight = 0.3;
+const customTopicWeight = 0.55;
+// const customTopicWeight = 1;
+const unlockTopicWeight = 0.35;
 
 interface Options {
   topicMeta: TopicMeta;
