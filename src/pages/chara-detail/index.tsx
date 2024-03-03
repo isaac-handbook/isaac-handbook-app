@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { View } from '@tarojs/components';
-import { SideNav } from '@components/SideNav';
 import styles from './index.module.scss';
 import { useHandBookData } from '@hooks/useHandbookData';
 import Taro from '@tarojs/taro';
@@ -49,7 +48,6 @@ function ItemDetail() {
 
         <DetailContent item={chara} />
       </View>
-      <SideNav />
     </ErrorBoundary>
   );
 }

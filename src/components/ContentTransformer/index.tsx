@@ -18,6 +18,7 @@ import { formatCharaName, unFormatCharaName } from '@utils/formatCharaName';
 import { CharaUnlockDrawer } from '@components/CharaUnlockDrawer';
 import { ThemeColor } from '@hooks/useThemeInfo/style';
 import { getGlobalData, setGlobalData } from '@src/global_data';
+import { pickItemFromHandbook } from './utils/pickItemFromHandbook';
 
 interface Props {
   id?: string;
@@ -62,71 +63,6 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     ]);
   };
 
-  // 从handbookData的items中获取对应的数据
-  const getItemData = (target: string) => {
-    // 如果是ID=c开头，说明要匹配道具的id
-    if (target.startsWith('ID=c')) {
-      const item = handbookData.items.find(
-        (item) => item.id === target.replace('ID=c', ''),
-      );
-      if (!item) {
-        return null;
-      }
-      return item;
-    }
-    // 如果是ID=t开头，说明要匹配饰品的id
-    if (target.startsWith('ID=t')) {
-      const trinket = handbookData.trinkets.find(
-        (trinket) => trinket.id === target.replace('ID=t', ''),
-      );
-      if (!trinket) {
-        return null;
-      }
-      return trinket;
-    }
-    // 如果是ID=p开头，说明要匹配胶囊的id
-    if (target.startsWith('ID=p')) {
-      const pill = handbookData.pills.find(
-        (pill) => pill.id === target.replace('ID=p', ''),
-      );
-      if (!pill) {
-        return null;
-      }
-      return pill;
-    }
-    // 如果是ID=k开头，说明要匹配卡牌的id
-    if (target.startsWith('ID=k')) {
-      const card = handbookData.cards.find(
-        (card) => card.id === target.replace('ID=k', ''),
-      );
-      if (!card) {
-        return null;
-      }
-      return card;
-    }
-    // 不是c开头，匹配nameZh
-    // 匹配道具
-    const item = handbookData.items.find((item) => item.nameZh === target);
-    if (item) return item;
-    // 匹配饰品
-    const trinket = handbookData.trinkets.find(
-      (trinket) => trinket.nameZh === target,
-    );
-    if (trinket) return trinket;
-    // 匹配卡牌
-    const card = handbookData.cards.find((card) => card.nameZh === target);
-    if (card) return card;
-    // 匹配胶囊
-    const pill = handbookData.pills.find((pill) => pill.nameZh === target);
-    if (pill) return pill;
-
-    if (props.type === 'chara') {
-      return handbookData.chara[target];
-    }
-
-    return null;
-  };
-
   // 转换value中的{{}}为对应的数据
   const transformInnerData = (data: string) => {
     if (mode === 'clean') {
@@ -165,14 +101,22 @@ export const ContentTransformer: React.FC<Props> = (props) => {
       case 'N':
         return (
           <InlineItem
-            item={getItemData(nameZh ?? '当前道具')}
+            item={pickItemFromHandbook({
+              target: nameZh || '当前道具',
+              handbookData,
+              type: props.type,
+            })}
             linkable={false}
           />
         );
       case 'n':
         return (
           <InlineItem
-            item={getItemData(nameZh ?? '当前道具')}
+            item={pickItemFromHandbook({
+              target: nameZh || '当前道具',
+              handbookData,
+              type: props.type,
+            })}
             linkable={false}
           />
         );
@@ -186,7 +130,11 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     // item| 开头，表示是一个物品
     if (data.startsWith('item|')) {
       const item = data.replace('item|', '');
-      const targetItem = getItemData(item);
+      const targetItem = pickItemFromHandbook({
+        target: item || '当前道具',
+        handbookData,
+        type: props.type,
+      });
       if (!targetItem) {
         log(`没有命中的item: ${item}`, 'danger');
         return `「${item}」`;

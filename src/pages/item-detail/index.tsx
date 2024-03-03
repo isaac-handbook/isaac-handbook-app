@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { View } from '@tarojs/components';
-import { SideNav } from '@components/SideNav';
 import styles from './index.module.scss';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { Item, ItemType } from 'src/types/handbook';
@@ -166,7 +165,6 @@ function ItemDetail() {
           )
         } */}
       </View>
-      <SideNav />
     </ErrorBoundary>
   );
 }

@@ -7,20 +7,20 @@ import { PoolFilter } from './PoolFilter';
 import { TagFilter } from './TagFilter';
 import { QualityFilter } from './QualityFilter';
 import { ChargeFilter } from './ChargeFilter';
-import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
 import { NeedUnlock } from './NeedUnlock';
 import { drawerMaskColor } from '@src/styles';
+import { useAchieveSearchInfo } from '@hooks/useAchieveSearchInfo';
 
-export const ItemFilter: React.FC = () => {
+export const AchieveFilter: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
 
-  const { resetFilter } = useItemSearchInfo();
+  const { resetFilter } = useAchieveSearchInfo();
 
   return (
     <>
       <Popup
         closeable
-        title="道具过滤"
+        title="成就过滤"
         visible={visible}
         position="bottom"
         round
@@ -47,7 +47,7 @@ export const ItemFilter: React.FC = () => {
         }
         onCloseIconClick={(e) => {
           e.preventDefault();
-          resetFilter({});
+          resetFilter();
         }}
       >
         <View className={styles.drawer}>

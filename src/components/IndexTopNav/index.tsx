@@ -5,48 +5,26 @@ import { Setting } from '../../pages/index/components/Setting';
 import styles from './index.module.scss';
 import { ItemFilter } from '../../pages/index/components/ItemFilter';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
-import { Home, Photograph, Refresh } from '@nutui/icons-react-taro';
+import { Refresh } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
-import Taro from '@tarojs/taro';
 import { useTrinketSearchInfo } from '@hooks/useTrinketSearchInfo';
+import { SideMenu } from '@components/SideMenu';
+import { AchieveFilter } from '@pages/achieve/components/AchieveFilter';
 
 export interface IndexTopNavProps extends SearchProps {
-  supportFilter?: boolean;
   supportSetting?: boolean;
-  supportBackHome?: boolean;
-  supportColorFilter?: boolean;
 }
 
 export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
-  const {
-    supportFilter = true,
-    supportSetting = true,
-    supportBackHome = false,
-    // supportColorFilter = false,
-    type,
-  } = props;
+  const { supportSetting = true, type } = props;
 
-  const {
-    hasFilterInfo: item_hasFilterInfo,
-    resetFilter: item_resetFilter,
-    // updateItemSearchInfo,
-    // itemSearchInfo,
-  } = useItemSearchInfo();
+  const { hasFilterInfo: item_hasFilterInfo, resetFilter: item_resetFilter } =
+    useItemSearchInfo();
 
   const {
     hasFilterInfo: trinket_hasFilterInfo,
     resetFilter: trinket_resetFilter,
   } = useTrinketSearchInfo();
-
-  const handleBackHome = () => {
-    // 清除所有页面栈，并返回首页
-    Taro.reLaunch({ url: '/pages/index/index' });
-  };
-
-  const handleScanClick = () => {
-    // 跳转到 scan 页面
-    Taro.navigateTo({ url: '/package-scan/pages/scan/index' });
-  };
 
   const shouldShowReset =
     type === 'item' ? item_hasFilterInfo : trinket_hasFilterInfo;
@@ -75,31 +53,10 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
         </View>
       )}
 
-      {type === 'item' && (
-        <View
-          onClick={handleScanClick}
-          className={classNames(styles.icon, styles.refresh)}
-        >
-          <Photograph
-            size={'32rpx'}
-            // className="nut-icon-am-breathe nut-icon-am-infinite"
-          />
-          <View className={styles.text}>识别</View>
-        </View>
-      )}
+      <SideMenu />
 
-      {supportFilter && <ItemFilter />}
-
-      {supportBackHome && (
-        <View
-          onClick={handleBackHome}
-          className={styles.icon}
-          // style={{ paddingLeft: '6rpx' }}
-        >
-          <Home size={'32rpx'} />
-          <View className={styles.text}>首页</View>
-        </View>
-      )}
+      {type === 'item' && <ItemFilter />}
+      {type === 'achieve' && <AchieveFilter />}
     </View>
   );
 };

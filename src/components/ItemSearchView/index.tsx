@@ -4,9 +4,11 @@ import { IndexTopNav, IndexTopNavProps } from '../IndexTopNav';
 import { ItemGrid } from '../ItemGrid';
 import styles from './index.module.scss';
 import { ItemList } from '@components/itemList';
+import { ItemType } from '@typers/handbook';
 
-interface Props extends IndexTopNavProps {
+interface Props extends Omit<IndexTopNavProps, 'type'> {
   showType: 'grid' | 'list';
+  type: ItemType;
 }
 
 export const ItemSearchView: React.FC<Props> = (props) => {

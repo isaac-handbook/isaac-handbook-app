@@ -7,6 +7,7 @@ import itemsExtra from '@data/itemsExtra.json';
 import trinketsExtra from '@data/trinketsExtra.json';
 import { colorTypeList } from '@hooks/useItemSearchInfo';
 import { isDev } from '@utils/env';
+import { pickItemFromHandbook } from '@components/ContentTransformer/utils/pickItemFromHandbook';
 
 // 请求失败后重试的次数
 let reTryTimes = 0;
@@ -116,6 +117,7 @@ const initJsonData = (data: string) => {
     ...trinket,
     type: 'trinket',
   }));
+
   // 遍历每一个 trinkets，将 trinketsExtra.json 的内容添加进去
   res.trinkets = res.trinkets.map((trinket) => {
     // 塞 colors
@@ -140,17 +142,47 @@ const initJsonData = (data: string) => {
     ...card,
     type: 'card',
   }));
+
   // 所有 pills 都加入 type=pill
   res.pills = res.pills.map((pill) => ({
     ...pill,
     type: 'pill',
   }));
+
   // 所有 chara 都加入 type=chara
   Object.keys(res.chara).forEach((key) => {
     res.chara[key] = {
       ...res.chara[key],
       type: 'chara',
     };
+  });
+
+  // 遍历每一个 achieve，寻找 unlock 和 unlockItem 中包含的 {{item|ID=XXX}}
+  res.achieve = res.achieve.map((achieve) => {
+    if (!achieve.tmp) {
+      achieve.tmp = '';
+    }
+    if (achieve.unlock) {
+      // 使用正则匹配所有 {{item|ID=XXX}}，中的 XXX。其中 XXX 为 string
+      achieve.unlock.match(/\{\{item\|ID=(.*?)\}\}/g)?.forEach((match) => {
+        const it = pickItemFromHandbook({
+          target: match.replace('{{item|', '').replace('}}', ''),
+          handbookData: res,
+        });
+        achieve.tmp += (it?.nameZh || '') + ' ';
+      });
+    }
+    if (achieve.unlockItem) {
+      // 使用正则匹配所有 {{item|ID=XXX}}，中的 XXX。其中 XXX 为 string
+      achieve.unlockItem.match(/\{\{item\|ID=(.*?)\}\}/g)?.forEach((match) => {
+        const it = pickItemFromHandbook({
+          target: match.replace('{{item|', '').replace('}}', ''),
+          handbookData: res,
+        });
+        achieve.tmp += (it?.nameZh || '') + ' ';
+      });
+    }
+    return achieve;
   });
 
   return res;

@@ -1,0 +1,44 @@
+.page {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: transparent;
+  box-sizing: border-box;
+  position: relative;
+
+  padding-top: 90px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  padding: 4px;
+  height: 38px;
+  box-sizing: border-box;
+  padding-right: 8px;
+  position: fixed;
+  top: 52px;
+  color: #000000;
+
+  .id {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // border-right: 1px solid #333333;
+  }
+
+  .unlock {
+    flex: 7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // border-right: 1px solid #333333;
+  }
+
+  .unlockItem {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -11,6 +11,7 @@ import { Ranking } from '../Ranking';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { Season } from '@src/config/type';
+import { Dialog } from '@nutui/nutui-react-taro';
 
 interface Props {
   season: Season;
@@ -61,30 +62,43 @@ export const ExamContent: React.FC<Props> = (props) => {
 
   // 清空 score 集合中所有个人的数据
   const handleClearUser = async () => {
-    Taro.showLoading({
-      title: '清理中',
-    });
-    // 获取剪切板中的 openid
-    const clipRes = await Taro.getClipboardData();
-    const openid = clipRes.data;
-    if (!openid || openid.length > 30) {
-      Taro.showToast({
-        title: '剪切板中没有 openid',
-        icon: 'none',
+    const clean = async () => {
+      Taro.showLoading({
+        title: '清理中',
       });
-      return;
-    }
-    const db = Taro.cloud.database();
-    const col = db.collection('score');
-    const res = await col.where({ _openid: openid }).get();
-    const ids = res.data.map((item) => item._id);
-    for (const id of ids) {
-      await col.doc(id as any).remove({});
-    }
-    Taro.hideLoading();
-    Taro.showToast({
-      title: '清理成功',
-      icon: 'success',
+      // 获取剪切板中的 openid
+      const clipRes = await Taro.getClipboardData();
+      const openid = clipRes.data;
+      if (!openid || openid.length > 30) {
+        Taro.showToast({
+          title: '剪切板中没有 openid',
+          icon: 'none',
+        });
+        return;
+      }
+      const db = Taro.cloud.database();
+      const col = db.collection('score');
+      const res = await col.where({ _openid: openid }).get();
+      const ids = res.data.map((item) => item._id);
+      for (const id of ids) {
+        await col.doc(id as any).remove({});
+      }
+      Taro.hideLoading();
+      Taro.showToast({
+        title: '清理成功',
+        icon: 'success',
+      });
+    };
+
+    Dialog.open('cleanOpenid', {
+      title: '确定要清理吗？',
+      onConfirm: () => {
+        clean();
+        Dialog.close('cleanOpenid');
+      },
+      onCancel() {
+        Dialog.close('cleanOpenid');
+      },
     });
   };
 
@@ -94,6 +108,8 @@ export const ExamContent: React.FC<Props> = (props) => {
         className={styles.container}
         style={{ color: themeColor.textColor }}
       >
+        <Dialog id="cleanOpenid" />
+
         <NavItem
           level={1}
           title={levelStringMap['1']}

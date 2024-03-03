@@ -11,9 +11,10 @@ import { usePillSearchInfo } from '@hooks/usePillSearchInfo';
 import { ItemType } from 'src/types/handbook';
 import { useApp } from '@hooks/useApp';
 import { useUser } from '@hooks/useUser';
+import { useAchieveSearchInfo } from '@hooks/useAchieveSearchInfo';
 
 export interface SearchProps {
-  type: ItemType;
+  type: ItemType | 'achieve';
   marginLeft?: string;
 }
 
@@ -22,6 +23,7 @@ export const Search: React.FC<SearchProps> = (props) => {
   const { trinketSearchInfo, setTrinketSearchInfo } = useTrinketSearchInfo();
   const { cardSearchInfo, setCardSearchInfo } = useCardSearchInfo();
   const { pillSearchInfo, setPillSearchInfo } = usePillSearchInfo();
+  const { achieveSearchInfo, setAchieveSearchInfo } = useAchieveSearchInfo();
 
   const {
     updateSetting,
@@ -87,6 +89,13 @@ export const Search: React.FC<SearchProps> = (props) => {
         keyword: val,
       }));
     }
+    // 搜索成就
+    if (props.type === 'achieve') {
+      setAchieveSearchInfo((prev) => ({
+        ...prev,
+        keyword: val,
+      }));
+    }
   };
 
   const handleClear = () => {
@@ -115,6 +124,12 @@ export const Search: React.FC<SearchProps> = (props) => {
         keyword: '',
       }));
     }
+    if (props.type === 'achieve') {
+      setAchieveSearchInfo((prev) => ({
+        ...prev,
+        keyword: '',
+      }));
+    }
   };
 
   const customStyle: any = {
@@ -137,6 +152,9 @@ export const Search: React.FC<SearchProps> = (props) => {
     case 'pill':
       keyword = pillSearchInfo.keyword;
       break;
+    case 'achieve':
+      keyword = achieveSearchInfo.keyword;
+      break;
     default:
       break;
   }
@@ -145,7 +163,7 @@ export const Search: React.FC<SearchProps> = (props) => {
     <View className={styles.search} style={{ marginLeft: props.marginLeft }}>
       <SearchBar
         shape="round"
-        placeholder={'万能的搜索'}
+        placeholder={'关键字搜索'}
         onSearch={onSearch}
         style={customStyle}
         onClear={handleClear}

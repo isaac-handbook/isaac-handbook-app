@@ -19,6 +19,7 @@ export default defineAppConfig({
     'pages/user-edit/index',
     'pages/developer/index',
     'pages/dev-checker/index',
+    'pages/achieve/index',
   ],
   subpackages: [
     {

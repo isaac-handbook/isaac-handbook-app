@@ -5,6 +5,7 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { DetailContent } from '@pages/item-detail/components/DetailContent';
 import { useEffect, useState } from 'react';
+import { ContentTransformer } from '@components/ContentTransformer';
 
 function Index() {
   const {
@@ -45,6 +46,9 @@ function Index() {
               <View className={styles.checkerContainer}>
                 <DetailContent item={checkItem} />
               </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkItem.unlock} />
+              </View>
             </>
           ) : (
             <View className={styles.checkerTitle}>道具检测完成</View>
@@ -57,6 +61,9 @@ function Index() {
               </View>
               <View className={styles.checkerContainer}>
                 <DetailContent item={checkTrinket} />
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkItem.unlock} />
               </View>
             </>
           ) : (
@@ -71,6 +78,9 @@ function Index() {
               <View className={styles.checkerContainer}>
                 <DetailContent item={checkCard} />
               </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkItem.unlock} />
+              </View>
             </>
           ) : (
             <View className={styles.checkerTitle}>卡牌检测完成</View>
@@ -84,6 +94,9 @@ function Index() {
               <View className={styles.checkerContainer}>
                 <DetailContent item={checkPill} />
               </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkItem.unlock} />
+              </View>
             </>
           ) : (
             <View className={styles.checkerTitle}>药丸检测完成</View>
@@ -96,6 +109,9 @@ function Index() {
               </View>
               <View className={styles.checkerContainer}>
                 <DetailContent item={checkChara} />
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkItem.unlock} />
               </View>
             </>
           ) : (

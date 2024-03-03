@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
-import { Home, ArrowDown } from '@nutui/icons-react-taro';
+import { ArrowDown } from '@nutui/icons-react-taro';
 import Taro from '@tarojs/taro';
 import { PoolsPopover } from './PoolsPopover';
 import { Item } from 'src/types/handbook';
@@ -9,6 +9,7 @@ import { TagsPopover } from './TagsPopover';
 import { ItemGridDrawer } from '@components/ItemGridDrawer';
 import { Popover } from '@nutui/nutui-react-taro';
 import classNames from 'classnames';
+import { SideMenu } from '@components/SideMenu';
 
 export interface Props {
   item: Item;
@@ -78,11 +79,14 @@ export const DetailTopNav: React.FC<Props> = (props) => {
 
       {item.pools?.length ? <PoolsPopover pools={item.pools} /> : null}
 
-      <View className={styles.cell} onClick={handleBackHome}>
+      {/* <View className={styles.cell} onClick={handleBackHome}>
         <View className={styles.label}>首页</View>
         <View style={{ marginTop: '8rpx' }}>
           <Home size={'36rpx'} />
         </View>
+      </View> */}
+      <View style={{ marginLeft: '-16rpx', marginRight: '-8rpx' }}>
+        <SideMenu />
       </View>
 
       {/* 这个Popover只为了引入样式 */}

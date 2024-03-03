@@ -21,17 +21,20 @@ export interface ThemeColor {
   errorColor: Color;
   // 成功颜色
   successColor: Color;
+  // app 主题色
+  appColor: Color;
 }
 
 const baseColor: Pick<
   ThemeColor,
-  'linkColor' | 'primaryColor' | 'errorColor' | 'successColor'
+  'linkColor' | 'primaryColor' | 'errorColor' | 'successColor' | 'appColor'
 > = {
   linkColor: '#739ede',
   // primaryColor: '#f7b733',
   primaryColor: '#FF8C00',
   errorColor: '#ff4d4f',
   successColor: '#52c41a',
+  appColor: '#c4b39d',
 };
 
 // 初始化主题

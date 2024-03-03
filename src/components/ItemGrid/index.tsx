@@ -98,8 +98,8 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
       if (trinket_filteredColors.length) {
         // item.colors、trinket_filteredColors 是数组。如果当前 trinket_filteredColors 中的颜色有一个不在 item.colors 中，就不显示
         if (
-          !trinket_filteredColors?.every(
-            (color) => item.colors?.includes(color),
+          !trinket_filteredColors?.every((color) =>
+            item.colors?.includes(color),
           )
         ) {
           show = false;
