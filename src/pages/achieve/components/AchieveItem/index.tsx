@@ -3,7 +3,10 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Achieve } from '@typers/handbook';
 import { useThemeInfo } from '@hooks/useThemeInfo';
+
+import { AchieveIcon } from '../AchieveIcon';
 import { ContentTransformer } from '@components/ContentTransformer';
+import { AchieveDetailDrawer } from '../AchieveDetailDrawer';
 
 interface Props {
   achieve: Achieve;
@@ -17,21 +20,31 @@ export const AchieveItem: React.FC<Props> = (props) => {
   } = useThemeInfo();
 
   return (
-    <View
-      className={styles.item}
-      style={{
-        borderColor: themeColor.gridBorderColor + '80',
-        color: themeColor.textColor,
-        height: '84px',
-      }}
-    >
-      <View className={styles.id}>{achieve.id}</View>
-      <View className={styles.unlock}>
-        <ContentTransformer value={achieve.unlock} />
+    <AchieveDetailDrawer achieve={achieve}>
+      <View
+        className={styles.item}
+        style={{
+          borderColor: themeColor.gridBorderColor + '80',
+          color: themeColor.textColor,
+          height: '80px',
+        }}
+      >
+        <View className={styles.top}>
+          <View className={styles.icon}>
+            <AchieveIcon achieve={achieve} />
+          </View>
+          <View className={styles.topRight}>
+            <View className={styles.title}>{achieve.nameZh}</View>
+            <View className={styles.subtitle}>
+              <ContentTransformer
+                value={achieve.unlock}
+                mode="clean"
+                linkable={false}
+              />
+            </View>
+          </View>
+        </View>
       </View>
-      <View className={styles.unlockItem}>
-        <ContentTransformer value={achieve.unlockItem} />
-      </View>
-    </View>
+    </AchieveDetailDrawer>
   );
 };

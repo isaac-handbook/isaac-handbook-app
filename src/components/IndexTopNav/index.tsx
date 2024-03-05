@@ -5,11 +5,12 @@ import { Setting } from '../../pages/index/components/Setting';
 import styles from './index.module.scss';
 import { ItemFilter } from '../../pages/index/components/ItemFilter';
 import { useItemSearchInfo } from '@hooks/useItemSearchInfo';
-import { Refresh } from '@nutui/icons-react-taro';
+import { Apps, List, Refresh } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
 import { useTrinketSearchInfo } from '@hooks/useTrinketSearchInfo';
 import { SideMenu } from '@components/SideMenu';
 import { AchieveFilter } from '@pages/achieve/components/AchieveFilter';
+import { useSetting } from '@hooks/useSetting';
 
 export interface IndexTopNavProps extends SearchProps {
   supportSetting?: boolean;
@@ -26,6 +27,11 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
     resetFilter: trinket_resetFilter,
   } = useTrinketSearchInfo();
 
+  const {
+    setting: { achieveViewMode },
+    updateSetting,
+  } = useSetting();
+
   const shouldShowReset =
     type === 'item' ? item_hasFilterInfo : trinket_hasFilterInfo;
 
@@ -35,6 +41,12 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
     } else {
       trinket_resetFilter();
     }
+  };
+
+  const handleChangeAchieveView = () => {
+    updateSetting({
+      achieveViewMode: achieveViewMode === 'list' ? 'grid' : 'list',
+    });
   };
 
   return (
@@ -50,6 +62,20 @@ export const IndexTopNav: React.FC<IndexTopNavProps> = (props) => {
         >
           <Refresh size={'32rpx'} />
           <View className={styles.text}>重置</View>
+        </View>
+      )}
+
+      {type === 'achieve' && (
+        <View
+          onClick={handleChangeAchieveView}
+          className={classNames(styles.icon, styles.refresh)}
+        >
+          {achieveViewMode === 'list' ? (
+            <Apps size={'32rpx'} />
+          ) : (
+            <List size={'32rpx'} />
+          )}
+          <View className={styles.text}>视图</View>
         </View>
       )}
 

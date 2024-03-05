@@ -65,12 +65,6 @@ export const ContentTransformer: React.FC<Props> = (props) => {
 
   // 转换value中的{{}}为对应的数据
   const transformInnerData = (data: string) => {
-    if (mode === 'clean') {
-      if (data.includes('|')) {
-        return data.split('|')[1];
-      }
-      return data;
-    }
     switch (data) {
       case '不叠加':
         return `多个${nameZh}的效果不叠加`;
@@ -258,6 +252,34 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         </>
       );
     }
+    // mode| 开头，表示是一个模式
+    if (data.startsWith('mode|')) {
+      const mode = data.replace('mode|', '');
+      let img = '';
+      try {
+        if (mode.includes('贪婪')) {
+          img = require(`@assets/mode/贪婪.png`);
+        }
+      } catch (err) {}
+      if (!img) {
+        return mode;
+      }
+      return (
+        <>
+          <Image className={styles.mode} src={img} />
+          {mode}
+          {` `}
+        </>
+      );
+    }
+
+    if (mode === 'clean') {
+      if (data.includes('|')) {
+        return data.split('|')[1];
+      }
+      return data;
+    }
+
     // pool| 开头，表示是一个道具池
     if (data.startsWith('pool|')) {
       const pool = data.replace('pool|', '');
@@ -324,26 +346,6 @@ export const ContentTransformer: React.FC<Props> = (props) => {
             {`${TTL}`}
           </View>
         </ItemGridDrawer>
-      );
-    }
-    // mode| 开头，表示是一个模式
-    if (data.startsWith('mode|')) {
-      const mode = data.replace('mode|', '');
-      let img = '';
-      try {
-        if (mode.includes('贪婪')) {
-          img = require(`@assets/mode/贪婪.png`);
-        }
-      } catch (err) {}
-      if (!img) {
-        return mode;
-      }
-      return (
-        <>
-          <Image className={styles.mode} src={img} />
-          {mode}
-          {` `}
-        </>
       );
     }
     // file| 开头，表示需要读取本地图片

@@ -36,7 +36,7 @@ export const ENTITY_BOSS_IMG_URL =
   'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-entity-death-boss.png';
 // 成就
 export const ACHIEVE_ICON_IMG_URL =
-  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-achieves.png';
+  'https://6973-isaac-handbook-6gfcp1zy588edf1a-1317852125.tcb.qcloud.la/images/isaac-achieves.jpg';
 
 export const specialRuneIdList = [
   '32',

@@ -26,6 +26,8 @@ export interface SettingInfo {
   theme: (typeof themeList)[number]['value'];
   /** 是否展示间隔线 */
   showGridBorder: boolean;
+  /** 成就页面的视图模式 */
+  achieveViewMode: 'grid' | 'list';
   /** 开发者模式 */
   developerMode: boolean;
   /** 【开发者】无尽模式试卷是否只生成自定义题目 */
@@ -39,6 +41,7 @@ export const defaultSettingInfo: SettingInfo = {
   sortMethod: 'ID',
   theme: 'light',
   showGridBorder: true,
+  achieveViewMode: 'list',
   developerMode: false,
   customOnlyOnEndlessPaper: false,
 };

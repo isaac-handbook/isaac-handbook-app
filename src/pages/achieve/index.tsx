@@ -5,10 +5,11 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { AchieveItem } from './components/AchieveItem';
 import VirtualList from '@components/VirtualList';
-import { ItemListVirtualListItem } from '@typers/handbook';
 import { IndexTopNav } from '@components/IndexTopNav';
 import { useRecoilState } from 'recoil';
 import { achieveSearchInfoState } from '@hooks/useAchieveSearchInfo';
+import { AchieveIcon } from './components/AchieveIcon';
+import { useSetting } from '@hooks/useSetting';
 
 function Index() {
   const {
@@ -19,12 +20,19 @@ function Index() {
 
   const [{ keyword }] = useRecoilState(achieveSearchInfoState);
 
+  const {
+    setting: { achieveViewMode },
+  } = useSetting();
+
   let showAchieveList = handbookData.achieve;
 
   if (keyword) {
     showAchieveList = showAchieveList.filter((item) => {
       return (
         item.id.includes(keyword) ||
+        item.nameZh.includes(keyword) ||
+        item.nameEn.includes(keyword) ||
+        item.descZh.includes(keyword) ||
         item.unlock.includes(keyword) ||
         item.unlockItem.includes(keyword) ||
         item.tmp?.includes(keyword)
@@ -32,13 +40,41 @@ function Index() {
     });
   }
 
-  const list = showAchieveList.map((item) => ({
-    type: 'item',
-    item,
-  }));
+  let list: any[] = [];
+  if (achieveViewMode === 'list') {
+    list = showAchieveList.map((item) => ({
+      type: 'item',
+      item,
+    }));
+  } else {
+    const columnCount = 6;
+    // 补全后的格子数量
+    const showingCellCount = showAchieveList.length;
+    list = new Array(Math.ceil(showingCellCount / columnCount))
+      .fill(0)
+      .map((_, index) => {
+        const curItems = showAchieveList.slice(
+          index * columnCount,
+          (index + 1) * columnCount,
+        );
+        return {
+          type: 'items',
+          items: curItems,
+        };
+      });
+  }
 
-  const itemRender = (rowData: ItemListVirtualListItem) => {
-    return <AchieveItem achieve={rowData.item} />;
+  const itemRender = (rowData: any) => {
+    if (rowData.type === 'item') {
+      return <AchieveItem achieve={rowData.item} />;
+    }
+    return (
+      <View className={styles.gridLine}>
+        {rowData.items.map((achieve) => (
+          <AchieveIcon achieve={achieve} scaleRate={0.92} clickable />
+        ))}
+      </View>
+    );
   };
 
   return (
@@ -50,24 +86,14 @@ function Index() {
         }}
       >
         <IndexTopNav type="achieve" supportSetting={false} />
-        <View
-          className={styles.header}
-          style={{
-            backgroundColor: themeColor.appColor,
-          }}
-        >
-          <View className={styles.id}>ID</View>
-          <View className={styles.unlock}>解锁条件</View>
-          <View className={styles.unlockItem}>解锁内容</View>
-        </View>
         <View className={styles.list}>
           <VirtualList
-            itemHeight={84}
+            itemHeight={achieveViewMode === 'list' ? 80 : 68}
             data={list}
             renderRow={itemRender}
             loadHeight={1500}
             preloadHeight={375}
-            height="calc(100vh - 180rpx)"
+            height="calc(100vh - 104rpx)"
           />
         </View>
       </View>

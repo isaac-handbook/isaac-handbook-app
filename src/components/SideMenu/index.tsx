@@ -3,7 +3,7 @@ import { Popup } from '@nutui/nutui-react-taro';
 import Taro from '@tarojs/taro';
 import { ScrollView, Image, View } from '@tarojs/components';
 import styles from './index.module.scss';
-import { Apps, Home, Photograph } from '@nutui/icons-react-taro';
+import { Category, Home, Photograph } from '@nutui/icons-react-taro';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 
 interface Props {}
@@ -143,7 +143,7 @@ export const SideMenu: React.FC<Props> = () => {
   return (
     <>
       <View className={styles.gateIcon} onClick={() => setVisible(true)}>
-        <Apps size={'34rpx'} />
+        <Category size={'34rpx'} />
         <View className={styles.gateText}>菜单</View>
       </View>
 

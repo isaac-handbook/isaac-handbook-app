@@ -5,40 +5,12 @@
   box-sizing: border-box;
   position: relative;
 
-  padding-top: 90px;
+  padding-top: 52px;
 }
 
-.header {
-  width: 100%;
+.gridLine {
   display: flex;
-  padding: 4px;
-  height: 38px;
-  box-sizing: border-box;
-  padding-right: 8px;
-  position: fixed;
-  top: 52px;
-  color: #000000;
-
-  .id {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    // border-right: 1px solid #333333;
-  }
-
-  .unlock {
-    flex: 7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    // border-right: 1px solid #333333;
-  }
-
-  .unlockItem {
-    flex: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
 }

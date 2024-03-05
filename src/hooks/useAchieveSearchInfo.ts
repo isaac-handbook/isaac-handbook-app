@@ -49,7 +49,7 @@ export const useAchieveSearchInfo = () => {
     }
   }, [achieveSearchInfo]);
 
-  const updateItemSearchInfo = (
+  const updateAchieveSearchInfo = (
     newItemSearchInfo: Partial<AchieveSearchInfo>,
   ) => {
     setAchieveSearchInfo({
@@ -63,6 +63,6 @@ export const useAchieveSearchInfo = () => {
     setAchieveSearchInfo,
     resetFilter,
     hasFilterInfo,
-    updateItemSearchInfo,
+    updateAchieveSearchInfo,
   };
 };
