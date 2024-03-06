@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import classNames from 'classnames';
 import { drawerMaskColor } from '@src/styles';
-import { Achieve } from '@typers/handbook';
+import { Achieve, achieveTypeMapRe } from '@typers/handbook';
 import { AchieveIcon } from '../AchieveIcon';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { Unlock } from '@pages/item-detail/components/Unlock';
@@ -16,14 +16,6 @@ interface Props {
   achieve: Achieve;
   children: React.ReactNode;
 }
-
-export const achieveTypeMap = {
-  1: '重生成就',
-  2: '胎衣成就',
-  3: '胎衣†成就',
-  4: '忏悔成就',
-  5: 'PS中的重生奖杯',
-};
 
 export const AchieveDetailDrawer: React.FC<Props> = (props) => {
   const { achieve } = props;
@@ -76,7 +68,7 @@ export const AchieveDetailDrawer: React.FC<Props> = (props) => {
             <ContentTransformer value={'解锁内容：' + achieve.unlockItem} />
           </View>
           <View className={styles.list}>
-            游戏版本：{achieveTypeMap[achieve.type]}
+            游戏版本：{achieveTypeMapRe[achieve.type]}
           </View>
           <View className={styles.list}>成就ID：{achieve.id}</View>
           <View className={styles.list}>英文名：{achieve.nameEn}</View>

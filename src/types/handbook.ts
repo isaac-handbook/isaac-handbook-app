@@ -174,4 +174,12 @@ export const achieveTypeMap = {
   '胎衣†成就': 3,
   忏悔成就: 4,
   PS中的重生奖杯: 5,
+} as const;
+
+export const achieveTypeMapRe = {
+  1: '重生成就',
+  2: '胎衣成就',
+  3: '胎衣†成就',
+  4: '忏悔成就',
+  5: 'PS中的重生奖杯',
 };

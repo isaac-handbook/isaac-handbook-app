@@ -26,7 +26,7 @@ export const AchieveItem: React.FC<Props> = (props) => {
         style={{
           borderColor: themeColor.gridBorderColor + '80',
           color: themeColor.textColor,
-          height: '80px',
+          height: '78px',
         }}
       >
         <View className={styles.top}>
@@ -34,7 +34,9 @@ export const AchieveItem: React.FC<Props> = (props) => {
             <AchieveIcon achieve={achieve} />
           </View>
           <View className={styles.topRight}>
-            <View className={styles.title}>{achieve.nameZh}</View>
+            <View className={styles.title}>
+              {achieve.id + '. ' + achieve.nameZh}
+            </View>
             <View className={styles.subtitle}>
               <ContentTransformer
                 value={achieve.unlock}

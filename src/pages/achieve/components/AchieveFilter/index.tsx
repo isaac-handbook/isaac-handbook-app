@@ -3,13 +3,10 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Drag, Popup } from '@nutui/nutui-react-taro';
 import { Filter, Refresh } from '@nutui/icons-react-taro';
-import { PoolFilter } from './PoolFilter';
-import { TagFilter } from './TagFilter';
-import { QualityFilter } from './QualityFilter';
-import { ChargeFilter } from './ChargeFilter';
-import { NeedUnlock } from './NeedUnlock';
+import { AchieveTypeSelect } from './AchieveTypeSelect';
 import { drawerMaskColor } from '@src/styles';
 import { useAchieveSearchInfo } from '@hooks/useAchieveSearchInfo';
+import { UnlockItemTypeSelect } from './UnlockItemTypeSelect';
 
 export const AchieveFilter: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
@@ -51,11 +48,8 @@ export const AchieveFilter: React.FC = () => {
         }}
       >
         <View className={styles.drawer}>
-          <PoolFilter />
-          <TagFilter />
-          <QualityFilter />
-          <ChargeFilter />
-          <NeedUnlock />
+          <AchieveTypeSelect />
+          <UnlockItemTypeSelect />
         </View>
       </Popup>
 

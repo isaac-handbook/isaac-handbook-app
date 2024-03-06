@@ -32,6 +32,7 @@ const config = {
     '@utils': path.resolve(__dirname, '..', 'src/utils'),
     '@assets': path.resolve(__dirname, '..', 'src/assets'),
     '@types': path.resolve(__dirname, '..', 'src/types'),
+    '@typers': path.resolve(__dirname, '..', 'src/types'),
     '@constants': path.resolve(__dirname, '..', 'src/constants'),
     '@pages': path.resolve(__dirname, '..', 'src/pages'),
     '@data': path.resolve(__dirname, '..', 'src/data'),

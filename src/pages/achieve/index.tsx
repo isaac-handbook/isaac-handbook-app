@@ -10,6 +10,7 @@ import { useRecoilState } from 'recoil';
 import { achieveSearchInfoState } from '@hooks/useAchieveSearchInfo';
 import { AchieveIcon } from './components/AchieveIcon';
 import { useSetting } from '@hooks/useSetting';
+import { achieveTypeMap } from '@typers/handbook';
 
 function Index() {
   const {
@@ -18,7 +19,11 @@ function Index() {
 
   const { handbookData } = useHandBookData();
 
-  const [{ keyword }] = useRecoilState(achieveSearchInfoState);
+  const [{ keyword, achieveType, unlockItemType }] = useRecoilState(
+    achieveSearchInfoState,
+  );
+
+  const achieveTypeIndex = achieveTypeMap[achieveType];
 
   const {
     setting: { achieveViewMode },
@@ -26,6 +31,7 @@ function Index() {
 
   let showAchieveList = handbookData.achieve;
 
+  // 关键字过滤
   if (keyword) {
     showAchieveList = showAchieveList.filter((item) => {
       return (
@@ -37,6 +43,39 @@ function Index() {
         item.unlockItem.includes(keyword) ||
         item.tmp?.includes(keyword)
       );
+    });
+  }
+
+  // 游戏版本过滤
+  if (achieveTypeIndex) {
+    showAchieveList = showAchieveList.filter(
+      (item) => item.type === achieveTypeIndex,
+    );
+  }
+
+  // 解锁物品类型过滤
+  if (unlockItemType && unlockItemType !== '全部') {
+    showAchieveList = showAchieveList.filter((item) => {
+      const { unlockItem } = item;
+      if (unlockItem) {
+        switch (unlockItemType) {
+          case '道具':
+            return unlockItem.includes('ID=c');
+          case '角色':
+            return unlockItem.includes('chara');
+          case '饰品':
+            return unlockItem.includes('ID=t');
+          case '卡牌、符文、药丸':
+            return unlockItem.includes('ID=k') || unlockItem.includes('ID=p');
+          case '怪物':
+            return unlockItem.includes('entity');
+          case '挑战':
+            return unlockItem.includes('挑战');
+          case '宝宝':
+            return unlockItem.includes('宝宝');
+        }
+      }
+      return false;
     });
   }
 
@@ -88,7 +127,7 @@ function Index() {
         <IndexTopNav type="achieve" supportSetting={false} />
         <View className={styles.list}>
           <VirtualList
-            itemHeight={achieveViewMode === 'list' ? 80 : 68}
+            itemHeight={achieveViewMode === 'list' ? 78 : 68}
             data={list}
             renderRow={itemRender}
             loadHeight={1500}
