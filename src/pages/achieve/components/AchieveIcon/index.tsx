@@ -14,6 +14,17 @@ interface Props {
 export const AchieveIcon: React.FC<Props> = (props) => {
   const { achieve, scaleRate = 0.88, clickable = false } = props;
 
+  if (!achieve.id) {
+    return (
+      <View
+        className={styles.icon}
+        style={{
+          opacity: 0,
+        }}
+      ></View>
+    );
+  }
+
   const renderIcon = () => {
     return (
       <View

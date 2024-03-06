@@ -156,8 +156,6 @@ export interface Achieve {
   iconPosition: string;
   /** 成就描述 中文 */
   descZh: string;
-  /** 成就描述 英文 */
-  descEn: string;
   /** 解锁条件 */
   unlock: string;
   /** 解锁物品 */
@@ -181,5 +179,4 @@ export const achieveTypeMapRe = {
   2: '胎衣成就',
   3: '胎衣†成就',
   4: '忏悔成就',
-  5: 'PS中的重生奖杯',
 };

@@ -107,9 +107,14 @@ function Index() {
     if (rowData.type === 'item') {
       return <AchieveItem achieve={rowData.item} />;
     }
+    const renderData = [...rowData.items];
+    // 如果不够 6 个，则补全
+    if (renderData.length < 6) {
+      renderData.push(...new Array(6 - renderData.length).fill({}));
+    }
     return (
       <View className={styles.gridLine}>
-        {rowData.items.map((achieve) => (
+        {renderData.map((achieve) => (
           <AchieveIcon achieve={achieve} scaleRate={0.92} clickable />
         ))}
       </View>
