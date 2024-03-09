@@ -20,6 +20,7 @@ export default defineAppConfig({
     'pages/developer/index',
     'pages/dev-checker/index',
     'pages/achieve/index',
+    'pages/curse/index',
   ],
   subpackages: [
     {

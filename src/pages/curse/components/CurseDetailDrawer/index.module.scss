@@ -1,0 +1,27 @@
+.drawer {
+  padding: 16px;
+  padding-top: 8px;
+  padding-bottom: 32px;
+  height: 60vh;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+}
+
+.children {
+  display: inline-block;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  transform: scale(1.5);
+  position: relative;
+  top: 2px;
+  margin-left: 8px;
+  margin-right: 8px;
+}

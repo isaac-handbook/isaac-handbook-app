@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
-import { Chara, Item, ItemDetailNode } from 'src/types/handbook';
+import { Chara, Curse, Item, ItemDetailNode } from 'src/types/handbook';
 import classNames from 'classnames';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { useRecoilState } from 'recoil';
@@ -12,7 +12,7 @@ import { LinkText } from '@components/LinkText';
 import { getItemWikiLink } from '@utils/wiki';
 
 interface Props {
-  item: Item | Chara;
+  item: Item | Chara | Curse;
 }
 
 export const DetailContent: React.FC<Props> = (props) => {
@@ -30,6 +30,7 @@ export const DetailContent: React.FC<Props> = (props) => {
     if (item.level === 0 && !item.children?.length) {
       return null;
     }
+    const value = item.value ?? '效果';
     return (
       <View
         className={classNames(styles.section, styles[`section-${item.level}`])}
@@ -39,10 +40,10 @@ export const DetailContent: React.FC<Props> = (props) => {
             [styles.subTitle]: item.extra?.includes('subTitle'),
           })}
         >
-          <Dot level={item.level} themeColor={themeColor} value={item.value} />
+          <Dot level={item.level} themeColor={themeColor} value={value} />
           <ContentTransformer
             id={curItem.id}
-            value={item.value}
+            value={value}
             nameZh={curItem.nameZh}
             type={curItem.type}
           />
@@ -102,12 +103,9 @@ export const DetailContent: React.FC<Props> = (props) => {
           curItem.description,
           curSuit && `可作为{{suit|${curSuit}}}的组成部分。`,
         ])}
-      {curItem.content?.map((cell) => {
-        if (!cell.value) {
-          return null;
-        }
+      {curItem.content?.map((cell, index) => {
         return (
-          <View key={cell.value} className={styles.module}>
+          <View key={`${cell.value}_${index}`} className={styles.module}>
             {renderSections(cell)}
           </View>
         );

@@ -19,6 +19,8 @@ import { CharaUnlockDrawer } from '@components/CharaUnlockDrawer';
 import { ThemeColor } from '@hooks/useThemeInfo/style';
 import { getGlobalData, setGlobalData } from '@src/global_data';
 import { pickItemFromHandbook } from './utils/pickItemFromHandbook';
+import { AchieveDetailDrawer } from '@pages/achieve/components/AchieveDetailDrawer';
+import { CurseDetailDrawer } from '@pages/curse/components/CurseDetailDrawer';
 
 interface Props {
   id?: string;
@@ -46,7 +48,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
 
   const themeColor = lockTheme ?? themeColor_;
 
-  const { handbookData } = useHandBookData();
+  const { handbookData, getItemDataById, getCurseByName } = useHandBookData();
 
   const log = (msg: string, tagType: string) => {
     console.log(msg, props.id, props.nameZh, props.type);
@@ -121,6 +123,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
           <ItemTable id={props.id} nameZh={props.nameZh} type={props.type} />
         );
     }
+
     // item| 开头，表示是一个物品
     if (data.startsWith('item|')) {
       const item = data.replace('item|', '');
@@ -273,6 +276,39 @@ export const ContentTransformer: React.FC<Props> = (props) => {
       );
     }
 
+    // achi| 开头，表示是一个成就
+    if (data.startsWith('achi|')) {
+      const achieveID = data.replace('achi|', '');
+      const achieve = getItemDataById('achieve', achieveID);
+      if (!achieve?.nameZh) {
+        return `成就#${achieveID}`;
+      }
+      return (
+        <AchieveDetailDrawer achieve={achieve}>
+          <View
+            style={{
+              color: themeColor.linkColor,
+              display: 'inline',
+              padding: '0 8rpx',
+            }}
+          >
+            成就#{achieveID}
+          </View>
+        </AchieveDetailDrawer>
+      );
+    }
+
+    // curse| 开头，表示是一个诅咒
+    if (data.startsWith('curse|')) {
+      const curseName = data.replace('curse|', '');
+      const curse = getCurseByName(curseName);
+      if (!curse) {
+        return curseName;
+      }
+      return <CurseDetailDrawer curse={curse} />;
+    }
+
+    // clean 模式截断。下面的内容在 clean 模式下不会被解析
     if (mode === 'clean') {
       if (data.includes('|')) {
         return data.split('|')[1];

@@ -15,7 +15,10 @@ export const getItemWikiLink = (item: Item) => {
       return `${wikiBaseUrl}/wiki/P${item.id}`;
     case 'chara':
       return `${wikiBaseUrl}/wiki/${item.nameZh}`;
-    default:
-      return wikiBaseUrl;
   }
+
+  if (item.nameZh.includes('诅咒')) {
+    return `${wikiBaseUrl}/wiki/诅咒`;
+  }
+  return wikiBaseUrl;
 };

@@ -1,0 +1,19 @@
+.page {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: transparent;
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 52px;
+}
+
+.list {
+  padding: 16px;
+}
+
+.item {
+  margin-bottom: 20px;
+  position: relative;
+  top: 8px;
+  left: 8px;
+}

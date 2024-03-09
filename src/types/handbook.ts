@@ -4,7 +4,14 @@ import { Achieve } from './achieve';
 import { Chara } from './chara';
 import { Curse } from './curse';
 
-export type ItemType = 'item' | 'trinket' | 'card' | 'pill' | 'chara';
+export type ItemType =
+  | 'item'
+  | 'trinket'
+  | 'card'
+  | 'pill'
+  | 'chara'
+  | 'achieve'
+  | 'curse';
 
 export interface ItemGridVirtualListItem {
   type: 'items' | 'component';
@@ -60,7 +67,7 @@ export interface Item extends BriefItem {
   /** 官方简介-英文 */
   descEn?: string;
   /** 是否显示 */
-  show: boolean;
+  show?: boolean;
   /** 类型 */
   type: ItemType;
   /** 别名 */

@@ -14,7 +14,7 @@ import { useUser } from '@hooks/useUser';
 import { useAchieveSearchInfo } from '@hooks/useAchieveSearchInfo';
 
 export interface SearchProps {
-  type: ItemType | 'achieve';
+  type: ItemType;
   marginLeft?: string;
 }
 

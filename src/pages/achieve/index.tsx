@@ -49,7 +49,7 @@ function Index() {
   // 游戏版本过滤
   if (achieveTypeIndex) {
     showAchieveList = showAchieveList.filter(
-      (item) => item.type === achieveTypeIndex,
+      (item) => item.achieveType === achieveTypeIndex,
     );
   }
 

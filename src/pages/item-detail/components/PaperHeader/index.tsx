@@ -5,8 +5,8 @@ import paperImg from '@assets/paper.png';
 import classNames from 'classnames';
 
 interface Props {
-  descZh?: string;
-  nameZh?: string;
+  descZh?: React.ReactNode;
+  nameZh?: React.ReactNode;
   type?: 'default' | 'oneRow';
 }
 

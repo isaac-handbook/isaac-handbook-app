@@ -5,6 +5,7 @@ import { ScrollView, Image, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Category, Home, Photograph } from '@nutui/icons-react-taro';
 import { useThemeInfo } from '@hooks/useThemeInfo';
+import classNames from 'classnames';
 
 interface Props {}
 
@@ -31,20 +32,26 @@ export const SideMenu: React.FC<Props> = () => {
       text: '套装',
     },
     {
+      id: 'achieve',
+      text: '成就',
+    },
+    {
+      id: 'curse',
+      text: '诅咒',
+    },
+    {
       id: 'sacrifice-room',
       text: '献祭房',
+      smallIcon: true,
     },
     {
       id: 'dice-room',
       text: '骰子房',
+      smallIcon: true,
     },
     {
       id: 'boss-mark',
       text: '通关标记',
-    },
-    {
-      id: 'achieve',
-      text: '成就',
     },
     {
       id: 'scan',
@@ -56,7 +63,7 @@ export const SideMenu: React.FC<Props> = () => {
   // 如果当前不处于首页，则给 list 添加 返回首页
   const currentPages = Taro.getCurrentPages();
   const currentPage = currentPages[currentPages.length - 1];
-  console.log('currentPage.route', currentPage.route);
+
   if (currentPage.route !== 'pages/index/index') {
     list.push({
       id: 'backHome',
@@ -122,16 +129,19 @@ export const SideMenu: React.FC<Props> = () => {
       case 'boss-mark':
         Taro.navigateTo({ url: '/pages/boss-mark/index' });
         break;
+      case 'curse':
+        Taro.navigateTo({ url: '/pages/curse/index' });
+        break;
       default:
         break;
     }
   };
 
-  const renderIcon = (icon: any) => {
+  const renderIcon = (icon: any, smallIcon = false) => {
     if (typeof icon === 'string') {
       return (
         <Image
-          className={styles.icon}
+          className={classNames(styles.icon, smallIcon && styles.smallIcon)}
           src={require(`@assets/sideMenu/${icon}.png`)}
           mode="heightFix"
         />
@@ -167,7 +177,9 @@ export const SideMenu: React.FC<Props> = () => {
               style={{ borderColor: themeColor.gridBorderColor + '80' }}
               onClick={() => selected(item)}
             >
-              {renderIcon(item.icon ? item.icon : item.id)}
+              <View className={styles.iconContainer}>
+                {renderIcon(item.icon ? item.icon : item.id, item.smallIcon)}
+              </View>
               <View className={styles.text}>{item.text}</View>
             </View>
           ))}

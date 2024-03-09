@@ -39,6 +39,10 @@ export const useHandBookData = () => {
     ) as HandBookData[T][0];
   };
 
+  const getCurseByName = (name: string) => {
+    return handbookData.extra.curse.find((curse) => curse.nameZh === name);
+  };
+
   const updateSingleHandbookState = <T extends keyof HandBookData>(
     key: T,
     value: HandBookData[T],
@@ -55,5 +59,6 @@ export const useHandBookData = () => {
     forceRefresh,
     getItemDataById,
     updateSingleHandbookState,
+    getCurseByName,
   };
 };
