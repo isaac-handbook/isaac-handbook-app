@@ -68,7 +68,7 @@ export const AchieveDetailDrawer: React.FC<Props> = (props) => {
             <ContentTransformer value={'解锁内容：' + achieve.unlockItem} />
           </View>
           <View className={styles.list}>
-            游戏版本：{achieveTypeMapRe[achieve.type]}
+            游戏版本：{achieveTypeMapRe[achieve.type ?? '']}
           </View>
           <View className={styles.list}>成就ID：{achieve.id}</View>
           <View className={styles.list}>英文名：{achieve.nameEn}</View>

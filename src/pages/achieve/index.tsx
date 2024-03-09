@@ -36,11 +36,11 @@ function Index() {
     showAchieveList = showAchieveList.filter((item) => {
       return (
         item.id.includes(keyword) ||
-        item.nameZh.includes(keyword) ||
-        item.nameEn.includes(keyword) ||
-        item.descZh.includes(keyword) ||
-        item.unlock.includes(keyword) ||
-        item.unlockItem.includes(keyword) ||
+        item.nameZh?.includes(keyword) ||
+        item.nameEn?.includes(keyword) ||
+        item.descZh?.includes(keyword) ||
+        item.unlock?.includes(keyword) ||
+        item.unlockItem?.includes(keyword) ||
         item.tmp?.includes(keyword)
       );
     });

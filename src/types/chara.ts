@@ -7,21 +7,21 @@ export interface CharaInfo {
   /** 英文名称 */
   nameEn: string;
   /** 血量 */
-  health: string;
+  health?: string;
   /** 移速 */
-  speed: string;
+  speed?: string;
   /** 射速 */
-  tears: string;
+  tears?: string;
   /** 伤害 */
-  damage: string;
+  damage?: string;
   /** 射程 */
-  range: string;
+  range?: string;
   /** 弹速 */
-  shotSpeed: string;
+  shotSpeed?: string;
   /** 幸运 */
-  luck: string;
+  luck?: string;
   /** 解锁条件 */
-  unlock: string;
+  unlock?: string;
 }
 
 export interface Chara extends Item {

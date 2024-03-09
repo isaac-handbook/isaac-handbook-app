@@ -5,17 +5,17 @@ export interface Achieve {
   /** 中文名称 */
   nameZh: string;
   /** 英文名称 */
-  nameEn: string;
+  nameEn?: string;
   /** 图标坐标 */
   iconPosition: string;
   /** 成就描述 中文 */
-  descZh: string;
+  descZh?: string;
   /** 解锁条件 */
-  unlock: string;
+  unlock?: string;
   /** 解锁物品 */
-  unlockItem: string;
+  unlockItem?: string;
   /** 成就类型 */
-  type: number;
+  type?: number;
   /** 临时数据，用于搜索 */
   tmp?: string;
 }

@@ -42,8 +42,8 @@ export type BriefItem = {
 export type ItemDetailNode = {
   level: number;
   extra?: string[];
-  value: string;
-  children: ItemDetailNode[];
+  value?: string;
+  children?: ItemDetailNode[];
 };
 
 export interface Item extends BriefItem {

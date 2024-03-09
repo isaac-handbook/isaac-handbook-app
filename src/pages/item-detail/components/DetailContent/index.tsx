@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
-import { Chara, Item } from 'src/types/handbook';
+import { Chara, Item, ItemDetailNode } from 'src/types/handbook';
 import classNames from 'classnames';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { useRecoilState } from 'recoil';
@@ -26,8 +26,8 @@ export const DetailContent: React.FC<Props> = (props) => {
   }
 
   // 递归渲染所有 value 和 children
-  const renderSections = (item: Required<Item>['content'][0]) => {
-    if (item.level === 0 && !item.children.length) {
+  const renderSections = (item: ItemDetailNode) => {
+    if (item.level === 0 && !item.children?.length) {
       return null;
     }
     return (

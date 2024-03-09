@@ -20,7 +20,7 @@ export const CharaAchieve: React.FC<Props> = (props) => {
   const matchText = `用{{chara|${nameZh}`;
 
   const matchedAchieve = achieve.filter((item) =>
-    item.unlock.includes(matchText),
+    item.unlock?.includes(matchText),
   );
 
   if (!matchedAchieve.length) {
