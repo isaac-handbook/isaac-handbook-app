@@ -68,13 +68,13 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
     // 关键字搜索
     // 道具池过滤
     if (poolFilter) {
-      if (!item.pools.includes(poolFilter)) {
+      if (!item.pools?.includes(poolFilter)) {
         show = false;
       }
     }
     // 标签过滤
     if (tagFilter) {
-      if (!item.tags.includes(tagFilter)) {
+      if (!item.tags?.includes(tagFilter)) {
         show = false;
       }
     }
@@ -177,7 +177,7 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
           className={styles.drawer}
           style={{
             backgroundColor: themeColor.bgColor,
-            height: isSuit ? '50vh' : '60vh',
+            height: isSuit ? '55vh' : '60vh',
           }}
           scrollY
           enablePassive

@@ -9,6 +9,7 @@ const defaultHandbookData: HandBookData = {
   pills: [],
   chara: {},
   extra: { tagInfo: {}, table: {}, revive: [] } as any,
+  achieve: [],
 };
 
 export const handbookDataState = atom<HandBookData>({
@@ -27,11 +28,15 @@ export const useHandBookData = () => {
   };
 
   // 通过 type 和 id 获取图鉴数据
-  const getItemDataById = (
-    type: keyof Omit<HandBookData, 'extra' | 'chara' | 'version'>,
+  const getItemDataById = <
+    T extends keyof Omit<HandBookData, 'extra' | 'chara' | 'version'>,
+  >(
+    type: T,
     id: string,
   ) => {
-    return handbookData[type].find((item) => item.id === id);
+    return handbookData[type].find(
+      (item) => item.id === id,
+    ) as HandBookData[T][0];
   };
 
   const updateSingleHandbookState = <T extends keyof HandBookData>(

@@ -28,15 +28,15 @@ export const CharaUnlockDrawer: React.FC<Props> = (props) => {
 
   // 从 handbookData 中获取当前角色可以解锁的物品
   const showingItems = handbookData.items.filter((item) =>
-    item.unlock.includes(matchName),
+    item.unlock?.includes(matchName),
   );
 
   const showingTrinkets = handbookData.trinkets.filter((trinket) =>
-    trinket.unlock.includes(matchName),
+    trinket.unlock?.includes(matchName),
   );
 
   const showingCards = handbookData.cards.filter((card) =>
-    card.unlock.includes(matchName),
+    card.unlock?.includes(matchName),
   );
 
   return (

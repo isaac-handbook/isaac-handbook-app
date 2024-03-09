@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "types": ["node"],
     "target": "es2020",
     "module": "commonjs",
+    "skipLibCheck": true,
     "removeComments": false,
     "preserveConstEnums": true,
     "moduleResolution": "node",
@@ -9,12 +11,14 @@
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "outDir": "lib",
-    "noUnusedParameters": true,
     "strictNullChecks": true,
     "sourceMap": true,
     "baseUrl": ".",
     "rootDir": ".",
     "jsx": "react-jsx",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    // "allowUnusedLabels": true,
     "resolveJsonModule": true,
     "typeRoots": ["node_modules/@types"],
     "paths": {
@@ -31,9 +35,9 @@
       "@hooks/*": ["src/hooks/*"],
       "@typers/*": ["src/types/*"],
       "@data/*": ["src/data/*"],
-      "@src/*": ["src/*"]
-    }
+      "@src/*": ["src/*"],
+    },
   },
   "include": ["./src", "./types"],
-  "compileOnSave": false
+  "compileOnSave": false,
 }

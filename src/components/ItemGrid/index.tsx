@@ -69,13 +69,13 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
       // 去掉空格
       keyword = keyword.replace(/\s/g, '');
       if (
-        !item.nameZh.includes(keyword) &&
-        !item.description.includes(keyword) &&
-        !item.descZh.includes(keyword) &&
+        !item.nameZh?.includes(keyword) &&
+        !item.description?.includes(keyword) &&
+        !item.descZh?.includes(keyword) &&
         !(item.id === keyword) &&
-        !item.tags.includes(keyword) &&
-        !item.descEn.toLowerCase().includes(keyword.toLowerCase()) &&
-        !item.nameEn.toLowerCase().includes(keyword.toLowerCase()) &&
+        !item.tags?.includes(keyword) &&
+        !item.descEn?.toLowerCase().includes(keyword.toLowerCase()) &&
+        !item.nameEn?.toLowerCase().includes(keyword.toLowerCase()) &&
         // alias 别名
         !item.alias?.join('')?.toLowerCase()?.includes(keyword)
       ) {
@@ -118,13 +118,13 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
 
     // 道具池过滤
     if (poolFilter) {
-      if (!item.pools.includes(poolFilter)) {
+      if (!item.pools?.includes(poolFilter)) {
         show = false;
       }
     }
     // 标签过滤
     if (tagFilter) {
-      if (!item.tags.includes(tagFilter)) {
+      if (!item.tags?.includes(tagFilter)) {
         show = false;
       }
     }
@@ -136,13 +136,13 @@ export const ItemGrid: React.FC<ItemGridProps> = (props) => {
     }
     // 充能类过滤
     // 时间充能类
-    if (chargeFilter === '时间充能' && !item.charge.includes('秒')) {
+    if (chargeFilter === '时间充能' && !item.charge?.includes('秒')) {
       show = false;
     }
     // 电池充能类
     if (
       chargeFilter === '电池充能' &&
-      !/^\d+$|^\d+,一次性使用$/.test(item.charge)
+      !/^\d+$|^\d+,一次性使用$/.test(item.charge ?? '')
     ) {
       show = false;
     }

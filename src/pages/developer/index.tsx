@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { Tag } from '@nutui/nutui-react-taro';
 import { formatCharaName } from '@utils/formatCharaName';
 import { useUser } from '@hooks/useUser';
-import { CustomOnlyOnEndlessPaperSetting } from '@pages/index/components/Setting/CustomOnlyOnEndlesspaperSetting';
+import { CustomOnlyOnEndlessPaperSetting } from '@pages/index/components/Setting/CustomOnlyOnEndlessPaperSetting';
 
 function Index() {
   const {

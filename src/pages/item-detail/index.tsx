@@ -7,13 +7,13 @@ import Taro from '@tarojs/taro';
 import { Unlock } from './components/Unlock';
 import { DetailIcon } from './components/DetailIcon';
 import ErrorBoundary from '@components/ErrorBoundary';
-import { Header } from './components/Header';
 import { DetailContent } from './components/DetailContent';
 import { DetailTopNav } from '@components/DetailTopNav';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { useRecoilState } from 'recoil';
 import LoadingPage from '@components/ErrorBoundary/LoadingPage';
 import { CharaFigure } from './components/CharaFigure';
+import { PaperHeader } from './components/PaperHeader';
 
 function ItemDetail() {
   const { handbookData } = useHandBookData();
@@ -137,7 +137,7 @@ function ItemDetail() {
           goToPrevItem={goToPrevItem}
         />
 
-        <Header descZh={item.descZh} nameZh={item.nameZh} />
+        <PaperHeader descZh={item.descZh} nameZh={item.nameZh} />
 
         <Unlock unlock={item.unlock} />
 

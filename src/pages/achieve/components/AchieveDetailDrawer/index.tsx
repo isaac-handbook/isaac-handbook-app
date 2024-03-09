@@ -10,7 +10,7 @@ import { Achieve, achieveTypeMapRe } from '@typers/handbook';
 import { AchieveIcon } from '../AchieveIcon';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { Unlock } from '@pages/item-detail/components/Unlock';
-import { Header } from '@pages/item-detail/components/Header';
+import { PaperHeader } from '@pages/item-detail/components/PaperHeader';
 
 interface Props {
   achieve: Achieve;
@@ -33,7 +33,7 @@ export const AchieveDetailDrawer: React.FC<Props> = (props) => {
         {props.children}
       </View>
       <Popup
-        title={`成就 #${achieve.id}`}
+        title={achieve.nameZh}
         visible={showDrawer}
         position="bottom"
         round
@@ -55,10 +55,10 @@ export const AchieveDetailDrawer: React.FC<Props> = (props) => {
             <AchieveIcon achieve={achieve} scaleRate={1.2} />
           </View>
           <View className={styles.header}>
-            <Header
+            <PaperHeader
               nameZh={achieve.nameZh}
               descZh={achieve.descZh}
-              height="160rpx"
+              type="oneRow"
             />
           </View>
           <View className={styles.unlock}>

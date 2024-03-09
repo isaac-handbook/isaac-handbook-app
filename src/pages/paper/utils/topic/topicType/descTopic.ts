@@ -18,16 +18,16 @@ export const generateDescTopic = (params: Params): Topic | null => {
 
   // 寻找 items 中 tagss 与 itemTags 不相同的 item
   const descItems = items.filter((it) => {
-    const itemTags = it.tags.join(',');
+    const itemTags = it.tags?.join(',');
     if (it.description === item.description) return false;
     if (!itemTags?.length) return false;
-    if (itemTags === item.tags.join(',')) return false;
+    if (itemTags === item.tags?.join(',')) return false;
     return true;
   });
 
   // 打乱 descItems 的顺序，并随机选出 optionCount 个 tags 不同的
   const wrongList = _.shuffle(descItems)
-    .filter((it) => it.tags.length)
+    .filter((it) => it.tags?.length)
     .slice(0, optionCount - 1)
     .map((it) => it.description);
 

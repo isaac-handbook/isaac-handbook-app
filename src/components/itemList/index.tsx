@@ -53,13 +53,13 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
       // 去掉空格
       keyword = keyword.replace(/\s/g, '');
       if (
-        !item.nameZh.includes(keyword) &&
-        !item.description.includes(keyword) &&
-        !item.descZh.includes(keyword) &&
+        !item.nameZh?.includes(keyword) &&
+        !item.description?.includes(keyword) &&
+        !item.descZh?.includes(keyword) &&
         !(item.id === keyword) &&
-        !item.tags.join('').includes(keyword) &&
-        !item.descEn.toLowerCase().includes(keyword.toLowerCase()) &&
-        !item.nameEn.toLowerCase().includes(keyword.toLowerCase())
+        !item.tags?.join('').includes(keyword) &&
+        !item.descEn?.toLowerCase().includes(keyword.toLowerCase()) &&
+        !item.nameEn?.toLowerCase().includes(keyword.toLowerCase())
       ) {
         show = false;
       }
@@ -81,7 +81,7 @@ export const ItemList: React.FC<ItemListProps> = (props) => {
         中性: 2,
         负面: 3,
       };
-      return qualityMap[a.quality] - qualityMap[b.quality];
+      return qualityMap[a.quality ?? ''] - qualityMap[b.quality ?? ''];
     });
   }
 

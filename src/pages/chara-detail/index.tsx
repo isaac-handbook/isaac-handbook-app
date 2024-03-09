@@ -10,6 +10,7 @@ import { SingleCharaBox } from './components/SingleCharaBox';
 import { unFormatCharaName } from '@utils/formatCharaName';
 import LoadingPage from '@components/ErrorBoundary/LoadingPage';
 import { useThemeInfo } from '@hooks/useThemeInfo';
+import { CharaAchieve } from './components/CharaAchieve';
 
 function ItemDetail() {
   const { handbookData } = useHandBookData();
@@ -47,6 +48,10 @@ function ItemDetail() {
         ))}
 
         <DetailContent item={chara} />
+
+        {chara.infoList.map((charaInfo) => (
+          <CharaAchieve charaInfo={charaInfo} />
+        ))}
       </View>
     </ErrorBoundary>
   );

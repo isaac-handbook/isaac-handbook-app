@@ -11,7 +11,7 @@ interface Props {
   id: string;
   iconPosition: string;
   type: ItemType;
-  charge: string;
+  charge?: string;
   getNextItem: () => Item | undefined;
   goToNextItem: () => void;
   getPrevItem: () => Item | undefined;
@@ -40,9 +40,11 @@ export const DetailIcon: React.FC<Props> = (props) => {
         type={props.type}
         scaleRate={1.5}
       />
-      <View className={styles.charge}>
-        <ChargeBar charge={props.charge} scale={2} />
-      </View>
+      {props.charge && (
+        <View className={styles.charge}>
+          <ChargeBar charge={props.charge} scale={2} />
+        </View>
+      )}
 
       {getNextItem() && (
         <View onClick={goToNextItem} className={styles.turnNext}>

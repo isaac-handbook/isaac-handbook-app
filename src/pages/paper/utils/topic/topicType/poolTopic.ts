@@ -25,7 +25,7 @@ export const generatePoolTopic = (params: Params): Topic | null => {
   const { item, optionCount = 3 } = params;
   const { pools } = item;
   // 过滤掉所有 pools 中不包含于 allPoolType 的内容
-  const filterPools = pools.filter((pool) => allPoolType.includes(pool));
+  const filterPools = pools?.filter((pool) => allPoolType.includes(pool));
   if (!filterPools?.length) return null;
 
   // 从 filterPools 中随机选取一个作为正确答案

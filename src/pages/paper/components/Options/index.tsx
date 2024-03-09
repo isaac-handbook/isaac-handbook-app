@@ -5,6 +5,7 @@ import { useExamPaper } from '@hooks/useExamPaper';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { OptionItem } from './OptionItem';
 import { CustomButton } from '@components/CustomButton';
+import { Item } from '@typers/handbook';
 
 interface Props {
   selected: number | null;
@@ -38,11 +39,11 @@ export const Options: React.FC<Props> = (props) => {
   const item = getItemDataById(
     (curTopic.itemType + 's') as any,
     curTopic.itemId,
-  );
+  ) as Item;
 
   if (!item) {
     console.error('没有定位到 Item', curTopic);
-    return '哎呀，出大错了，快去锤开发者';
+    return <>哎呀，出大错了，快去锤开发者</>;
   }
 
   const handleNext = () => {

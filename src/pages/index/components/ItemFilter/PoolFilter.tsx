@@ -49,7 +49,8 @@ const Cell: React.FC = () => {
       items
         .map((item) => item.pools)
         .reduce((prev, cur) => {
-          return prev.concat(cur);
+          if (!cur) return prev;
+          return prev?.concat(cur);
         }, []),
     ),
   );

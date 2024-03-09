@@ -26,7 +26,7 @@ export const DetailContent: React.FC<Props> = (props) => {
   }
 
   // 递归渲染所有 value 和 children
-  const renderSections = (item: Item['content'][0]) => {
+  const renderSections = (item: Required<Item>['content'][0]) => {
     if (item.level === 0 && !item.children.length) {
       return null;
     }
@@ -47,7 +47,7 @@ export const DetailContent: React.FC<Props> = (props) => {
             type={curItem.type}
           />
         </View>
-        {item.children && item.children.map((child) => renderSections(child))}
+        {item.children && item.children?.map((child) => renderSections(child))}
       </View>
     );
   };
@@ -95,14 +95,14 @@ export const DetailContent: React.FC<Props> = (props) => {
 
   return (
     <View className={styles.container}>
-      {curItem.type === 'chara' &&
-        renderSingleModule('可解锁物品', [`{{charaUnlock|${curItem.nameZh}}}`])}
+      {/* {curItem.type === 'chara' &&
+        renderSingleModule('可解锁物品', [`{{charaUnlock|${curItem.nameZh}}}`])} */}
       {curItem.description &&
         renderSingleModule('简介', [
           curItem.description,
           curSuit && `可作为{{suit|${curSuit}}}的组成部分。`,
         ])}
-      {curItem.content.map((cell) => {
+      {curItem.content?.map((cell) => {
         if (!cell.value) {
           return null;
         }

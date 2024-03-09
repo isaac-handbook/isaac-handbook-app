@@ -101,7 +101,7 @@ const initJsonData = (data: string) => {
     }
     if (isDev) {
       // 如果 item.colors 中的值不存在与 ColorType 中，则提示
-      item.colors.forEach((color) => {
+      item.colors?.forEach((color) => {
         if (!colorTypeList.includes(color)) {
           console.warn(
             `item ${item.nameZh} ID=${item.id} 的颜色 ${color} 不存在`,
@@ -126,7 +126,7 @@ const initJsonData = (data: string) => {
     }
     if (isDev) {
       // 如果 trinket.colors 中的值不存在与 ColorType 中，则提示
-      trinket.colors.forEach((color) => {
+      trinket.colors?.forEach((color) => {
         if (!colorTypeList.includes(color)) {
           console.warn(
             `trinket ${trinket.nameZh} ID=${trinket.id} 的颜色 ${color} 不存在`,
@@ -158,7 +158,7 @@ const initJsonData = (data: string) => {
   });
 
   // 遍历每一个 achieve，寻找 unlock 和 unlockItem 中包含的 {{item|ID=XXX}}
-  res.achieve = res.achieve.map((achieve) => {
+  res.achieve = res.achieve?.map((achieve) => {
     if (!achieve.tmp) {
       achieve.tmp = '';
     }

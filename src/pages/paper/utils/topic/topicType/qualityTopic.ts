@@ -18,7 +18,7 @@ export const generateQualityTopic = (params: Params): Topic | null => {
   const { quality } = item;
 
   // 如果 quality 不包含在 allQuality 中，直接返回 null
-  if (!allQuality.includes(quality)) {
+  if (!allQuality.includes(quality ?? '0')) {
     return null;
   }
 

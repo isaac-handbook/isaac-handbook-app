@@ -6,7 +6,7 @@ import { ContentTransformer } from '@components/ContentTransformer';
 import { ThemeColor } from '@hooks/useThemeInfo/style';
 
 interface Props {
-  unlock: string;
+  unlock?: string;
   lockTheme?: ThemeColor;
 }
 

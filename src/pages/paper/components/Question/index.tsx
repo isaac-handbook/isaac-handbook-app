@@ -35,7 +35,7 @@ export const Question: React.FC<Props> = (props) => {
 
   if (!item) {
     console.error('没有定位到 Item', topic);
-    return '哎呀，出大错了，快去锤开发者';
+    return <>哎呀，出大错了，快去锤开发者</>;
   }
 
   const handleIconClick = () => {

@@ -40,7 +40,7 @@ export const examSeasonConfig: ExamSeasonConfig = {
       enable: true,
       name: '道具篇：下',
       id: 'item2',
-      enableEndless: false,
+      enableEndless: true,
       rankStatus: 'query',
       endlessRankStatus: 'query',
     },

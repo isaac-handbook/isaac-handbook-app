@@ -43,7 +43,7 @@ const Cell: React.FC<Props> = (props) => {
       </View>
       <View className={styles.value}>
         <ContentTransformer
-          value={item.unlock.replace(`用{{chara|${nameZh}}}`, '')}
+          value={item.unlock?.replace(`用{{chara|${nameZh}}}`, '')}
           mode="clean"
           lineHeight="48rpx"
         />
