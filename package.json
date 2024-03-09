@@ -39,8 +39,8 @@
   "license": "Apache License 2.0",
   "dependencies": {
     "@babel/runtime": "^7.23.9",
-    "@nutui/icons-react-taro": "^1.0.2",
-    "@nutui/nutui-react-taro": "^2.3.8",
+    "@nutui/icons-react-taro": "1.0.2",
+    "@nutui/nutui-react-taro": "2.3.8",
     "@rojer/katex-mini": "^1.1.3",
     "@tarojs/components": "3.6.17",
     "@tarojs/helper": "3.6.17",

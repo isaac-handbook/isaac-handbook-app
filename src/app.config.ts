@@ -21,6 +21,7 @@ export default defineAppConfig({
     'pages/dev-checker/index',
     'pages/achieve/index',
     'pages/curse/index',
+    'pages/challenge/index',
   ],
   subpackages: [
     {

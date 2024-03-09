@@ -21,6 +21,8 @@ import { getGlobalData, setGlobalData } from '@src/global_data';
 import { pickItemFromHandbook } from './utils/pickItemFromHandbook';
 import { AchieveDetailDrawer } from '@pages/achieve/components/AchieveDetailDrawer';
 import { CurseDetailDrawer } from '@pages/curse/components/CurseDetailDrawer';
+import { B } from '@components/B';
+import { ChallengeDetailDrawer } from '@pages/challenge/components/ChallengeDetailDrawer';
 
 interface Props {
   id?: string;
@@ -298,6 +300,28 @@ export const ContentTransformer: React.FC<Props> = (props) => {
       );
     }
 
+    // 挑战| 开头，表示是一个挑战
+    if (data.startsWith('挑战|')) {
+      const challengeID = data.replace('挑战|', '');
+      const challenge = getItemDataById('challenge', challengeID);
+      if (!challenge?.nameZh) {
+        return `挑战#${challengeID}`;
+      }
+      return (
+        <ChallengeDetailDrawer challenge={challenge}>
+          <View
+            style={{
+              color: themeColor.linkColor,
+              display: 'inline',
+              padding: '0 8rpx',
+            }}
+          >
+            挑战#{challengeID}
+          </View>
+        </ChallengeDetailDrawer>
+      );
+    }
+
     // curse| 开头，表示是一个诅咒
     if (data.startsWith('curse|')) {
       const curseName = data.replace('curse|', '');
@@ -306,6 +330,11 @@ export const ContentTransformer: React.FC<Props> = (props) => {
         return curseName;
       }
       return <CurseDetailDrawer curse={curse} />;
+    }
+
+    // b| 开头，表示是一个加粗
+    if (data.startsWith('b|')) {
+      return <B>{data.replace('b|', '')}</B>;
     }
 
     // clean 模式截断。下面的内容在 clean 模式下不会被解析

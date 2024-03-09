@@ -36,6 +36,10 @@ export const SideMenu: React.FC<Props> = () => {
       text: '成就',
     },
     {
+      id: 'challenge',
+      text: '挑战',
+    },
+    {
       id: 'curse',
       text: '诅咒',
     },
@@ -131,6 +135,9 @@ export const SideMenu: React.FC<Props> = () => {
         break;
       case 'curse':
         Taro.navigateTo({ url: '/pages/curse/index' });
+        break;
+      case 'challenge':
+        Taro.navigateTo({ url: '/pages/challenge/index' });
         break;
       default:
         break;

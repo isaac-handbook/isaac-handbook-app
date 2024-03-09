@@ -1,0 +1,20 @@
+.item {
+  border-bottom: 1px solid #e5e5e5;
+  // padding: 0px 8px;
+  box-sizing: border-box;
+  // width: 100vw;
+  height: 64px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-top: 2px;
+}

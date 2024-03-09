@@ -3,6 +3,7 @@ import { TableColumnProps } from '@nutui/nutui-react-taro/dist/types/packages/ta
 import { Achieve } from './achieve';
 import { Chara } from './chara';
 import { Curse } from './curse';
+import { Challenge } from './challenge';
 
 export type ItemType =
   | 'item'
@@ -11,7 +12,8 @@ export type ItemType =
   | 'pill'
   | 'chara'
   | 'achieve'
-  | 'curse';
+  | 'curse'
+  | 'challenge';
 
 export interface ItemGridVirtualListItem {
   type: 'items' | 'component';
@@ -83,6 +85,7 @@ export interface HandBookData {
   cards: Item[];
   pills: Item[];
   achieve: Achieve[];
+  challenge: Challenge[];
   extra: {
     suitList: { name: string }[];
     tagInfo: {
@@ -115,3 +118,4 @@ export interface HandBookData {
 export * from './achieve';
 export * from './chara';
 export * from './curse';
+export * from './challenge';

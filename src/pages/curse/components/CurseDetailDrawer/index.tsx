@@ -12,11 +12,11 @@ import { DetailContent } from '@pages/item-detail/components/DetailContent';
 
 interface Props {
   curse: Curse;
-  childrenScale?: number;
+  block?: boolean;
 }
 
 export const CurseDetailDrawer: React.FC<Props> = (props) => {
-  const { curse, childrenScale = 1 } = props;
+  const { curse, block = false } = props;
 
   const [showDrawer, setShowDrawer] = React.useState(false);
 
@@ -30,10 +30,9 @@ export const CurseDetailDrawer: React.FC<Props> = (props) => {
   return (
     <>
       <View
-        className={classNames(styles.children)}
+        className={classNames(styles.children, block && styles.block)}
         style={{
-          color: themeColor.linkColor,
-          transform: `scale(${childrenScale})`,
+          color: styles.block ? themeColor.textColor : themeColor.linkColor,
         }}
         onClick={() => setShowDrawer(true)}
       >
