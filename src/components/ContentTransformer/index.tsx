@@ -19,10 +19,10 @@ import { CharaUnlockDrawer } from '@components/CharaUnlockDrawer';
 import { ThemeColor } from '@hooks/useThemeInfo/style';
 import { getGlobalData, setGlobalData } from '@src/global_data';
 import { pickItemFromHandbook } from './utils/pickItemFromHandbook';
-import { AchieveDetailDrawer } from '@pages/achieve/components/AchieveDetailDrawer';
-import { CurseDetailDrawer } from '@pages/curse/components/CurseDetailDrawer';
+import { AchieveDetailDrawer } from '@pages/achieves/components/AchieveDetailDrawer';
+import { CurseDetailDrawer } from '@pages/curses/components/CurseDetailDrawer';
 import { B } from '@components/B';
-import { ChallengeDetailDrawer } from '@pages/challenge/components/ChallengeDetailDrawer';
+import { ChallengeDetailDrawer } from '@pages/challenges/components/ChallengeDetailDrawer';
 
 interface Props {
   id?: string;
@@ -281,7 +281,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     // achi| 开头，表示是一个成就
     if (data.startsWith('achi|')) {
       const achieveID = data.replace('achi|', '');
-      const achieve = getItemDataById('achieve', achieveID);
+      const achieve = getItemDataById('achieves', achieveID);
       if (!achieve?.nameZh) {
         return `成就#${achieveID}`;
       }
@@ -303,7 +303,7 @@ export const ContentTransformer: React.FC<Props> = (props) => {
     // 挑战| 开头，表示是一个挑战
     if (data.startsWith('挑战|')) {
       const challengeID = data.replace('挑战|', '');
-      const challenge = getItemDataById('challenge', challengeID);
+      const challenge = getItemDataById('challenges', challengeID);
       if (!challenge?.nameZh) {
         return `挑战#${challengeID}`;
       }

@@ -19,9 +19,10 @@ export default defineAppConfig({
     'pages/user-edit/index',
     'pages/developer/index',
     'pages/dev-checker/index',
-    'pages/achieve/index',
-    'pages/curse/index',
-    'pages/challenge/index',
+    'pages/achieves/index',
+    'pages/curses/index',
+    'pages/challenges/index',
+    'pages/seeds/index',
   ],
   subpackages: [
     {

@@ -4,6 +4,7 @@ import { Achieve } from './achieve';
 import { Chara } from './chara';
 import { Curse } from './curse';
 import { Challenge } from './challenge';
+import { Seed } from './seed';
 
 export type ItemType =
   | 'item'
@@ -84,8 +85,9 @@ export interface HandBookData {
   trinkets: Item[];
   cards: Item[];
   pills: Item[];
-  achieve: Achieve[];
-  challenge: Challenge[];
+  achieves: Achieve[];
+  challenges: Challenge[];
+  seeds: Seed[];
   extra: {
     suitList: { name: string }[];
     tagInfo: {
@@ -110,7 +112,7 @@ export interface HandBookData {
       columns: TableColumnProps[];
       data: any[];
     };
-    curse: Curse[];
+    curses: Curse[];
   };
   chara: Record<string, Chara>;
 }
@@ -119,3 +121,4 @@ export * from './achieve';
 export * from './chara';
 export * from './curse';
 export * from './challenge';
+export * from './seed';

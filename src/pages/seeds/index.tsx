@@ -3,7 +3,8 @@ import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
-import { ChallegeItem } from './components/ChallengeItem';
+import { SeedItem } from './components/SeedItem';
+import ErrorPage from '@components/ErrorBoundary/ErrorPage';
 
 function Index() {
   const {
@@ -11,8 +12,12 @@ function Index() {
   } = useThemeInfo();
 
   const {
-    handbookData: { challenge },
+    handbookData: { seeds },
   } = useHandBookData();
+
+  if (!seeds?.length) {
+    return <ErrorPage />;
+  }
 
   return (
     <ErrorBoundary>
@@ -23,8 +28,8 @@ function Index() {
         }}
       >
         <View className={styles.list}>
-          {challenge.map((cha) => (
-            <ChallegeItem challenge={cha} />
+          {seeds.map((seed, index) => (
+            <SeedItem seed={seed} index={index} />
           ))}
         </View>
       </View>

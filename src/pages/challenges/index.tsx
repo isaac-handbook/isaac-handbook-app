@@ -3,7 +3,8 @@ import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
-import { CurseItem } from './components/CurseItem';
+import { ChallengeItem } from './components/ChallengeItem';
+import ErrorPage from '@components/ErrorBoundary/ErrorPage';
 
 function Index() {
   const {
@@ -11,10 +12,12 @@ function Index() {
   } = useThemeInfo();
 
   const {
-    handbookData: {
-      extra: { curse },
-    },
+    handbookData: { challenges },
   } = useHandBookData();
+
+  if (!challenges?.length) {
+    return <ErrorPage />;
+  }
 
   return (
     <ErrorBoundary>
@@ -25,8 +28,8 @@ function Index() {
         }}
       >
         <View className={styles.list}>
-          {curse.map((cur) => (
-            <CurseItem curse={cur} />
+          {challenges.map((cha) => (
+            <ChallengeItem challenge={cha} />
           ))}
         </View>
       </View>

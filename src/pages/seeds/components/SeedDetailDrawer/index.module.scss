@@ -1,0 +1,33 @@
+.drawer {
+  padding: 16px;
+  padding-top: 0px;
+  padding-bottom: 32px;
+  max-height: 70vh;
+  min-height: 50vh;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 15px;
+}
+
+.header {
+  padding-top: 8px;
+  width: 100%;
+}
+
+.unlock {
+  margin-bottom: 8px;
+}
+
+.list {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start !important;
+  line-height: 30px;
+}
+
+.children {
+  display: inline-block;
+}

@@ -158,7 +158,7 @@ const initJsonData = (data: string) => {
   });
 
   // 遍历每一个 achieve，寻找 unlock 和 unlockItem 中包含的 {{item|ID=XXX}}
-  res.achieve = res.achieve?.map((achieve) => {
+  res.achieves = res.achieves?.map((achieve) => {
     if (!achieve.tmp) {
       achieve.tmp = '';
     }

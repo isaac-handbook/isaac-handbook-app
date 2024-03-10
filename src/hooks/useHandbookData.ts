@@ -9,7 +9,9 @@ const defaultHandbookData: HandBookData = {
   pills: [],
   chara: {},
   extra: { tagInfo: {}, table: {}, revive: [] } as any,
-  achieve: [],
+  achieves: [],
+  seeds: [],
+  challenges: [],
 };
 
 export const handbookDataState = atom<HandBookData>({
@@ -40,7 +42,7 @@ export const useHandBookData = () => {
   };
 
   const getCurseByName = (name: string) => {
-    return handbookData.extra.curse.find((curse) => curse.nameZh === name);
+    return handbookData.extra.curses.find((curse) => curse.nameZh === name);
   };
 
   const updateSingleHandbookState = <T extends keyof HandBookData>(

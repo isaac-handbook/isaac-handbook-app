@@ -32,16 +32,20 @@ export const SideMenu: React.FC<Props> = () => {
       text: '套装',
     },
     {
-      id: 'achieve',
+      id: 'achieves',
       text: '成就',
     },
     {
-      id: 'challenge',
+      id: 'challenges',
       text: '挑战',
     },
     {
-      id: 'curse',
+      id: 'curses',
       text: '诅咒',
+    },
+    {
+      id: 'seeds',
+      text: '种子',
     },
     {
       id: 'sacrifice-room',
@@ -118,8 +122,8 @@ export const SideMenu: React.FC<Props> = () => {
       case 'backHome':
         Taro.reLaunch({ url: '/pages/index/index' });
         break;
-      case 'achieve':
-        Taro.navigateTo({ url: '/pages/achieve/index' });
+      case 'achieves':
+        Taro.navigateTo({ url: '/pages/achieves/index' });
         break;
       case 'suit':
         Taro.navigateTo({ url: '/pages/suit/index' });
@@ -133,11 +137,14 @@ export const SideMenu: React.FC<Props> = () => {
       case 'boss-mark':
         Taro.navigateTo({ url: '/pages/boss-mark/index' });
         break;
-      case 'curse':
-        Taro.navigateTo({ url: '/pages/curse/index' });
+      case 'curses':
+        Taro.navigateTo({ url: '/pages/curses/index' });
         break;
-      case 'challenge':
-        Taro.navigateTo({ url: '/pages/challenge/index' });
+      case 'challenges':
+        Taro.navigateTo({ url: '/pages/challenges/index' });
+        break;
+      case 'seeds':
+        Taro.navigateTo({ url: '/pages/seeds/index' });
         break;
       default:
         break;

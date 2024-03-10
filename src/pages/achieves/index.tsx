@@ -17,19 +17,25 @@ function Index() {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
-  const { handbookData } = useHandBookData();
+  const {
+    handbookData: { achieves },
+  } = useHandBookData();
 
   const [{ keyword, achieveType, unlockItemType }] = useRecoilState(
     achieveSearchInfoState,
   );
 
-  const achieveTypeIndex = achieveTypeMap[achieveType];
-
   const {
     setting: { achieveViewMode },
   } = useSetting();
 
-  let showAchieveList = handbookData.achieve;
+  if (!achieves?.length) {
+    return null;
+  }
+
+  const achieveTypeIndex = achieveTypeMap[achieveType];
+
+  let showAchieveList = [...achieves];
 
   // 关键字过滤
   if (keyword) {

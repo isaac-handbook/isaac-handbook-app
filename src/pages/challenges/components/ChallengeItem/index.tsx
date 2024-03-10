@@ -10,7 +10,7 @@ interface Props {
   challenge: Challenge;
 }
 
-export const ChallegeItem: React.FC<Props> = (props) => {
+export const ChallengeItem: React.FC<Props> = (props) => {
   const { challenge } = props;
 
   const {

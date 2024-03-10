@@ -6,34 +6,27 @@ import { useRecoilState } from 'recoil';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import classNames from 'classnames';
 import { drawerMaskColor } from '@src/styles';
-import { Challenge } from '@typers/handbook';
+import { Seed } from '@typers/handbook';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { Unlock } from '@pages/item-detail/components/Unlock';
 import { PaperHeader } from '@pages/item-detail/components/PaperHeader';
 import { B } from '@components/B';
-import { useHandBookData } from '@hooks/useHandbookData';
+import { LockAchieveImg } from '@components/LockAchieveImg';
 
 interface Props {
-  challenge: Challenge;
+  seed: Seed;
   children: React.ReactNode;
 }
 
-export const ChallengeDetailDrawer: React.FC<Props> = (props) => {
-  const { challenge } = props;
+export const SeedDetailDrawer: React.FC<Props> = (props) => {
+  const { seed } = props;
 
   const [showDrawer, setShowDrawer] = React.useState(false);
 
   const [{ themeColor }] = useRecoilState(themeInfoState);
 
-  const {
-    handbookData: { achieve },
-  } = useHandBookData();
-
-  const findAchieveByChallenge = () => {
-    return achieve.find((ach) => ach.unlock?.includes(`挑战|${challenge.id}`));
-  };
-
-  const achieveData = findAchieveByChallenge();
+  // 给种子的第四位后面加一个空格
+  const showSeedCode = seed.seedCode.replace(/(.{4})/g, '$1 ');
 
   return (
     <>
@@ -44,7 +37,7 @@ export const ChallengeDetailDrawer: React.FC<Props> = (props) => {
         {props.children}
       </View>
       <Popup
-        title={'挑战内容'}
+        title={'种子内容'}
         visible={showDrawer}
         position="bottom"
         round
@@ -64,57 +57,40 @@ export const ChallengeDetailDrawer: React.FC<Props> = (props) => {
         <ScrollView className={styles.drawer} scrollY>
           <View className={styles.header}>
             <PaperHeader
-              nameZh={challenge.nameZh}
-              descZh={'挑战' + challenge.id + '：' + challenge.nameZh}
+              nameZh={seed.nameZh}
+              descZh={showSeedCode}
               type="oneRow"
+              line1Style={{ fontSize: '40rpx' }}
             />
           </View>
 
           <View className={styles.unlock}>
-            <Unlock unlock={challenge.unlock} />
+            <Unlock unlock={seed.unlock} />
           </View>
 
           <View className={styles.list}>
-            <ContentTransformer
-              value={'{{b|使用人物：}}' + challenge.useChara}
-            />
+            <B>描述：</B>
+            {seed.nameZh}
           </View>
 
           <View className={styles.list}>
-            <ContentTransformer
-              value={'{{b|初始物品：}}' + (challenge.initialItems || '无')}
-            />
+            <B>成就：</B>
+            {seed.supportAchieve ? '支持解锁成就' : '不支持解锁成就'}
+            {!seed.supportAchieve && <LockAchieveImg />}
           </View>
 
           <View className={styles.list}>
-            <ContentTransformer
-              value={'{{b|特殊规则：}}' + (challenge.specialRule || '无')}
-            />
+            <ContentTransformer value={'{{b|效果：}}' + seed.descZh} />
           </View>
 
           <View className={styles.list}>
-            <ContentTransformer
-              value={'{{b|目的地：}}' + challenge.destination}
-            />
-          </View>
-
-          {achieveData && (
-            <View className={styles.list}>
-              <ContentTransformer
-                value={'{{b|解锁内容：}}' + achieveData.unlockItem}
-              />
-            </View>
-          )}
-
-          <View className={styles.list}>
-            <B>特殊房间：</B>
-            {challenge.hasTreasureRoom ? '有' : '没有'}宝箱房，
-            {challenge.hasShop ? '有' : '没有'}商店
+            <B>类别：</B>
+            {seed.seedType}
           </View>
 
           <View className={styles.list}>
             <B>英文名：</B>
-            {challenge.nameEn}
+            {seed.nameEn}
           </View>
         </ScrollView>
       </Popup>

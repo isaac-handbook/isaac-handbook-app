@@ -8,10 +8,12 @@ interface Props {
   descZh?: React.ReactNode;
   nameZh?: React.ReactNode;
   type?: 'default' | 'oneRow';
+  line1Style?: React.CSSProperties;
+  line2Style?: React.CSSProperties;
 }
 
 export const PaperHeader: React.FC<Props> = (props) => {
-  const { type = 'default' } = props;
+  const { type = 'default', line1Style = {}, line2Style = {} } = props;
   const isOneRow = type === 'oneRow';
   return (
     <View className={classNames(styles.container, isOneRow && styles.oneRow)}>
@@ -19,10 +21,17 @@ export const PaperHeader: React.FC<Props> = (props) => {
         src={paperImg}
         className={classNames(styles.bg, isOneRow && styles.oneRow)}
       />
-      <View className={classNames(styles.line1, isOneRow && styles.oneRow)}>
+      <View
+        className={classNames(styles.line1, isOneRow && styles.oneRow)}
+        style={{ ...line1Style }}
+      >
         {isOneRow ? props.descZh : props.nameZh}
       </View>
-      {!isOneRow && <View className={styles.line2}>{props.descZh}</View>}
+      {!isOneRow && (
+        <View className={styles.line2} style={{ ...line2Style }}>
+          {props.descZh}
+        </View>
+      )}
     </View>
   );
 };

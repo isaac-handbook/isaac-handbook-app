@@ -9,7 +9,7 @@ import { Apps, List, Refresh } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
 import { useTrinketSearchInfo } from '@hooks/useTrinketSearchInfo';
 import { SideMenu } from '@components/SideMenu';
-import { AchieveFilter } from '@pages/achieve/components/AchieveFilter';
+import { AchieveFilter } from '@pages/achieves/components/AchieveFilter';
 import { useSetting } from '@hooks/useSetting';
 
 export interface IndexTopNavProps extends SearchProps {

@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { CharaInfo } from '../../../../types/handbook';
 import { useHandBookData } from '@hooks/useHandbookData';
-import { AchieveItem } from '@pages/achieve/components/AchieveItem';
+import { AchieveItem } from '@pages/achieves/components/AchieveItem';
 
 interface Props {
   charaInfo: CharaInfo;
@@ -14,12 +14,12 @@ export const CharaAchieve: React.FC<Props> = (props) => {
   const { nameZh } = charaInfo;
 
   const {
-    handbookData: { achieve },
+    handbookData: { achieves },
   } = useHandBookData();
 
   const matchText = `用{{chara|${nameZh}`;
 
-  const matchedAchieve = achieve.filter((item) =>
+  const matchedAchieve = achieves.filter((item) =>
     item.unlock?.includes(matchText),
   );
 
