@@ -4,7 +4,7 @@ import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { DetailContent } from '@pages/item-detail/components/DetailContent';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ContentTransformer } from '@components/ContentTransformer';
 
 function Index() {
@@ -16,9 +16,17 @@ function Index() {
 
   const [checkerIndex, setCheckIndex] = useState(0);
 
+  const intervalRef = useRef<any>();
+
   useEffect(() => {
-    setInterval(() => {
-      setCheckIndex((prev) => prev + 1);
+    intervalRef.current = setInterval(() => {
+      setCheckIndex((prev) => {
+        if (prev < 1000) {
+          return prev + 1;
+        }
+        clearInterval(intervalRef.current);
+        return prev;
+      });
     }, 250);
   }, []);
 
@@ -31,6 +39,9 @@ function Index() {
   const checkCurse = handbookData.extra.curses[checkerIndex];
   const checkSeed = handbookData.seeds[checkerIndex];
   const checkChara = Object.values(handbookData.chara)[checkerIndex];
+
+  console.log('checkItem', checkItem);
+  console.log('checkAchieve', checkAchieve);
 
   return (
     <ErrorBoundary>
