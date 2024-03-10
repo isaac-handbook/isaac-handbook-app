@@ -1,6 +1,6 @@
 import { Item } from '@typers/handbook';
 
-const wikiBaseUrl = 'https://isaac.huijiwiki.com';
+export const wikiBaseUrl = 'https://isaac.huijiwiki.com';
 
 /** 获取某个 item 的 wiki 链接 */
 export const getItemWikiLink = (item: Item) => {

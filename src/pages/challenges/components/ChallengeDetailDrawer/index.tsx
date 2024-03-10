@@ -12,6 +12,8 @@ import { Unlock } from '@pages/item-detail/components/Unlock';
 import { PaperHeader } from '@pages/item-detail/components/PaperHeader';
 import { B } from '@components/B';
 import { useHandBookData } from '@hooks/useHandbookData';
+import { LinkText } from '@components/LinkText';
+import { wikiBaseUrl } from '@utils/wiki';
 
 interface Props {
   challenge: Challenge;
@@ -92,12 +94,6 @@ export const ChallengeDetailDrawer: React.FC<Props> = (props) => {
             />
           </View>
 
-          <View className={styles.list}>
-            <ContentTransformer
-              value={'{{b|目的地：}}' + challenge.destination}
-            />
-          </View>
-
           {achieveData && (
             <View className={styles.list}>
               <ContentTransformer
@@ -113,8 +109,22 @@ export const ChallengeDetailDrawer: React.FC<Props> = (props) => {
           </View>
 
           <View className={styles.list}>
+            <ContentTransformer
+              value={'{{b|目的地：}}' + challenge.destination}
+            />
+          </View>
+
+          <View className={styles.list}>
             <B>英文名：</B>
             {challenge.nameEn}
+          </View>
+
+          <View className={styles.list}>
+            <LinkText
+              value="点击复制 WIKI 链接"
+              action="copy"
+              copyValue={`${wikiBaseUrl}/wiki/挑战/${challenge.id}`}
+            />
           </View>
         </ScrollView>
       </Popup>
