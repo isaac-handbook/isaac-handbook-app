@@ -40,9 +40,6 @@ function Index() {
   const checkSeed = handbookData.seeds[checkerIndex];
   const checkChara = Object.values(handbookData.chara)[checkerIndex];
 
-  console.log('checkItem', checkItem);
-  console.log('checkAchieve', checkAchieve);
-
   return (
     <ErrorBoundary>
       <View

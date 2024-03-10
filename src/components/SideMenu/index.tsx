@@ -101,7 +101,10 @@ export const SideMenu: React.FC<Props> = () => {
     }
     // 检查缓存
     const cache = Taro.getStorageSync('sideMenuBadge') || 0;
-    if (cache > 5) {
+    if (typeof cache !== 'number') {
+      return;
+    }
+    if (cache > 4) {
       return;
     }
     if (sideMenuBadge === updateInfo.version) {

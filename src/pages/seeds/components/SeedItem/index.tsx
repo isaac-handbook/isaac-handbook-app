@@ -19,6 +19,9 @@ export const SeedItem: React.FC<Props> = (props) => {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
+  // 给种子的第四位后面加一个空格
+  const showSeedCode = seed.seedCode.replace(/(.{4})/g, '$1 ');
+
   return (
     <SeedDetailDrawer seed={seed}>
       <View
@@ -32,7 +35,7 @@ export const SeedItem: React.FC<Props> = (props) => {
           {index + 1 + '. ' + seed.nameZh}
           {!seed.supportAchieve && <LockAchieveImg />}
         </View>
-        <View className={styles.subtitle}>{seed.seedCode}</View>
+        <View className={styles.subtitle}>{showSeedCode}</View>
       </View>
     </SeedDetailDrawer>
   );

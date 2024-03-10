@@ -6,6 +6,8 @@ import { useHandBookData } from '@hooks/useHandbookData';
 import { SeedItem } from './components/SeedItem';
 import ErrorPage from '@components/ErrorBoundary/ErrorPage';
 
+let prevSeedType = '';
+
 function Index() {
   const {
     themeInfo: { themeColor },
@@ -25,12 +27,22 @@ function Index() {
         className={styles.page}
         style={{
           backgroundColor: themeColor.bgColor,
+          color: themeColor.textColor,
         }}
       >
         <View className={styles.list}>
-          {seeds.map((seed, index) => (
-            <SeedItem seed={seed} index={index} />
-          ))}
+          {seeds.map((seed, index) => {
+            let prevSeedType_ = prevSeedType;
+            prevSeedType = seed.seedType;
+            return (
+              <>
+                {prevSeedType_ !== seed.seedType && (
+                  <View className={styles.seedType}>{seed.seedType}</View>
+                )}
+                <SeedItem seed={seed} index={index} />
+              </>
+            );
+          })}
         </View>
       </View>
     </ErrorBoundary>
