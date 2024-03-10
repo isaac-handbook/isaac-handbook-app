@@ -26,6 +26,10 @@ function Index() {
   const checkTrinket = handbookData.trinkets[checkerIndex];
   const checkCard = handbookData.cards[checkerIndex];
   const checkPill = handbookData.pills[checkerIndex];
+  const checkAchieve = handbookData.achieves[checkerIndex];
+  const checkChallenge = handbookData.challenges[checkerIndex];
+  const checkCurse = handbookData.extra.curses[checkerIndex];
+  const checkSeed = handbookData.seeds[checkerIndex];
   const checkChara = Object.values(handbookData.chara)[checkerIndex];
 
   return (
@@ -63,7 +67,7 @@ function Index() {
                 <DetailContent item={checkTrinket} />
               </View>
               <View className={styles.checkerContainer}>
-                <ContentTransformer value={checkItem.unlock} />
+                <ContentTransformer value={checkTrinket.unlock} />
               </View>
             </>
           ) : (
@@ -79,7 +83,7 @@ function Index() {
                 <DetailContent item={checkCard} />
               </View>
               <View className={styles.checkerContainer}>
-                <ContentTransformer value={checkItem.unlock} />
+                <ContentTransformer value={checkCard.unlock} />
               </View>
             </>
           ) : (
@@ -95,7 +99,7 @@ function Index() {
                 <DetailContent item={checkPill} />
               </View>
               <View className={styles.checkerContainer}>
-                <ContentTransformer value={checkItem.unlock} />
+                <ContentTransformer value={checkPill.unlock} />
               </View>
             </>
           ) : (
@@ -111,11 +115,78 @@ function Index() {
                 <DetailContent item={checkChara} />
               </View>
               <View className={styles.checkerContainer}>
-                <ContentTransformer value={checkItem.unlock} />
+                <ContentTransformer value={checkChara.unlock} />
               </View>
             </>
           ) : (
             <View className={styles.checkerTitle}>角色检测完成</View>
+          )}
+
+          {checkAchieve ? (
+            <>
+              <View className={styles.checkerTitle}>
+                成就检测：{checkerIndex} - {checkAchieve.nameZh}
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkAchieve.unlock} />
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkAchieve.unlockItem} />
+              </View>
+            </>
+          ) : (
+            <View className={styles.checkerTitle}>成就检测完成</View>
+          )}
+
+          {checkChallenge ? (
+            <>
+              <View className={styles.checkerTitle}>
+                挑战检测：{checkerIndex} - {checkChallenge.nameZh}
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkChallenge.unlock} />
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkChallenge.useChara} />
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkChallenge.specialRule} />
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkChallenge.initialItems} />
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkChallenge.destination} />
+              </View>
+            </>
+          ) : (
+            <View className={styles.checkerTitle}>挑战检测完成</View>
+          )}
+
+          {checkCurse ? (
+            <>
+              <View className={styles.checkerTitle}>
+                诅咒检测：{checkerIndex} - {checkCurse.nameZh}
+              </View>
+              <View className={styles.checkerContainer}>
+                <DetailContent item={checkCurse} />
+              </View>
+            </>
+          ) : (
+            <View className={styles.checkerTitle}>诅咒检测完成</View>
+          )}
+
+          {checkSeed ? (
+            <>
+              <View className={styles.checkerTitle}>
+                种子检测：{checkerIndex} - {checkSeed.nameZh}
+              </View>
+              <View className={styles.checkerContainer}>
+                <ContentTransformer value={checkSeed.descZh} />
+              </View>
+            </>
+          ) : (
+            <View className={styles.checkerTitle}>种子检测完成</View>
           )}
         </View>
       </View>
