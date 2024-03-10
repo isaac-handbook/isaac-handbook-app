@@ -177,7 +177,6 @@ export const ItemGridDrawer: React.FC<Props> = (props) => {
           className={styles.drawer}
           style={{
             backgroundColor: themeColor.bgColor,
-            height: isSuit ? '55vh' : '60vh',
           }}
           scrollY
           enablePassive

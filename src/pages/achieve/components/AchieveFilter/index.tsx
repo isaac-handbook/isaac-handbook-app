@@ -48,8 +48,8 @@ export const AchieveFilter: React.FC = () => {
         }}
       >
         <View className={styles.drawer}>
-          <AchieveTypeSelect />
           <UnlockItemTypeSelect />
+          <AchieveTypeSelect />
         </View>
       </Popup>
 

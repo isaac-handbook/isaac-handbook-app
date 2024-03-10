@@ -32,7 +32,7 @@ export const CurseDetailDrawer: React.FC<Props> = (props) => {
       <View
         className={classNames(styles.children, block && styles.block)}
         style={{
-          color: styles.block ? themeColor.textColor : themeColor.linkColor,
+          color: block ? themeColor.textColor : themeColor.linkColor,
         }}
         onClick={() => setShowDrawer(true)}
       >

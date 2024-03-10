@@ -11,6 +11,7 @@ import { ContentTransformer } from '@components/ContentTransformer';
 import { Unlock } from '@pages/item-detail/components/Unlock';
 import { PaperHeader } from '@pages/item-detail/components/PaperHeader';
 import { B } from '@components/B';
+import { useHandBookData } from '@hooks/useHandbookData';
 
 interface Props {
   challenge: Challenge;
@@ -23,6 +24,16 @@ export const ChallengeDetailDrawer: React.FC<Props> = (props) => {
   const [showDrawer, setShowDrawer] = React.useState(false);
 
   const [{ themeColor }] = useRecoilState(themeInfoState);
+
+  const {
+    handbookData: { achieve },
+  } = useHandBookData();
+
+  const findAchieveByChallenge = () => {
+    return achieve.find((ach) => ach.unlock?.includes(`挑战|${challenge.id}`));
+  };
+
+  const achieveData = findAchieveByChallenge();
 
   return (
     <>
@@ -58,37 +69,49 @@ export const ChallengeDetailDrawer: React.FC<Props> = (props) => {
               type="oneRow"
             />
           </View>
+
           <View className={styles.unlock}>
             <Unlock unlock={challenge.unlock} />
           </View>
+
           <View className={styles.list}>
             <ContentTransformer
               value={'{{b|使用人物：}}' + challenge.useChara}
             />
           </View>
+
           <View className={styles.list}>
             <ContentTransformer
               value={'{{b|初始物品：}}' + (challenge.initialItems || '无')}
             />
           </View>
+
           <View className={styles.list}>
             <ContentTransformer
               value={'{{b|特殊规则：}}' + (challenge.specialRule || '无')}
             />
           </View>
+
           <View className={styles.list}>
             <ContentTransformer
               value={'{{b|目的地：}}' + challenge.destination}
             />
           </View>
+
+          {achieveData && (
+            <View className={styles.list}>
+              <ContentTransformer
+                value={'{{b|解锁内容：}}' + achieveData.unlockItem}
+              />
+            </View>
+          )}
+
           <View className={styles.list}>
-            <B>宝箱房：</B>
-            {challenge.hasTreasureRoom ? '有' : '无'}
+            <B>特殊房间：</B>
+            {challenge.hasTreasureRoom ? '有' : '没有'}宝箱房，
+            {challenge.hasShop ? '有' : '没有'}商店
           </View>
-          <View className={styles.list}>
-            <B>商店：</B>
-            {challenge.hasShop ? '有' : '无'}
-          </View>
+
           <View className={styles.list}>
             <B>英文名：</B>
             {challenge.nameEn}
