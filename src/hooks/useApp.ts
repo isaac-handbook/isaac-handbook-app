@@ -26,6 +26,8 @@ export interface AppState {
   examPassRate: Record<string, string>;
   /** 开发者模式 openid 白名单 */
   devWhiteList: string[];
+  /** 是否给右上角菜单 Icon 展示红点，值为 app 版本 */
+  sideMenuBadge: string;
 }
 
 export const defaultAppState: AppState = {
@@ -44,6 +46,7 @@ export const defaultAppState: AppState = {
   },
   examPassRate: {},
   devWhiteList: [],
+  sideMenuBadge: '',
 };
 
 export const appState = atom<AppState>({

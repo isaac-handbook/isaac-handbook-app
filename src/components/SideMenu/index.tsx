@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { Popup } from '@nutui/nutui-react-taro';
+import React, { useEffect, useState } from 'react';
+import { Badge, Popup } from '@nutui/nutui-react-taro';
 import Taro from '@tarojs/taro';
 import { ScrollView, Image, View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { Category, Home, Photograph } from '@nutui/icons-react-taro';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import classNames from 'classnames';
+import { useApp } from '@hooks/useApp';
+import { updateInfo } from '@src/config/config.app';
 
 interface Props {}
 
@@ -84,7 +86,30 @@ export const SideMenu: React.FC<Props> = () => {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
+  const {
+    app: { sideMenuBadge },
+  } = useApp();
+
   const [visible, setVisible] = useState(false);
+
+  const [badge, setBadge] = useState(false);
+
+  // 检查是否要展示红点
+  useEffect(() => {
+    if (!sideMenuBadge) {
+      return;
+    }
+    // 检查缓存
+    const cache = Taro.getStorageSync('sideMenuBadge') || 0;
+    if (cache > 5) {
+      return;
+    }
+    if (sideMenuBadge === updateInfo.version) {
+      setBadge(true);
+      // 存缓存
+      Taro.setStorageSync('sideMenuBadge', cache + 1);
+    }
+  }, [sideMenuBadge]);
 
   const selected = (item: any) => {
     switch (item.id) {
@@ -167,8 +192,23 @@ export const SideMenu: React.FC<Props> = () => {
   return (
     <>
       <View className={styles.gateIcon} onClick={() => setVisible(true)}>
-        <Category size={'34rpx'} />
-        <View className={styles.gateText}>菜单</View>
+        {badge ? (
+          <Badge value="NEW" top={-2} right={9} style={{ top: 3 }}>
+            <Category size={'34rpx'} />
+          </Badge>
+        ) : (
+          <Category
+            size={'34rpx'}
+            className="nut-icon-am-breathe  nut-icon-am-infinite"
+          />
+        )}
+
+        <View
+          className={styles.gateText}
+          style={{ marginTop: badge ? '0rpx' : '8rpx' }}
+        >
+          菜单
+        </View>
       </View>
 
       <Popup

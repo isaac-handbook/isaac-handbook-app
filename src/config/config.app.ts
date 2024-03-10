@@ -1,7 +1,7 @@
 import { ExamSeasonConfig, UpdateInfo } from './type';
 
 // 当前版本
-const version = '2.2.0';
+const version = '3.0.0';
 
 // 更新通知
 const updateNotice: UpdateInfo = {
@@ -10,11 +10,11 @@ const updateNotice: UpdateInfo = {
   // 功能更新
   features: [
     {
-      title: '「课堂」道具篇：下',
-      content: ['全新题目，更有挑战~'],
+      title: '一大波新功能！',
+      content: ['新增：成就、挑战、诅咒、种子'],
     },
     // {
-    //   title: '「课堂」新题库即将到来',
+    //   title: '',
     //   content: ['开发者说：正在编了'],
     // },
   ],
