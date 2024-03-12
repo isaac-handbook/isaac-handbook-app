@@ -75,8 +75,8 @@ export const SeedDetailDrawer: React.FC<Props> = (props) => {
 
           <View className={styles.list}>
             <B>成就：</B>
-            {seed.supportAchieve ? '支持解锁成就' : '不支持解锁成就'}
-            {!seed.supportAchieve && <LockAchieveImg />}
+            {!seed.supportAchieve ? '支持解锁成就' : '不支持解锁成就'}
+            {seed.supportAchieve && <LockAchieveImg />}
           </View>
 
           <View className={styles.list}>
