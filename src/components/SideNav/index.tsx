@@ -5,7 +5,7 @@ import cardsImg from '@assets/cards.png';
 import pillImg from '@assets/pill.png';
 import coinImg from '@assets/coin.gif';
 import othersImg from '@assets/others.png';
-import Taro from '@tarojs/taro';
+import { safeNavigate } from '@utils/navigate';
 
 interface Props {}
 
@@ -48,35 +48,35 @@ export const SideNav: React.FC<Props> = () => {
     switch (item.id) {
       case 1:
         // 跳转到饰品页面
-        Taro.navigateTo({
+        safeNavigate({
           url: `/pages/trinkets/index`,
         });
         setVisible(false);
         break;
       case 2:
         // 跳转到卡牌页面
-        Taro.navigateTo({
+        safeNavigate({
           url: `/pages/cards/index`,
         });
         setVisible(false);
         break;
       case 3:
         // 跳转到胶囊页面
-        Taro.navigateTo({
+        safeNavigate({
           url: `/pages/pills/index`,
         });
         setVisible(false);
         break;
       case 4:
         // 跳转到其他页面
-        Taro.navigateTo({
+        safeNavigate({
           url: `/pages/charas/index`,
         });
         setVisible(false);
         break;
       case 5:
         // 跳转到其他页面
-        Taro.navigateTo({
+        safeNavigate({
           url: `/pages/others/index`,
         });
         setVisible(false);

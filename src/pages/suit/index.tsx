@@ -5,11 +5,14 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import { ItemGridDrawer } from '@components/ItemGridDrawer';
 import { convertTagToSuit } from '@pages/index/components/ItemFilter/TagFilter';
 import suitList from '@data/suit.json';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
+
+  useShareMenu();
 
   return (
     <ErrorBoundary>

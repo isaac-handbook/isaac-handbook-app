@@ -12,7 +12,6 @@ export default defineAppConfig({
     'pages/boss-mark/index',
     'pages/dice-room/index',
     'pages/sacrifice-room/index',
-    'pages/others/index',
     'pages/suit/index',
     'pages/charas/index',
     'pages/chara-detail/index',

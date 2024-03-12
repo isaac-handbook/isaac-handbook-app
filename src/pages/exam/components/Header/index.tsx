@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Image } from '@tarojs/components';
 import styles from './index.module.scss';
-import Taro from '@tarojs/taro';
 import { ArrowSize6 } from '@nutui/icons-react-taro';
 import { userScoreToStageString } from '@pages/exam/utils/userScoreToStageString';
 import { useExamPaper } from '@hooks/useExamPaper';
 import emptyAvatar from '@assets/emptyAvatar.png';
 import { useUser } from '@hooks/useUser';
 import { Help } from '../Help';
+import { safeNavigate } from '@utils/navigate';
 
 interface Props {}
 
@@ -19,7 +19,7 @@ export const Header: React.FC<Props> = () => {
   const { user } = useUser();
 
   const handleUserEdit = async () => {
-    Taro.navigateTo({
+    safeNavigate({
       url: `/pages/user-edit/index`,
     });
   };

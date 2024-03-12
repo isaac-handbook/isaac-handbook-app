@@ -5,6 +5,7 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { CurseItem } from './components/CurseItem';
 import ErrorPage from '@components/ErrorBoundary/ErrorPage';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function Index() {
   const {
@@ -16,6 +17,8 @@ function Index() {
       extra: { curses },
     },
   } = useHandBookData();
+
+  useShareMenu();
 
   if (!curses?.length) {
     return <ErrorPage />;

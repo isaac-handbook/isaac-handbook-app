@@ -11,6 +11,7 @@ import { achieveSearchInfoState } from '@hooks/useAchieveSearchInfo';
 import { AchieveIcon } from './components/AchieveIcon';
 import { useSetting } from '@hooks/useSetting';
 import { achieveTypeMap } from '@typers/handbook';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function Index() {
   const {
@@ -20,6 +21,8 @@ function Index() {
   const {
     handbookData: { achieves },
   } = useHandBookData();
+
+  useShareMenu();
 
   const [{ keyword, achieveType, unlockItemType }] = useRecoilState(
     achieveSearchInfoState,

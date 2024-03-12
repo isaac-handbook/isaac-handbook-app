@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
 import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useHandBookData } from '@hooks/useHandbookData';
-import Taro from '@tarojs/taro';
+import Taro, { useShareAppMessage } from '@tarojs/taro';
 import ErrorBoundary from '@components/ErrorBoundary';
-import { BadCharaList, NormalCharaList } from '@pages/charas/const';
 import { DetailContent } from '@pages/item-detail/components/DetailContent';
 import { SingleCharaBox } from './components/SingleCharaBox';
 import { unFormatCharaName } from '@utils/formatCharaName';
 import LoadingPage from '@components/ErrorBoundary/LoadingPage';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { CharaAchieve } from './components/CharaAchieve';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function ItemDetail() {
   const { handbookData } = useHandBookData();
@@ -18,15 +17,15 @@ function ItemDetail() {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
-  const [charaName, setCharaName] = React.useState<
-    NormalCharaList | BadCharaList
-  >();
+  const { charaName } = Taro.getCurrentInstance().router?.params as any;
 
-  // 获取页面参数中的 itemId
-  useEffect(() => {
-    const { charaName } = Taro.getCurrentInstance().router?.params as any;
-    setCharaName(charaName);
-  }, []);
+  useShareMenu();
+  useShareAppMessage(() => {
+    return {
+      title: `角色 - ${charaName}`,
+      path: `/pages/chara-detail/index?charaName=${charaName}`,
+    };
+  });
 
   const chara = handbookData.chara[unFormatCharaName(charaName)];
 

@@ -33,7 +33,7 @@ export const SeedItem: React.FC<Props> = (props) => {
       >
         <View className={styles.title}>
           {index + 1 + '. ' + seed.nameZh}
-          {!seed.supportAchieve && <LockAchieveImg />}
+          {seed.supportAchieve && <LockAchieveImg />}
         </View>
         <View className={styles.subtitle}>{showSeedCode}</View>
       </View>

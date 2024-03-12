@@ -12,6 +12,7 @@ import { Tag } from '@nutui/nutui-react-taro';
 import { formatCharaName } from '@utils/formatCharaName';
 import { useUser } from '@hooks/useUser';
 import { CustomOnlyOnEndlessPaperSetting } from '@pages/index/components/Setting/CustomOnlyOnEndlessPaperSetting';
+import { safeNavigate } from '@utils/navigate';
 
 function Index() {
   const {
@@ -27,7 +28,7 @@ function Index() {
 
   const handleDevChecker = () => {
     // 跳转到 dev-checker 页面
-    Taro.navigateTo({
+    safeNavigate({
       url: '/pages/dev-checker/index',
     });
   };
@@ -35,12 +36,12 @@ function Index() {
   // 点击日志，跳转到 item-detail 页面
   const handleLogClick = (log: any) => {
     if (log.type === 'chara') {
-      Taro.navigateTo({
+      safeNavigate({
         url: `/pages/chara-detail/index?charaName=${formatCharaName(log.nameZh)}`,
       });
       return;
     }
-    Taro.navigateTo({
+    safeNavigate({
       url: `/pages/item-detail/index?itemId=${log.id}&type=${log.type}`,
     });
   };

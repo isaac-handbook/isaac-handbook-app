@@ -7,6 +7,7 @@ import { ArrowSize6, Lock } from '@nutui/icons-react-taro';
 import classNames from 'classnames';
 import { useExamPaper } from '@hooks/useExamPaper';
 import { Season } from '@src/config/type';
+import { safeNavigate } from '@utils/navigate';
 
 interface Props {
   levelScore: number;
@@ -37,7 +38,7 @@ export const NavItem: React.FC<Props> = (props) => {
     clearExamPaper();
     setTimeout(() => {
       // 跳转到 paper 页面
-      Taro.navigateTo({
+      safeNavigate({
         url: `/pages/paper/index?level=${level}&seasonID=${season.id}`,
       });
     });

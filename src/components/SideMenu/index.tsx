@@ -8,6 +8,7 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import classNames from 'classnames';
 import { useApp } from '@hooks/useApp';
 import { updateInfo } from '@src/config/config.app';
+import { safeNavigate } from '@utils/navigate';
 
 interface Props {}
 
@@ -118,61 +119,61 @@ export const SideMenu: React.FC<Props> = () => {
     switch (item.id) {
       case 'trinket':
         // 跳转到饰品页面
-        Taro.navigateTo({
+        safeNavigate({
           url: `/pages/trinkets/index`,
         });
         setVisible(false);
         break;
       case 'card':
         // 跳转到卡牌页面
-        Taro.navigateTo({
+        safeNavigate({
           url: `/pages/cards/index`,
         });
         setVisible(false);
         break;
       case 'pill':
         // 跳转到胶囊页面
-        Taro.navigateTo({
+        safeNavigate({
           url: `/pages/pills/index`,
         });
         setVisible(false);
         break;
       case 'chara':
         // 跳转到其他页面
-        Taro.navigateTo({
+        safeNavigate({
           url: `/pages/charas/index`,
         });
         setVisible(false);
         break;
       case 'scan':
-        Taro.navigateTo({ url: '/package-scan/pages/scan/index' });
+        safeNavigate({ url: '/package-scan/pages/scan/index' });
         break;
       case 'backHome':
         Taro.reLaunch({ url: '/pages/index/index' });
         break;
       case 'achieves':
-        Taro.navigateTo({ url: '/pages/achieves/index' });
+        safeNavigate({ url: '/pages/achieves/index' });
         break;
       case 'suit':
-        Taro.navigateTo({ url: '/pages/suit/index' });
+        safeNavigate({ url: '/pages/suit/index' });
         break;
       case 'sacrifice-room':
-        Taro.navigateTo({ url: '/pages/sacrifice-room/index' });
+        safeNavigate({ url: '/pages/sacrifice-room/index' });
         break;
       case 'dice-room':
-        Taro.navigateTo({ url: '/pages/dice-room/index' });
+        safeNavigate({ url: '/pages/dice-room/index' });
         break;
       case 'boss-mark':
-        Taro.navigateTo({ url: '/pages/boss-mark/index' });
+        safeNavigate({ url: '/pages/boss-mark/index' });
         break;
       case 'curses':
-        Taro.navigateTo({ url: '/pages/curses/index' });
+        safeNavigate({ url: '/pages/curses/index' });
         break;
       case 'challenges':
-        Taro.navigateTo({ url: '/pages/challenges/index' });
+        safeNavigate({ url: '/pages/challenges/index' });
         break;
       case 'seeds':
-        Taro.navigateTo({ url: '/pages/seeds/index' });
+        safeNavigate({ url: '/pages/seeds/index' });
         break;
       default:
         break;

@@ -3,10 +3,10 @@ import { View, Image } from '@tarojs/components';
 import styles from './index.module.scss';
 import { ItemIcon } from '@components/ItemIcon';
 import { Item } from 'src/types/handbook';
-import Taro from '@tarojs/taro';
 import { useRecoilState } from 'recoil';
 import { themeInfoState } from '@hooks/useThemeInfo';
 import { formatCharaName, unFormatCharaName } from '@utils/formatCharaName';
+import { safeNavigate } from '@utils/navigate';
 
 interface Props {
   item: Item | null;
@@ -30,30 +30,15 @@ export const InlineItem: React.FC<Props> = ({ item, linkable = true }) => {
       return;
     }
     if (isChara) {
-      Taro.navigateTo({
+      safeNavigate({
         url: `/pages/chara-detail/index?charaName=${formatCharaName(
           item.nameZh,
         )}`,
       });
     }
     // 跳转到对应的物品详情页
-    Taro.navigateTo({
+    safeNavigate({
       url: `/pages/item-detail/index?itemId=${item.id}&type=${type}`,
-      fail: (err) => {
-        if (err.errMsg.includes('limit')) {
-          // 关闭当前页面，打开新的页面
-          Taro.redirectTo({
-            url: `/pages/item-detail/index?itemId=${item.id}&type=${type}`,
-          });
-          setTimeout(() => {
-            Taro.showToast({
-              duration: 1800,
-              title: '页面打开数量已达上限，已关闭上一级页面',
-              icon: 'none',
-            });
-          }, 200);
-        }
-      },
     });
   };
 

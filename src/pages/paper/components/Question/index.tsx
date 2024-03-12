@@ -6,9 +6,9 @@ import { ItemIcon } from '@components/ItemIcon';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { Topic } from '@typers/exam';
-import Taro from '@tarojs/taro';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { ArrowLeft, ArrowRight } from '@nutui/icons-react-taro';
+import { safeNavigate } from '@utils/navigate';
 
 interface Props {
   topic: Topic;
@@ -42,7 +42,7 @@ export const Question: React.FC<Props> = (props) => {
     if (!linkable) {
       return;
     }
-    Taro.navigateTo({
+    safeNavigate({
       url: `/pages/item-detail/index?type=${item.type}&itemId=${item.id}`,
     });
   };

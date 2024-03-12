@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { Item, ItemType } from 'src/types/handbook';
-import Taro from '@tarojs/taro';
+import Taro, { useShareAppMessage } from '@tarojs/taro';
 import { Unlock } from './components/Unlock';
 import { DetailIcon } from './components/DetailIcon';
 import ErrorBoundary from '@components/ErrorBoundary';
@@ -14,6 +14,7 @@ import { useRecoilState } from 'recoil';
 import LoadingPage from '@components/ErrorBoundary/LoadingPage';
 import { CharaFigure } from './components/CharaFigure';
 import { PaperHeader } from './components/PaperHeader';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function ItemDetail() {
   const { handbookData } = useHandBookData();
@@ -23,6 +24,14 @@ function ItemDetail() {
   const [itemId, setItemId] = React.useState<string>(params.itemId);
   const [type, setType] = React.useState<ItemType>(params.type);
   const [item, setItem] = React.useState<Item>();
+
+  useShareMenu();
+  useShareAppMessage(() => {
+    return {
+      title: `道具 - ${item?.nameZh}`,
+      path: `/pages/item-detail/index?type=${type}&itemId=${itemId}`,
+    };
+  });
 
   // 广告加载失败，隐藏组件
   // const [adError, setAdError] = React.useState(false);

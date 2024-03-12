@@ -8,10 +8,10 @@ import { Setting as SettingIcon, User } from '@nutui/icons-react-taro';
 import { ThemeSetting } from './ThemeSetting';
 import { GridBorderSetting } from './GridBorderSetting';
 import { DeveloperSetting } from './DeveloperSetting';
-import Taro from '@tarojs/taro';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { drawerMaskColor } from '@src/styles';
 import { useExamPaper } from '@hooks/useExamPaper';
+import { safeNavigate } from '@utils/navigate';
 
 export const Setting: React.FC = () => {
   const [showDrawer, setShowDrawer] = React.useState(false);
@@ -58,7 +58,7 @@ export const Setting: React.FC = () => {
         onCloseIconClick={(e) => {
           e.preventDefault();
           // 跳转到关于页面
-          Taro.navigateTo({
+          safeNavigate({
             url: `/pages/about/index`,
           });
         }}

@@ -5,6 +5,7 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { SeedItem } from './components/SeedItem';
 import ErrorPage from '@components/ErrorBoundary/ErrorPage';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 let prevSeedType = '';
 
@@ -16,6 +17,8 @@ function Index() {
   const {
     handbookData: { seeds },
   } = useHandBookData();
+
+  useShareMenu();
 
   if (!seeds?.length) {
     return <ErrorPage />;

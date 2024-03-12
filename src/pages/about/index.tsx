@@ -4,11 +4,14 @@ import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import changeLog from './assets/changeLog.json';
 import { LinkText } from '@components/LinkText';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
+
+  useShareMenu();
 
   return (
     <ErrorBoundary>

@@ -3,9 +3,9 @@ import { View } from '@tarojs/components';
 import { ItemIcon } from '../ItemIcon';
 import { Item, ItemType } from 'src/types/handbook';
 import styles from './index.module.scss';
-import Taro from '@tarojs/taro';
 import { GridIconSize, gridSizeMap } from './constants';
 import { useThemeInfo } from '@hooks/useThemeInfo';
+import { safeNavigate } from '@utils/navigate';
 
 interface Props {
   item: Item;
@@ -19,7 +19,7 @@ const Cell: React.FC<Props> = (props) => {
   const { item, size, themeColor, showGridBorder } = props;
   const handleClick = () => {
     if (!item.id) return;
-    Taro.navigateTo({
+    safeNavigate({
       url: `/pages/item-detail/index?itemId=${item.id}&type=${props.type}`,
     });
   };

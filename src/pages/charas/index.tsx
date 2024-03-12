@@ -8,8 +8,8 @@ import {
   badCharaList,
   normalCharaList,
 } from './const';
-import Taro from '@tarojs/taro';
 import { formatCharaName } from '@utils/formatCharaName';
+import { safeNavigate } from '@utils/navigate';
 
 function Index() {
   const {
@@ -18,7 +18,7 @@ function Index() {
 
   const onClick = (name: NormalCharaList | BadCharaList) => {
     // 跳转到角色详情页
-    Taro.navigateTo({
+    safeNavigate({
       url: `/pages/chara-detail/index?charaName=${formatCharaName(name)}`,
     });
   };

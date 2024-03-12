@@ -3,11 +3,14 @@ import styles from './index.module.scss';
 import ErrorBoundary from '@components/ErrorBoundary';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import { ItemSearchView } from '@components/ItemSearchView';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function Index() {
   const {
     themeInfo: { themeColor },
   } = useThemeInfo();
+
+  useShareMenu();
 
   return (
     <ErrorBoundary>

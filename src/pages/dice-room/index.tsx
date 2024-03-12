@@ -5,6 +5,7 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import { ContentTransformer } from '@components/ContentTransformer';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { Table } from '@components/Table';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function Index() {
   const {
@@ -12,6 +13,8 @@ function Index() {
   } = useThemeInfo();
 
   const { handbookData } = useHandBookData();
+
+  useShareMenu();
 
   return (
     <ErrorBoundary>

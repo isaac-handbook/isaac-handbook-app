@@ -7,6 +7,7 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import { UpdateNotice } from '@components/UpdateNotice';
 import { useHandbookInit } from '@hooks/useHandbookInit';
 import { useExamInit } from '@hooks/useExamInit';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function Index() {
   const {
@@ -14,7 +15,10 @@ function Index() {
   } = useThemeInfo();
 
   useHandbookInit();
+
   useExamInit();
+
+  useShareMenu();
 
   return (
     <ErrorBoundary>

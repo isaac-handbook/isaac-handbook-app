@@ -116,11 +116,4 @@ export const useHandbookInit = () => {
       }
     });
   }, []);
-
-  useEffect(() => {
-    wx.showShareMenu({
-      withShareTicket: true,
-      menus: ['shareAppMessage', 'shareTimeline'],
-    });
-  }, []);
 };

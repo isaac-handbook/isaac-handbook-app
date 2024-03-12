@@ -5,6 +5,7 @@ import { useThemeInfo } from '@hooks/useThemeInfo';
 import { useHandBookData } from '@hooks/useHandbookData';
 import { ChallengeItem } from './components/ChallengeItem';
 import ErrorPage from '@components/ErrorBoundary/ErrorPage';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function Index() {
   const {
@@ -14,6 +15,8 @@ function Index() {
   const {
     handbookData: { challenges },
   } = useHandBookData();
+
+  useShareMenu();
 
   if (!challenges?.length) {
     return <ErrorPage />;

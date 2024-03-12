@@ -12,6 +12,7 @@ import { Empty, Tabs } from '@nutui/nutui-react-taro';
 import { ExamContent } from './components/ExamContent';
 import { examSeasonConfig } from '@src/config/config.app';
 import _ from 'lodash';
+import { useShareMenu } from '@utils/hooks/useShareMenu';
 
 function Index() {
   const {
@@ -24,6 +25,8 @@ function Index() {
   const { updateSingleExamPaperState } = useExamPaper();
 
   const [seasonTab, setSeasonTab] = useState<any>('0');
+
+  useShareMenu();
 
   const userInit = useLockFn(async () => {
     // 获取用户头像、昵称

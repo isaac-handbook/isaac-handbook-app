@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { View } from '@tarojs/components';
 import { useSetting } from '@hooks/useSetting';
 import { CustomButton } from '@components/CustomButton';
-import Taro from '@tarojs/taro';
+import { safeNavigate } from '@utils/navigate';
 
 const Cell: React.FC = () => {
   const {
@@ -15,7 +15,7 @@ const Cell: React.FC = () => {
 
   const handleClick = () => {
     // 跳转到开发者页面
-    Taro.navigateTo({ url: '/pages/developer/index' });
+    safeNavigate({ url: '/pages/developer/index' });
   };
 
   return (

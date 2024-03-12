@@ -3,9 +3,9 @@ import { View } from '@tarojs/components';
 import { ItemIcon } from '../ItemIcon';
 import { Item, ItemType } from 'src/types/handbook';
 import styles from './index.module.scss';
-import Taro from '@tarojs/taro';
 import { useThemeInfo } from '@hooks/useThemeInfo';
 import classNames from 'classnames';
+import { safeNavigate } from '@utils/navigate';
 
 interface Props {
   item: Item;
@@ -17,7 +17,7 @@ interface Props {
 const Cell: React.FC<Props> = (props) => {
   const { item, themeColor, lang } = props;
   const handleClick = () => {
-    Taro.navigateTo({
+    safeNavigate({
       url: `/pages/item-detail/index?itemId=${item.id}&type=${props.type}`,
     });
   };
