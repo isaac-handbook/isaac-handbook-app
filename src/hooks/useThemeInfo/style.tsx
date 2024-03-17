@@ -43,7 +43,7 @@ export const initThemeColor: ThemeColor = {
   bgColor: 'transparent',
   gridColor: 'transparent',
   gridBorderColor: 'transparent',
-  textColor: '#000000',
+  textColor: '#000000e0',
   ...baseColor,
 };
 

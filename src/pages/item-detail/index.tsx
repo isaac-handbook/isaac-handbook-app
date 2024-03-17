@@ -15,6 +15,7 @@ import LoadingPage from '@components/ErrorBoundary/LoadingPage';
 import { CharaFigure } from './components/CharaFigure';
 import { PaperHeader } from './components/PaperHeader';
 import { useShareMenu } from '@utils/hooks/useShareMenu';
+import { CommentBubble } from './components/CommentBubble';
 
 function ItemDetail() {
   const { handbookData } = useHandBookData();
@@ -153,6 +154,8 @@ function ItemDetail() {
         <DetailContent item={item} />
 
         <CharaFigure itemId={item.id} />
+
+        <CommentBubble item={item} />
 
         {/* {
           // 广告

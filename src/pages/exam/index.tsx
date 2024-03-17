@@ -19,40 +19,13 @@ function Index() {
     themeInfo: { themeColor },
   } = useThemeInfo();
 
-  const { user, setUser } = useUser();
-  const { openid } = user;
+  const { user } = useUser();
 
   const { updateSingleExamPaperState } = useExamPaper();
 
   const [seasonTab, setSeasonTab] = useState<any>('0');
 
   useShareMenu();
-
-  const userInit = useLockFn(async () => {
-    // 获取用户头像、昵称
-    const db = Taro.cloud.database();
-    const col = db.collection('user');
-    const res = await col.where({ _openid: openid }).get();
-    const user = res.data[0];
-    if (user) {
-      setUser({
-        avatar: user.avatar || '',
-        nickname: user.nickname,
-        openid: openid,
-      });
-      return;
-    }
-    // 如果用户不存在，创建用户。默认给一个昵称
-    const newUser = {
-      nickname: '路人' + Math.floor(Math.random() * 10000),
-    };
-    await col.add({ data: newUser });
-    setUser({
-      avatar: '',
-      nickname: newUser.nickname,
-      openid: openid,
-    });
-  });
 
   // 获取到用户的 openid 之后，查询数据库，用户的得分
   useEffect(() => {
@@ -80,7 +53,7 @@ function Index() {
     Taro.showLoading({
       title: '',
     });
-    await Promise.all([userInit(), updateUserScore()]);
+    await updateUserScore();
     Taro.hideLoading();
   });
 

@@ -22,6 +22,7 @@ export default defineAppConfig({
     'pages/curses/index',
     'pages/challenges/index',
     'pages/seeds/index',
+    'pages/comment/index',
   ],
   subpackages: [
     {

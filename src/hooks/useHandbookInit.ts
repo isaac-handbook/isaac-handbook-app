@@ -12,6 +12,7 @@ import { AppState, defaultAppState, useApp } from './useApp';
 import { refreshHandBookData } from '@src/actions/handbook/refreshHandBookData';
 import { useEffect } from 'react';
 import { updateInfo } from '@src/config/config.app';
+import { useDev } from './useDev';
 
 // 初始化，只在进入首页时执行一次
 export const useHandbookInit = () => {
@@ -21,9 +22,11 @@ export const useHandbookInit = () => {
 
   const { updateSingleUIState } = useUI();
 
-  const { updateSingleUserState } = useUser();
+  const { updateSingleUserState, userInfoInit } = useUser();
 
   const { app, setApp } = useApp();
+
+  const { setDev } = useDev();
 
   useAsyncEffect(async () => {
     // 读取数据库的 app 集合，获取设置
@@ -74,6 +77,7 @@ export const useHandbookInit = () => {
       return;
     }
     updateSingleUserState('openid', OPENID);
+    userInfoInit(OPENID);
   }, []);
 
   // 是否要给课堂 Tab 展示红点
@@ -114,6 +118,14 @@ export const useHandbookInit = () => {
         // 本地需要更新，展示弹窗
         updateSingleUIState('showUpdateModal', true);
       }
+    });
+
+    // 获取系统信息
+    Taro.getSystemInfo().then((res) => {
+      setDev((prev) => ({
+        ...prev,
+        systemInfo: res,
+      }));
     });
   }, []);
 };

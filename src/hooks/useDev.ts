@@ -1,6 +1,7 @@
 import { Item } from '@typers/handbook';
 import { useCallback } from 'react';
 import { atom, useRecoilState } from 'recoil';
+import Taro from '@tarojs/taro';
 
 export interface DevState {
   /** 转换器的错误日志 */
@@ -8,12 +9,15 @@ export interface DevState {
     item: Partial<Item>;
     msg: string;
   }[];
+  /** 系统信息 */
+  systemInfo: Partial<Taro.getSystemInfoAsync.Result>;
 }
 
 export const devState = atom<DevState>({
   key: 'devState',
   default: {
     transformerLog: [],
+    systemInfo: {},
   },
 });
 
@@ -46,6 +50,8 @@ export const useDev = () => {
 
   return {
     dev,
+    isIOS: dev.systemInfo.platform === 'ios',
+    isAndroid: dev.systemInfo.platform === 'android',
     updateSingleDevState,
     setDev,
     logTransformer,

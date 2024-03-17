@@ -1,0 +1,37 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.scroll {
+  width: 100%;
+  position: relative;
+}
+
+.observer {
+  width: 100%;
+  height: 0;
+}
+
+.contrast {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.scrollBottom {
+  position: absolute;
+  left: 0;
+  // bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  font-size: 14px;
+  opacity: 0.5;
+  align-items: center;
+  justify-content: center;
+}

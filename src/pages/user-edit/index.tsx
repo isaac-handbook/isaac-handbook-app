@@ -66,22 +66,20 @@ function Index() {
   const updateAllScoreData = async () => {
     const db = Taro.cloud.database();
     const col = db.collection('score');
-    const queryRes = col.where({
-      _openid: openid,
-    });
-    await queryRes.get().then((res) => {
-      res.data.forEach((item) => {
-        col.doc(item._id as any).update({
-          data: {
-            avatar: uploadedAvatar,
-            nickname: inputNickName,
-          },
-        });
+    await col
+      .where({
+        _openid: openid,
+      })
+      // @ts-ignore
+      .update({
+        data: {
+          avatar: uploadedAvatar,
+          nickname: inputNickName,
+        },
       });
-    });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     Taro.showLoading({
       title: '更新中...',
     });
@@ -93,35 +91,24 @@ function Index() {
     const queryRes = col.where({
       _openid: openid,
     });
-    queryRes.get().then(async (res) => {
-      if (res.data.length === 0) {
-        // 插入一条新的记录
-        await col.add({
-          data: {
-            avatar: uploadedAvatar,
-            nickname: inputNickName,
-          },
-        });
-      } else {
-        // 更新记录
-        await col.doc(res.data[0]._id as any).update({
-          data: {
-            avatar: uploadedAvatar,
-            nickname: inputNickName,
-          },
-        });
-      }
-      await updateAllScoreData();
-      setUser((prev) => ({
-        ...prev,
-        avatar: uploadedAvatar || '',
-        nickname: inputNickName,
-      }));
-      Taro.hideLoading();
-      Taro.showToast({
-        title: '更新成功',
-        icon: 'success',
-      });
+    const dbUser = (await queryRes.get()).data[0];
+    // 更新记录。此时一定有记录，否则报错
+    await col.doc(dbUser._id as any).update({
+      data: {
+        avatar: uploadedAvatar || dbUser.avatar || '',
+        nickname: inputNickName || dbUser.nickname || '',
+      },
+    });
+    await updateAllScoreData();
+    setUser((prev) => ({
+      ...prev,
+      avatar: uploadedAvatar || dbUser.avatar || '',
+      nickname: inputNickName || dbUser.nickname || '',
+    }));
+    Taro.hideLoading();
+    Taro.showToast({
+      title: '更新成功',
+      icon: 'success',
     });
   };
 
